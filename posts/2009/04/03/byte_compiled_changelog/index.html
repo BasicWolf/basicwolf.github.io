@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://znasibov.info/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/font-awesome/css/solid.css">
+
+    <link href="https://znasibov.info//static/css/extra.css" rel="stylesheet">
+
+
+
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+<script>
+
+var PRIVACY_POLICY_VERSION = "1.0";
+var PRIVACY_COOKIE_NAME = 'privacyAccepted' + PRIVACY_POLICY_VERSION
+
+if (!cookieExists(PRIVACY_COOKIE_NAME)) {
+    document.addEventListener("DOMContentLoaded",function(){
+        document.getElementById('privacy_policy_popup').style['display'] = 'block';
+        //here code
+    });
+}
+
+function privacyOk() {
+    var expires = ' expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+
+    document.cookie = PRIVACY_COOKIE_NAME + '=true; ' + expires;
+    document.getElementById('privacy_policy_popup').remove();
+}
+
+function cookieExists(name) {
+    return document.cookie.split(';').filter(function(item) {
+        return item.trim().indexOf(name + '=') == 0;
+    }).length
+}
+
+function disableGoogleAnalytics() {
+    document.cookie = 'disable_google_analytics=true; expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+    window['ga-disable-UA-9017911-1'] = true;
+    alert('Google Analytics have been successfully disabled!');
+}
+</script>
+<!-- Google Analytics -->
+<script type="text/javascript">
+
+if (cookieExists('disable_google_analytics')) {
+    window['ga-disable-UA-9017911-1'] = true;
+}
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-9017911-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->  
+
+
+<meta name="author" content="Zaur Nasibov" />
+<meta name="description" content="My favourite all-purpose, extensible and customizable editor is Emacs. Mastering Emacs takes months, even years, and there is always a lot to discover. For example, I&#39;ve just seen how Emacs tried to byte-compile a simple ChangeLog text document. How could that happen?" />
+<meta name="keywords" content="programming, Emacs, Elisp, regex">
+
+
+<meta property="og:site_name" content="Zaur's Thoughts"/>
+<meta property="og:title" content="Byte-compiled ChangeLog"/>
+<meta property="og:description" content="My favourite all-purpose, extensible and customizable editor is Emacs. Mastering Emacs takes months, even years, and there is always a lot to discover. For example, I&#39;ve just seen how Emacs tried to byte-compile a simple ChangeLog text document. How could that happen?"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://znasibov.info/posts/2009/04/03/byte_compiled_changelog/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2009-04-03 12:00:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://znasibov.info/author/zaur-nasibov.html">
+<meta property="article:section" content="Articles"/>
+<meta property="article:tag" content="programming"/>
+<meta property="article:tag" content="Emacs"/>
+<meta property="article:tag" content="Elisp"/>
+<meta property="article:tag" content="regex"/>
+<meta property="og:image" content="/images/logo.png">
+
+  <title>Zaur's Thoughts &ndash; Byte-compiled ChangeLog</title>
+
+</head>
+
+<body class="light-theme">
+<!-- Policy notice -->
+<div id="privacy_policy_popup"
+    style="display:none;
+           position:absolute;
+           width:100%;
+           text-align:center;
+           background-color:white;
+           z-index:100;">
+  Dear visitor,
+  <br>
+  We kindly ask you to read the site's <a href="/pages/privacy-policy/">privacy policy</a>.
+  <br>
+  <button style="position:relative; border:dashed" onclick="privacyOk();">OK!</button>
+</div>  <aside>
+    <div>
+      <a href="https://znasibov.info">
+          <img src="/images/logo.png" alt="Zaurun Fikirləri" title="Zaurun Fikirləri">
+      </a>
+
+      <h1>
+        <a href="https://znasibov.info">Zaurun Fikirləri</a>
+      </h1>
+
+<p>Zaur's Thoughts</p>
+
+      <nav>
+        <ul class="list">
+
+
+              <li>
+                <a target="_self"
+                   href="https://znasibov.info/pages/projects/#projects">
+                  Projects
+                </a>
+              </li>
+              <li>
+                <a target="_self"
+                   href="https://znasibov.info/pages/about/#about">
+                  About
+                </a>
+              </li>
+              <li>
+                <a target="_self"
+                   href="https://znasibov.info/pages/privacy-policy/#privacy-policy">
+                  Privacy policy
+                </a>
+              </li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/zaur-nasibov-44610853/" target="_blank">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-github" href="https://github.com/basicwolf" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="/feeds/atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://znasibov.info">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="byte_compiled_changelog">Byte-compiled ChangeLog</h1>
+    <p>
+      Posted on pe 03 huhtikuu 2009 in <a href="https://znasibov.info/category/articles.html">Articles</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>My dot emacs file is divided into .el pieces like this:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">load</span> <span class="s">&quot;~/.emacs/conf/env_internal.el&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">load</span> <span class="s">&quot;~/.emacs/conf/env_external.el&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">load</span> <span class="s">&quot;~/.emacs/conf/ui.el&quot;</span><span class="p">)</span>
+<span class="c1">; ...</span>
+</pre></div>
+</td></tr></table><p>It's much easier to deal with functions grouped in different files rather
+than functions in one big <tt class="docutils literal">.emacs.el</tt>.</p>
+<p>The following &quot;trick&quot; automatically byte-compiles .el files as they're
+being saved in Emacs:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nb">defun</span> <span class="nv">autocompile</span> <span class="no">nil</span>
+  <span class="p">(</span><span class="k">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;bytecomp</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nf">numberp</span> <span class="p">(</span><span class="nf">string-match</span> <span class="s">&quot;.el&quot;</span> <span class="nf">buffer-file-name</span><span class="p">))</span>
+        <span class="p">(</span><span class="nv">byte-compile-file</span> <span class="p">(</span><span class="nf">buffer-file-name</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;after-save-hook</span> <span class="ss">&#39;autocompile</span><span class="p">)</span>
+</pre></div>
+</td></tr></table><p>It worked perfect for me, until once I was updating a single ChangeLog file
+via Emacs. When I saved it, Emacs tried to byte-compile the file! That was
+weird.</p>
+<p>The error should have not been in Emacs (that's true for 99.9%
+Emacs-related &quot;bugs&quot;), but somewhere in one of my configuration .el files.
+And probably there was something wrong with the byte-compile-on-save hook.
+The only function that could cause it was:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nf">numberp</span> <span class="p">(</span><span class="nf">string-match</span> <span class="s">&quot;.el&quot;</span> <span class="nf">buffer-file-name</span><span class="p">))</span>
+</pre></div>
+</td></tr></table><p>Let's see what Emacs says about the <tt class="docutils literal"><span class="pre">string-match()</span></tt> function:</p>
+<blockquote class="epigraph">
+<p><tt class="docutils literal"><span class="pre">(string-match</span> regexp string &amp; optional start)</tt></p>
+<p>Returns the index of start of the first match for regexp in string,
+or <tt class="docutils literal">nil</tt>.</p>
+</blockquote>
+<p>So, <tt class="docutils literal"><span class="pre">string-match()</span></tt> works with regexps! And I have the &quot;.&quot; symbol in
+the pattern. But period stands for a special character in regexps:</p>
+<blockquote class="epigraph">
+<p><tt class="docutils literal">'.' (Period)</tt>
+is a special character that matches any single character except a
+newline. Using concatenation, we can make regular expressions
+like <tt class="docutils literal">'a.b'</tt>, which matches any three-character string that begins
+with <tt class="docutils literal">'a'</tt> and ends with <tt class="docutils literal">'b'</tt>.</p>
+<p class="attribution">&mdash;Emacs help</p>
+</blockquote>
+<p>So, <tt class="docutils literal"><span class="pre">(string-match</span> &quot;.el&quot; <span class="pre">buffer-file-name)</span></tt> function call is wrong! For
+example:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">string-match</span> <span class="s">&quot;.el&quot;</span> <span class="s">&quot;ChangeLog&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table><p>returns 4.</p>
+<p>I had to use a backslash to quote that period, like this:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">string-match</span> <span class="s">&quot;\.el&quot;</span> <span class="s">&quot;ChangeLog&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table><p>But somehow, that didn't work either. An additional documentation exploration
+had shown that</p>
+<blockquote class="epigraph">
+<p>When you use regular expressions in a Lisp program, each <tt class="docutils literal">'\'</tt> must be
+doubled.</p>
+<p class="attribution">&mdash;Emacs help</p>
+</blockquote>
+<p>Finally, I tried:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">string-match</span> <span class="s">&quot;\\.el&quot;</span> <span class="s">&quot;ChangeLog&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table><p>And it worked! The result was <cite>nil</cite>. And the result for any file with .el
+extension was the start position of the &quot;.el&quot; string in file's name.</p>
+<p>Here is the final version for automatic byte-compile when saving a file with
+.el extension:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nb">defun</span> <span class="nv">autocompile</span> <span class="no">nil</span>
+  <span class="s">&quot;compile itself if contains .el&quot;</span>
+  <span class="p">(</span><span class="k">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;bytecomp</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nf">numberp</span> <span class="p">(</span><span class="nf">string-match</span> <span class="s">&quot;\\.el&quot;</span> <span class="nf">buffer-file-name</span><span class="p">))</span>
+      <span class="p">(</span><span class="nv">byte-compile-file</span> <span class="p">(</span><span class="nf">buffer-file-name</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;after-save-hook</span> <span class="ss">&#39;autocompile</span><span class="p">)</span>
+</pre></div>
+</td></tr></table><p>That was a funny problem and it took me about half an hour to deal with.
+Emacs help helps :)</p>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://znasibov.info/tag/programming.html">programming</a>
+      <a href="https://znasibov.info/tag/emacs.html">Emacs</a>
+      <a href="https://znasibov.info/tag/elisp.html">Elisp</a>
+      <a href="https://znasibov.info/tag/regex.html">regex</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'znasibov';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy; 2020 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zaur's Thoughts ",
+  "url" : "https://znasibov.info",
+  "image": "/images/logo.png",
+  "description": "Zaurun Fikirləri"
+}
+</script>
+
+</body>
+</html>

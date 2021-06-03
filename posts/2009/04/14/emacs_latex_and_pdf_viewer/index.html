@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://znasibov.info/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/font-awesome/css/solid.css">
+
+    <link href="https://znasibov.info//static/css/extra.css" rel="stylesheet">
+
+
+
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+<script>
+
+var PRIVACY_POLICY_VERSION = "1.0";
+var PRIVACY_COOKIE_NAME = 'privacyAccepted' + PRIVACY_POLICY_VERSION
+
+if (!cookieExists(PRIVACY_COOKIE_NAME)) {
+    document.addEventListener("DOMContentLoaded",function(){
+        document.getElementById('privacy_policy_popup').style['display'] = 'block';
+        //here code
+    });
+}
+
+function privacyOk() {
+    var expires = ' expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+
+    document.cookie = PRIVACY_COOKIE_NAME + '=true; ' + expires;
+    document.getElementById('privacy_policy_popup').remove();
+}
+
+function cookieExists(name) {
+    return document.cookie.split(';').filter(function(item) {
+        return item.trim().indexOf(name + '=') == 0;
+    }).length
+}
+
+function disableGoogleAnalytics() {
+    document.cookie = 'disable_google_analytics=true; expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+    window['ga-disable-UA-9017911-1'] = true;
+    alert('Google Analytics have been successfully disabled!');
+}
+</script>
+<!-- Google Analytics -->
+<script type="text/javascript">
+
+if (cookieExists('disable_google_analytics')) {
+    window['ga-disable-UA-9017911-1'] = true;
+}
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-9017911-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->  
+
+
+<meta name="author" content="Zaur Nasibov" />
+<meta name="description" content="A short note on how-to set a pdf-viewer for LaTeX-generated documents in Emacs." />
+<meta name="keywords" content="Elisp, Emacs, LaTeX">
+
+
+<meta property="og:site_name" content="Zaur's Thoughts"/>
+<meta property="og:title" content="Emacs, LaTeX and pdf viewer"/>
+<meta property="og:description" content="A short note on how-to set a pdf-viewer for LaTeX-generated documents in Emacs."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://znasibov.info/posts/2009/04/14/emacs_latex_and_pdf_viewer/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2009-04-14 12:00:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://znasibov.info/author/zaur-nasibov.html">
+<meta property="article:section" content="Articles"/>
+<meta property="article:tag" content="Elisp"/>
+<meta property="article:tag" content="Emacs"/>
+<meta property="article:tag" content="LaTeX"/>
+<meta property="og:image" content="/images/logo.png">
+
+  <title>Zaur's Thoughts &ndash; Emacs, LaTeX and pdf viewer</title>
+
+</head>
+
+<body class="light-theme">
+<!-- Policy notice -->
+<div id="privacy_policy_popup"
+    style="display:none;
+           position:absolute;
+           width:100%;
+           text-align:center;
+           background-color:white;
+           z-index:100;">
+  Dear visitor,
+  <br>
+  We kindly ask you to read the site's <a href="/pages/privacy-policy/">privacy policy</a>.
+  <br>
+  <button style="position:relative; border:dashed" onclick="privacyOk();">OK!</button>
+</div>  <aside>
+    <div>
+      <a href="https://znasibov.info">
+          <img src="/images/logo.png" alt="Zaurun Fikirləri" title="Zaurun Fikirləri">
+      </a>
+
+      <h1>
+        <a href="https://znasibov.info">Zaurun Fikirləri</a>
+      </h1>
+
+<p>Zaur's Thoughts</p>
+
+      <nav>
+        <ul class="list">
+
+
+              <li>
+                <a target="_self"
+                   href="https://znasibov.info/pages/projects/#projects">
+                  Projects
+                </a>
+              </li>
+              <li>
+                <a target="_self"
+                   href="https://znasibov.info/pages/about/#about">
+                  About
+                </a>
+              </li>
+              <li>
+                <a target="_self"
+                   href="https://znasibov.info/pages/privacy-policy/#privacy-policy">
+                  Privacy policy
+                </a>
+              </li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/zaur-nasibov-44610853/" target="_blank">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-github" href="https://github.com/basicwolf" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="/feeds/atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://znasibov.info">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="emacs_latex_and_pdf_viewer">Emacs, LaTeX and pdf viewer</h1>
+    <p>
+      Posted on ti 14 huhtikuu 2009 in <a href="https://znasibov.info/category/articles.html">Articles</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>My favourite editor Emacs provides a great support for LaTeX document
+preparation system. There are several modes that extend the default
+latex-mode. My favourite ones are: AUCTex (with Preview-latex) and CDLaTeX.</p>
+<p>By-default LaTeX outputs DVI files and uses xdvi viewer with &quot;View&quot; command.
+However it's possible to configure LaTeX to outpud pdf files. In Emacs,
+you have to execute (<tt class="docutils literal"><span class="pre">M-x</span> <span class="pre">tex-pdf-mode</span></tt>) command to set the LaTeX's output
+to pdf. If you'd like to have a pdf output for all LaTeX documents, add</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="k">setq</span> <span class="nv">TeX-PDF-mode</span> <span class="no">t</span><span class="p">)</span>
+</pre></div>
+</td></tr></table><p>to your <tt class="docutils literal">.emacs</tt>.</p>
+<p>Now, let's add a pdf-viwer to be executed on &quot;View&quot; command (<tt class="docutils literal"><span class="pre">C-c</span> <span class="pre">C-v</span></tt>).
+I use GNOME's default Evince document viewer for pdf files. So, the code that
+should be added to .emacs is:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nb">defun</span> <span class="nv">pdfevince</span> <span class="p">()</span>
+   <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;TeX-output-view-style</span>
+                 <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;^pdf$&quot;</span> <span class="s">&quot;.&quot;</span> <span class="s">&quot;evince %o %(outpage)&quot;</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nv">add-hook</span>  <span class="ss">&#39;LaTeX-mode-hook</span>  <span class="ss">&#39;pdfevince</span>  <span class="no">t</span><span class="p">)</span> <span class="c1">; AUCTeX LaTeX mode</span>
+</pre></div>
+</td></tr></table><p>That's it!</p>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://znasibov.info/tag/elisp.html">Elisp</a>
+      <a href="https://znasibov.info/tag/emacs.html">Emacs</a>
+      <a href="https://znasibov.info/tag/latex.html">LaTeX</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'znasibov';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy; 2020 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zaur's Thoughts ",
+  "url" : "https://znasibov.info",
+  "image": "/images/logo.png",
+  "description": "Zaurun Fikirləri"
+}
+</script>
+
+</body>
+</html>

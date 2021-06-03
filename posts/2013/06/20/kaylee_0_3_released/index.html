@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://znasibov.info/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/font-awesome/css/solid.css">
+
+    <link href="https://znasibov.info//static/css/extra.css" rel="stylesheet">
+
+
+
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+<script>
+
+var PRIVACY_POLICY_VERSION = "1.0";
+var PRIVACY_COOKIE_NAME = 'privacyAccepted' + PRIVACY_POLICY_VERSION
+
+if (!cookieExists(PRIVACY_COOKIE_NAME)) {
+    document.addEventListener("DOMContentLoaded",function(){
+        document.getElementById('privacy_policy_popup').style['display'] = 'block';
+        //here code
+    });
+}
+
+function privacyOk() {
+    var expires = ' expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+
+    document.cookie = PRIVACY_COOKIE_NAME + '=true; ' + expires;
+    document.getElementById('privacy_policy_popup').remove();
+}
+
+function cookieExists(name) {
+    return document.cookie.split(';').filter(function(item) {
+        return item.trim().indexOf(name + '=') == 0;
+    }).length
+}
+
+function disableGoogleAnalytics() {
+    document.cookie = 'disable_google_analytics=true; expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+    window['ga-disable-UA-9017911-1'] = true;
+    alert('Google Analytics have been successfully disabled!');
+}
+</script>
+<!-- Google Analytics -->
+<script type="text/javascript">
+
+if (cookieExists('disable_google_analytics')) {
+    window['ga-disable-UA-9017911-1'] = true;
+}
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-9017911-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->  
+
+
+<meta name="author" content="Zaur Nasibov" />
+<meta name="description" content="Ladies and Gentlemen! I am proud to announce that Kaylee v0.3 has been finally released!" />
+<meta name="keywords" content="Kaylee, Python, programming">
+
+
+<meta property="og:site_name" content="Zaur's Thoughts"/>
+<meta property="og:title" content="Kaylee v0.3"/>
+<meta property="og:description" content="Ladies and Gentlemen! I am proud to announce that Kaylee v0.3 has been finally released!"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://znasibov.info/posts/2013/06/20/kaylee_0_3_released/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2013-06-20 12:00:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://znasibov.info/author/zaur-nasibov.html">
+<meta property="article:section" content="articles"/>
+<meta property="article:tag" content="Kaylee"/>
+<meta property="article:tag" content="Python"/>
+<meta property="article:tag" content="programming"/>
+<meta property="og:image" content="/images/logo.png">
+
+  <title>Zaur's Thoughts &ndash; Kaylee v0.3</title>
+
+</head>
+
+<body class="light-theme">
+<!-- Policy notice -->
+<div id="privacy_policy_popup"
+    style="display:none;
+           position:absolute;
+           width:100%;
+           text-align:center;
+           background-color:white;
+           z-index:100;">
+  Dear visitor,
+  <br>
+  We kindly ask you to read the site's <a href="/pages/privacy-policy/">privacy policy</a>.
+  <br>
+  <button style="position:relative; border:dashed" onclick="privacyOk();">OK!</button>
+</div>  <aside>
+    <div>
+      <a href="https://znasibov.info">
+          <img src="/images/logo.png" alt="Zaurun Fikirləri" title="Zaurun Fikirləri">
+      </a>
+
+      <h1>
+        <a href="https://znasibov.info">Zaurun Fikirləri</a>
+      </h1>
+
+<p>Zaur's Thoughts</p>
+
+      <nav>
+        <ul class="list">
+
+
+              <li>
+                <a target="_self"
+                   href="https://znasibov.info/pages/projects/#projects">
+                  Projects
+                </a>
+              </li>
+              <li>
+                <a target="_self"
+                   href="https://znasibov.info/pages/about/#about">
+                  About
+                </a>
+              </li>
+              <li>
+                <a target="_self"
+                   href="https://znasibov.info/pages/privacy-policy/#privacy-policy">
+                  Privacy policy
+                </a>
+              </li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/zaur-nasibov-44610853/" target="_blank">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-github" href="https://github.com/basicwolf" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="/feeds/atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://znasibov.info">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="kaylee_0_3_released">Kaylee v0.3</h1>
+    <p>
+      Posted on to 20 kesäkuu 2013 in <a href="https://znasibov.info/category/articles.html">articles</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <div class="section" id="what-is-new-in-kaylee-0-3">
+<h2>What is new in Kaylee 0.3</h2>
+<ul class="simple">
+<li><a class="reference internal" href="#kaylee-environment-and-project-management-scripts">Kaylee environment and project management scripts</a></li>
+<li><a class="reference internal" href="#built-in-debug-server">Built-in debug server</a></li>
+<li><a class="reference internal" href="#native-werkzeug-framework-support">Native Werkzeug framework support</a></li>
+<li><a class="reference internal" href="#demo-projects-repository">Demo projects repository</a></li>
+<li><a class="reference internal" href="#updated-unit-tests-and-massive-code-improvements">Updated unit tests and massive code improvements</a></li>
+</ul>
+<div class="section" id="id1">
+<span id="kaylee-environment-and-project-management-scripts"></span><h3>Kaylee environment and project management scripts</h3>
+<p>This is the sweetest feature of Kaylee. Since the first release I felt
+that although Kaylee may be an interesting project to an end user
+(meaning a programmer), it has a pretty big fence which one has to jump
+over to start using it. The tutorial was written in a plain and simple
+language, yet a user had to create a <cite>Makefile</cite>, learn about Kaylee's
+recursive-make-based build system and perform some other simple but
+inconvenient operations.</p>
+<p>The best way out of this were management scripts inspired by the <em>Django</em>
+framework. Now, a user can simply run:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>python kaylee-admin.py startenv myenv
+</pre></div>
+</td></tr></table><p>to create a Kaylee development environment directory with a management
+script inside it. The management script helps creating, building and testing
+the projects, e.g.:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>python klmanage.py startproject FastPI
+</pre></div>
+</td></tr></table><p>- creates a <tt class="docutils literal">fastpi</tt> directory  with the project's server and client-side
+skeletons.</p>
+</div>
+<div class="section" id="id2">
+<span id="built-in-debug-server"></span><h3>Built-in debug server</h3>
+<p>This feature is about testing and debugging your project without installing
+a 3d party web server. Simply execute</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>python klmanage.py run
+</pre></div>
+</td></tr></table><p>after building the environment. The command starts a local web server, and
+launches the first available application defined in the environment's
+<tt class="docutils literal">settings.py</tt>. The application is then by-default accessible via
+<a class="reference external" href="http://127.0.0.1:5000">http://127.0.0.1:5000</a></p>
+</div>
+<div class="section" id="id3">
+<span id="native-werkzeug-framework-support"></span><h3>Native Werkzeug framework support</h3>
+<p>Now you can easily integrate Kaylee into your <a class="reference external" href="http://werkzeug.pocoo.org">Werkzeug</a> -based web application
+via native API. This is the third front-end framework which is supported by
+Kaylee out-of-the box. The other two are <a class="reference external" href="http://djangoproject.com">Django</a> and <a class="reference external" href="http://flask.pocoo.org">Flask</a>.</p>
+</div>
+<div class="section" id="id4">
+<span id="demo-projects-repository"></span><h3>Demo projects repository</h3>
+<p>At last, all Kaylee demo projects, including the tutorial project are
+gathered under a separate repository on github:
+<a class="reference external" href="https://github.com/BasicWolf/kaylee-demo-projects">https://github.com/BasicWolf/kaylee-demo-projects</a>
+In addition to the projects, the repository includes a special build script
+which automatically creates a Kaylee demo environment, builds the projects
+and starts the built-in debug server.</p>
+</div>
+<div class="section" id="id5">
+<span id="updated-unit-tests-and-massive-code-improvements"></span><h3>Updated unit tests and massive code improvements</h3>
+<p>Finally, there are lots of code improvements covered with unit tests.
+All to make sure that Kaylee would be solid-stable the day it reaches
+the maturity version :)</p>
+</div>
+</div>
+<div class="section" id="are-you-ready-to-rock">
+<h2>Are you ready to rock?</h2>
+<p>Find more information about Kaylee at <a class="reference external" href="http://kaylee.znasibov.info">http://kaylee.znasibov.info</a>.</p>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://znasibov.info/tag/kaylee.html">Kaylee</a>
+      <a href="https://znasibov.info/tag/python.html">Python</a>
+      <a href="https://znasibov.info/tag/programming.html">programming</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'znasibov';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy; 2020 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zaur's Thoughts ",
+  "url" : "https://znasibov.info",
+  "image": "/images/logo.png",
+  "description": "Zaurun Fikirləri"
+}
+</script>
+
+</body>
+</html>

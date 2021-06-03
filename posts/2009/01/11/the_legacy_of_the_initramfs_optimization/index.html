@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://znasibov.info/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/font-awesome/css/solid.css">
+
+    <link href="https://znasibov.info//static/css/extra.css" rel="stylesheet">
+
+
+
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+<script>
+
+var PRIVACY_POLICY_VERSION = "1.0";
+var PRIVACY_COOKIE_NAME = 'privacyAccepted' + PRIVACY_POLICY_VERSION
+
+if (!cookieExists(PRIVACY_COOKIE_NAME)) {
+    document.addEventListener("DOMContentLoaded",function(){
+        document.getElementById('privacy_policy_popup').style['display'] = 'block';
+        //here code
+    });
+}
+
+function privacyOk() {
+    var expires = ' expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+
+    document.cookie = PRIVACY_COOKIE_NAME + '=true; ' + expires;
+    document.getElementById('privacy_policy_popup').remove();
+}
+
+function cookieExists(name) {
+    return document.cookie.split(';').filter(function(item) {
+        return item.trim().indexOf(name + '=') == 0;
+    }).length
+}
+
+function disableGoogleAnalytics() {
+    document.cookie = 'disable_google_analytics=true; expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+    window['ga-disable-UA-9017911-1'] = true;
+    alert('Google Analytics have been successfully disabled!');
+}
+</script>
+<!-- Google Analytics -->
+<script type="text/javascript">
+
+if (cookieExists('disable_google_analytics')) {
+    window['ga-disable-UA-9017911-1'] = true;
+}
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-9017911-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->  
+
+
+<meta name="author" content="Zaur Nasibov" />
+<meta name="description" content="An adventure of dealing with Target filesystem doesn&#39;t have /sbin/init" />
+<meta name="keywords" content="initramfs, Linux">
+
+
+<meta property="og:site_name" content="Zaur's Thoughts"/>
+<meta property="og:title" content="The legacy of the initramfs optimization"/>
+<meta property="og:description" content="An adventure of dealing with Target filesystem doesn&#39;t have /sbin/init"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://znasibov.info/posts/2009/01/11/the_legacy_of_the_initramfs_optimization/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2009-01-11 12:00:00+01:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://znasibov.info/author/zaur-nasibov.html">
+<meta property="article:section" content="articles"/>
+<meta property="article:tag" content="initramfs"/>
+<meta property="article:tag" content="Linux"/>
+<meta property="og:image" content="/images/logo.png">
+
+  <title>Zaur's Thoughts &ndash; The legacy of the initramfs optimization</title>
+
+</head>
+
+<body class="light-theme">
+<!-- Policy notice -->
+<div id="privacy_policy_popup"
+    style="display:none;
+           position:absolute;
+           width:100%;
+           text-align:center;
+           background-color:white;
+           z-index:100;">
+  Dear visitor,
+  <br>
+  We kindly ask you to read the site's <a href="/pages/privacy-policy/">privacy policy</a>.
+  <br>
+  <button style="position:relative; border:dashed" onclick="privacyOk();">OK!</button>
+</div>  <aside>
+    <div>
+      <a href="https://znasibov.info">
+          <img src="/images/logo.png" alt="Zaurun Fikirləri" title="Zaurun Fikirləri">
+      </a>
+
+      <h1>
+        <a href="https://znasibov.info">Zaurun Fikirləri</a>
+      </h1>
+
+<p>Zaur's Thoughts</p>
+
+      <nav>
+        <ul class="list">
+
+
+              <li>
+                <a target="_self"
+                   href="https://znasibov.info/pages/projects/#projects">
+                  Projects
+                </a>
+              </li>
+              <li>
+                <a target="_self"
+                   href="https://znasibov.info/pages/about/#about">
+                  About
+                </a>
+              </li>
+              <li>
+                <a target="_self"
+                   href="https://znasibov.info/pages/privacy-policy/#privacy-policy">
+                  Privacy policy
+                </a>
+              </li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/zaur-nasibov-44610853/" target="_blank">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-github" href="https://github.com/basicwolf" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="/feeds/atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://znasibov.info">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="the_legacy_of_the_initramfs_optimization">The legacy of the initramfs optimization</h1>
+    <p>
+      Posted on su 11 tammikuu 2009 in <a href="https://znasibov.info/category/articles.html">articles</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>I was shocked receiving the <tt class="docutils literal">Target filesystem doesn't have /sbin/init</tt>
+message. I've surfed the Internet for possible solutions - none of them
+helped. I had to remember everything I've changed in my system during
+past 3 months. Finally, I remembered..</p>
+<p>I'm a Linux person. I'm a Linux person since March 2008. My current OS is
+Ubuntu Linux (x86). But I don't like to be &quot;generic&quot;. My x64 processor is not
+generic, it's Core2. I have one particular Ethernet, wi-fi and bluetooth
+adapter, one sound and video card. I'll never use the 95% of Linux-supported
+hardware..</p>
+<p>So, I've compiled my custom &quot;sony-vaio&quot; kernel, still always downloaded the
+generic kernel upgrades (to have a native kernel full of modules in a case
+of emergency).</p>
+<p>This happened when I've updated the system.</p>
+<p>Ubuntu has downloaded the linux-image-2.6.11-generic kernel. I wanted to
+check, If my motioneye camera works under it, so, I rebooted the computer
+and selected the <strong>Ubuntu 8.10, kernel 2.6.27-11-generic</strong> option. Bump!</p>
+<p><tt class="docutils literal">Target filesystem doesn't have /sbin/init</tt></p>
+<p>I had no ideas of what did that mean. I rebooted the laptop via
+<strong>Ctrl+Alt+PrintScreen+B</strong>. Fortunately my custom kernel was working fine.
+After an hour of surfing the Internet I already knew, that possibly the
+kernel can't mount a root file system. So, the difference was between my
+custom kernel and the generic kernel. I was annoyed. There was nothing in my
+kernel, that  generic kernel didn't have. But wait! While creating my custom
+kernel, I've compiled the ext3 filesystem support <strong>statically</strong> into it.
+But why the generic kernel can't load the ext3 module?</p>
+<p>Suddenly it dawned upon me.</p>
+<p>There is initial ram disk stuff at the beginning of system load process.</p>
+<blockquote>
+The initial ramdisk, or initrd is a temporary file system commonly used
+by the Linux kernel during boot. The initrd is typically used for making
+preparations before the real root file system can be mounted <a class="footnote-reference" href="#id2" id="id1">[1]</a></blockquote>
+<p>So, possibly the initrd image created for the generic kernel didn't contain
+the ext3 module. How could that happen? It could, if you're a person who
+likes to optimize everything that could be optimized. For example, the
+system's boot-time.</p>
+<p>There is a minimal set of modules enough to load a system both from hibernate
+(suspend2disk) and powered-off conditions. By default, the initrd contains
+&quot;most&quot; modules (see /etc/initramfs-tools/initramfs.conf file). In my case the
+MODULES option was changed like this:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>#MODULES=most
+MODULES=list
+</pre></div>
+</td></tr></table><p>I used next steps to generate the modules list:</p>
+<ol class="arabic simple">
+<li>Boot kernel with <tt class="docutils literal"><span class="pre">init=/bin/sh</span></tt> option</li>
+<li>Execute <tt class="docutils literal">sudo lsmod | tail <span class="pre">-n</span> +2 | sort | awk '{print <span class="pre">$1;}'</span> &gt;
+<span class="pre">/etc/initramfs-tools/modules</span></tt></li>
+<li>Execute <tt class="docutils literal"><span class="pre">update-initramfs</span> <span class="pre">-v</span> <span class="pre">-d</span> <span class="pre">-k</span>
+\`uname <span class="pre">-r`</span> &amp;&amp; <span class="pre">update-initramfs</span> <span class="pre">-v</span> <span class="pre">-c</span> <span class="pre">-k</span> \`uname <span class="pre">-r`</span></tt></li>
+</ol>
+<p>The second line copies all loaded modules' names to
+<tt class="docutils literal"><span class="pre">/etc/initramfs-tools/modules</span></tt> file. The third line updates the current
+kernel's initramfs file.</p>
+<p>As you might already found out, there was no ext3 module in the list, because
+my custom kernel didn't need an ext3 module!</p>
+<p>But Ubuntu's generic kernel has the ext3 as a module!
+So, to boot a system with generic kernel, I should have had an &quot;ext3&quot; line
+in <tt class="docutils literal"><span class="pre">/etc/initramfs-tools/modules</span></tt>.</p>
+<p>It didn't take long. I updated the file and called
+<tt class="docutils literal"><span class="pre">update-initramfs</span> <span class="pre">-c</span> <span class="pre">-k</span> all</tt>
+to regenerate the init ram disks for both kernels (actually I didn't need
+to do that for my custom kernel :).</p>
+<p>At last, I could load the system with new 2.6.27.11 kernel.</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="http://en.wikipedia.org/wiki/Initrd">http://en.wikipedia.org/wiki/Initrd</a></td></tr>
+</tbody>
+</table>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://znasibov.info/tag/initramfs.html">initramfs</a>
+      <a href="https://znasibov.info/tag/linux.html">Linux</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'znasibov';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy; 2020 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zaur's Thoughts ",
+  "url" : "https://znasibov.info",
+  "image": "/images/logo.png",
+  "description": "Zaurun Fikirləri"
+}
+</script>
+
+</body>
+</html>

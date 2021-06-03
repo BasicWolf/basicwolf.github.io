@@ -1,0 +1,573 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://znasibov.info/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://znasibov.info/theme/font-awesome/css/solid.css">
+
+    <link href="https://znasibov.info//static/css/extra.css" rel="stylesheet">
+
+
+
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+<script>
+
+var PRIVACY_POLICY_VERSION = "1.0";
+var PRIVACY_COOKIE_NAME = 'privacyAccepted' + PRIVACY_POLICY_VERSION
+
+if (!cookieExists(PRIVACY_COOKIE_NAME)) {
+    document.addEventListener("DOMContentLoaded",function(){
+        document.getElementById('privacy_policy_popup').style['display'] = 'block';
+        //here code
+    });
+}
+
+function privacyOk() {
+    var expires = ' expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+
+    document.cookie = PRIVACY_COOKIE_NAME + '=true; ' + expires;
+    document.getElementById('privacy_policy_popup').remove();
+}
+
+function cookieExists(name) {
+    return document.cookie.split(';').filter(function(item) {
+        return item.trim().indexOf(name + '=') == 0;
+    }).length
+}
+
+function disableGoogleAnalytics() {
+    document.cookie = 'disable_google_analytics=true; expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+    window['ga-disable-UA-9017911-1'] = true;
+    alert('Google Analytics have been successfully disabled!');
+}
+</script>
+<!-- Google Analytics -->
+<script type="text/javascript">
+
+if (cookieExists('disable_google_analytics')) {
+    window['ga-disable-UA-9017911-1'] = true;
+}
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-9017911-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->  
+
+
+<meta name="author" content="Zaur Nasibov" />
+<meta name="description" content="Dependencies and abstractions Dependencies are everywhere. Our mornings often start with the least pleasing dependency - an alarm clock. The following dependencies are running water in a bathroom and electricity to brew hot coffee and have a fresh breakfast. Imagine the galaxy of dependencies required to pump that water and electricity …" />
+<meta name="keywords" content="programming, python, dependency injection">
+
+
+<meta property="og:site_name" content="Zaur's Thoughts"/>
+<meta property="og:title" content="Python and dependency injection"/>
+<meta property="og:description" content="Dependencies and abstractions Dependencies are everywhere. Our mornings often start with the least pleasing dependency - an alarm clock. The following dependencies are running water in a bathroom and electricity to brew hot coffee and have a fresh breakfast. Imagine the galaxy of dependencies required to pump that water and electricity …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://znasibov.info/drafts/python_and_dependency_injection.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-07-18 12:00:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://znasibov.info/author/zaur-nasibov.html">
+<meta property="article:section" content="articles"/>
+<meta property="article:tag" content="programming"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="dependency injection"/>
+<meta property="og:image" content="/images/logo.png">
+
+  <title>Zaur's Thoughts &ndash; Python and dependency injection</title>
+
+</head>
+
+<body class="light-theme">
+<!-- Policy notice -->
+<div id="privacy_policy_popup"
+    style="display:none;
+           position:absolute;
+           width:100%;
+           text-align:center;
+           background-color:white;
+           z-index:100;">
+  Dear visitor,
+  <br>
+  We kindly ask you to read the site's <a href="/pages/privacy-policy/">privacy policy</a>.
+  <br>
+  <button style="position:relative; border:dashed" onclick="privacyOk();">OK!</button>
+</div>  <aside>
+    <div>
+      <a href="https://znasibov.info">
+          <img src="/images/logo.png" alt="Zaurun Fikirləri" title="Zaurun Fikirləri">
+      </a>
+
+      <h1>
+        <a href="https://znasibov.info">Zaurun Fikirləri</a>
+      </h1>
+
+<p>Zaur's Thoughts</p>
+
+      <nav>
+        <ul class="list">
+
+
+              <li>
+                <a target="_self"
+                   href="https://znasibov.info/pages/projects/#projects">
+                  Projects
+                </a>
+              </li>
+              <li>
+                <a target="_self"
+                   href="https://znasibov.info/pages/about/#about">
+                  About
+                </a>
+              </li>
+              <li>
+                <a target="_self"
+                   href="https://znasibov.info/pages/privacy-policy/#privacy-policy">
+                  Privacy policy
+                </a>
+              </li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/zaur-nasibov-44610853/" target="_blank">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-github" href="https://github.com/basicwolf" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="/feeds/atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://znasibov.info">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="python_and_dependency_injection">Python and dependency injection</h1>
+    <p>
+      Posted on la 18 heinäkuu 2020 in <a href="https://znasibov.info/category/articles.html">articles</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <div class="section" id="dependencies-and-abstractions">
+<h2>Dependencies and abstractions</h2>
+<p>Dependencies are everywhere. Our mornings
+often start with the least pleasing dependency
+- an alarm clock. The following dependencies
+are running water in a bathroom and electricity
+to brew hot coffee and have a fresh breakfast.
+Imagine the galaxy of dependencies required
+to pump that water and electricity into
+a house. Water and power plants, all the equipment
+and all the plumbing and power lines!</p>
+<p>Our world runs on dependencies. However, is it a concrete
+dependency or just its abstract capabilities that we depend upon?</p>
+<p>Imagine that you have to make a phone call.
+Does it matter, whether you use an IPhone, an Android
+device, or a good old stationary phone?</p>
+<p>You are probably reading this article from
+a screen - be it a monitor, a mobile device,
+or a e-Ink display. It doesn't really matter which one.</p>
+<p>It is a wonderful Saturday evening and you are
+on a geeks meetup. &quot;Can someone please pass me a beer?&quot;
+Someone passes you a beer and you thank them. It could
+be anyone, your best friend, or someone you've
+met for the first time. It doesn't matter since
+you got the beer.</p>
+<p>Tadaaam! You've just rediscovered the <strong>Dependency Inversion Principle</strong>.
+Robert Martin defined the Dependency Inversion Principle in two statements: <a class="footnote-reference" href="#id5" id="id1">[2]</a></p>
+<ol class="arabic simple">
+<li>High-level modules should not depend on low-level modules. Both should depend on abstractions.</li>
+<li>Abstractions should not depend on details. Details should depend upon abstractions.</li>
+</ol>
+<p>Back to the beer example: you, a lazy and thirsty Python developer (<strong>high-level module</strong>)
+does not depend on a concrete person (<strong>low-level module</strong>) in the room.
+All you want is to get a beer (<strong>abstract action</strong>). You also do not depend upon <strong>details</strong>:
+it could be a bottle, a can, a pint glass - your friend would figure it out.
+But she knows, that you won't be happy with a 2 litre plastic bottle:
+it is too thick to be comfortably held in one hand (<strong>detail depending upon abstraction</strong>).</p>
+</div>
+<div class="section" id="dependencies-through-the-eye-of-the-python">
+<h2>Dependencies through the eye of the Python</h2>
+<p>In terms of software development,
+<em>a dependency is an object, that another object requires.</em> <a class="footnote-reference" href="#id4" id="id2">[1]</a></p>
+<p>Let's have a look at an example function which sends an alert
+via a messaging bus:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">message_bus_library</span> <span class="kn">import</span> <span class="n">MessageBus</span><span class="p">,</span> <span class="n">MemoryMessageBus</span>
+
+<span class="n">message_bus</span><span class="p">:</span> <span class="n">MessageBus</span> <span class="o">=</span> <span class="n">MemoryMessageBus</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">send_alert</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">message_bus</span><span class="o">.</span><span class="n">send</span><span class="p">(</span>
+        <span class="n">topic</span><span class="o">=</span><span class="s1">&#39;alert&#39;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="n">Priority</span><span class="o">.</span><span class="n">HIGHEST</span><span class="p">,</span>
+        <span class="n">message</span><span class="o">=</span><span class="n">message</span>
+    <span class="p">)</span>
+</pre></div>
+</td></tr></table><p>Here <tt class="docutils literal">send_alert()</tt> function depends on <tt class="docutils literal">message_bus</tt> object
+and its <tt class="docutils literal">.send()</tt> method.
+In other words, <tt class="docutils literal">message_bus</tt> is a <strong>dependency</strong> of  <tt class="docutils literal">send_alert()</tt>.</p>
+</div>
+<div class="section" id="dependency-injection">
+<h2>Dependency Injection</h2>
+<p>Using a global variable as a dependency is simple and easy to start with,
+but it quickly becomes a maintenance nightmare.
+Consider the kind of &quot;dark magic&quot; required to write a unit test
+for <tt class="docutils literal">send_alert</tt> - the module has to be monkey patched in order
+to replace <tt class="docutils literal">message_bus</tt> with a test double.</p>
+<p>Another way is to pass the dependency as a function
+argument:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">message_bus_library</span> <span class="kn">import</span> <span class="n">MessageBus</span><span class="p">,</span> <span class="n">Priority</span>
+
+<span class="k">def</span> <span class="nf">send_alert</span><span class="p">(</span><span class="n">message_bus</span><span class="p">:</span> <span class="n">MessageBus</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">message_bus</span><span class="o">.</span><span class="n">send</span><span class="p">(</span>
+        <span class="n">topic</span><span class="o">=</span><span class="s1">&#39;alert&#39;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="n">Priority</span><span class="o">.</span><span class="n">HIGHEST</span><span class="p">,</span>
+        <span class="n">message</span><span class="o">=</span><span class="n">message</span>
+    <span class="p">)</span>
+</pre></div>
+</td></tr></table><p>This small change brings an immediate improvement to the code.
+There are no more magic global variables, and what is even
+more important - <strong>it is obvious that send_alert()
+depends on a MessageBus object</strong>.
+Testing <tt class="docutils literal">send_alert()</tt> is also simple, since
+a test double such as a mocked <tt class="docutils literal">MessageBus</tt> instance
+is explicitly passed to the function.
+The huge downside is that <tt class="docutils literal">message_bus</tt> has to be
+passed to every <tt class="docutils literal">send_alert()</tt> call.</p>
+<p>This can be tackled by creating a factory function, which
+produces <tt class="docutils literal">send_alert</tt> with the required dependency:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">message_bus_library</span> <span class="kn">import</span> <span class="n">MessageBus</span><span class="p">,</span> <span class="n">get_message_bus</span>
+
+<span class="k">def</span> <span class="nf">_send_alert</span><span class="p">(</span><span class="n">message_bus</span><span class="p">:</span> <span class="n">MessageBus</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">build_send_alert</span><span class="p">(</span><span class="n">message_bus</span><span class="p">:</span> <span class="n">MessageBus</span><span class="p">):</span>
+   <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">_send_alert</span><span class="p">,</span> <span class="n">message_bus</span><span class="o">=</span><span class="n">message_bus</span><span class="p">)</span>
+
+<span class="n">send_alert</span> <span class="o">=</span> <span class="n">build_send_alert</span><span class="p">(</span><span class="n">get_message_bus</span><span class="p">())</span>
+</pre></div>
+</td></tr></table><p>An <strong>object-oriented</strong> way solution is to
+put the <tt class="docutils literal">send_alert</tt> method in a class
+and pass the dependency through <tt class="docutils literal">__init__()</tt>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AlertDispatcher</span><span class="p">:</span>
+    <span class="n">_message_bus</span><span class="p">:</span> <span class="n">MessageBus</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message_bus</span><span class="p">:</span> <span class="n">MessageBus</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_message_bus</span> <span class="o">=</span> <span class="n">message_bus</span>
+
+    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_message_bus</span><span class="o">.</span><span class="n">send</span><span class="p">(</span>
+            <span class="n">topic</span><span class="o">=</span><span class="s1">&#39;alert&#39;</span><span class="p">,</span>
+            <span class="n">priority</span><span class="o">=</span><span class="n">Priority</span><span class="o">.</span><span class="n">HIGHEST</span><span class="p">,</span>
+            <span class="n">message</span><span class="o">=</span><span class="n">message</span>
+        <span class="p">)</span>
+</pre></div>
+</td></tr></table><p>Now the application now has two separate components, each
+with its own <em>single responsibility</em>: <tt class="docutils literal">AlertDispacher</tt>
+and a <tt class="docutils literal">MessageBus</tt>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="n">rabbit_message_bus</span> <span class="o">=</span> <span class="n">RabbitMQBus</span><span class="p">()</span>
+<span class="n">alert_dispatcher</span> <span class="o">=</span>  <span class="n">AlertDispatcher</span><span class="p">(</span><span class="n">rabbit_message_bus</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="k">if</span> <span class="n">reactor_meltdown_detected</span><span class="p">:</span>
+    <span class="n">alert_dispatcher</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;Reactor is no more!&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table><p><tt class="docutils literal">AlertDispatcher</tt>'s <tt class="docutils literal">message_bus</tt> dependency is fulfilled
+by  an instance of <tt class="docutils literal">RabbitMQBus</tt>.
+In other words, the objects are <em>wired</em> together and
+the <em>dependency is injected</em> into an object
+while the object is being initialized (constructed).</p>
+<blockquote>
+In software engineering, <em>dependency injection</em> (DI) is a technique in which an
+object receives other objects that it depends on.
+The receiving object is called a <em>client</em> and the passed (that is, &quot;injected&quot;)
+object is called a <em>service</em>.
+The service is made part of the client's state. Passing the service to the client,
+rather than allowing a client to build or find the service, is the fundamental
+requirement of the pattern. <a class="footnote-reference" href="#id6" id="id3">[3]</a></blockquote>
+<p><strong>Passing the service to the client, rather than allowing a client to build
+or find the service</strong> is the key concept of DI. In the example above
+<tt class="docutils literal">AlertDispatcher</tt> doesn't look for <tt class="docutils literal">message_bus</tt>, but instead requires
+<tt class="docutils literal">message_bus</tt> to be passed during initialization.</p>
+</div>
+<div class="section" id="inversion-of-control-containers">
+<h2>Inversion of Control Containers</h2>
+<p>Dependency Injection solves many problems, but it
+comes at a dangerously high cost. In one sentence: big bowl of
+dependencies spaghetti.
+Consider this: what if <tt class="docutils literal">AlertDispatcher</tt> requires
+two dependencies, and each of those requires even more?</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AlertDispatcher</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="n">message_bus</span><span class="p">:</span> <span class="n">MessageBus</span><span class="p">,</span>
+        <span class="n">alert_serializer</span><span class="p">:</span> <span class="n">AlertSerializer</span>
+    <span class="p">)</span>
+        <span class="o">...</span>
+
+<span class="k">class</span> <span class="nc">MemoryMessageBus</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">heap_memory_provider</span><span class="p">:</span> <span class="n">HeapMemoryProvider</span><span class="p">)</span>
+        <span class="o">...</span>
+
+<span class="k">class</span> <span class="nc">AlertSerializer</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="n">string_serializer</span><span class="p">:</span> <span class="n">StringSerializer</span><span class="p">,</span>
+        <span class="n">binary_serializer</span><span class="p">:</span> <span class="n">BinarySerializer</span>
+    <span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</td></tr></table><p>Initializing and <em>wiring</em> dependencies together can be done manually.
+However as an application grows, this task can be handled to
+<strong>Inversion of Control (IoC) containers</strong> or
+<strong>Dependency Injection frameworks</strong>.</p>
+<p>An IoC container is an application component
+(a tool, a library, a framework - pick your favourite)
+which manages the dependencies life cycle.
+<em>Inversion</em> means that it is the container which instantiates
+the dependencies and their consumers and routes the control
+flow to the consumers' methods.
+This may sound a bit cryptic, but I am sure you will get the idea
+in a moment.</p>
+<p>Some IoC containers require explicit dependencies declaration,
+other scan application code and structure to build the dependencies
+tree automatically.</p>
+<p><strong>Pytest</strong> is probably the most famous IoC container in Python
+ecosystem.</p>
+<ol class="arabic simple">
+<li>pytest scans the application for tests and fixtures.</li>
+<li>Instantiates the fixtures.</li>
+<li>Calls the tests (<tt class="docutils literal"><span class="pre">test_*()</span></tt>) functions and methods</li>
+<li>Injects the instantiated fixtures into the test by matching
+test function arguments and fixture names.</li>
+</ol>
+<p>Here is an example from pytest documentation:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># content of conftest.py</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">import</span> <span class="nn">smtplib</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;module&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">smtp_connection</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span><span class="s2">&quot;smtp.gmail.com&quot;</span><span class="p">,</span> <span class="mi">587</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</td></tr></table><p>The name of the fixture is <tt class="docutils literal">smtp_connection</tt> and you can access
+its result by listing the name <tt class="docutils literal">smtp_connection</tt> as an input
+parameter in any test function.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># content of test_module.py</span>
+
+<span class="k">def</span> <span class="nf">test_ehlo</span><span class="p">(</span><span class="n">smtp_connection</span><span class="p">):</span>
+    <span class="n">response</span><span class="p">,</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">smtp_connection</span><span class="o">.</span><span class="n">ehlo</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">response</span> <span class="o">==</span> <span class="mi">250</span>
+    <span class="k">assert</span> <span class="sa">b</span><span class="s2">&quot;smtp.gmail.com&quot;</span> <span class="ow">in</span> <span class="n">msg</span>
+    <span class="k">assert</span> <span class="mi">0</span>  <span class="c1"># for demo purposes</span>
+</pre></div>
+</td></tr></table><p>Here, <tt class="docutils literal">smtp_connection</tt> is a <em>dependency</em>, <tt class="docutils literal">test_ehlo</tt> is
+a dependency <em>consumer</em> and pytest is an <em>IoC container</em>, which
+orchestrates the execution flow.</p>
+</div>
+<div class="section" id="ioc-container-and-application-layers">
+<h2>IoC container and application layers</h2>
+<p>Did you notice that <tt class="docutils literal">AlertDispatcher</tt> does not depend on concrete
+<tt class="docutils literal">MessageBus</tt> implementation? It could be <tt class="docutils literal">MemoryMessageBus</tt>,
+<tt class="docutils literal">DBus</tt>, <tt class="docutils literal">RabbitMQ</tt> or anything else implementing the required
+method - after all, Python is a dynamic language with duck typing.</p>
+</div>
+<div class="section" id="targeted-unit-testing">
+<h2>Targeted unit testing</h2>
+</div>
+<div class="section" id="clean-architecture-and-more">
+<h2>Clean architecture and more</h2>
+</div>
+<div class="section" id="references">
+<h2>References</h2>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td><a class="reference external" href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.1">Dependency injection in ASP.NET Core</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[2]</a></td><td>Robert Martin C. (2003), <em>Agile Software Development, Principles, Patterns, and Practices</em>. ISBN 978-0135974445.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>Dependency Injection. From Wikipedia. Retrieved on 2020.08.15. URL: <a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_injection">https://en.wikipedia.org/wiki/Dependency_injection</a></td></tr>
+</tbody>
+</table>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://znasibov.info/tag/programming.html">programming</a>
+      <a href="https://znasibov.info/tag/python.html">python</a>
+      <a href="https://znasibov.info/tag/dependency-injection.html">dependency injection</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'znasibov';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy; 2020 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zaur's Thoughts ",
+  "url" : "https://znasibov.info",
+  "image": "/images/logo.png",
+  "description": "Zaurun Fikirləri"
+}
+</script>
+
+</body>
+</html>
