@@ -1,5 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Zaur's Thoughts</title><link href="https://znasibov.info/" rel="alternate"></link><link href="znasibov.info/feeds/atom.xml" rel="self"></link><id>https://znasibov.info/</id><updated>2020-07-11T13:06:00+02:00</updated><subtitle>Zaur's Thoughts</subtitle><entry><title>Concrete Settings: a new way to manage configurations in Python projects</title><link href="https://znasibov.info/posts/2020/07/11/concrete_settings/" rel="alternate"></link><published>2020-07-11T13:06:00+02:00</published><updated>2020-07-11T13:06:00+02:00</updated><author><name>Zaur Nasibov</name></author><id>tag:znasibov.info,2020-07-11:/posts/2020/07/11/concrete_settings/</id><summary type="html">&lt;p&gt;After two years of developing a hobby project,
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Zaur's Thoughts</title><link href="https://znasibov.info/" rel="alternate"></link><link href="znasibov.info/feeds/atom.xml" rel="self"></link><id>https://znasibov.info/</id><updated>2021-06-04T12:00:00+02:00</updated><subtitle>Zaur's Thoughts</subtitle><entry><title>Alarms and dashboards</title><link href="https://znasibov.info/posts/2021/06/04/alarms_and_dashboards/" rel="alternate"></link><published>2021-06-04T12:00:00+02:00</published><updated>2021-06-04T12:00:00+02:00</updated><author><name>Zaur Nasibov</name></author><id>tag:znasibov.info,2021-06-04:/posts/2021/06/04/alarms_and_dashboards/</id><summary type="html">&lt;p class="first last"&gt;Ranting about alarms and dashboards&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Dashboard is a great tool to show information in a human-friendly manner.
+Yet, it is useless as a monitoring tool.
+Hanging a big shiny screen in the middle of the room, with bars, plots,
+charts and lots of other cool stuff is spectacular.
+But it won't help you to catch an issue in a timely manner.
+That is because you can't watch the screen all the time, don't you?&lt;/p&gt;
+&lt;p&gt;The solution is obvious - alarms.
+Alarms are meant to warn you when the situation is exceptional or
+something is about to go south. When a service fails.
+When your disk space is running low.
+When a request processing time takes too long.
+When there is an error in logs.&lt;/p&gt;
+&lt;p&gt;And then, you actually need a dashboard to query the history
+of the parameters in trouble.
+You'd want to see the trend of free disk space - did it happen suddenly,
+or it's been filling up in a linear manner?
+Maybe you have to wipe some old data?
+Perhaps there was a temporal network error?
+How many times that error happened lately?&lt;/p&gt;
+&lt;p&gt;Alarm can be dangerous.
+When you get too many alarms they slip through.
+Too many &amp;quot;usual&amp;quot; alarms turn into annoying buzz which is soon ignored.
+The solution is to temporarily disable the unnecessary alarms.
+Do keep in mind that
+&lt;strong&gt;an alarm could be disabled only when you are actively fixing the problem&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;This is nothing new.
+Have you seen Ron Howard's &amp;quot;Apollo 13&amp;quot; film?
+Remember the CO2 alarm indicator lighting up and the crew checking
+the CO2 levels on the gauge?&lt;/p&gt;
+&lt;img alt="CO2 Indicator | Apollo 13 (2005)" class="align-center" src="https://znasibov.info/images/articles/2021_06_04_alarms_and_dashboards/apollo_13_co2_indicator.jpg" style="width: 50%;" /&gt;
+&lt;p&gt;Can you imagine the crew constantly checking those values
+to make sure that CO2 levels are acceptable instead?
+What about other critical indicators?
+Of course not.&lt;/p&gt;
+&lt;img alt="CO2 Gauge | Apollo 13 (2005)" class="align-center" src="https://znasibov.info/images/articles/2021_06_04_alarms_and_dashboards/apollo_13_co2_gauge.jpg" style="width: 50%;" /&gt;
+&lt;p&gt;There are alarms to draw attention and dashboards to help dealing with the alarm as fast as possible.&lt;/p&gt;
+</content><category term="articles"></category><category term="rants"></category><category term="alarm"></category><category term="dashboard"></category><category term="DevOps"></category><category term="errors"></category></entry><entry><title>Concrete Settings: a new way to manage configurations in Python projects</title><link href="https://znasibov.info/posts/2020/07/11/concrete_settings/" rel="alternate"></link><published>2020-07-11T13:06:00+02:00</published><updated>2020-07-11T13:06:00+02:00</updated><author><name>Zaur Nasibov</name></author><id>tag:znasibov.info,2020-07-11:/posts/2020/07/11/concrete_settings/</id><summary type="html">&lt;p&gt;After two years of developing a hobby project,
 I am proud to announce &lt;strong&gt;Concrete Settings&lt;/strong&gt; -
 a new configuration management library for Python projects.&lt;/p&gt;
 &lt;p&gt;Concrete Settings was born as an effort to improve configuration handling in
