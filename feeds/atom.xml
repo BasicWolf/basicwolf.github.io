@@ -1,5 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Zaur's Thoughts</title><link href="https://znasibov.info/" rel="alternate"></link><link href="znasibov.info/feeds/atom.xml" rel="self"></link><id>https://znasibov.info/</id><updated>2021-06-04T12:00:00+02:00</updated><subtitle>Zaur's Thoughts</subtitle><entry><title>Alarms and dashboards</title><link href="https://znasibov.info/posts/2021/06/04/alarms_and_dashboards/" rel="alternate"></link><published>2021-06-04T12:00:00+02:00</published><updated>2021-06-04T12:00:00+02:00</updated><author><name>Zaur Nasibov</name></author><id>tag:znasibov.info,2021-06-04:/posts/2021/06/04/alarms_and_dashboards/</id><summary type="html">&lt;p class="first last"&gt;Ranting about alarms and dashboards&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Zaur's Thoughts</title><link href="https://znasibov.info/" rel="alternate"></link><link href="znasibov.info/feeds/atom.xml" rel="self"></link><id>https://znasibov.info/</id><updated>2021-06-23T12:00:00+02:00</updated><subtitle>Zaur's Thoughts</subtitle><entry><title>Accelerate: The Science of Lean Software and DevOps</title><link href="https://znasibov.info/posts/2021/06/23/accelerate_book_review/" rel="alternate"></link><published>2021-06-23T12:00:00+02:00</published><updated>2021-06-23T12:00:00+02:00</updated><author><name>Zaur Nasibov</name></author><id>tag:znasibov.info,2021-06-23:/posts/2021/06/23/accelerate_book_review/</id><summary type="html">&lt;p class="first last"&gt;Are you familiar with the gut feeling that the software development
+practices around you could be better? What if I told you that there
+is a solid scientific study on practices of low and high performing
+technology organizations?&lt;/p&gt;
+</summary><content type="html">&lt;div class="section" id="longing-for-improvement"&gt;
+&lt;h2&gt;Longing for improvement&lt;/h2&gt;
+&lt;p&gt;Are you familiar with the gut feeling that the software development
+practices around you could be better?
+Sometimes the desired improvements are small and obvious.
+They are not very hard to implement and have a quick return of investment.&lt;/p&gt;
+&lt;p&gt;For example, adding a vulnerability scanner to a CI pipeline prevents using
+dependencies with known CVEs.
+A code formatter which applies the rules for every source file save operation -
+brings determinism and keeps team members from nagging about style.
+Even a low disk space alarm configured long time ago
+could save you from major embarrassment and business losses.&lt;/p&gt;
+&lt;p&gt;Other improvements are not that easy.
+Core dependencies being dramatically outdated since new versions break
+compatibility?
+Painful deployment with downtime lasting for days?
+Features being developed by single developers for months and living in a branch
+for all the that time?
+Backlog growing indefinitely.
+Bugs, bugs and even more bugs pouring in every day?
+I'd be glad to tell that the above is a horror story, and it never happens in
+reality. But you and I both know the sad truth.
+Worse - when everyone in the development
+department agrees that something should be done, but the time is never right.
+Thousands of software businesses have to deal with stories like this every day.&lt;/p&gt;
+&lt;p&gt;There is no silver bullet to fix all the issues in your organization.
+But we are not armless in the matter.
+What if you don't need to guess what should or could be improved?
+What if there is a solid scientific study on practices of
+high performing technology organizations?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="accelerate"&gt;
+&lt;h2&gt;Accelerate&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Accelerate&lt;/strong&gt; by Nicole Forsgren, Jez Humble and Gene Kim is a book concluding
+a four-year research into capabilities and practices
+of software development practices.
+There were over 23000 survey responses from over 2000 unique
+and diverse organizations from around the world collected during the research.
+It uncovered 24 key capabilities that drive improvement in
+software delivery performance. Some of these capabilities are:
+&lt;strong&gt;continuous delivery&lt;/strong&gt; and &lt;strong&gt;trunk-based development&lt;/strong&gt;,
+&lt;strong&gt;loosely coupled architecture&lt;/strong&gt; and &lt;strong&gt;customer feedback&lt;/strong&gt;,
+&lt;strong&gt;work-in-progress limits&lt;/strong&gt; and &lt;strong&gt;transformational leadership&lt;/strong&gt;.&lt;/p&gt;
+&lt;img alt="Accelerate book cover" class="align-center" src="https://znasibov.info/images/2021_06_23_accelerate/accelerate.jpg" style="width: 40%;" /&gt;
+&lt;p&gt;&amp;quot;Accelerate&amp;quot; doesn't have all the answers and is not a guidebook.
+But it clearly describes the differences between low and high -performing
+organizations and teams. It explains in detail how capabilities are related
+and how each capability affects performance and
+how leadership is essential for transformation.
+Being said, not every capability is easy to measure.
+You can quickly estimate how long it takes to deliver a committed piece of code
+to the customer. But how do you measure culture?&lt;/p&gt;
+&lt;p&gt;The second part of the book may help you find the answer.
+While the first part is about the study results, it's the second part which
+explains the methods used in the research and dives deep into the science
+behind conducted surveys.&lt;/p&gt;
+&lt;p&gt;The third part is a life example story of ING  Netherlands.
+It tells how leadership, management, and team  practices work together
+bringing a traditional banking business into the digital age.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="verdict"&gt;
+&lt;h2&gt;Verdict&lt;/h2&gt;
+&lt;p&gt;There is no verdict. This book is truth based on facts.
+Although not a long one, my career has been among low, average and great
+performing teams.
+I mentally applied everything said in the book to my experience,
+and boy it is accurate!
+There is really no excuse for an organization to ignore this study or
+delay applying the practices ASAP.
+If you want to stay in the game, you have to &lt;strong&gt;Accelerate&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="articles"></category><category term="book"></category><category term="software development"></category><category term="accelerate"></category></entry><entry><title>Alarms and dashboards</title><link href="https://znasibov.info/posts/2021/06/04/alarms_and_dashboards/" rel="alternate"></link><published>2021-06-04T12:00:00+02:00</published><updated>2021-06-04T12:00:00+02:00</updated><author><name>Zaur Nasibov</name></author><id>tag:znasibov.info,2021-06-04:/posts/2021/06/04/alarms_and_dashboards/</id><summary type="html">&lt;p class="first last"&gt;Ranting about alarms and dashboards&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Dashboard is a great tool to show information in a human-friendly manner.
 Yet, it is useless as a monitoring tool.
 Hanging a big shiny screen in the middle of the room, with bars, plots,
