@@ -1,0 +1,1575 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Zaur's Thoughts - Books</title><link href="https://zaurnasibov.com/" rel="alternate"></link><link href="https://zaurnasibov.com/feeds/books.atom.xml" rel="self"></link><id>https://zaurnasibov.com/</id><updated>2024-03-23T21:42:00+02:00</updated><subtitle>Zaurun Fikirləri</subtitle><entry><title>Teams Topologies - Book Review</title><link href="https://zaurnasibov.com/posts/2024/03/23/teams-topologies-book-review.html" rel="alternate"></link><published>2024-03-23T21:42:00+02:00</published><updated>2024-03-23T21:42:00+02:00</updated><author><name>Zaur Nasibov</name></author><id>tag:zaurnasibov.com,2024-03-23:/posts/2024/03/23/teams-topologies-book-review.html</id><summary type="html">&lt;a class="reference external image-reference first" href="https://zaurnasibov.com/posts/2024/03/23/teams-topologies-book-review.html"&gt;
+&lt;img alt="&amp;quot;Teams Topologies book cover&amp;quot;" class="align-center" src="https://zaurnasibov.com/articles/2024-03-23-teams-topologies/teams-topologies-cover.webp" /&gt;
+&lt;/a&gt;
+&lt;p class="last"&gt;Conway’s Law states that systems are designed to mirror the communication
+structures of the organizations that create them. How, then, can we
+shape an organization to produce the desired system design? Let's
+find out &amp;quot;Team Topologies: Organizing Business and Technology Teams
+for Fast Flow&amp;quot; by Matthew Skelton and Manuel Pais.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Are you familiar with the exiting feeling of making a discovery?
+Butterflies in your stomach, intermittent breathing, galvanized palms?
+Every chapter draws a &amp;quot;&lt;em&gt;WOW!&lt;/em&gt;&amp;quot;, every page turns into a vivid picture
+in your imagination.
+That is &amp;quot;Team Topologies&amp;quot; -  a book about systems architecture.
+This may come as a surprise, since the title clearly states otherwise.
+It's also a book about teams interactions and organizational design.&lt;/p&gt;
+&lt;img alt="&amp;quot;Teams Topologies book cover&amp;quot;" class="align-center" src="https://zaurnasibov.com/articles/2024-03-23-teams-topologies/teams-topologies-cover.webp" /&gt;
+&lt;p&gt;Part I - &lt;em&gt;Teams As the Means of Delivery&lt;/em&gt;.
+Matthew Skelton and Manuel Pais dedicate the early
+chapters of the book to show how organizational structure affects
+the system design. This effect is nowadays known as &amp;quot;Conway's law&amp;quot;,
+which originates from Mel Conway's 1968 paper &amp;quot;How Do Committees Invent&amp;quot;:&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+Organizations which design systems ... are constrained to produce designs
+which are copies of the communication structures of these organizations.&lt;/blockquote&gt;
+&lt;p&gt;It is a scary discovery. It means that organizational structure prevails
+over system architecture, unless the structure is made to support the
+desired architecture. If the former and the latter are in conflict, one
+of them has to change. Which one? If the desired architecture is the target,
+there isn't much to change about it. This leaves us with the organizational
+structure.&lt;/p&gt;
+&lt;p&gt;But before diving into the structure, the organization needs to have team-first
+mindset. In the book, a team is a stable group of five to nine people who
+work toward a shared goal as a unit. The team is the smallest entity of delivery
+within the organization. An organization should never assign work to individuals;
+only to teams.&lt;/p&gt;
+&lt;p&gt;How can an organization improve team performance?
+The team should be long-lived and stable, of relatively small size (as stated above).
+The team should own the software while being able to limit its cognitive load.
+The organization should reward the team, not individuals.
+Last but not the least: the team members should develop a team-first mindset,
+prioritizing team goals and all required activities that help achieve these goals.&lt;/p&gt;
+&lt;hr class="docutils" /&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+Organizations must design teams intentionally by asking these questions:
+Given our skills, constraints, cultural and engineering maturity, desired
+software architecture, and business goals, which team topology will help
+us deliver results faster and safer? How can we reduce or avoid handovers
+between teams in the main flow of change? Where should the boundaries be
+in the software system in order to preserve system viability and encourage
+rapid flow? How can our teams align to that?&lt;/blockquote&gt;
+&lt;p&gt;The answers to these questions are found in
+Part II - &lt;em&gt;Team Topologies that Work for Flow&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The authors start by examining team anti-patterns, such as
+frequently shuffling team members and ad-hoc or reactive
+team design. A team that has grown too large may be split without clear
+boundaries. A dedicated DBA team might be created after a software crash
+in production due to poor database handling. These situation certainly
+require action, but &amp;quot;the most natural solution&amp;quot; might slow down delivery and
+weaken the autonomy of teams.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+In order to be as effective as possible, we need to consciously design
+our teams rather than merely allow them to form accidentally or haphazardly.
+We call these consciously designed team structures &lt;strong&gt;team topologies&lt;/strong&gt;,
+a term that acknowledges that teams should be deliberately “placed”
+into organizations while also referring to the boundary of responsibility
+of each team.&lt;/blockquote&gt;
+&lt;p&gt;A high-performing team takes responsibility and the ownership of the features
+they develop - from design all the way to production. Here, &lt;em&gt;production&lt;/em&gt; means
+monitoring feature usage and performance, rather than handing it over to an Ops team.
+Such a team is cross-functional and equipped with all necessary skills
+to design, develop, test, deploy and monitor application usage and performance.
+To maintain a rapid flow, the team remains autonomous, ideally utilizing non-blocking
+external dependencies in the form of self-services developed and maintained
+by other teams.&lt;/p&gt;
+&lt;a class="reference external image-reference" href="https://zaurnasibov.com/articles/2024-03-23-teams-topologies/feedback-from-production.svg"&gt;
+&lt;img alt="&amp;quot;Feedback from production to different development stages maintained by the same team&amp;quot;" class="align-center" src="https://zaurnasibov.com/articles/2024-03-23-teams-topologies/feedback-from-production.png" style="width: 100%;" /&gt;
+&lt;/a&gt;
+&lt;hr class="docutils" /&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Perfection is achieved, not when there is nothing more to add, but
+when there is nothing left to take away.&lt;/p&gt;
+&lt;p class="attribution"&gt;&amp;mdash;Antoine de Saint-Exupéry, Airman's Odyssey&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Skelton and Pais reduce the number of team variations to four fundamental
+team topologies:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;em&gt;Stream-aligned team&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Enabling team&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Complicated-subsystem team&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Platform team&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The authors argue that these are the only topologies
+necessary to build and run modern software systems. Limiting to these
+four team types acts as a powerful template for effective organization design,
+especially when combined with well-defined software boundaries and efficient
+team interactions.&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;strteam-aligned&lt;/strong&gt; team is the primary team type in an organization, and
+the purpose of the other fundamental team topologies. A &lt;em&gt;stream&lt;/em&gt; represents the
+continuous flow of work aligned to a business domain or organizational
+capability. The team is empowered to build and deliver customer or user
+value as quickly, safely, and independently as possible.&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;enabling team&lt;/strong&gt; assists stream-aligned teams in acquiring necessary skills
+and knowledge, setting up pipelines, adopting tools and solving engineering problems
+in unfamiliar environments. Enabling teams have a strongly collaborative nature;
+they thrive to understand the problems and shortcomings of stream-aligned
+teams in order to provide effective guidance.&lt;/p&gt;
+&lt;p&gt;A &lt;strong&gt;complicated-subsystem&lt;/strong&gt; team is responsible for building and maintaining
+a part of the system that relies heavily on specialized knowledge.
+This is to such an extent that most team members must be specialists in that particular
+area to understand and maintain the subsystem effectively.
+Examples of complicated subsystems might include a mathematical model,
+a mainframe module, a voice recognition algorithm, and so on.&lt;/p&gt;
+&lt;p&gt;The purpose of the &lt;strong&gt;platform team&lt;/strong&gt; is to enable stream-aligned team to deliver
+their work autonomously. It provides internal services to reduce the cognitive
+load that would otherwise be required from stream-aligned teams to develop these underlying
+services. Examples of these services include: continuous integration (CI),
+code registries, repository hosting, databases, deployment, monitoring,
+logging aggregation and so on.&lt;/p&gt;
+&lt;p&gt;Based on reports from successful organizations, the ratio of stream-aligned teams
+to other types of teams should be between approximately 6:1 and 9:1.&lt;/p&gt;
+&lt;p&gt;How should stream-aligned teams divide responsibilities?
+The authors advice breaking down the system, so that the resulting parts
+can evolve as independently as possible. Consequently, teams assigned to these
+parts will experience greater autonomy and ownership over them.&lt;/p&gt;
+&lt;p&gt;It is also essential to consider the teams dynamics when splitting a monolith.
+Splitting a monolithic application into autonomous services that need
+to be released and deployed together is merely creating a
+&amp;quot;distributed monolith&amp;quot; with tightly coupled pieces.
+Microservices sharing a database, monolithic world models with similar domain
+language and representation across different formats, or even a single office
+layout for all the teams, can all contribute to a distributed monolith.&lt;/p&gt;
+&lt;hr class="docutils" /&gt;
+&lt;p&gt;Now that the reader is familiar with the four fundamental team topologies,
+Skelton and Pais discuss how teams interact and when to change the teams
+and their interactions. Well-defined interactions are key to effective
+teams, and the authors outline three essential ways teams can and should interact:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;Collaboration: working closely together with another team&lt;/strong&gt;.
+Imagine two or more teams coming together to solve a problem that requires
+competences from all of them. Their collaboration is rapid; they quickly
+make discoveries and share knowledge, experiment and prototype solutions.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;X-as-a-Service: consuming or providing something with minimal collaboration&lt;/strong&gt;.
+This interaction is ideal when a team needs to focus on its tasks and
+consume the necessary services - from CI/CD infrastructure to upstream
+production API services - without being involved in their development and
+maintenance.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Facilitating: helping (or being helped by) another team to clear impediments&lt;/strong&gt;.
+When a team lacks certain competences, a facilitating team can save the
+day by coaching and providing help. This is the main interaction mode for
+Enabling teams.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The last chapter of the book - &lt;strong&gt;Evolve Team Structures with Organizational Sensing&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;As Frederic Brooks mentioned in &amp;quot;Mythical Man-Months&amp;quot;:&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+Conway goes on to point out that the organization chart
+will initially reflect the first system design, which is almost surely
+not the right one. If the system design is to be free to change, the
+organization must be prepared to change.&lt;/blockquote&gt;
+&lt;p&gt;The software design must align with the way in which teams communicate;
+otherwise, it is doomed to fail. The methods of communication evolve as
+the system and the organization matures. What begins as collaboration eventually
+becomes part of platform services with strict boundaries. Stream-aligned teams
+seek help from Enabling teams when necessary or provide assistance to other teams
+upon request.&lt;/p&gt;
+&lt;hr class="docutils" /&gt;
+&lt;p&gt;I tried very hard to distill the essential ideas of the book into this small review
+to get you interested in reading it. As you can imagine, there is so much more!
+If you are ever involved in designing systems architecture that requires
+the interaction of many teams, this book is a must-read.&lt;/p&gt;
+</content><category term="Books"></category><category term="book"></category><category term="review"></category><category term="architecture"></category><category term="teams"></category><category term="software development"></category></entry><entry><title>The Mythical Man-Months - thoughts</title><link href="https://zaurnasibov.com/posts/2024/03/19/mythical-man-months.html" rel="alternate"></link><published>2024-03-19T21:42:00+02:00</published><updated>2024-03-19T21:42:00+02:00</updated><author><name>Zaur Nasibov</name></author><id>tag:zaurnasibov.com,2024-03-19:/posts/2024/03/19/mythical-man-months.html</id><summary type="html">&lt;a class="reference external image-reference first" href="https://zaurnasibov.com/posts/2024/03/19/mythical-man-months.html"&gt;
+&lt;img alt="&amp;quot;Then Mythical Man-Months&amp;quot; by Frederic Broogks book cover" class="align-center" src="https://zaurnasibov.com/articles/2023-12-16-mythical-man-months/mythical-man-months-book-cover.webp" /&gt;
+&lt;/a&gt;
+&lt;p&gt;As the year 2023 was coming to an end, I finally had some time to recap
+&lt;strong&gt;&amp;quot;The Mythical Man-Month: Essays on Software Engineering&amp;quot;&lt;/strong&gt;
+by Fred Brooks. The book talks about software development fallacies from
+software engineering and project management perspectives.
+However this is not &amp;quot;yet another book&amp;quot;. It was first published in 1975,
+nearly fifty years ago! So much changed since 1975, and yet, so little!
+It's unbelievable that today we are still struggling with the problems
+that haunted us in the age of mainframes.&lt;/p&gt;
+&lt;p class="last"&gt;You smile a lot as you read the book. Programming with punch cards?
+A big fat machine with only 2 MB of RAM? Software documented on paper?
+Sure, things were different back then. But there are so many similarities!
+Instead of reviewing the book, I'd prefer to study these similarities,
+draw parallels, and find out whether things have changed for the better.&lt;/p&gt;
+</summary><content type="html">&lt;img alt="&amp;quot;Then Mythical Man-Months&amp;quot; by Frederic Brooks book cover" class="align-center" src="https://zaurnasibov.com/articles/2023-12-16-mythical-man-months/mythical-man-months-book-cover.webp" /&gt;
+&lt;p&gt;As the year 2023 was coming to an end, I finally had some time to recap
+&lt;strong&gt;&amp;quot;The Mythical Man-Month: Essays on Software Engineering&amp;quot;&lt;/strong&gt;
+by Fred Brooks. The book talks about software development fallacies from
+software engineering and project management perspectives.
+However this is not &amp;quot;yet another book&amp;quot;. It was first published in 1975,
+nearly fifty years ago! So much changed since 1975, and yet, so little!
+It's unbelievable that today we are still struggling with the problems
+that haunted us in the age of mainframes.&lt;/p&gt;
+&lt;p&gt;You smile a lot as you read the book. Programming with punch cards?
+A big fat machine with only 2 MB of RAM? Software documented on paper?
+Sure, things were different back then. But there are so many similarities!
+Instead of reviewing the book, I'd prefer to study these similarities,
+draw parallels, and find out whether things have changed for the better.&lt;/p&gt;
+&lt;div class="section" id="the-tar-pit"&gt;
+&lt;h2&gt;1 - The Tar Pit&lt;/h2&gt;
+&lt;p&gt;Programming is joyful. Every time our program behaves as we intended, it's
+like a small masterpiece coming to life. However, programming is also full of woes.
+How many programs - big and small, beautiful and ugly, useful and useless -
+have been sucked into a tar pit?
+Initially, it may not be apparent; after all, a creature can pull out one of its paws.
+But what if it's all four paws are stuck?
+Therefore, we should learn to avoid such tar pits.&lt;/p&gt;
+&lt;p&gt;How painfully true! Even in my relatively short career (14 years and counting),
+I've witnessed software systems - both small and large - struggling under the weight
+of their features, unable to escape the tar pit and eventually fading away.
+That's precisely why we begin with Proof of Concepts (PoCs) and
+Minimal Viable Products (MVPs) and develop systems iteratively.
+This is why we continuously evolve software architecture - to ensure
+it remains resilient and elastic - and prevents getting into the tar pit.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="the-mythical-man-months"&gt;
+&lt;h2&gt;2 - The Mythical Man-Months&lt;/h2&gt;
+&lt;p&gt;The second chapter explains why measuring a job
+in &amp;quot;man-months&amp;quot; is inappropriate for software development.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+Men and months are interchangeable commodities only when
+a task can be partitioned among many workers with no communication
+among them. This is true of reaping wheat or picking
+cotton; it is not even approximately true of systems programming.&lt;/blockquote&gt;
+&lt;p&gt;And yet, we continue measuring software development in &amp;quot;story points&amp;quot; - a measure
+of task complexity.
+We even play &amp;quot;agile poker&amp;quot; to determine a reasonable amount of story points.
+Our teams digest fewer story points when someone is on vacation or sick leave,
+and more story points when everyone is present. When story points seem too
+abstract, we convert them into days and hours using arbitrary logarithmic scale.
+For instance, 1 story point represents couple of hours of development,
+while 8 story points correspond to about a week of work for a seasoned developer...
+But wait a second, aren't we back to man-months again?!&lt;/p&gt;
+&lt;p&gt;Are you playing agile poker? Consider using these accurate estimation cards for
+the next round:&lt;/p&gt;
+&lt;img alt="&amp;quot;Lunar Logic Estimation Cards&amp;quot;" class="align-center" src="https://zaurnasibov.com/articles/2023-12-16-mythical-man-months/lunar-logic-cards.webp" style="width: 30%;" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="the-surgical-team"&gt;
+&lt;h2&gt;3 - The Surgical Team&lt;/h2&gt;
+&lt;p&gt;In the third chapter Brooks discusses team efficiency based on size and structure.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+For efficiency and conceptual integrity, one prefers a few good minds
+doing design and construction. Yet for large systems one wants a way
+to bring considerable manpower to bear, so that the product can make
+a timely appearance.&lt;/blockquote&gt;
+&lt;p&gt;How wild does a 200-man team sound?
+Brooks talks of ever bigger teams - 1000 people working on OS/360.
+And it's not just programmers but writers, machine operators, clerks, managers and more.
+Even a brilliant, but small team is not able to tackle work that requires
+the collective effort of hundreds of minds.&lt;/p&gt;
+&lt;p&gt;Brooks refers to a proposal by Harlan Mills, where the chunks of work are split
+between &lt;em&gt;surgical teams&lt;/em&gt;. A surgical team includes people in different
+roles, much like a real surgical team that performs medical operations.
+There roles include: &lt;em&gt;the surgeon, the copilot, the tester and the toolsmith, the
+language expert and the editor (i.e. a technical copywriter), the administrator
+and the secretaries&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Interestingly, you can easily map all these roles to the roles in modern software development teams: Product Owner (PO), team lead, engineer, tester.
+While some of the roles have been automated and become unnecessary in our age,
+the essence of the idea - that collaboration and specialization are crucial -
+remains relevant:&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+10-man team can be effective no matter how it is organized, if the
+whole job is within its purview.&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="aristocracy-democracy-and-system-design-1"&gt;
+&lt;span id="aristocracy-democracy-and-system-design"&gt;&lt;/span&gt;&lt;h2&gt;4 - Aristocracy, Democracy and System Design&lt;/h2&gt;
+&lt;p&gt;The chapter begins with a photo of the Reims
+Cathedral, which unlike some of European cathedrals, exhibits sound design and
+architectural integrity.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+The guidebook tells, this integrity was achieved by the self-abnegation
+of eight generations of builders, each of whom sacrificed
+some of his ideas so that the whole might be of pure design.&lt;/blockquote&gt;
+&lt;p&gt;Conceptual integrity is equally important for software systems as for buildings.
+Think of Unix with its small programs that each excel at a specific task.
+Can you imagine a &amp;quot;jack of all trades and the master of none&amp;quot; among them?
+Probably not, because it wouldn't align with the Unix philosophy and
+wouldn't be accepted by the Unix community.
+Or imagine a bunch of connected  microservices,
+each written in a different language, deployed across various clouds, collaborating
+via non-compatible protocols. Such an architecture is a maintenance hell
+destined to fail.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Conceptual integrity implies that design comes from a limited set of minds.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Brooks argues that to achieve conceptual integrity, the design of the architecture
+(i.e. the interfaces of the system) must be separated from its implementation.
+This doesn't mean that the architects are &amp;quot;aristocracy&amp;quot; who make all the
+decisions. Rather, the architects decide &amp;quot;what should be done&amp;quot;,
+while implementers decide the &amp;quot;how&amp;quot;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="the-second-system-effect"&gt;
+&lt;h2&gt;5 - The second-system effect&lt;/h2&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The second is the most dangerous system a man ever designs.
+When he does his third and later ones, his prior experiences will
+confirm each other as to the general characteristics of such systems,
+and their differences will identify those parts of his experience
+that are particular and not generalizable.&lt;/p&gt;
+&lt;p&gt;The general tendency is to over-design the second system,
+using all the ideas and frills that were cautiously sidetracked on
+the first one.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I believe that overengineering can happen at any stage of one's journey.
+The fundamental concepts of our field are stable,
+compared to all the hyped frameworks, tools, programming languages
+and processes, that claim to solve the issues of their predecessors.&lt;/p&gt;
+&lt;p&gt;In my experience, the most skilled engineers create the solutions
+that are simple, elegant and efficient.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="passing-the-word"&gt;
+&lt;h2&gt;6 - Passing the word&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;How can a group of 10 architects maintain the conceptual integrity
+of a system which 1000 men are building?&lt;/em&gt;
+This chapter is a perfect example of eternal problems on one hand and technical
+progress transforming (but not completely eradicating!) the others.&lt;/p&gt;
+&lt;p&gt;How did people tackle this problem on the verge of 60s and 70s? They used&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Written specifications - the manuals.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Formal definitions - API specifications.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I think we will see future specifications to consist of both a formal definition
+and a prose definition.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Direct incorporation - &lt;tt class="docutils literal"&gt;#include&lt;/tt&gt; of function definitions in C,
+or &lt;tt class="docutils literal"&gt;import&lt;/tt&gt; in Java to ensure correct function
+signature usage in compile-time.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Conferences and courts - the communities of practice.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Multiple implementations - The definition will be clearer,
+if there are at least two implementations in the beginning
+(web standards, compilers etc.)&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In most computer project there comes a day when it is discovered that the
+machine and the manual don't agree. When the confrontation follows, the manual
+usually loses, for it can be changed far more quickly and cheaply than the
+machine.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Telephone log - Brooks advises architects to keep recordings of every
+question and answer, combine and distribute those on a weekly basis - in paper format!
+We have better tools (no, Confluence is not a better tool!) for this
+nowadays, and a well structured and up-to-date Q&amp;amp;A log is quite handy!&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Product test -
+we tend to shift left in testing strategies. Software built with good test-first
+practices and automated integration testing has a solid foundation, yet manual
+exploratory testing can reveal so much! Independent testing is also necessary
+to have get the feedback and perspective of the people who were not involved in the
+development.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The project manager's best friend is his daily adversary, the independent
+product-testing organization.&lt;/p&gt;
+&lt;p&gt;Every development organization needs such an independent technical auditing
+group to keep it honest. In the last analysis the customer is the independent auditor.
+In the merciless light of real use, every flaw will show. The product-testing
+group then is the surrogate customer, specialized for finding flaws.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="why-did-the-tower-of-babel-fail"&gt;
+&lt;h2&gt;7 - Why did the tower of Babel fail?&lt;/h2&gt;
+&lt;p&gt;This chapter discusses communication, or rather synchronisation problems.
+Brooks emphasizes the need of an up-to-date &lt;em&gt;workbook&lt;/em&gt;
+- &lt;em&gt;a structure imposed on the documents that the project will be producing.&lt;/em&gt;&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+All the documents of the project need to be part of this structure.
+This includes objectives, external specifications, interface specifications,
+technical standards, internal specifications, and administrative memoranda.&lt;/blockquote&gt;
+&lt;p&gt;Sounds like our issue trackers, rich version control systems (think Github, Gitlab etc.),
+project wikis (Lord help to keep them in harmony!)&lt;/p&gt;
+&lt;p&gt;How hard was it? Brooks talks of keeping a workbook on paper - which
+became 5 feet (~ 1.5m!) thick and daily change distributions consisting of
+150 pages! Microfische was a huge step forward which according to Brooks
+saved millions of dollars on wasting paper.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+With today's system technology available, I think the technique of choice
+is to keep the workbook on the direct-access file, marked with change bars
+and revision dates. Each user would consult it from a display terminal.
+A change summary, prepared daily, would be stored in LIFO fashion at a fixed
+access point.
+The programmer would probably read that daily, but if he missed a day he would
+need only read longer the next day.&lt;/blockquote&gt;
+&lt;p&gt;On a smaller scale - a good CHANGELOG is a crucial part of any system's API.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="calling-the-shot"&gt;
+&lt;h2&gt;8 - Calling the shot&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;How long will a system programming job take? How much effort
+will be required? How does one estimate?&lt;/em&gt; Half a century later, we are still bad at answering these questions.&lt;/p&gt;
+&lt;p&gt;In the past, a common measure of system complexity was the number of instructions
+it contained. The chapter is mostly dedicated to that topic, which is quite
+outdated by today's standards.
+However, we can still draw parallels, for example,the effort required
+to create and maintain a system grows exponentially with its size:&lt;/p&gt;
+&lt;img alt="&amp;quot;Productivity vs. Size&amp;quot;" class="align-center" src="https://zaurnasibov.com/articles/2023-12-16-mythical-man-months/productivity-vs-size.webp" style="width: 80%;" /&gt;
+&lt;p&gt;compare to the &amp;quot;Cost per line of code&amp;quot; chart from &lt;a class="reference external" href="https://zaurnasibov.com/posts/2023/05/18/clean-architecture-book-review.html"&gt;&amp;quot;Clean Architecture&amp;quot;&lt;/a&gt;:&lt;/p&gt;
+&lt;img alt="&amp;quot;Cost of software per line of code&amp;quot;" class="align-center" src="https://zaurnasibov.com/articles/2023-12-16-mythical-man-months/cost-per-loc.webp" style="width: 80%;" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="ten-pounds-in-a-five-pound-sack"&gt;
+&lt;h2&gt;9 - Ten Pounds in a Five-Pound sack&lt;/h2&gt;
+&lt;p&gt;Talks of the costs we tend to often forget.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+Consider the IBM APL interactive software system. It rents for $400 per month
+and, when used, takes at least 160K bytes of memory. On a Model 165,
+memory rents for about $12 per kilobyte per month. If the program
+is available full-time, one pays $400 software rent and $1920 memory rent for
+using the program.&lt;/blockquote&gt;
+&lt;p&gt;Projecting this to the present day, a &lt;tt class="docutils literal"&gt;t3.2xlarge&lt;/tt&gt; EC2 AWS instance with 32GiB
+of memory costs $0.333 per hour. This is roughly $0.00000714 per KiB per month
+- almost 1.7 Million times cheaper than Model 165 memory usage costs.
+This insane leap took half a century, and we are not slowing down.
+However, our systems have evolved as well. They grew in complexity, now serving
+millions of customers concurrently,
+streaming high-quality video, and processing real-time AI tasks.
+Consequently, despite more affordable hardware and broader network bandwidth,
+we still have to pay the price.&lt;/p&gt;
+&lt;p&gt;It’s a timeless truth: we've got to keep an eye on our budgets and watch how we're
+using our resources. Whether it’s CPU, memory, network bandwidth, storage,
+file sizes, startup time - you name it - we need to track it all.&lt;/p&gt;
+&lt;p&gt;Finally the following advice caught me off-guard, but then I recalled the
+world of embedded programming, where it makes total sense:&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+Every project needs a notebook full of good subroutines or macros for queuing,
+searching, hashing, and sorting. For each such function the notebook
+should have at least two programs, the quick and the squeezed.&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="the-documentary-hypothesis"&gt;
+&lt;h2&gt;10 - The Documentary Hypothesis&lt;/h2&gt;
+&lt;p&gt;The documentary hypothesis states that&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+Amid a wash of paper, a small number of documents become the critical
+pivots around which every project 's management revolves.
+These are the manager's chief personal tools.&lt;/blockquote&gt;
+&lt;p&gt;Brooks presents examples of documents from various projects and discusses
+the necessity of formal documentation. He states that the least questions
+these documents should address are:
+what, when, how much, where, and who.
+Take a software project, for instance:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;What: objectives and product specifications&lt;/li&gt;
+&lt;li&gt;When: schedule&lt;/li&gt;
+&lt;li&gt;Where: space allocation&lt;/li&gt;
+&lt;li&gt;How much: budget&lt;/li&gt;
+&lt;li&gt;Who: organization chart - more on this one just in few paragraphs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Why have formal documents? Brooks emphasizes three matters:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Writing the decisions down is essential. It's only when we write things down,
+that the gaps and inconsistencies become evident.&lt;/li&gt;
+&lt;li&gt;The documents communicate the decisions to others.&lt;/li&gt;
+&lt;li&gt;Manager's documents provide them with a database and a checklist.
+Periodic reviews allow managers to assess their current status and determine
+necessary changes in focus or direction.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Brooks mentions Conway's law when talking of organization structure that will
+work on the software project.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+Conway goes on to point out that the organization chart
+will initially reflect the first system design, which is almost surely
+not the right one. If the system design is to be free to change, the
+organization must be prepared to change.&lt;/blockquote&gt;
+&lt;p&gt;Indeed, &lt;a class="reference external" href="https://teamtopologies.com/book"&gt;Team Topologies&lt;/a&gt; teaches us that
+we need to arrange teams according to the desired architecture and design,
+not vice versa. As the design and architecture evolve, so should the
+team topologies involved in product development.&lt;/p&gt;
+&lt;p&gt;To some extent, everything discussed in this chapter remains relevant
+to project management today.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="plan-to-throw-one-away"&gt;
+&lt;h2&gt;11 - Plan To Throw One Away&lt;/h2&gt;
+&lt;p&gt;So often we conflate the purpose and meaning of “Proof of Concept” with
+that of a “Minimal Viable Product”.
+A team working on a PoC might be forced to carry on with it to production,
+rather than starting from scratch and properly building the system from the ground up,
+applying the insights acquired during the PoC phase.
+There is nothing new under the Sun:&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+The management question, therefore, is not whether to build
+system and throw it away. You will do that. The only
+question is whether to plan in advance to build a throwaway, or
+to promise to deliver the throwaway to customers. Seen this way,
+the answer is much clearer. Delivering that throwaway to customers buys time,
+but it does so only at the cost of agony for the user,
+distraction for the builders while they do the redesign, and a bad
+reputation for the product that the best redesign will find hard to
+live down.&lt;/blockquote&gt;
+&lt;p&gt;There is so much wisdom in these words. A PoC is a tool to test a business hypothesis
+and should be considered a throwaway. Delivering the PoC as a finished solution
+to the customer always backfires: developing on a weak foundation
+eventually leads to a collapse.&lt;/p&gt;
+&lt;p&gt;The next topic is - &lt;strong&gt;The Only Constancy Is Change Itself&lt;/strong&gt;.&lt;/p&gt;
+&lt;!-- The first step is to accept the fact of change as a way of life, rather than an
+untoward and annoying exception. Cosgrove has perceptively pointed out that the
+programmer delivers satisfaction of a user need rather than any tangible product.
+And both the actual need and the user's perception of that need will change as
+programs are built, tested, and used. --&gt;
+&lt;p&gt;Both the actual need and the user’s perception of that need will evolve as
+programs are developed, tested, and utilized. The &amp;quot;throw-one-away&amp;quot; concept
+is essentially an acknowledgment that learning leads to changes in design.
+That’s precisely why we must &lt;strong&gt;plan the system for change&lt;/strong&gt;.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+The ways of designing a system for each change are well known and
+widely discussed in the literature &lt;em&gt;perhaps more widely discussed than practiced.&lt;/em&gt;&lt;/blockquote&gt;
+&lt;p&gt;Isn't it painful? We understand the need to design and implement and the system,
+keeping the need for change in mind. Yet so many systems eventually collapse
+under their own weight! Making changes to these systems becomes more expensive
+than not touching the systems at all.&lt;/p&gt;
+&lt;p&gt;Should we plan for change only in software systems? Brooks answers this
+by referencing J. Cosgrove's paper &amp;quot;Needed: a new planning framework&amp;quot;,
+where Cosgrove advocates for treating all plans, milestones, and schedules as
+provisional to facilitate change.
+Although the section is only four pages long, it contains ideas that
+have been extensively discussed in &amp;quot;Accelerate&amp;quot;, &amp;quot;The DevOps Handbook&amp;quot;,
+&amp;quot;Team Topologies&amp;quot; and other studies.
+These include
+continuous learning and experimentation across various domains, team-first thinking,
+effective communication, facilitating (surgical) teams, the importance of leadership,
+and more.&lt;/p&gt;
+&lt;p&gt;Finally, Brooks discusses system maintenance, which he defines as
+the period following a program’s installation for a customer:&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+The total cost of maintaining a widely used program is typically 40 percent
+or more of the cost of developing it. Surprisingly, this cost is strongly
+affected by the number of users. More users find more bugs.&lt;/blockquote&gt;
+&lt;p&gt;Software-as-a-Service has transformed the landscape such that
+software may never enter a traditional maintenance phase in its entire lifetime.
+However, without a solid architecture and a team committed to continuous improvement,
+an increasing amount of time will be devoted to bug fixing,
+to the point where a “complete rewrite” becomes a more viable option.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+Theoretically, after each fix one must run the entire bank of test cases
+previously run against the system, to ensure that it has not been damaged
+in an obscure way.
+In practice such regression testing must indeed approximate this
+theoretical ideal, and it is very costly.&lt;/blockquote&gt;
+&lt;p&gt;Today, regression testing is cheap.
+We have fantastic tools to fulfill the test pyramid.
+Test-first development of software has become the standard.
+Each modern programming language and environment comes with a handful
+of unit testing frameworks and libraries.
+Tools like
+&lt;a class="reference external" href="https://www.docker.com"&gt;Docker&lt;/a&gt;
+and
+&lt;a class="reference external" href="https://testcontainers.com"&gt;Testcontainers&lt;/a&gt;
+enable us to set up a &lt;em&gt;real&lt;/em&gt; database
+with a &lt;em&gt;actual&lt;/em&gt; message brokers for integration testing.
+Even end-to-end (E2E) tests can be automated.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="sharp-tools"&gt;
+&lt;h2&gt;12 - Sharp tools&lt;/h2&gt;
+&lt;p&gt;From laptops, IDEs, CI services, and Source Code Management systems to phones,
+circuit boards for debugging, and even the comfort of office chairs -
+we rely heavily on our tools.
+Nowadays, tools are generally much more affordable compared to personnel costs.
+Any savings made by not acquiring the best tools often result in losses
+due to slower market entry.
+However, tools weren’t always so affordable, particularly in the early days of
+computing.&lt;/p&gt;
+&lt;p&gt;Brooks discusses the machines required by development teams,
+which needed at least 1 MB of main storage and
+100 MB of additional online disk storage, along with terminals.
+There were other constraints as well.
+Remember that machine time was a costly commodity?
+This led to the scheduling of machine access among developers,
+often limiting them to a few 20-minute sessions during a workday.&lt;/p&gt;
+&lt;p&gt;Another common challenge was that the target computers for the final product
+were not the same ones developers used to create the systems.
+Either the target machines were too expensive, or they weren’t available yet.
+Brooks also touches on machine simulators, performance simulators,
+documentation systems, and, finally,
+high-level programming languages and interactive programming!&lt;/p&gt;
+&lt;p&gt;In my view, the jewel of this chapter is the discussion on the
+Segregation of Duties (SoD) in the software release process.
+If you ever experienced a heavy, multi-gate release processes
+keep in mind that it was not invented recently!&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;When a man had his component ready for integration into a
+larger piece, he passed a copy over to the manager of that larger
+system, who put this copy into a system integration sublibrary. Now
+the original programmer could not change it, except by permission
+of the integration manager. As the system came together, the latter
+would proceed with all sorts of system tests, identifying bugs and
+getting fixes. From time to time a system version would be ready for wider
+use.&lt;/p&gt;
+&lt;p&gt;Then it would be promoted to the current version sublibrary.
+This copy was sacrosanct, touched only to fix crippling bugs.
+It was available for use in integration and testing of all
+new module versions.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="the-whole-and-the-parts"&gt;
+&lt;h2&gt;13 - The Whole and The Parts&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;How does one build a program to work?
+How does one test a program?
+And how does one integrate a tested set of component
+programs into a tested and dependable system?&lt;/em&gt;
+These topics were briefly touched in the book, in this chapter
+Brooks considers them more systematically.&lt;/p&gt;
+&lt;p&gt;Brooks begins by emphasizing the significance of
+&lt;a class="reference external" href="#aristocracy-democracy-and-system-design"&gt;Conceptual Integrity&lt;/a&gt;
+in system architecture.
+He then advocates for testing the &lt;em&gt;Specification&lt;/em&gt; before any implementation
+starts. Consider clients testing a platform API solely based on
+specification, prior to the platform's implementation being ready.
+This approach can reveal numerous issues, such as
+unclear or missing specification pieces,
+API inconsistencies, lack of documentation etc., all of which may arise
+during the implementation of client-to-platform communication.&lt;/p&gt;
+&lt;p&gt;Top-Down design - a method formalized by
+Niklaus Wirth in 1971 paper - in Brook's opinion,
+was the most significant new programming formalization of the decade:&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Briefly, Wirth's procedure is to identify design as a sequence
+of refinement steps. One sketches a rough task definition and
+a rough solution method that achieves the principal result.
+Then one examines the definition more closely to see how the
+result differs from what is wanted, and one takes the large
+steps of the solution and breaks them down into smaller steps.&lt;/p&gt;
+&lt;p&gt;From this process one identifies modules of solution or of data
+whose further refinement can proceed independently of other
+work. The degree of this modularity determines the adaptability
+and changeability of the program.&lt;/p&gt;
+&lt;p&gt;Wirth advocates using as high-level a notation as is possible
+at each step, exposing the concepts and concealing the details
+until further refinement becomes necessary.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This is a simple and yet a very effective procedure.
+We can prevent implementation details from impacting architecture,
+and concentrate on the interaction between its components -
+starting from the grand scale all the way down to the details.
+Sounds familiar? That's right, it's Clean Architecture for you.&lt;/p&gt;
+&lt;p&gt;As I write these lines, another though strikes me: design comes second.
+It follows the gathering the user stories, the mapping of events, and
+identification of the needs of all involved stakeholders.
+Unless we get that right, the system won't address the problems of its end-users,
+no matter how impeccable the design is.&lt;/p&gt;
+&lt;p&gt;We've focused a lot on design, but what else does Brooks mention in this chapter?&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Structured programming&lt;/em&gt;: on the verge of the 60s and 70s, programmers commonly
+controlled the flow with &lt;tt class="docutils literal"&gt;GOTO&lt;/tt&gt; statements. Brooks recommends the use of
+&lt;tt class="docutils literal"&gt;do/while&lt;/tt&gt; loops and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;if-then-else&lt;/span&gt;&lt;/tt&gt; statements instead.
+While we have made significant progress in programming languages development,
+we still employ these simple program building blocks.
+Moreover, loops and conditional statements form the basis of syntactic sugar
+provided by modern programming languages.&lt;/p&gt;
+&lt;p&gt;The next topics are about debugging, which wasn't straightforward at all:&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+The programmer carefully designed his debugging procedure
+planning where to stop, what memory locations to examine,
+what do find there, and what to do if he didn't. This meticulous
+programming of himself as a debugging machine might well take
+half as long as writing the computer program to be debugged.&lt;/blockquote&gt;
+&lt;p&gt;Just reading about these challenges makes you appreciate the simplicity of
+setting a breakpoint and using a rich interactive debugger.&lt;/p&gt;
+&lt;p&gt;At the end of the debugging section, Brooks discusses what we now refer
+to as test doubles:&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+One form of scaffolding is the dummy component, which consists
+only of interfaces and perhaps some faked data or some small
+test cases. For example, a system may include a sort program
+which isn't finished yet. Its neighbors can be tested by using a
+dummy program that merely reads and tests the format of input
+data, and spews out a set of well-formatted meaningless but ordered
+data.&lt;/blockquote&gt;
+&lt;p&gt;As previously mentioned, modern programming provides fantastic tools to design
+and execute tests and test doubles. Test-first development is not a luxury,
+but a necessity that ensures code maintainability as it grows.&lt;/p&gt;
+&lt;p&gt;Brooks concludes by addressing the control of changes, also known as
+Segregation of Duties (SoD), advocating for the addition of one component
+at a time and the quantization of updates.
+This involves releasing in small batches and conducting
+thorough regression testing.&lt;/p&gt;
+&lt;p&gt;What tools assist us in these tasks nowadays? Version Control Systems,
+test-first development with comprehensive unit and integration testing,
+continuous integration and continuous delivery, and the strategic
+launch of new features through dark launches and canary releases.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="hatching-a-catastrophe"&gt;
+&lt;h2&gt;14 - Hatching a catastrophe&lt;/h2&gt;
+&lt;p&gt;This chapter could be perfectly illustrated by the following meme:&lt;/p&gt;
+&lt;img alt="&amp;quot;Developer says that he is \&amp;quot;almost done\&amp;quot; and release will be in two days (sarcastic)&amp;quot;" class="align-center" src="https://zaurnasibov.com/articles/2023-12-16-mythical-man-months/almost-done.webp" style="width: 60%;" /&gt;
+&lt;p&gt;Well, developers are not always the guilty party, are they?&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;When one hears of disastrous schedule slippage in a project, he
+imagines that a series of major calamities must have befallen it.
+Usually, however, the disaster is due to termites, not tornadoes;
+and the schedule has slipped imperceptibly but inexorably.&lt;/p&gt;
+&lt;p&gt;Yesterday a key man was sick, and a meeting couldn't be held.
+Today the machines are all down, because lightning struck the
+building's power transformer. Tomorrow the disk routines won't
+start testing, because the first disk is a week late from the factory.
+Snow, jury duty, family problems, emergency meetings with customers,
+executive audits the list goes on and on. Each one only postpones
+some activity by a half-day or a day. And the schedule slips,
+one day at a time.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Brooks asserts that the optimal way to manage a large project is to establish
+a schedule with defined milestones.
+Each milestone must be concrete, specific, and measurable.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+It is more important that milestones be sharp-edged and unambiguous
+than that they be easily verifiable by the boss. Rarely
+will a man lie about milestone progress, if the milestone is so sharp
+that he can't deceive himself.&lt;/blockquote&gt;
+&lt;p&gt;This advice is universally applicable, whether in software development or room cleaning.
+For instance, a ticket stating “Make the server respond faster” is inadequate.
+What does “faster” mean in this context? Which responses are deemed slow?
+A more precise ticket would be “Reduce the response time for Resource API
+endpoints from 500ms to a maximum of 250ms.”&lt;/p&gt;
+&lt;p&gt;Brooks praises PERT charts for visualizing the dependencies between activities
+necessary to complete the project and identifying the critical path -
+the sequence of interdependent activities that take the longest to complete.
+It also indicates how much an activity can be delayed before it impacts
+the critical path.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+The preparation of a PERT chart is the most valuable part of
+its use. Laying out the network, identifying the dependencies,
+and estimating the legs all force a great deal of very specific planning
+very early in a project. The first chart is always terrible, and one
+invents and invents in making the second one.&lt;/blockquote&gt;
+&lt;p&gt;I have no personal experience with PERT charts, so I cannot comment.
+However, I’m interested in your thoughts on the matter!&lt;/p&gt;
+&lt;p&gt;Finally, Brooks discusses human behavior in scenarios where a schedule begins
+to fall behind. Please indulge me not making commenting on this too,
+Instead, I suggest reading &lt;a class="reference external" href="https://www.triballeadership.net"&gt;&amp;quot;Tribal Leadership&amp;quot;&lt;/a&gt;
+and &lt;a class="reference external" href="https://zaurnasibov.com/posts/2021/10/22/turn_the_ship_around_short_review.html"&gt;&amp;quot;Turn the Ship Around!&amp;quot;&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="the-other-face"&gt;
+&lt;h2&gt;15 - The other face&lt;/h2&gt;
+&lt;p&gt;What is the other face of a program? According to Brooks, it’s the documentation,
+whether it’s for the user or a technical manual.&lt;/p&gt;
+&lt;p&gt;Pause for a moment and consider the year 1970. There was no StackOverflow,
+no Internet, and not even a terminal for every programmer.
+Without comprehensive documentation accompanying the program,
+it would be virtually useless.&lt;/p&gt;
+&lt;p&gt;But even back then, Brooks advocates shipping a program with &lt;strong&gt;tests&lt;/strong&gt;!&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Every copy of a program shipped should include some small
+test cases that can be routinely used to reassure the user that he
+has a faithful copy, accurately loaded into the machine.&lt;/p&gt;
+&lt;p&gt;Then one needs more thorough test cases, which are normally
+run only after a program is modified. These fall into three parts of
+the input data domain:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Mainline cases that test the program's chief functions for commonly
+encountered data.&lt;/li&gt;
+&lt;li&gt;Barely legitimate cases that probe the edge of the input data
+domain, ensuring that largest possible values, smallest possible values,
+and all kinds of valid exceptions work.&lt;/li&gt;
+&lt;li&gt;Barely illegitimate cases that probe the domain boundary from
+the other side, ensuring that invalid inputs raise proper diagnostic
+messages.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Nowadays, we seldom need to verify that a faithful copy has been accurately
+loaded into the machine, but a &lt;em&gt;regression&lt;/em&gt; test suite remains absolutely
+essential - both during development and upon the delivery of a program.&lt;/p&gt;
+&lt;p&gt;A well-designed test suite also acts as documentation of a program’s capabilities.
+A &lt;a class="reference external" href="https://zaurnasibov.com/posts/2023/02/21/specification_by_example_book_review.html"&gt;specification by example&lt;/a&gt;,
+with automated tests included, precisely documents what a program does.&lt;/p&gt;
+&lt;p&gt;Brooks recommends including a technical overview of the program to
+facilitate easy modification. This should encompass a flow chart,
+descriptions of the algorithms used,
+explanations of file layouts,
+and even the pass structure -
+the sequence in which programs are transferred from tape or disk. Finally&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+A discussion of modifications contemplated in the original
+design, the nature and location of hooks and exits, and discursive
+discussion of the ideas of the original author about what
+modifications might be desirable and how one might proceed.
+His observations on hidden pitfalls are also useful.&lt;/blockquote&gt;
+&lt;p&gt;All this reminds of &lt;a class="reference external" href="https://matklad.github.io//2021/02/06/ARCHITECTURE.md.html"&gt;ARCHITECTURE.md&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The next topic Brooks emphasizes is &lt;em&gt;Self-Documenting Programs&lt;/em&gt;.
+As stated in the book, the adoption of high-level languages was not
+mainstream at all. Programs were written in machine codes,
+which is (sarcastically speaking) intended for machines, not for human comprehension.
+However, even with machine code, it was possible to use human-friendly
+symbolic names, labels, declaration statements, etc.
+Comments were just as important.
+Just have a look at this listing, which carries the unmistakable aroma
+of the &amp;quot;old school&amp;quot; days:&lt;/p&gt;
+&lt;a class="reference external image-reference" href="https://zaurnasibov.com/articles/2023-12-16-mythical-man-months/code-listing.webp"&gt;
+&lt;img alt="An old code listing with thorough comments" class="align-center" src="https://zaurnasibov.com/articles/2023-12-16-mythical-man-months/code-listing.webp" style="width: 60%;" /&gt;
+&lt;/a&gt;
+&lt;p&gt;Brooks uses this listing as an example and explains the techniques used
+to document it.&lt;/p&gt;
+&lt;p&gt;Today, we still struggle with writing self-documenting code.
+“Clean Code,” “Code Complete,” “The Art of Readable Code,”
+“A Philosophy of Software Design” wouldn't exist if high-level languages
+had solved all the problems.
+Engineers still name variables &lt;tt class="docutils literal"&gt;a&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;b&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;c&lt;/tt&gt;.
+Software is still written without any tests.
+Specifications still come in the form of poorly-written JIRA tickets,
+which look nothing like actual specifications.
+Oh, I’m ranting again. :)&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="no-silver-bullet"&gt;
+&lt;h2&gt;17 - No Silver Bullet&lt;/h2&gt;
+&lt;p&gt;&amp;quot;No Silver Bullet - Essence and Accident in Software Engineering&amp;quot; (1986)
+is perhaps the most renowned essay by Brooks. It was included
+in the anniversary edition of the Mythical Man-Months, republished in 1995.
+The paper's opening statement immediately takes you to the point:&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+There is no single development, in either technology or management
+technique, which by itself promises even one order-of-magnitude
+improvement within a decade in productivity, in reliability, in simplicity.&lt;/blockquote&gt;
+&lt;p&gt;Brooks differentiates between essential and accidental complexities in the
+software development process.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Essential&lt;/em&gt; complexity comes from the abstract nature of
+software's building blocks: algorithms, data sets and their relationships.
+Yet, they must be highly precise and richly detailed.
+There are countless ways to write a &amp;quot;Hello world&amp;quot; program.
+What is to be said of anything more complicated?&lt;/p&gt;
+&lt;p&gt;Brooks suggests attacking essential complexity by reducing productivity
+constraints. He identifies several promising strategies: &lt;em&gt;Buy versus build&lt;/em&gt;,
+&lt;em&gt;Requirements refinement and rapid prototyping&lt;/em&gt;,
+&lt;em&gt;Incremental development - growing, not building, software&lt;/em&gt;, and
+&lt;em&gt;Employing great designers&lt;/em&gt;.
+All these ideas have stood the test of time and are parts of modern software
+development.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Accidental&lt;/em&gt; complexity comes from limitations of tools, processes, hardware
+and the environment. For instance, high-level languages alleviate the accidental
+complexity of assembly language. Iterative software development prevents us
+from committing to extensive upfront designs,
+only to discover later that what we've released doesn't meet the customer needs.
+Having more computing power in our pockets than we had in our desktops just
+a few decades ago enables the use of more sophisticated algorithms
+that now run in a reasonable time frame.&lt;/p&gt;
+&lt;p&gt;Brooks evaluates technical advancements that have been praised as
+potential silver bullets:
+&lt;em&gt;Ada and other high-level language advances&lt;/em&gt;,
+&lt;em&gt;Object-oriented programming&lt;/em&gt;,
+&lt;em&gt;Expert systems&lt;/em&gt;,
+&lt;em&gt;Graphical programming&lt;/em&gt;,
+&lt;em&gt;Program verification&lt;/em&gt;,
+&lt;em&gt;Environments and tools&lt;/em&gt;,
+&lt;em&gt;Workstations&lt;/em&gt;,
+finally
+&lt;em&gt;AI&lt;/em&gt; and &lt;em&gt;Automatic programming&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Looking at the latter through the lens of 2024 -
+Generative Pre-Trained Transformers (GPTs) and Large Language Models (LLMs)
+are flourishing. We can interact with these tools in natural language and
+receive code with explanations in return.
+The interaction doesn't stop there; these tools can maintain context,
+allowing us to refine queries for more targeted and sophisticated results.
+Is this sort of &lt;em&gt;automatic programming&lt;/em&gt; a silver bullet?
+In my opinion - no, at least not yet.&lt;/p&gt;
+&lt;p&gt;Now, don't get
+me wrong, we can throw a colossal amount of computing power to build a vast,
+boundless model, capable of holding an entire Linux kernel with all its development
+history in the context. But the output is still intended for human interpretation.
+How much can we trust the code generated by such LLMs? How do we verify its
+correctness? Would we use another LLM to generate tests, or would we craft tests
+in the traditional way?
+Let's get back to this discussion in five years - it's going to be interesting!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="epilogue"&gt;
+&lt;h2&gt;16 - EPILOGUE&lt;/h2&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+The tar pit of software engineering will continue to be sticky for
+a long time to come. One can expect the human race to continue
+attempting systems just within or just beyond our reach; and
+software systems are perhaps the most intricate and complex of
+man's handiworks. The management of this complex craft will
+demand our best use of new languages and systems, our best
+adaptation of proven engineering management methods, liberal
+doses of common sense, and a God-given humility to recognize
+our fallibility and limitations.&lt;/blockquote&gt;
+&lt;/div&gt;
+</content><category term="Books"></category><category term="book"></category><category term="review"></category><category term="software development"></category><category term="programming"></category><category term="management"></category></entry><entry><title>The DevOps Handbook - review</title><link href="https://zaurnasibov.com/posts/2023/08/11/devops-handbook-review.html" rel="alternate"></link><published>2023-08-11T17:40:00+03:00</published><updated>2023-08-11T17:40:00+03:00</updated><author><name>Zaur Nasibov</name></author><id>tag:zaurnasibov.com,2023-08-11:/posts/2023/08/11/devops-handbook-review.html</id><summary type="html">&lt;a class="reference external image-reference first" href="https://zaurnasibov.com/posts/2023/08/11/devops-handbook-review.html"&gt;
+&lt;img alt="&amp;quot;DevOps Handbook cover&amp;quot;" class="align-center" src="https://zaurnasibov.com/articles/2023-08-11-devops-handbook-review/devops-handbook-cover.webp" /&gt;
+&lt;/a&gt;
+&lt;p class="last"&gt;&lt;strong&gt;DevOps Handbook&lt;/strong&gt; is a fantastic guide for IT organizations,
+that describes the ways of improving the &lt;em&gt;technology value stream&lt;/em&gt; -
+the process required to convert a business hypothesis into
+a technology-enabled service that delivers value to the customer.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;I have started writing this review by describing the contents of each
+chapter in-depth, just to realize that it's hardly possible to do that
+without repeating the whole book. I usually put some conclusions at
+the end of a book review, but this book is different.&lt;/p&gt;
+&lt;p&gt;This is a short and emotional review of the
+&lt;em&gt;DevOps Handbook: How to create world-class agility, reliability, &amp;amp; security in technology organizations&lt;/em&gt;.&lt;/p&gt;
+&lt;img alt="&amp;quot;DevOps Handbook cover&amp;quot;" class="align-center" src="https://zaurnasibov.com/articles/2023-08-11-devops-handbook-review/devops-handbook-cover.webp" /&gt;
+&lt;p&gt;For developers, programmers, craftsmen, and engineers,
+testers and architects, operations and security overseers,
+product managers, leaders, and many, many more -
+to all the exceptional IT professionals out there.&lt;/p&gt;
+&lt;p&gt;This is the book — the book that serves as a reminder of many things.&lt;/p&gt;
+&lt;p&gt;It reminds us that programmers are not mere machines that convert assignments into code.
+It underscores that QA professionals are not solely gatekeepers whose task is to extract bugs from the code programmers produce.
+It highlights that Operations personnel are more than overseers of programs functioning in production.
+It emphasizes that excelling as Project Managers is not about inundating products with requested features from customers.
+The book unites us in our shared objectives and reminds that ultimately
+&lt;em&gt;value is created only when our customers can effectively utilize our product&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;This is the book - the book that imparts to us the principles of
+&lt;em&gt;flow&lt;/em&gt;, &lt;em&gt;feedback&lt;/em&gt;, and &lt;em&gt;continual learning and experimentation&lt;/em&gt;
+within &lt;em&gt;the technology value stream&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The First Way: The Principles of Flow&lt;/strong&gt; encompass the guidelines which help
+us to accelerate the progress of code, from the moment it was committed
+to the version control system, all the way until the customer is able to interact
+with it in a form of a software product.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The Second Way: The Principles of Feedback&lt;/strong&gt; - are the guidelines that
+assist us in staying on the correct path.
+Are we truly addressing customer issues?
+Are we doing so efficiently?
+Is security ensured?
+Can we manage substantial customer loads?
+Are we addressing issues as they arise?
+Measure. Act. Analyze. Take action based on findings. Iterate.
+Apply this approach to every process, every hypothesis, and every segment
+of delivered software functionality.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The Third Way: The Principles of Continual Learning and Experimentation&lt;/strong&gt;
+comprise the guidelines that aid us in maintaining a cutting-edge position
+and foster the creation of knowledge, both at an individual and organizational level.&lt;/p&gt;
+&lt;p&gt;The book begins by building a solid foundation out of these principles.
+It continues in Part II by discussing DevOps transformation, its starting points
+and ways to learn and experiment without jeopardizing the rest of the organization.&lt;/p&gt;
+&lt;p&gt;In Part III the author discuss
+the technical practices and architecture required
+to enable and sustain the fast flow of work from Development into Operations
+without causing chaos and disruption to the production environment or customers.
+These practices are commonly knows as &lt;em&gt;Continuous Delivery&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;In Part IV the authors discuss how to implement the technical practices
+of the Second Way, which are required to create fast and continuous feedback
+from Operations to Development.&lt;/p&gt;
+&lt;p&gt;In the last part - Part V, the book presents the practices that create
+opportunities for learning, as quickly, frequently, cheaply,
+and as soon as possible. This includes creating learnings from accidents and
+failures, as well as
+organizing and designing our systems of work so that we can constantly
+experiment and learn, continually making the systems safer.&lt;/p&gt;
+&lt;p&gt;Many of us have experienced some of these practices.
+I was fortunate in my career to grasp and adhere to the principles
+of flow and the principles of continual learning.
+However, I never had the opportunity to properly experiment
+or establish feedback mechanisms for such experiments,
+and I am still eagerly anticipating that chance.&lt;/p&gt;
+&lt;p&gt;This is &lt;strong&gt;the book&lt;/strong&gt;. Get it. Read it. Embed everything you read in your
+daily work. Your colleagues, company and above of all, your customers will
+be grateful.&lt;/p&gt;
+</content><category term="Books"></category><category term="book"></category><category term="review"></category><category term="devops"></category><category term="software development"></category><category term="programming"></category></entry><entry><title>Clean Architecture - book review</title><link href="https://zaurnasibov.com/posts/2023/05/18/clean-architecture-book-review.html" rel="alternate"></link><published>2023-05-18T22:39:00+03:00</published><updated>2023-05-18T22:39:00+03:00</updated><author><name>Zaur Nasibov</name></author><id>tag:zaurnasibov.com,2023-05-18:/posts/2023/05/18/clean-architecture-book-review.html</id><summary type="html">&lt;a class="reference external image-reference first" href="https://zaurnasibov.com/posts/2023/05/18/clean-architecture-book-review.html"&gt;
+&lt;img alt="&amp;quot;Clean Architecture&amp;quot; book cover" class="align-center" src="https://zaurnasibov.com/articles/2023-04-20-clean-architecture-review/clean-architecture-book-cover.jpg" style="width: 30%;" /&gt;
+&lt;/a&gt;
+&lt;p class="last"&gt;&lt;em&gt;Clean Architecture&lt;/em&gt; is the &amp;quot;Art of War&amp;quot; of the software industry. It was written by a professional who has been through many tough battles, both wins, and losses. Uncle Bob talks about timeless topics of software development that are just as applicable today as they were fifty years ago.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Oh, I loved the book! A warm picture emerges in my mind: late evening,
+comfortable armchairs, a hot burning fire in a fireplace, and an engaging discussion
+with a dear friend who happens to be one of the greatest teachers in software engineering...&lt;/p&gt;
+&lt;img alt="&amp;quot;Clean Architecture&amp;quot; book cover" class="align-center" src="https://zaurnasibov.com/articles/2023-04-20-clean-architecture-review/clean-architecture-book-cover.jpg" /&gt;
+&lt;p&gt;&amp;quot;Clean Architecture&amp;quot; is the &amp;quot;Art of War&amp;quot; of the software industry.
+It was written by a professional who has been through many tough battles, both wins, and losses.
+Uncle Bob talks about timeless topics of software development that are
+just as applicable today as they were fifty years ago.&lt;/p&gt;
+&lt;p&gt;Software architecture determines the necessary pieces and their integration to create the desired system.
+The pieces can vary from individual variables and functions to large-scale services like databases.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+The goal of software architecture is to minimize the human resources required
+to build and maintain the required system.
+The measure of design quality is simply the measure of the effort required to
+meet the needs of the customer.&lt;/blockquote&gt;
+&lt;p&gt;It is that simple! Or is it?
+How many times have you struggled trying to fit a new feature into an existing code base?
+How many times have you started from scratch, only to find later that the redesign became the same mess as before?&lt;/p&gt;
+&lt;p&gt;Here is a scary diagram from the book.
+It shows how the cost of each line of code increases with every major release.
+This trend is not sustainable; no business model can make a profit while letting costs grow exponentially.&lt;/p&gt;
+&lt;img alt="Market leading software product life cycle" class="align-center" src="https://zaurnasibov.com/articles/2023-04-20-clean-architecture-review/market-leading-software-product-life-cycle.png" style="width: 75%;" /&gt;
+&lt;p&gt;Why does this happen? What goes wrong?
+Too often, we developers buy into the familiar lie:
+&lt;em&gt;&amp;quot;We can clean it up later; we just have to get to market first!&amp;quot;&lt;/em&gt;&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Of course, things never do get cleaned up later, because market pressures never
+abate. Getting to market first simply means that you’ve now got a horde of
+competitors on your tail, and you have to stay ahead of them by running
+as fast as you can.&lt;/p&gt;
+&lt;p&gt;And so the developers never switch modes. They can’t go back and clean things
+up because they’ve got to get the next feature done, and the next, and the next,
+and the next. And so the mess builds, and productivity continues its asymptotic
+approach toward zero.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Making messes is always slower than staying clean and the only way to go fast,
+is to go well.&lt;/p&gt;
+&lt;p&gt;We often forget that, unlike firmware, software was invented to be &amp;quot;soft.&amp;quot;
+It was intended to be a way to easily change the behavior of machines.
+Therefore, software architectures should be as shape-agnostic as possible.
+Uncle Bob argues that for a software system to be easy to change, it is more important than for it to work.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+If you give me a program that does not work but is easy to change, then I can
+make it work, and keep it working as requirements change. Therefore the
+program will remain continually useful.&lt;/blockquote&gt;
+&lt;p&gt;One of our responsibilities is to find the balance and
+assert the importance of architecture over the urgency of features.
+Sometimes we have to fight for it with the business side that is pushing to implement new features.
+If architecture comes last, then the system will become even more costly to develop,
+and eventually, change will become practically impossible for a part or all of the system.&lt;/p&gt;
+&lt;p&gt;That is the end of &lt;strong&gt;Part I - Introduction&lt;/strong&gt;.
+The rest of the tale is for you to discover, just like in 'One Thousand and One Nights'.&lt;/p&gt;
+&lt;div class="section" id="inside-the-book"&gt;
+&lt;h2&gt;Inside the book&lt;/h2&gt;
+&lt;p&gt;In &lt;strong&gt;Part II - Starting with the Bricks: Programming Paradigms&lt;/strong&gt;, Uncle Bob discusses
+structured, object-oriented, and functional programming paradigms,
+and how to apply them from an architectural perspective.&lt;/p&gt;
+&lt;p&gt;Each paradigm is about discipline, telling us what &lt;em&gt;not&lt;/em&gt; to do, and each paradigm
+takes something away from us. Each restricts some aspect of the way we write code.&lt;/p&gt;
+&lt;p&gt;In &lt;strong&gt;Part III - Design Principles&lt;/strong&gt; we learn to put the well-made software
+bricks together.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Good software systems begin with clean code. On the one hand, if the bricks
+aren’t well made, the architecture of the building doesn’t matter much. On the
+other hand, you can make a substantial mess with well-made bricks. This is
+where the SOLID principles come in.&lt;/p&gt;
+&lt;p&gt;The goal of the principles is the creation of mid-level software structures that:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Tolerate change,&lt;/li&gt;
+&lt;li&gt;Are easy to understand, and&lt;/li&gt;
+&lt;li&gt;Are the basis of components that can be used in many software systems.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Part IV - Component Principles&lt;/strong&gt; is about arranging larger software blocks
+to make a sound system.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Components are the units of deployment. They are the smallest entities that can
+be deployed as part of a system. In Java, they are jar files. In Ruby, they are gem
+files. In .Net, they are DLLs. In compiled languages, they are aggregations of
+binary files. In interpreted languages, they are aggregations of source files.&lt;/p&gt;
+&lt;p&gt;Regardless of how they are eventually deployed, well-designed components always
+retain the ability to be independently deployable and, therefore, independently
+developable.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We learn the principles that help in putting components together. We learn how
+to group and separate the components and how to manage dependencies between them.&lt;/p&gt;
+&lt;p&gt;Finally &lt;strong&gt;Part V - Architecture&lt;/strong&gt; and &lt;strong&gt;Part VI - Details&lt;/strong&gt;.
+So far the book has been preparing us to grok these parts.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+The architecture of a software system is the shape given to that system by those
+who build it. The form of that shape is in the division of that system into
+components, the arrangement of those components, and the ways in which those
+components communicate with each other.&lt;/blockquote&gt;
+&lt;p&gt;Uncle Bob talks about the importance of deferring decisions about details.
+Should we use a database or a plain text file? Shall we rely on TCP or UDP?
+Do we use React, Vue, or Angular?
+He argues that the longer we keep our options open, the more information we can gather
+and the more experiments we can conduct to make an informed decision.&lt;/p&gt;
+&lt;p&gt;The architecture that allows us to delay these decisions establishes clear boundaries between its components.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+Software architecture is the art of drawing lines that I call boundaries.&lt;/blockquote&gt;
+&lt;p&gt;This statement leads the way to &lt;strong&gt;Clean Architectures&lt;/strong&gt;, which are&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Independent of frameworks. The architecture does not depend on the existence
+of some library of feature-laden software. This allows to use such
+frameworks as tools, rather than forcing to cram system into their
+limited constraints.&lt;/li&gt;
+&lt;li&gt;Testable. The business rules can be tested without the UI, database, web server,
+or any other external element.&lt;/li&gt;
+&lt;li&gt;Independent of the UI. The UI can change easily, without changing the rest of
+the system.&lt;/li&gt;
+&lt;li&gt;Independent of the database. We can swap out Oracle or SQL Server for
+Mongo, BigTable, CouchDB, or something else.&lt;/li&gt;
+&lt;li&gt;Independent of any external agency. The business rules don’t know
+anything at all about the interfaces to the outside world.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a class="reference external image-reference" href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html"&gt;
+&lt;img alt="Clean Architecture diagram" class="align-center" src="https://zaurnasibov.com/articles/2023-04-20-clean-architecture-review/clean-architecture.jpg" style="width: 75%;" /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;div class="section" id="the-hidden-gem"&gt;
+&lt;h2&gt;The hidden gem&lt;/h2&gt;
+&lt;p&gt;Book appendices are often skipped by the readers. Don't you dare to skip this one,
+because it is the hidden gem of the book. &lt;strong&gt;Architecture Archaeology&lt;/strong&gt; is
+Uncle Bob's life-long software engineering journey. It is a story of creation and
+discoveries, of fights and struggle of everything that lead to writing this book.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="thoughts"&gt;
+&lt;h2&gt;Thoughts&lt;/h2&gt;
+&lt;p&gt;This is one of the &amp;quot;must-read&amp;quot; for all software engineers. The only question
+is, &amp;quot;When?&amp;quot;. This book discusses many abstract topics. Unless you are intimately
+familiar with software development, it may have little impact on you.
+However, when you start interacting with large systems, a time comes when you sense that something is wrong, and you can't simply formalize it.
+That's when you know the time has come.
+The time to do architecture right.
+The time to embrace Clean Architecture.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="Books"></category><category term="book"></category><category term="review"></category><category term="programming"></category><category term="architecture"></category><category term="clean code"></category><category term="clean architecture"></category></entry><entry><title>Specification by example - book review</title><link href="https://zaurnasibov.com/posts/2023/02/21/specification_by_example_book_review.html" rel="alternate"></link><published>2023-02-21T22:17:00+02:00</published><updated>2023-02-21T22:17:00+02:00</updated><author><name>Zaur Nasibov</name></author><id>tag:zaurnasibov.com,2023-02-21:/posts/2023/02/21/specification_by_example_book_review.html</id><summary type="html">&lt;a class="reference external image-reference first" href="https://zaurnasibov.com/posts/2023/02/21/specification_by_example_book_review.html"&gt;
+&lt;img alt="&amp;quot;Specification by Example&amp;quot; by Gojko Adzic book cover." class="align-center" src="https://zaurnasibov.com/articles/2023_02_21_specification_by_example/specification_by_example_book_cover.jpg" /&gt;
+&lt;/a&gt;
+&lt;p&gt;Doing things right doesn't matter unless you do the right thing.
+&amp;quot;Specification by Example&amp;quot; by Gojko Adzic is about delivering the right
+software. Adzic has interviewed many successful teams and discovered
+that their ways of software development are quite similar.
+These ways or processes are based on a close collaboration between
+all the parties, including business representatives.
+It begins by understanding the business goals.
+It continues with creating a specification and utilizing it for
+software development and verification.
+It is finalized by providing living documentation which reflects
+the current software state and behaviour.&lt;/p&gt;
+&lt;p class="last"&gt;&amp;quot;Specification by Example&amp;quot; helped me to understand how to do
+behaviour-driven development (BDD).
+It is an excellent reading for a software craftsman.&lt;/p&gt;
+</summary><content type="html">&lt;img alt="&amp;quot;Specification by Example&amp;quot; by Gojko Adzic book cover." class="align-center" src="https://zaurnasibov.com/articles/2023_02_21_specification_by_example/specification_by_example_book_cover.jpg" /&gt;
+&lt;p&gt;Merriam-Webster dictionary
+&lt;a class="reference external" href="https://www.merriam-webster.com/dictionary/specification"&gt;defines&lt;/a&gt;
+&lt;em&gt;specification&lt;/em&gt; as&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;The act of specifying - naming or stating explicitly or in detail.&lt;/li&gt;
+&lt;li&gt;A detailed, precise presentation of something or a plan or proposal
+for something.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I think of specification as
+&lt;em&gt;a definition of what the system is expected to do&lt;/em&gt;.
+Ah, if only systems always behaved as they were supposed to!&lt;/p&gt;
+&lt;p&gt;You darn well know, how that happens.
+First comes the business, with brilliant or not-so ideas.
+&amp;quot;We are going to make a new product! It will increase our revenue! ...
+[an hour later] and the button text should be in red!&amp;quot;.
+The Business Analysts mince that into a Business case™.
+The POs scrutinize the case into user stories.
+The QA write acceptance criteria.
+Finally, the developers start implementing.
+But the business has already given the teams a detailed
+vision of how things should be, so there is not much thinking on the way,
+just turning JIRA tickets into code. There is even no need to roll it out
+in small chunks to the end customer - the business already knows what the
+customer wants...
+This half a century old illustration has not aged by a single second:&lt;/p&gt;
+&lt;img alt="The Swing - from the University of London Computer Centre Newsletter No. 53, March 1973" class="align-center" src="https://zaurnasibov.com/articles/2023_02_21_specification_by_example/computer_centre_treeswing_pictures.jpg" /&gt;
+&lt;p&gt;Gojko Adzic analyzed the software industry fallacies that lead to such a result.
+He found out that &lt;em&gt;how&lt;/em&gt; companies deal with these fallacies is very
+much alike. The methods and processes are shared by the most successful teams that he interviewed
+while researching for the book.
+He talks of these methods as &lt;em&gt;a set of process patterns that facilitate change in software
+products to ensure the right product is delivered effectively.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The foundation of every key pattern is &lt;strong&gt;collaboration&lt;/strong&gt;.
+Gojko noticed that the &amp;quot;handover&amp;quot; journey of specifications through business people,
+product managers, developers, and QA is full of misunderstanding, ambiguity, information losses,
+errors and unnecessary work.
+&amp;quot;&lt;em&gt;Specification by example&lt;/em&gt;&amp;quot; teaches how to build a shared understanding between
+everyone involved in the software creation process.
+It then demonstrates how to translate the shared understanding into specification
+documents, leverage them for continual system testing, and produce up-to-date
+documentation that evolves with the system.&lt;/p&gt;
+&lt;div class="section" id="key-process-patterns-in-a-tiny-nutshell"&gt;
+&lt;h2&gt;Key process patterns in a tiny nutshell&lt;/h2&gt;
+&lt;p&gt;A successful team begins by &lt;em&gt;deriving scope from a customer's business goals&lt;/em&gt;.
+They collaborate to define the scope that will achieve the goal.
+The business representatives explain the intent and the value of the feature,
+so that everyone understands what's needed. Then, the team works with the business
+to determine the solution.&lt;/p&gt;
+&lt;p&gt;The teams collaborate and specify the solution together with the business people.
+&lt;em&gt;Specifying collaboratively&lt;/em&gt; allows to utilize the expertise of stakeholders,
+gather different ideas about the solution and make everyone more engaged.&lt;/p&gt;
+&lt;p&gt;The stakeholders tightly work together to &lt;em&gt;illustrate specifications using examples&lt;/em&gt;.
+They identify the &lt;em&gt;key examples&lt;/em&gt; which unambiguously define &lt;em&gt;what&lt;/em&gt; the software needs to do.
+They’re both the target for development and serve an evaluation criterion
+to see whether the development is done.&lt;/p&gt;
+&lt;img alt="Key process patterns" class="align-center" src="https://zaurnasibov.com/articles/2023_02_21_specification_by_example/key_process_patterns.png" /&gt;
+&lt;p&gt;Key examples are a great starting point for creating specification, but
+they are not specification yet. Gojko emphasizes, that the common reason
+for teams to fail with Specification by Example - is not taking the time to
+process the raw key examples.
+Successful teams don’t use raw examples; they &lt;em&gt;refine the specification&lt;/em&gt; from them.
+The teams carve out the essence of a key example, discard the unnecessary
+details and turn it into a clear definition of the desired system behaviour.&lt;/p&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p&gt;Ideally, a specification with examples should unambiguously define the
+required functionality from a business perspective
+&lt;em&gt;but not how the system is supposed to implement it&lt;/em&gt;.&lt;/p&gt;
+&lt;p class="last"&gt;&lt;strong&gt;A good specification, with examples, is effectively an acceptance test for
+the described functionality.&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;Automating the validation process&lt;/em&gt; is a proven way to avoid the bottlenecks of
+manual testing.
+What's important is that the teams validate &lt;em&gt;without changing specifications&lt;/em&gt;.
+Otherwise, all the value of refining specifications is lost.
+Such automated, comprehensible and accessible to all the team members
+specification with examples becomes an &lt;em&gt;executable specification&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;When the validation process happens frequently, the stakeholders are sure
+that the software works according to the specification.
+However, how and in which form can they access the verification results?
+Hence the team continues sharpening the executable specifications and organises
+the verification output to provide all stakeholders a consistent,
+easy-to-understand and up-to-date &lt;em&gt;living documentation&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="thoughts"&gt;
+&lt;h2&gt;Thoughts&lt;/h2&gt;
+&lt;p&gt;Specification by Example is Behaviour-Driven Development. Gojko Adzic
+avoided the term since it was too ambiguous, and the meaning was changing all the time.
+It's been almost fifteen years since the book was written,
+and BDD is still ambiguous and misunderstood by large and small companies alike.&lt;/p&gt;
+&lt;p&gt;In one company, the team was participating in meetings with the clients, and
+together they derived scope from the business goals. They even documented
+the key examples that the customer provided. But it never went further - the
+specifications were extracted to JIRA tickets hierarchy and remained there
+never to be seen again, once the tickets got closed.&lt;/p&gt;
+&lt;p&gt;In another company, the user stories were extracted into Cucumber-based behaviour tests.
+But these tests got written AFTER the implementation in code!
+They have reflected how developers implemented the software, not how it was supposed
+to behave.&lt;/p&gt;
+&lt;p&gt;The third company used Cucumber for contract testing of HTTP API.
+That nicely fits into &amp;quot;101 ways of abusing Given, When, Then&amp;quot;.&lt;/p&gt;
+&lt;p&gt;Least to say, that none of these companies had living documentation.&lt;/p&gt;
+&lt;p&gt;&amp;quot;Specification by Example&amp;quot; tells the story of teams and companies that
+succeeded in BDD.
+Gojko first talks about the obstacles that the teams should go through
+to change the mindset about BDD. He continues with a detailed explanation of
+every key pattern - every pattern has a designated chapter.
+The last six chapters of the book are the case studies, which narrate the companies
+journey from  waterfall and &amp;quot;agile-ish&amp;quot; development processes to specification by example.&lt;/p&gt;
+&lt;p&gt;To my shame, I have yet to build a system that incorporates all the key patterns
+described in the book. And I am eagerly looking forward to it!&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="Books"></category><category term="book"></category><category term="review"></category><category term="programming"></category><category term="specification"></category><category term="requirements"></category><category term="BDD"></category><category term="collaboration"></category></entry><entry><title>Refactoring - book review</title><link href="https://zaurnasibov.com/posts/2022/10/15/refactoring_book_review.html" rel="alternate"></link><published>2022-10-15T12:00:00+03:00</published><updated>2022-10-15T12:00:00+03:00</updated><author><name>Zaur Nasibov</name></author><id>tag:zaurnasibov.com,2022-10-15:/posts/2022/10/15/refactoring_book_review.html</id><summary type="html">&lt;a class="reference external image-reference first" href="https://zaurnasibov.com/posts/2022/10/15/refactoring_book_review.html"&gt;
+&lt;img alt="&amp;quot;Refactoring&amp;quot; book front cover" class="align-center" src="https://zaurnasibov.com/articles/2022_10_15_refactoring_book_review/refactoring_book_cover.webp" /&gt;
+&lt;/a&gt;
+&lt;p&gt;&lt;em&gt;Refactoring&lt;/em&gt; is a book by Martin Fowler
+about what a fellow developer  might describe as
+&amp;quot;a process of improving the code quality.&amp;quot;&lt;/p&gt;
+&lt;p class="last"&gt;I highly recommend this book to software professionals who want to improve and formalise their refactoring skills.&lt;/p&gt;
+</summary><content type="html">&lt;img alt="&amp;quot;Refactoring&amp;quot; book front cover" class="align-center" src="https://zaurnasibov.com/articles/2022_10_15_refactoring_book_review/refactoring_book_cover.webp" /&gt;
+&lt;p&gt;&lt;em&gt;Refactoring&lt;/em&gt; is a book by Martin Fowler (with contributions by Kent Beck)
+about what a fellow developer  might describe as
+&amp;quot;a process of improving the code quality.&amp;quot;&lt;/p&gt;
+&lt;p&gt;Martin Fowler defines its meaning  more accurately:&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Refactoring&lt;/strong&gt; (&lt;em&gt;noun&lt;/em&gt;) -
+A change made to the internal structure of software to make it easier
+to understand and cheaper to modify without changing its observable behavior.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Refactoring&lt;/strong&gt; (&lt;em&gt;verb&lt;/em&gt;) -
+To restructure software by applying a series of refactorings
+without changing its observable behavior.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So often developers refactor code and apply dozens of refactorings unconsciously!
+We won't name the &lt;em&gt;small steps&lt;/em&gt;, and don't categorise our actions - we merely
+crave clean code.
+Often we forget that the code should roughly do the same things it did before,
+i.e. &lt;strong&gt;the observable behaviour should not change&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;In a nutshell, &amp;quot;Refactoring&amp;quot; teaches detecting a piece of code that needs refactoring,
+determining which refactorings are necessary, applying them,
+and most importantly - preserving the code behavior while doing all these.&lt;/p&gt;
+&lt;div class="section" id="inside-the-book"&gt;
+&lt;h2&gt;Inside the book&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Chapter 1&lt;/strong&gt; pulls the reader straight into refactoring example.
+This chapter is &lt;a class="reference external" href="https://www.thoughtworks.com/content/dam/thoughtworks/documents/books/bk_Refactoring2-free-chapter_en.pdf"&gt;available for free download&lt;/a&gt;.
+Before diving into the code, the author discusses the reasons for refactoring.
+After all, a compiler doesn't care about the quality of our code.
+It has no aesthetic judgement.
+We like clean code because it is easier to comprehend and change.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+A poorly designed system is hard to
+change—because it is difficult to figure out what to change and how these changes
+will interact with the existing code to get the behaviour I want. And if it is hard
+to figure out what to change, there is a good chance that I will make mistakes
+and introduce bugs.&lt;/blockquote&gt;
+&lt;p&gt;Fowler teaches how to improve the code without breaking it -
+in tiny, explicit, consequential steps.
+He emphasises the &lt;strong&gt;tests&lt;/strong&gt; as the cornerstone of successful refactoring.
+If a piece of code has no tests, it's hard to tell whether its observed
+behaviour changed after refactoring.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+When you have to add a feature to a program but the code is not structured
+in a convenient way, first refactor the program to make it easy to add
+the feature, then add the feature.&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Chapter 2 - &amp;quot;Principles in Refactoring&amp;quot;&lt;/strong&gt;,
+discusses &lt;em&gt;why&lt;/em&gt; and &lt;em&gt;when&lt;/em&gt; we should refactor, the problems
+and benefits of refactoring, its relationship to the software
+development process in general and dozens of other aspects that one would
+not even imagine.
+This chapter also aids in explaining refactoring to а wide circle of people,
+from junior developers to senior managers.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Chapter 3 - &amp;quot;Bad Smells in Code&amp;quot;&lt;/strong&gt;, is written in cooperation with Kent Beck.
+While Chapter 2 talks of &lt;em&gt;the right time to refactor&lt;/em&gt;,
+the third chapter describes the looks and smells of code that is crying for refactoring.
+Best of all - the chapter is in plain English - not a single line of code in it!
+&lt;em&gt;&amp;quot;Global data&amp;quot;&lt;/em&gt;, &lt;em&gt;&amp;quot;Repeated switches&amp;quot;&lt;/em&gt;, &lt;em&gt;&amp;quot;Temporary field&amp;quot;&lt;/em&gt;,
+and many more - I bet you've met them before.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Chapter 4 - &amp;quot;Building Tests&amp;quot;&lt;/strong&gt;, explains the value of self-testing code and
+why effective refactoring is impossible without a reliable test suite.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+Refactoring is a valuable tool, but it can’t come alone.
+To do refactoring properly, I need a solid suite of tests to spot my inevitable
+mistakes.
+Even with automated refactoring tools, many of my refactorings will still need
+checking via a test suite.&lt;/blockquote&gt;
+&lt;div class="section" id="the-catalogue"&gt;
+&lt;h3&gt;The Catalogue&lt;/h3&gt;
+&lt;p&gt;The rest of the book is a monumental catalogue of refactorings.
+There are six chapters with more than 60 refactorings thoroughly broken down.
+Fowler starts with a mix of refactorings that he considers the most useful and common,
+such as &amp;quot;Extract function&amp;quot;, &amp;quot;Rename Variable&amp;quot;, &amp;quot;Introduce Parameter Object&amp;quot;.
+Every following chapter reveals a group of related refactorings.&lt;/p&gt;
+&lt;p&gt;Each refactoring is presented in a standard format:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;. The name is important to building a vocabulary of refactorings.
+Fowler refers to a refactoring by its name elsewhere in the book.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Sketch&lt;/strong&gt;. The sketch shows a small code example of the transformation of the refactoring.
+It does not explain what a refactoring is but
+helps to understand and recognise a refactoring quickly.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Motivation&lt;/strong&gt;. The motivation describes why the refactoring should be done
+and the circumstances in which it should &lt;strong&gt;not&lt;/strong&gt;. While it's possible
+to deal with a code smell via different refactorings, this section
+describes the &amp;quot;flavour&amp;quot; of a code smell that requires the given refactoring.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mechanics&lt;/strong&gt;. The mechanics are a concise, step-­by-­step description of
+how to carry out the refactoring.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Example&lt;/strong&gt;. The examples show how to apply the refactoring in code.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;It's worth mentioning that the online catalogue of refactorings with
+names and sketches is available for free at
+&lt;a class="reference external" href="https://www.refactoring.com/catalog/"&gt;https://www.refactoring.com/catalog/&lt;/a&gt;!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reading-the-book"&gt;
+&lt;h3&gt;Reading the book&lt;/h3&gt;
+&lt;p&gt;This book primarily appeals to seasoned developers.
+One has to write thousands and read tens of thousands of lines of code before
+she is able to detect code smells effortlessly.
+The book won't make much sense for a junior developer
+making his first steps in programming.&lt;/p&gt;
+&lt;p&gt;Most of the refactorings would look familiar for the developers that
+have been around the block.
+Challenge yourself by trying to describe the exact mechanics of a refactoring before reading them.
+I failed for almost all the refactorings, missing (not even realising) some steps
+every time!
+The examples help to map everything you've just learned about a refactoring
+to real code.
+It might be tedious to read every example section thoroughly -
+after all, those are paper-printed code blocks.
+But the book won't be complete without them.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="thoughts"&gt;
+&lt;h3&gt;Thoughts&lt;/h3&gt;
+&lt;p&gt;After I finished reading the book I felt that all my prior practical knowledge
+and experience has been &amp;quot;rebased&amp;quot; on a solid theoretical foundation.
+The book vocabulary is a ubiquitous language of the refactoring domain and
+makes it so much easier to explain your intentions to colleagues
+- especially when they also use the same vocabulary.
+I highly recommend this book to software professionals
+who want to improve and formalise their refactoring skills.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="Books"></category><category term="book"></category><category term="review"></category><category term="programming"></category><category term="refactoring"></category><category term="Martin Fowler"></category><category term="Kent Beck"></category></entry><entry><title>Turn the Ship Around!: A True Story of Turning Followers into Leaders - book review</title><link href="https://zaurnasibov.com/posts/2021/10/22/turn_the_ship_around_short_review.html" rel="alternate"></link><published>2021-10-22T12:00:00+03:00</published><updated>2021-10-22T12:00:00+03:00</updated><author><name>Zaur Nasibov</name></author><id>tag:zaurnasibov.com,2021-10-22:/posts/2021/10/22/turn_the_ship_around_short_review.html</id><summary type="html">&lt;a class="reference external image-reference first" href="https://zaurnasibov.com/posts/2021/10/22/turn_the_ship_around_short_review.html"&gt;
+&lt;img alt="Turn the Ship Around!: A True Story of Turning Followers into Leaders book cover" class="align-center" src="https://zaurnasibov.com/articles/2021_10_22_turn_the_ship_around/turn_the_ship_around_cover.webp" /&gt;
+&lt;/a&gt;
+&lt;p class="last"&gt;&amp;quot;Turn The Ship Around!&amp;quot; is an exceptional book. It narrates a story of a
+poor-performing submarine becoming the best in a short period of time.
+It teaches the mechanisms of such transformation which involve the
+leader and the team alike.&lt;/p&gt;
+</summary><content type="html">&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Whatever sense we have of thinking we know something is a barrier
+to continued learning.&lt;/em&gt;&lt;/p&gt;
+&lt;p class="right"&gt;(David Marquet, &amp;quot;Turn The Ship Around!&amp;quot;)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;img alt="Turn the Ship Around!: A True Story of Turning Followers into Leaders book cover" class="align-center" src="https://zaurnasibov.com/articles/2021_10_22_turn_the_ship_around/turn_the_ship_around_cover.webp" /&gt;
+&lt;p&gt;&lt;em&gt;&amp;quot;What does it take to turn a nuclear submarine around?&amp;quot;&lt;/em&gt; sprung up in my head,
+when I saw the cover of the book for the first time. It turns out, the book
+wasn't literally about turning the ship around. Or rather the definition of
+a &amp;quot;ship&amp;quot; was not a &amp;quot;nuclear submarine&amp;quot;.&lt;/p&gt;
+&lt;p&gt;What does it take to challenge the decision making and leadership mechanisms
+in an organization as old and solid as U.S. Navy? Any why should these mechanisms
+change in the first place?&lt;/p&gt;
+&lt;p&gt;In December 1998, Captain David Marquet was ordered to
+take command over the &lt;em&gt;SSN Santa Fe&lt;/em&gt; - a nuclear-powered fast attack submarine.
+She and her crew were to be ready for combat deployment in six months.
+That was not an ordinary task.
+Not only Captain Marquet previously spent half a year getting ready to command
+&lt;em&gt;SSN Olympia&lt;/em&gt; - a submarine completely different from technical perspective,
+he was also assigned to command &amp;quot;&lt;em&gt;The Santa Fe&lt;/em&gt;&amp;quot; - the worst-performing submarine
+in the navy at a time.&lt;/p&gt;
+&lt;p&gt;However, that rapid change of plan was not coincidental nor random.
+During his earlier career and training Marquet has experienced and identified the
+limitations of &amp;quot;One leader commands them all&amp;quot; or broadly &amp;quot;Leader - Follower&amp;quot;
+approach. &lt;em&gt;The follower learns to rely on the leader to make all decisions rather
+than to fully engage with the work process to help make the organization
+run as efficiently as possible. One of the factors that makes this top-down
+leadership approach appealing is the induced numbness. It absolves subordinates
+of the hard work of thinking, making decisions, and being responsible and
+accountable&lt;/em&gt;.
+&lt;em&gt;Santa Fe&lt;/em&gt; was a ship where &lt;em&gt;everyone below the captain and the department heads
+had their brain shut off&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Captain Marquet was committed to &amp;quot;turn &lt;em&gt;Santa Fe&lt;/em&gt; around&amp;quot;.
+He describes how he needed to let go of old ideas to make room for new ones.
+He would make small evolutionary steps to build the bridge from &amp;quot;leader-follower&amp;quot;
+to the supreme &amp;quot;leader-leader&amp;quot; approach.
+The core of the leader-leader model is giving employees &lt;strong&gt;control&lt;/strong&gt; over what they
+work on and how they work. It means letting them make meaningful decisions.
+The two enabling pillars are &lt;strong&gt;competence&lt;/strong&gt; and &lt;strong&gt;clarity&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Marquet discovered that leader-leader structures are significantly more resilient,
+and they do not rely on the designated leader always being right.
+Moreover, they spawn additional leaders throughout the organization naturally.&lt;/p&gt;
+&lt;p&gt;&amp;quot;Turn The Ship Around!&amp;quot; is a story of how a mediocre crew that focused
+on avoiding mistakes became a crew thriving to achieve excellence.
+Marquet does a fantastic storytelling, fusing the narrative with
+practical analysis and guide. Every chapter focuses on a set small
+set of challenges that the crew and the captain of &lt;em&gt;Santa Fe&lt;/em&gt; had to face
+and the solution they've come up with. All solutions are further described
+as practical &amp;quot;mechanisms&amp;quot;.&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Ultimately, this book is a call to action, a manifesto, for all those
+frustrated workers and bosses for whom the current leadership structure
+just isn’t working.&lt;/em&gt;&lt;/p&gt;
+&lt;p class="right"&gt;(David Marquet, &amp;quot;Turn The Ship Around!&amp;quot;)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="section" id="a-crew-a-tribe"&gt;
+&lt;h2&gt;A crew? - A Tribe!&lt;/h2&gt;
+&lt;p&gt;What I personally find great about &lt;em&gt;Santa Fe's&lt;/em&gt; journey is that it resembles
+a journey through the stages of tribal relationships as described in
+&amp;quot;Tribal Leadership&amp;quot; &lt;a class="footnote-reference" href="#footnote-1" id="footnote-reference-1"&gt;[1]&lt;/a&gt;.
+The crew of &lt;em&gt;Santa Fe&lt;/em&gt;, was at stage 2: &amp;quot;My life sucks&amp;quot; when Captain Marquet took over.
+The crew wanted change, even if they didn’t know quite how to do it. And since
+the leader-follower approach in place, they always had the boss,
+the ultimate decision maker - merely the captain to blame for every problem.&lt;/p&gt;
+&lt;p&gt;Captain Marquet was able to &lt;em&gt;to tap into the existing energy of
+the command, discover the strengths, and remove barriers to further progress&lt;/em&gt;.
+Marquet's determination, commitment and leadership helped the crew to reach
+the highest tribal stages: Stage 4 &amp;quot;We're great&amp;quot; - and ultimately
+Stage 5 &amp;quot;Life is Great&amp;quot;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="thoughts"&gt;
+&lt;h2&gt;Thoughts&lt;/h2&gt;
+&lt;p&gt;A good leader always remembers what needs to be done, follows up the execution
+to make sure that it was unimpeachable. A great leader doesn't have to remember
+everything or follow up every step the team makes. Instead, the leader employs
+practices which ensure that the team can perform flawlessly without a leader
+being present.
+He or she are the part of the team where every member trusts each-other to do
+their job. That trust comes from the team being competent, being able to make
+decisions, clearly understanding the goals on all levels - from personal to
+organizational. That trust means that every single member of the crew is a leader.&lt;/p&gt;
+&lt;p&gt;What kind of a leader are you? A leader that tells what should be done,
+controls the execution hides the bigger picture since
+&amp;quot;it's not their concern&amp;quot;? A leader who wants to be followed?
+Or a leader who clarifies the bigger picture,
+helps building competence and lets the team figure out the best way to perform
+the job? A leader who trusts and is trusted in return? A leader who spawns leaders?&lt;/p&gt;
+&lt;p&gt;Thanks to David Marquet I made my mind. How about you?&lt;/p&gt;
+&lt;table class="docutils footnote" frame="void" id="footnote-1" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#footnote-reference-1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="https://www.triballeadership.net"&gt;Tribal Leadership: Leveraging Natural Groups to Build a Thriving Organization
+(Dave Logan, John King, Halee Fischer-Wright)&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+</content><category term="Books"></category><category term="book"></category><category term="leadership"></category></entry><entry><title>Accelerate: The Science of Lean Software and DevOps - book review</title><link href="https://zaurnasibov.com/posts/2021/06/23/accelerate_book_review.html" rel="alternate"></link><published>2021-06-23T12:00:00+03:00</published><updated>2021-06-23T12:00:00+03:00</updated><author><name>Zaur Nasibov</name></author><id>tag:zaurnasibov.com,2021-06-23:/posts/2021/06/23/accelerate_book_review.html</id><summary type="html">&lt;a class="reference external image-reference first" href="https://zaurnasibov.com/posts/2021/06/23/accelerate_book_review.html"&gt;
+&lt;img alt="Accelerate book cover" class="align-center" src="https://zaurnasibov.com/articles/2021_06_23_accelerate/accelerate_cover.jpg" style="width: 25%;" /&gt;
+&lt;/a&gt;
+&lt;p class="last"&gt;Are you familiar with the gut feeling that the software development
+practices around you could be better? What if I told you that there
+is a solid scientific study on practices of low and high performing
+technology organizations?&lt;/p&gt;
+</summary><content type="html">&lt;div class="section" id="longing-for-improvement"&gt;
+&lt;h2&gt;Longing for improvement&lt;/h2&gt;
+&lt;p&gt;Are you familiar with the gut feeling that the software development
+practices around you could be better?
+Sometimes the desired improvements are small and obvious.
+They are not very hard to implement and have a quick return of investment.&lt;/p&gt;
+&lt;p&gt;For example, adding a vulnerability scanner to a CI pipeline prevents using
+dependencies with known CVEs.
+A code formatter which applies the rules for every source file save operation -
+brings determinism and keeps team members from nagging about style.
+Even a low disk space alarm configured long time ago
+could save you from major embarrassment and business losses.&lt;/p&gt;
+&lt;p&gt;Other improvements are not that easy.
+Core dependencies being dramatically outdated since new versions break
+compatibility?
+Painful deployment with downtime lasting for days?
+Features being developed by single developers for months and living in a branch
+for all the that time?
+Backlog growing indefinitely.
+Bugs, bugs and even more bugs pouring in every day?
+I'd be glad to tell that the above is a horror story, and it never happens in
+reality. But you and I both know the sad truth.
+Worse - when everyone in the development
+department agrees that something should be done, but the time is never right.
+Thousands of software businesses have to deal with stories like this every day.&lt;/p&gt;
+&lt;p&gt;There is no silver bullet to fix all the issues in your organization.
+But we are not armless in the matter.
+What if you don't need to guess what should or could be improved?
+What if there is a solid scientific study on practices of
+high performing technology organizations?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="accelerate"&gt;
+&lt;h2&gt;Accelerate&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Accelerate&lt;/strong&gt; by Nicole Forsgren, Jez Humble and Gene Kim is a book concluding
+a four-year research into capabilities and practices
+of software development practices.
+There were over 23000 survey responses from over 2000 unique
+and diverse organizations from around the world collected during the research.
+It uncovered 24 key capabilities that drive improvement in
+software delivery performance. Some of these capabilities are:
+&lt;strong&gt;continuous delivery&lt;/strong&gt; and &lt;strong&gt;trunk-based development&lt;/strong&gt;,
+&lt;strong&gt;loosely coupled architecture&lt;/strong&gt; and &lt;strong&gt;customer feedback&lt;/strong&gt;,
+&lt;strong&gt;work-in-progress limits&lt;/strong&gt; and &lt;strong&gt;transformational leadership&lt;/strong&gt;.&lt;/p&gt;
+&lt;img alt="Accelerate book cover" class="align-center" src="https://zaurnasibov.com/articles/2021_06_23_accelerate/accelerate_cover.jpg" style="width: 40%;" /&gt;
+&lt;p&gt;&amp;quot;Accelerate&amp;quot; doesn't have all the answers and is not a guidebook.
+But it clearly describes the differences between low and high -performing
+organizations and teams. It explains in detail how capabilities are related
+and how each capability affects performance and
+how leadership is essential for transformation.
+Being said, not every capability is easy to measure.
+You can quickly estimate how long it takes to deliver a committed piece of code
+to the customer. But how do you measure culture?&lt;/p&gt;
+&lt;p&gt;The second part of the book may help you find the answer.
+While the first part is about the study results, it's the second part which
+explains the methods used in the research and dives deep into the science
+behind conducted surveys.&lt;/p&gt;
+&lt;p&gt;The third part is a life example story of ING  Netherlands.
+It tells how leadership, management, and team  practices work together
+bringing a traditional banking business into the digital age.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="verdict"&gt;
+&lt;h2&gt;Verdict&lt;/h2&gt;
+&lt;p&gt;There is no verdict. This book is truth based on facts.
+Although not a long one, my career has been among low, average and great
+performing teams.
+I mentally applied everything said in the book to my experience,
+and boy it is accurate!
+There is really no excuse for an organization to ignore this study or
+delay applying the practices ASAP.
+If you want to stay in the game, you have to &lt;strong&gt;Accelerate&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="Books"></category><category term="book"></category><category term="software development"></category><category term="accelerate"></category></entry></feed>
