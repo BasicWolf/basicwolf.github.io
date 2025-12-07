@@ -1,0 +1,475 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Lexend+Deca:wght@100..900&display=swap&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://zaurnasibov.com/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/fontawesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/brands.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/solid.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com//static/css/extra.css">
+
+  <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="/static/images/favicon.png" type="image/x-icon">
+
+
+  <link href="https://zaurnasibov.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zaur's Thoughts Atom">
+
+
+
+
+
+
+
+
+
+<meta name="author" content="Zaur Nasibov" />
+<meta name="description" content="Python never stops surprising me. While doing my master IT project, I was looking for a way to add dynamic properties to classes (we&#39;re speaking of new-style classes of course!). I did a little research and here are the results..." />
+<meta name="keywords" content="programming, Python">
+
+
+  <meta property="og:site_name" content="Zaur's Thoughts"/>
+  <meta property="og:title" content="Python classes: Dynamic properties"/>
+  <meta property="og:description" content="Python never stops surprising me. While doing my master IT project, I was looking for a way to add dynamic properties to classes (we&#39;re speaking of new-style classes of course!). I did a little research and here are the results..."/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://zaurnasibov.com/posts/2010/03/10/python_classes_dynamic_properties.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2010-03-10 12:00:00+02:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://zaurnasibov.com/author/zaur-nasibov.html">
+  <meta property="article:section" content="Articles"/>
+  <meta property="article:tag" content="programming"/>
+  <meta property="article:tag" content="Python"/>
+  <meta property="og:image" content="/static/images/logo.png">
+
+  <title>Zaur's Thoughts &ndash; Python classes: Dynamic properties</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://zaurnasibov.com/">
+      <img src="/static/images/logo.png" alt="Zaur's Thoughts" title="Zaur's Thoughts">
+    </a>
+
+    <h1>
+      <a href="https://zaurnasibov.com/">Zaur's Thoughts</a>
+    </h1>
+
+    <p>Zaurun Fikirləri</p>
+
+
+    <nav>
+      <ul class="list">
+
+          <li>
+            <a target="_self" href="/posts.html" ><strong>Articles</strong></a>
+          </li>
+          <li>
+            <a target="_self" href="/pages/shorts.html" >Shorts</a>
+          </li>
+          <li>
+            <a target="_self" href="/category/books.html" >Books</a>
+          </li>
+
+
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/bookmarks.html#bookmarks">
+                Bookmarks
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/memes.html#memes">
+                Memes
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/projects.html#projects">
+                Projects
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/about.html#about">
+                About
+              </a>
+            </li>
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/zaur-nasibov-44610853/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/basicwolf"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-rss"
+           href="/feeds/all.atom.xml"
+           target="_blank">
+          <i class="fa-solid fa-rss"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://zaurnasibov.com/">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/tags.html">Tags</a>
+  <a href="/pages/privacy-policy.html">Privacy Policy</a>
+</nav>
+
+<article>
+  <header>
+      
+    <h1 id="python_classes_dynamic_properties">Python classes: Dynamic properties</h1>
+    <p>
+      Posted on 10 March 2010 in <a href="https://zaurnasibov.com/category/articles.html">Articles</a>
+
+        &#8226; 3 min read
+    </p>
+  </header>
+
+
+  <div>
+    <div class="section" id="i-love-python-3">
+<h2>I love Python 3</h2>
+<p>Even Python 2.x is still used everywhere, it is time to move to Python 3.
+I made the code fully Python2.6 - compatible, but if you'd like to have a
+nice output of print(..) function please use the</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">print_function</span>
+</pre></div></td></tr></table></div>
+<p>statement.</p>
+</div>
+<div class="section" id="a-simple-class">
+<h2>A simple class</h2>
+<p>This is a simple class with one property:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Man</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+
+    <span class="nd">@name</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="n">m</span> <span class="o">=</span> <span class="n">Man</span><span class="p">(</span><span class="s1">&#39;Alex Black&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="n">m</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Kyra Brown&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>The output is:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span>Alex Black
+Kyra Brown
+</pre></div></td></tr></table></div>
+<p>We keep the local values in attributes that start with the underscore,
+e.g. self._name. Usually this is a way I separate &quot;private&quot; and &quot;public&quot;
+members of a class/object <a class="footnote-reference" href="#footnote-1" id="footnote-reference-1">[1]</a> (of course this &quot;private&quot; members remain
+&quot;public&quot;).</p>
+<p>This code does the same as the code above:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Man</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_name_get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_name&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_name_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_name&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">fget</span> <span class="o">=</span> <span class="n">_name_get</span><span class="p">,</span> <span class="n">fset</span> <span class="o">=</span> <span class="n">_name_set</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>There are two core changes:</p>
+<ol class="arabic simple">
+<li>The <tt class="docutils literal">_name</tt> attribute of an object is read and set by the <tt class="docutils literal"><span class="pre">getattr(..)</span></tt>
+and <tt class="docutils literal"><span class="pre">setattr(..)</span></tt> functions.</li>
+<li>The <tt class="docutils literal">&#64;property</tt> decorator is replaced by the built-in <tt class="docutils literal"><span class="pre">property(...)</span></tt>
+function <a class="footnote-reference" href="#footnote-2" id="footnote-reference-2">[2]</a> (which is actually &quot;behind&quot; that decorator).</li>
+</ol>
+</div>
+<div class="section" id="dynamic-properties-class">
+<h2>Dynamic properties class</h2>
+<p>Finally, let's write a class called &quot;Properties&quot; that will allow adding dynamic
+properties. The properties will require local (&quot;private&quot;) fields. We can use
+the same scheme as above, e.g. for property name, the private member of a
+class is <tt class="docutils literal">_name</tt>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Properties</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="c1"># create local fget and fset functions</span>
+        <span class="n">fget</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_property</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">fset</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_property</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="c1"># add property to self</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">property</span><span class="p">(</span><span class="n">fget</span><span class="p">,</span> <span class="n">fset</span><span class="p">))</span>
+        <span class="c1"># add corresponding local variable</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>The trick in <tt class="docutils literal"><span class="pre">add_property(..)</span></tt> is that we create two lambda objects (those
+could also be anonymous functions) which use the <tt class="docutils literal">self._get_property</tt> and
+<tt class="docutils literal">self._set_property</tt> methods with particular value of name argument.</p>
+<p>Let's play with this class:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><span class="n">po</span> <span class="o">=</span> <span class="n">Properties</span><span class="p">()</span>
+<span class="n">po</span><span class="o">.</span><span class="n">add_property</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;noname&#39;</span><span class="p">)</span>
+<span class="n">po</span><span class="o">.</span><span class="n">add_property</span><span class="p">(</span><span class="s1">&#39;speed&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">po</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">po</span><span class="o">.</span><span class="n">speed</span><span class="p">)</span>
+
+<span class="n">po</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">po</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Alex Black&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">po</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">po</span><span class="o">.</span><span class="n">speed</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">po</span><span class="o">.</span><span class="n">_user</span><span class="p">,</span> <span class="n">po</span><span class="o">.</span><span class="n">_speed</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>The output is:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span>noname 50
+Alex Black 100
+Alex Black 100
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="a-practical-usage">
+<h2>A practical usage</h2>
+<p>After all, what is a practical usage of dynamic properties? I'm sure you
+may have thought of that if you're reading this post now :) Here is a small
+example of a class which is able to &quot;lock&quot; the properties' setters:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PropertiesWithLock</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lock</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="n">lock</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">fget</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_property</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">fset</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_property</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">property</span><span class="p">(</span><span class="n">fget</span><span class="p">,</span> <span class="n">fset</span><span class="p">))</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Cannot change &quot;</span><span class="si">{0}</span><span class="s1">&quot;: properties are locked&#39;</span>
+                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>And the usage:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><span class="n">po</span> <span class="o">=</span> <span class="n">PropertiesWithLock</span><span class="p">()</span>
+<span class="n">po</span><span class="o">.</span><span class="n">add_property</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;noname&#39;</span><span class="p">)</span>
+<span class="n">po</span><span class="o">.</span><span class="n">add_property</span><span class="p">(</span><span class="s1">&#39;speed&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">po</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">po</span><span class="o">.</span><span class="n">speed</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">noname</span> <span class="mi">50</span>
+
+<span class="n">po</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="s1">&#39;a user&#39;</span>
+<span class="n">po</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">po</span><span class="o">.</span><span class="n">speed</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="n">user</span> <span class="mi">200</span>
+
+<span class="n">po</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">po</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="s1">&#39;a user&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Cannot</span> <span class="n">change</span> <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="n">properties</span> <span class="n">are</span> <span class="n">locked</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="references">
+<h2>References</h2>
+<table class="docutils footnote" frame="void" id="footnote-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-1">[1]</a></td><td><a class="reference external" href="http://docs.python.org/reference/lexical_analysis.html#reserved-classes-of-identifiers">Reserved classes of identifiers</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-2">[2]</a></td><td><a class="reference external" href="http://docs.python.org/library/functions.html#property">property([fget[, fset[, fdel[, doc]]]])</a></td></tr>
+</tbody>
+</table>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://zaurnasibov.com/tag/programming.html">programming</a>
+      <a href="https://zaurnasibov.com/tag/python.html">Python</a>
+    </p>
+  </div>
+
+
+
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://zaurnasibov.com/posts/2009/08/19/back-to-life.html" title="Back to life">
+      <i class="fa fa-angle-left"></i> Previous Post
+    </a>
+    <a class="btn float-right" href="https://zaurnasibov.com/posts/2010/04/01/a_very_long_nightmare.html" title="A very long nightmare">
+      Next Post <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2025 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zaur's Thoughts ",
+  "url" : "https://zaurnasibov.com",
+  "image": "/static/images/logo.png",
+  "description": ""
+}
+</script><script defer
+  src='https://static.cloudflareinsights.com/beacon.min.js'
+  data-cf-beacon='{"token": "1147ebca9f9247a38190f2958de429a8"}'>
+</script>
+
+</body>
+</html>

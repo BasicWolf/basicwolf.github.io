@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Lexend+Deca:wght@100..900&display=swap&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://zaurnasibov.com/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/fontawesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/brands.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/solid.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com//static/css/extra.css">
+
+  <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="/static/images/favicon.png" type="image/x-icon">
+
+
+  <link href="https://zaurnasibov.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zaur's Thoughts Atom">
+
+
+
+
+
+
+
+
+
+<meta name="author" content="Zaur Nasibov" />
+<meta name="description" content="Sometimes the bugs in programs do not depend on a programmer. For example, when a programmer expects a certain result from a built-in function, that would be the last place to check for bugs. But sometimes weird stuff happens, and it also happened to me." />
+<meta name="keywords" content="programming, G.729, C, VAD">
+
+
+  <meta property="og:site_name" content="Zaur's Thoughts"/>
+  <meta property="og:title" content="Big and Little endianness quest"/>
+  <meta property="og:description" content="Sometimes the bugs in programs do not depend on a programmer. For example, when a programmer expects a certain result from a built-in function, that would be the last place to check for bugs. But sometimes weird stuff happens, and it also happened to me."/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://zaurnasibov.com/posts/2009/08/01/big_little_endian_quest.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2009-08-01 12:00:00+03:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://zaurnasibov.com/author/zaur-nasibov.html">
+  <meta property="article:section" content="Articles"/>
+  <meta property="article:tag" content="programming"/>
+  <meta property="article:tag" content="G.729"/>
+  <meta property="article:tag" content="C"/>
+  <meta property="article:tag" content="VAD"/>
+  <meta property="og:image" content="/static/images/logo.png">
+
+  <title>Zaur's Thoughts &ndash; Big and Little endianness quest</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://zaurnasibov.com/">
+      <img src="/static/images/logo.png" alt="Zaur's Thoughts" title="Zaur's Thoughts">
+    </a>
+
+    <h1>
+      <a href="https://zaurnasibov.com/">Zaur's Thoughts</a>
+    </h1>
+
+    <p>Zaurun Fikirləri</p>
+
+
+    <nav>
+      <ul class="list">
+
+          <li>
+            <a target="_self" href="/posts.html" ><strong>Articles</strong></a>
+          </li>
+          <li>
+            <a target="_self" href="/pages/shorts.html" >Shorts</a>
+          </li>
+          <li>
+            <a target="_self" href="/category/books.html" >Books</a>
+          </li>
+
+
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/bookmarks.html#bookmarks">
+                Bookmarks
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/memes.html#memes">
+                Memes
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/projects.html#projects">
+                Projects
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/about.html#about">
+                About
+              </a>
+            </li>
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/zaur-nasibov-44610853/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/basicwolf"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-rss"
+           href="/feeds/all.atom.xml"
+           target="_blank">
+          <i class="fa-solid fa-rss"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://zaurnasibov.com/">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/tags.html">Tags</a>
+  <a href="/pages/privacy-policy.html">Privacy Policy</a>
+</nav>
+
+<article>
+  <header>
+      
+    <h1 id="big_little_endian_quest">Big and Little endianness quest</h1>
+    <p>
+      Posted on 01 August 2009 in <a href="https://zaurnasibov.com/category/articles.html">Articles</a>
+
+        &#8226; 3 min read
+    </p>
+  </header>
+
+
+  <div>
+    <p>I was working with G.729 Annex B 's <cite>source code
+&lt;http://www.itu.int/rec/T-REC-G.729/en&gt;</cite> to extract the codec's Voice
+Activity Detector (VAD).</p>
+<blockquote class="epigraph">
+<p>Voice activity detection is a technique used in speech processing
+wherein the presence or absence of human speech is detected in regions
+of audio (which may also contain music, noise, or other sound).</p>
+<p class="attribution">&mdash;Wikipedia <a class="footnote-reference" href="#footnote-1" id="footnote-reference-1">[1]</a></p>
+</blockquote>
+<p>The result of my work was a tool that produced <tt class="docutils literal">0</tt> and <tt class="docutils literal">1</tt> binary
+output for a speech and non-speech 10ms-long sections of a sound file
+with sampling frequency of 8000 Hz and 16 bits PCM data.</p>
+<p>The Aurora speech recognition experimental framework <a class="footnote-reference" href="#footnote-2" id="footnote-reference-2">[2]</a> data was used to
+test the program. That was the point where the problems began.</p>
+<p>The VAD was not working. Almost every part of every file was marked as
+&quot;speech&quot;. But that was not true! And the G729 Annex B VAD could not work
+so awful. Where was the problem?</p>
+<p>The original G.729 reads the input file as follows:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">while</span><span class="p">(</span><span class="w"> </span><span class="n">fread</span><span class="p">(</span><span class="n">new_speech</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">Word16</span><span class="p">),</span><span class="w"> </span><span class="n">L_FRAME</span><span class="p">,</span><span class="w"> </span><span class="n">f_speech</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">L_FRAME</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>Where <tt class="docutils literal">new_speech</tt> is a <tt class="docutils literal">L_FRAME</tt>-long array of <tt class="docutils literal">Word16</tt> (short)
+elements. Then the <tt class="docutils literal">new_speech</tt> data is pre-processed, passed through
+and compressed via the codec. I removed the compression part and the code
+looked like:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><span class="n">Pre_Process</span><span class="p">(</span><span class="n">new_speech</span><span class="p">,</span><span class="w"> </span><span class="n">L_FRAME</span><span class="p">);</span>
+<span class="n">Vad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Coder_ld8a</span><span class="p">(</span><span class="n">prm</span><span class="p">,</span><span class="w"> </span><span class="n">frame</span><span class="p">);</span>
+</pre></div></td></tr></table></div>
+<p>Probably the error was in the <tt class="docutils literal">Coder_ld8a()</tt> function. But how could
+it be? I just removed the compression stuff, and added</p>
+<ul class="simple">
+<li>return 1 for speech sections</li>
+<li>return 0 for non-speech sections</li>
+</ul>
+<p>I could have spent a lot of time hunting the &quot;ghost&quot; bug, if my supervisor
+Rahim Saedi didn't ask, whether the files were read correctly.
+OMG! A possible bug error in <tt class="docutils literal">fread()</tt> function?</p>
+<p>I checked the values of the new_speech array for a random file from the
+Aurora database and found something weird: the values sequence was
+<tt class="docutils literal"><span class="pre">-1</span> <span class="pre">-1</span> 0 0 256 <span class="pre">-1</span> 0 0 0 256 ...</tt> Something clicked in my mind.</p>
+<blockquote class="epigraph">
+<p>In computing, endianness is the byte (and sometimes bit) ordering used
+to represent some kind of data. Most modern computer processors agree
+on bit ordering &quot;inside&quot; individual bytes (this was not always the case).
+This means that any single-byte value will be read the same on almost
+any computer one may send it to.</p>
+<p>Integers are usually stored as sequences of bytes, so that the encoded
+value can be obtained by simple concatenation. The two most common of
+them are:</p>
+<ul class="simple">
+<li>increasing numeric significance with increasing memory addresses or
+increasing time, known as <em>little-endian</em>, and</li>
+<li>its opposite, most-significant byte first, called <em>big-endian</em>.</li>
+</ul>
+<p>Well known processor architectures that use the little-endian format
+include x86.</p>
+<p class="attribution">&mdash;Wikipedia <a class="footnote-reference" href="#footnote-3" id="footnote-reference-3">[3]</a></p>
+</blockquote>
+<p>I was using a x86 processor that uses the <em>little-endian</em> format, trying to
+read a file that contained 16-bit integers in <em>big-endian</em> format!</p>
+<p>It's easier to imagine what happened, with binary representation of the
+decimal <tt class="docutils literal">1</tt> in 16-bit big-endian and little-endian formats:</p>
+<ul class="simple">
+<li><tt class="docutils literal">00000000 00000001</tt> - Big endian</li>
+<li><tt class="docutils literal">00000001 00000000</tt> - Little endian</li>
+</ul>
+<p>And vice-versa the decimal <tt class="docutils literal">256</tt> is:</p>
+<ul class="simple">
+<li><tt class="docutils literal">00000001 00000000</tt> - Big endian</li>
+<li><tt class="docutils literal">00000000 00000001</tt> - Little endian</li>
+</ul>
+<p>Now you can see: the program read the big-endian data and interpreted it
+as little-endian. So, all values were actually multiplied by 256!</p>
+<p>Finally, a small piece of code helped to eliminate the problem:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><span class="kt">short</span><span class="w"> </span><span class="nf">reverseShort</span><span class="p">(</span><span class="kt">short</span><span class="w"> </span><span class="n">s</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">c1</span><span class="p">,</span><span class="w"> </span><span class="n">c2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">c1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mi">255</span><span class="p">;</span>
+<span class="w">    </span><span class="n">c2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mi">255</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">c1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c2</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div></td></tr></table></div>
+<div class="section" id="references">
+<h2>References</h2>
+<table class="docutils footnote" frame="void" id="footnote-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-1">[1]</a></td><td><a class="reference external" href="http://en.wikipedia.org/wiki/Voice_activity_detection">http://en.wikipedia.org/wiki/Voice_activity_detection</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-2">[2]</a></td><td><a class="reference external" href="http://aurora.hsnr.de/index.html">http://aurora.hsnr.de/index.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-3">[3]</a></td><td><a class="reference external" href="http://en.wikipedia.org/wiki/Endianness">http://en.wikipedia.org/wiki/Endianness</a></td></tr>
+</tbody>
+</table>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://zaurnasibov.com/tag/programming.html">programming</a>
+      <a href="https://zaurnasibov.com/tag/g729.html">G.729</a>
+      <a href="https://zaurnasibov.com/tag/c.html">C</a>
+      <a href="https://zaurnasibov.com/tag/vad.html">VAD</a>
+    </p>
+  </div>
+
+
+
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://zaurnasibov.com/posts/2009/04/14/emacs_latex_and_pdf_viewer.html" title="Emacs, LaTeX and pdf viewer">
+      <i class="fa fa-angle-left"></i> Previous Post
+    </a>
+    <a class="btn float-right" href="https://zaurnasibov.com/posts/2009/08/19/gnome_applet_with_python_part_2.html" title="Beginner's guide to creating a GNOME 2 applet with Python (Part II)">
+      Next Post <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2025 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zaur's Thoughts ",
+  "url" : "https://zaurnasibov.com",
+  "image": "/static/images/logo.png",
+  "description": ""
+}
+</script><script defer
+  src='https://static.cloudflareinsights.com/beacon.min.js'
+  data-cf-beacon='{"token": "1147ebca9f9247a38190f2958de429a8"}'>
+</script>
+
+</body>
+</html>

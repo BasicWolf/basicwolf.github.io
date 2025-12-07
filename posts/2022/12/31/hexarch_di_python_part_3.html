@@ -1,0 +1,865 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Lexend+Deca:wght@100..900&display=swap&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://zaurnasibov.com/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/fontawesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/brands.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/solid.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com//static/css/extra.css">
+
+  <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="/static/images/favicon.png" type="image/x-icon">
+
+
+  <link href="https://zaurnasibov.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zaur's Thoughts Atom">
+
+
+
+
+
+
+
+
+
+<meta name="author" content="Zaur Nasibov" />
+<meta name="description" content="Welcome to the third part of the article series, which cover principles of Hexagonal architecture, Dependency Injection, Domain-Driven Design and applies these all to Python and Django application design." />
+<meta name="keywords" content="architecture, DDD, dependency injection, Django, hexagonal architecture, programming, python">
+
+
+  <meta property="og:site_name" content="Zaur's Thoughts"/>
+  <meta property="og:title" content="Hexagonal architecture and Python - Part III: Persistence, Transactions, Exceptions and The Final Assembly"/>
+  <meta property="og:description" content="Welcome to the third part of the article series, which cover principles of Hexagonal architecture, Dependency Injection, Domain-Driven Design and applies these all to Python and Django application design."/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://zaurnasibov.com/posts/2022/12/31/hexarch_di_python_part_3.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2022-12-31 17:19:00+02:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://zaurnasibov.com/author/zaur-nasibov.html">
+  <meta property="article:section" content="Articles"/>
+  <meta property="article:tag" content="architecture"/>
+  <meta property="article:tag" content="DDD"/>
+  <meta property="article:tag" content="dependency injection"/>
+  <meta property="article:tag" content="Django"/>
+  <meta property="article:tag" content="hexagonal architecture"/>
+  <meta property="article:tag" content="programming"/>
+  <meta property="article:tag" content="python"/>
+  <meta property="og:image" content="/static/images/logo.png">
+
+  <title>Zaur's Thoughts &ndash; Hexagonal architecture and Python - Part III: Persistence, Transactions, Exceptions and The Final Assembly</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://zaurnasibov.com/">
+      <img src="/static/images/logo.png" alt="Zaur's Thoughts" title="Zaur's Thoughts">
+    </a>
+
+    <h1>
+      <a href="https://zaurnasibov.com/">Zaur's Thoughts</a>
+    </h1>
+
+    <p>Zaurun Fikirləri</p>
+
+
+    <nav>
+      <ul class="list">
+
+          <li>
+            <a target="_self" href="/posts.html" ><strong>Articles</strong></a>
+          </li>
+          <li>
+            <a target="_self" href="/pages/shorts.html" >Shorts</a>
+          </li>
+          <li>
+            <a target="_self" href="/category/books.html" >Books</a>
+          </li>
+
+
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/bookmarks.html#bookmarks">
+                Bookmarks
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/memes.html#memes">
+                Memes
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/projects.html#projects">
+                Projects
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/about.html#about">
+                About
+              </a>
+            </li>
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/zaur-nasibov-44610853/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/basicwolf"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-rss"
+           href="/feeds/all.atom.xml"
+           target="_blank">
+          <i class="fa-solid fa-rss"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://zaurnasibov.com/">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/tags.html">Tags</a>
+  <a href="/pages/privacy-policy.html">Privacy Policy</a>
+</nav>
+
+<article>
+  <header>
+      
+    <h1 id="hexarch_di_python_part_3">Hexagonal architecture and Python - Part III: Persistence, Transactions, Exceptions and The Final Assembly</h1>
+    <p>
+      Posted on 31 December 2022 in <a href="https://zaurnasibov.com/category/articles.html">Articles</a>
+
+        &#8226; 10 min read
+    </p>
+  </header>
+
+
+  <div>
+    <a class="reference external image-reference" href="https://zaurnasibov.com/posts/2022/12/31/hexarch_di_python_part_3.html" id="hexarch-di-python-part-3">
+<img alt="Python logo in a hexagon with Roman III literal" class="align-center" src="https://zaurnasibov.com/articles/2022_12_31_hexarch_di_python_part_3/hexagonal-python-3.jpg" />
+</a>
+<ul class="simple">
+<li><a class="reference external" href="https://zaurnasibov.com/posts/2021/10/30/hexarch_di_python_part_1.html">Part I: Dependency Injection and componential architecture</a></li>
+<li><a class="reference external" href="https://zaurnasibov.com/posts/2022/09/18/hexarch_di_python_part_2.html">Part II: Domain,  Application Services, Ports and Adapters</a></li>
+<li><a class="reference external" href="https://zaurnasibov.com/posts/2022/12/31/hexarch_di_python_part_3.html">Part III: Persistence, Transactions, Exceptions and The Final Assembly</a></li>
+<li><a class="reference external" href="https://zaurnasibov.com/posts/2025/05/10/hexarch-python-part-4-lightweight-integration-tests.html">Part IV: Lightweight integration tests</a></li>
+<li><a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/tree/blog3">The code</a></li>
+</ul>
+<p>In
+<a class="reference external" href="https://zaurnasibov.com/posts/2022/09/18/hexarch_di_python_part_2.html">Part II</a>
+we discussed the Hexagonal architecture of ports and adapters,
+the role of the Domain layer and its influence on API and database layers.
+We exposed the application to the outer world via the HTTP API port.</p>
+<p>In Part III we are going to
+put all the application pieces together.
+But before that,
+we have to connect the application to the database,
+research Django transactions in unit tests and
+set up exception handling on the HTTP API level.</p>
+<div class="section" id="the-repository">
+<h2>The repository</h2>
+<p>We love Django for many things, but most of them all - is the fantastic ORM.
+Django ORM abstracts the underlying database so gracefully that
+swapping one database engine to another is just a matter of updating the application
+configuration.
+But what if there is another data storage not supported by Django?
+What if the data storage is a web service?</p>
+<p>This problem is commonly solved via the
+<a class="reference external" href="https://learn.microsoft.com/en-us/previous-versions/msp-n-p/ff649690(v=pandp.10)">Repository design pattern</a>.
+A repository separates the logic of communicating with the database
+from the rest of the application. In terms of Hexagonal architecture, a
+repository is an SPI adapter that handles commands and queries from one
+or more related ports.</p>
+<p>Code-wise, the <tt class="docutils literal">VotingUserRepository</tt>
+<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog3/src/myapp/application/adapter/spi/persistence/repository/voting_user_repository.py#L21">[source]</a>
+is a class that implements
+the <tt class="docutils literal">FindVotingUserPort</tt>
+<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog3/src/myapp/application/port/spi/find_voting_user_port.py#L8">[source]</a>
+and the <tt class="docutils literal">SaveVotingUserPort</tt>
+<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog3/src/myapp/application/port/spi/save_voting_user_port.py#L6">[source]</a>
+ports:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/application/adapter/spi/persistence/repository/voting_user_repository.py</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">VotingUserRepository</span><span class="p">(</span>
+    <span class="n">FindVotingUserPort</span><span class="p">,</span>
+    <span class="n">SaveVotingUserPort</span>
+<span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_voting_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">article_id</span><span class="p">:</span> <span class="n">ArticleId</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="n">UserId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VotingUser</span><span class="p">:</span>
+        <span class="o">...</span>
+        <span class="k">return</span> <span class="n">VotingUser</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_voting_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">voting_user</span><span class="p">:</span> <span class="n">VotingUser</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VotingUser</span><span class="p">:</span>
+        <span class="o">...</span>
+        <span class="k">return</span> <span class="n">VotingUser</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>Strictly speaking, there is no need to use the Repository pattern here.
+We have already decoupled the application from the data stores via SPI ports.
+However, a repository is a convenient way of putting related adapter implementations
+in one place.
+The <tt class="docutils literal">VotingUserRepository</tt> provides database-backed adapters for both
+<tt class="docutils literal">FindVotingUserPort</tt> and <tt class="docutils literal">SaveVotingUserPort</tt> SPI ports.
+It communicates with the database through Django ORM:</p>
+<object class="align-center" data="https://zaurnasibov.com/articles/2022_12_31_hexarch_di_python_part_3/the-voting-user-repository.svg" style="width: 100%;" type="image/svg+xml">A diagram which shows the data flow between VotingUserRepository,
+Django ORM and a Database.</object>
+<div class="section" id="from-domain-models-to-database-entities">
+<h3>From domain models to database entities</h3>
+<p>The <tt class="docutils literal">VotingUserRepository</tt> has to map the <tt class="docutils literal">VotingUser</tt> domain model to
+data model(s) when saving to - and vice versa, when reading from the database.
+The <tt class="docutils literal">VotingUser</tt> model holds three pieces of information,
+which eventually influence the database design
+<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog3/src/myapp/application/domain/model/voting_user.py#L20">[source]</a>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/application/domain/model/voting_user.py</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">VotingUser</span><span class="p">:</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">UserId</span>
+    <span class="n">karma</span><span class="p">:</span> <span class="n">Karma</span>
+    <span class="n">votes_for_articles</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ArticleVote</span><span class="p">]</span>
+</pre></div></td></tr></table></div>
+<p>A modern relational database with native JSON support can store such
+an object in a single table row. Django natively supports JSON fields
+and provides unbelievable
+<a class="reference external" href="https://docs.djangoproject.com/en/4.1/topics/db/queries/#querying-jsonfield">JSON querying capabilities</a>.</p>
+<p>A more traditional way is to store <tt class="docutils literal">ArticleVotes</tt> and <tt class="docutils literal">VotingUsers</tt> in separate
+tables with an explicit relationship between them:</p>
+<img alt="uml diagram" class="align-center" src="https://zaurnasibov.com/images/d662121a.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Although I drew <tt class="docutils literal">article_vote.user_id</tt> and <tt class="docutils literal">article_vote.article_id</tt> as
+<strong>foreign keys</strong>, this is not reflected in the example project code.
+There is some hidden complexity here, like -
+if a user gets deleted, should the article votes stay? Or should they remain
+intact if an article gets deleted? If yes - how should we preserve the data?
+I hope you would indulge me this simplification and leave the
+proper foreign key relationships and domain-specific deletion handling for
+another time.</p>
+</div>
+<p>I bet you already picture how to express these tables as Django models.
+Here is a tricky question: where should we put them?
+It's not hard to answer if you remember the structure of HTTP API adapters.
+Let's do something similar for our persistence SPI adapter:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span>myapp/application/adapter/spi/
+    persistence/
+        entity/
+            article_vote_entity.py     # Django model here
+            voting_user_entity.py      # and here
+        repository/
+            voting_user_repository.py
+        exceptions/
+            ...
+</pre></div></td></tr></table></div>
+<p>Here is another unorthodox move: I called Django models &quot;<em>Entities</em>&quot;.
+That is - to avoid confusion between <em>domain models</em> and <em>Django models</em>.
+There is no other hidden meaning of &quot;Entity&quot; in this case.</p>
+<p>Here is the <tt class="docutils literal">ArticleVoteEntity</tt>
+<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog3/src/myapp/application/adapter/spi/persistence/entity/article_vote_entity.py#L8">[source]</a>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/application/adapter/spi/persistence/entity/article_vote_entity.py</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ArticleVoteEntity</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">VOTE_UP</span> <span class="o">=</span> <span class="s1">&#39;up&#39;</span>
+    <span class="n">VOTE_DOWN</span> <span class="o">=</span> <span class="s1">&#39;down&#39;</span>
+
+    <span class="n">VOTES_CHOICES</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">VOTE_UP</span><span class="p">,</span> <span class="s1">&#39;UP&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">VOTE_DOWN</span><span class="p">,</span> <span class="s1">&#39;DOWN&#39;</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">UUIDField</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">uuid4</span><span class="p">,</span> <span class="n">editable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">UUIDField</span><span class="p">()</span>
+    <span class="n">article_id</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">UUIDField</span><span class="p">()</span>
+    <span class="n">vote</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">VOTES_CHOICES</span><span class="p">)</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">unique_together</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;article_id&#39;</span><span class="p">]]</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;article_vote&#39;</span>
+</pre></div></td></tr></table></div>
+<p>The <tt class="docutils literal">VotingUserEntity</tt> is simpler
+<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog3/src/myapp/application/adapter/spi/persistence/entity/voting_user_entity.py">[source]</a>
+:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/application/adapter/spi/persistence/entity/voting_user_entity.py</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">VotingUserEntity</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">UUIDField</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">uuid4</span><span class="p">,</span> <span class="n">editable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">karma</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;voting_user&#39;</span>
+</pre></div></td></tr></table></div>
+<p>The entity definitions are lean and have no methods in them.
+All that is required - is to map data from Python to database and back.
+And Django flawlessly does that.</p>
+</div>
+<div class="section" id="inside-the-repository">
+<h3>Inside the repository</h3>
+<p>Once you've seen the entities (i.e. Django models), things get very predictable.
+The repository implements two SPI ports - one to get a <tt class="docutils literal">VotingUser</tt> from the
+database, another to persist a <tt class="docutils literal">VotingUser</tt> to the database.
+The repository takes care of transforming the domain model to Django entities
+and calling the required Django ORM methods. The repository then transforms
+the result back to the domain model:</p>
+<object class="align-center" data="https://zaurnasibov.com/articles/2022_12_31_hexarch_di_python_part_3/voting-user-to-database.svg" style="width: 100%;" type="image/svg+xml">A diagram which shows how VotingUser domain model is persisted to
+a database through Django ORM mechanism.</object>
+<p>The implementation fits just in few lines after hiding Django ORM boilerplate in
+private methods
+<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog3/src/myapp/application/adapter/spi/persistence/repository/voting_user_repository.py#L25">[source]</a>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/application/adapter/spi/persistence/repository/voting_user_repository.py</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">find_voting_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">article_id</span><span class="p">:</span> <span class="n">ArticleId</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="n">UserId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VotingUser</span><span class="p">:</span>
+    <span class="n">voting_user_entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_voting_user_entity</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="n">votes_for_articles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_votes_for_articles</span><span class="p">(</span><span class="n">article_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">VotingUser</span><span class="p">(</span>
+        <span class="n">user_id</span><span class="p">,</span>
+        <span class="n">Karma</span><span class="p">(</span><span class="n">voting_user_entity</span><span class="o">.</span><span class="n">karma</span><span class="p">),</span>
+        <span class="n">votes_for_articles</span>
+    <span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>Remember that I put no explicit <tt class="docutils literal">ForeignKey</tt> relationships here, so we
+have to load the votes manually. A user is saved in the same fashion
+<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog3/src/myapp/application/adapter/spi/persistence/repository/voting_user_repository.py#L57">[source]</a>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/application/adapter/spi/persistence/repository/voting_user_repository.py</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">save_voting_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">voting_user</span><span class="p">:</span> <span class="n">VotingUser</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VotingUser</span><span class="p">:</span>
+    <span class="n">saved_voting_user_entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_voting_user</span><span class="p">(</span><span class="n">voting_user</span><span class="p">)</span>
+    <span class="n">saved_article_vote_entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_votes_for_articles</span><span class="p">(</span>
+        <span class="n">voting_user</span><span class="o">.</span><span class="n">votes_for_articles</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_voting_user_entity_to_domain_model</span><span class="p">(</span>
+        <span class="n">saved_voting_user_entity</span><span class="p">,</span>
+        <span class="n">saved_article_vote_entities</span>
+    <span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>Perhaps you are wondering: <strong>why map a</strong> <tt class="docutils literal">VotingUserEntity</tt> <strong>back to a</strong>
+<tt class="docutils literal">VotingUser</tt> <strong>domain model if we already pass it as an argument?</strong>
+The data passed in an INSERT INTO statement may run through numerous
+transformations before it reaches the data storage.
+The well-known case is an &quot;auto-incremental&quot; integer primary key
+generated via <tt class="docutils literal">BEFORE INSERT</tt> triggers.
+So, it is paramount to return a domain model that resembles
+the updated database state, not what we pass to the routine.</p>
+</div>
+</div>
+<div class="section" id="transactions-management">
+<h2>Transactions management</h2>
+<p>A common way to handle database transactions in Django - is to wrap each HTTP
+request in a transaction.
+This works for simple cases. But what does it mean in terms of
+Hexagonal architecture? In
+<a class="reference external" href="https://zaurnasibov.com/posts/2022/09/18/hexarch_di_python_part_2.html">Part II</a>
+we created an HTTP API adapter, which invokes the <tt class="docutils literal">VoteForArticleUseCase</tt>
+<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog3/src/myapp/application/port/api/vote_for_article_use_case.py#L9">[source]</a>.</p>
+<p>But there could be many other adapters - a command line adapter,
+a message bus adapter, an RPC adapter etc.
+We can't trust all those adapters to wrap a use case in a transaction.
+So, the burden of defining transaction boundaries is shifted to
+a use case implementation - an application service.
+An application service places the database write operations into a single transaction.
+The operations then roll back if one of them fails.</p>
+<div class="section" id="transactions-in-django">
+<h3>Transactions in Django</h3>
+<p>We know that an application service
+vows to be agnostic of SPI adapters' implementation details.
+But wrapping SPI calls in transaction breaks this vow.
+Correction: wrapping SPI calls in a transaction <em>using Django routines</em> breaks
+this vow.
+Django's <a class="reference external" href="https://docs.djangoproject.com/en/4.1/topics/db/transactions/#controlling-transactions-explicitly">transaction.atomic</a>
+is the unambiguous way to wrap a code block in a transaction.
+It is used either as a decorator or a context manager.
+But the problem is that Python decorators and context managers are runtime
+constructs. Internally <tt class="docutils literal">transaction.atomic</tt> operates on database connection
+object. While we certainly need a database connection at a run time, we
+don't need one for <em>unit</em> testing.
+This means that the following perfectly valid production code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">django.db</span><span class="w"> </span><span class="kn">import</span> <span class="n">transaction</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ArticleRatingService</span><span class="p">(</span><span class="n">VoteForArticleUseCase</span><span class="p">):</span>
+    <span class="nd">@transaction</span><span class="o">.</span><span class="n">atomic</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vote_for_article</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div></td></tr></table></div>
+<p>fails in a unit test (pytest) with <tt class="docutils literal"><span class="pre">RuntimeError(&quot;Database</span> access not <span class="pre">allowed...&quot;)</span></tt> exception, unless a database connection is established.
+The exception suggest marking the test with <strong>&#64;pytest.mark.django_db</strong> - but
+this turns a <em>unit</em> test into an <em>integration</em> test!</p>
+<p>With all the &quot;batteries included&quot;, Django doesn't include one for this case.
+My version of such a battery is <tt class="docutils literal">&#64;transactional</tt> decorator, which
+wraps a callable in a transaction for production, but skips it when running tests
+<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog3/src/myapp/application/util/transactional.py#L11">[source]</a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><strong>Code smell detected</strong>.
+A routine in a production code made solely for the sake of testing is
+a sign of a bad design. However, such hack is necessary to push a Django
+application out of the framework box.</p>
+</div>
+</div>
+</div>
+<div class="section" id="spi-adapters-exceptions">
+<h2>SPI adapters exceptions</h2>
+<p>Traditionally handling exceptions in Django views boils down to wrapping a block of
+code in <tt class="docutils literal"><span class="pre">try..except</span></tt> and returning an error-indicating result:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_user_name</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">User</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HttpResponseNotFound</span><span class="p">(</span><span class="s2">&quot;User not found :(&quot;</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>But how does an API adapter handles an exception raised by an SPI adapter?
+The dependencies directions principle in Hexagonal Architecture reminds us that
+API adapters should not be aware of SPI <strong>adapters</strong>' innards.</p>
+<object class="align-center" data="https://zaurnasibov.com/articles/2022_12_31_hexarch_di_python_part_3/hexagonal-architecture-dependencies.svg" style="width: 35%;" type="image/svg+xml">Hexagonal Architecture layers, from top to bottom: Adapters, Ports,
+Application Services, Domain</object>
+<p>Instead, they are aware of interfaces exposed by SPI <strong>ports</strong>.
+An SPI <strong>port</strong> is not necessarily a bare interface.
+It includes type definitions, exceptions and other constructs that make an SPI
+port a whole. Our SPI port includes such an exception
+<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog3/src/myapp/application/adapter/spi/persistence/exceptions/voting_user_not_found.py">[source]</a>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/application/adapter/spi/persistence/exceptions/voting_user_not_found.py</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">VotingUserNotFound</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="n">UserId</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;User &#39;</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>The SPI adapter catches the downstream <tt class="docutils literal">User.DoesNotExist</tt> exception
+and re-throws it upstream in form of <tt class="docutils literal">VotingUserNotfound</tt>
+<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog3/src/myapp/application/adapter/spi/persistence/repository/voting_user_repository.py#L39">[source]</a>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/application/adapter/spi/persistence/repository/voting_user_repository.py</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_voting_user_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="n">UserId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VotingUserEntity</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">VotingUserEntity</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">VotingUserEntity</span><span class="o">.</span><span class="n">DoesNotExist</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">VotingUserNotFound</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+</pre></div></td></tr></table></div>
+<div class="section" id="exception-handler">
+<h3>Exception handler</h3>
+<p>Now that we know which exception to catch in the HTTP API adapter,
+let's discuss ways to handle it.
+The most obvious way is to wrap the body of <tt class="docutils literal">ArticleVoteView.post()</tt> in
+<tt class="docutils literal"><span class="pre">try..except</span></tt> statement.
+That works fine for a small number of exceptions, but in a larger
+application with lots of exceptions of a similar origin, a common mechanism might
+be preferable.
+For example, an &quot;Entity Not Found&quot; exception can be expressed as the <tt class="docutils literal">HTTP 404</tt>
+response for any kind of entity.
+Luckily for us, Django Rest Framework provides a common exception-handling mechanism.
+You can define a
+<a class="reference external" href="https://www.django-rest-framework.org/api-guide/exceptions/#custom-exception-handling">custom exception handler</a>
+function and set <tt class="docutils literal">REST_FRAMEWORK.EXCEPTION_HANDLER</tt> settings value.</p>
+<p>If a simple form, the handler catches SPI exceptions and converts them to an HTTP
+response
+<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog3/src/myapp/application/adapter/api/http/exceptions_handler.py">[source]</a>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/application/adapter/api/http/exceptions_handler.py</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">exceptions_handler</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="n">VotingUserNotFound</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span>
+            <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s2">&quot;Error&quot;</span><span class="p">,</span>
+            <span class="s1">&#39;detail&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">),</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">BAD_REQUEST</span>
+        <span class="p">})</span>
+</pre></div></td></tr></table></div>
+</div>
+</div>
+<div class="section" id="the-final-assembly">
+<h2>The Final Assembly</h2>
+<p>All the components of the application - the domain model, application services,
+API and SPI adapters are ready. All that is left - is to put them together.
+We are going to use a small dependencies or
+<a class="reference external" href="https://www.martinfowler.com/articles/injection.html">Inversion of Control</a>
+container that creates all the components instances and wires them into a
+complete application:</p>
+<object class="align-center" data="https://zaurnasibov.com/articles/2022_12_31_hexarch_di_python_part_3/ioc-container.svg" style="width: 80%;" type="image/svg+xml">A diagram which shows how Django passes control flow to the IoC
+Container.</object>
+<p>The container commences by instantiating <tt class="docutils literal">VotingUserRepository</tt>.
+It is the sole component with no dependencies.
+Next, the container instantiates the components that depend
+on the already available components instances, i.e. <tt class="docutils literal">ArticleRatingservice</tt>
+that solely depends upon <tt class="docutils literal">VotingUserRepository</tt>.
+It continues recursively assembling components until the dependency tree is
+fully populated
+<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog3/src/myapp/dependencies_container.py#L10">[source]</a>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/dependencies_container.py</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">build_production_dependencies_container</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="n">voting_user_repository</span> <span class="o">=</span> <span class="n">VotingUserRepository</span><span class="p">()</span>
+
+    <span class="n">article_rating_service</span> <span class="o">=</span> <span class="n">ArticleRatingService</span><span class="p">(</span>
+        <span class="n">find_voting_user_port</span><span class="o">=</span><span class="n">voting_user_repository</span><span class="p">,</span>
+        <span class="n">save_voting_user_port</span><span class="o">=</span><span class="n">voting_user_repository</span>
+    <span class="p">)</span>
+
+    <span class="n">article_vote_django_view</span> <span class="o">=</span> <span class="n">ArticleVoteView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span>
+        <span class="n">vote_for_article_use_case</span><span class="o">=</span><span class="n">article_rating_service</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;article_vote_django_view&#39;</span><span class="p">:</span> <span class="n">article_vote_django_view</span>
+    <span class="p">}</span>
+</pre></div></td></tr></table></div>
+<p>Notice that container only exposes a single entry point: the HTTP view, i.e.
+the API adapter.</p>
+<div class="section" id="configuration">
+<h3>Configuration</h3>
+<p>Where and when should we build the container? Consider this: the container
+creates and wires the components together. We can use different components
+for different environments - e.g. have a <tt class="docutils literal">VotingUserExcelRepository</tt>.
+So, the container <strong>configures</strong> the application.
+And Django applications have a well-known place for configurations - the
+<a class="reference external" href="https://docs.djangoproject.com/en/dev/ref/applications/#django.apps.AppConfig">AppConfig</a> class
+and the <tt class="docutils literal">AppConfig.ready()</tt> method:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/apps.py</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyAppConfig</span><span class="p">(</span><span class="n">AppConfig</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;myapp&#39;</span>
+    <span class="n">container</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">ready</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">myapp.dependencies_container</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_production_dependencies_container</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">container</span> <span class="o">=</span> <span class="n">build_production_dependencies_container</span><span class="p">()</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="urls">
+<h3>URLs</h3>
+<p>The application configuration registry is populated <em>before</em> Django sets up
+the URLs. It allows to get the application configuration from the registry
+and bind the view to a URL
+<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog3/src/myapp/urls.py">[source]</a>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/urls.py</span>
+
+<span class="n">app_config</span> <span class="o">=</span> <span class="n">django_apps</span><span class="o">.</span><span class="n">get_containing_app_config</span><span class="p">(</span><span class="s1">&#39;myapp&#39;</span><span class="p">)</span>
+<span class="n">article_vote_django_view</span> <span class="o">=</span> <span class="n">app_config</span><span class="o">.</span><span class="n">container</span><span class="p">[</span><span class="s1">&#39;article_vote_django_view&#39;</span><span class="p">]</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;article_vote&#39;</span><span class="p">,</span> <span class="n">article_vote_django_view</span><span class="p">)</span>
+<span class="p">]</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="django-models">
+<h3>Django models</h3>
+<p>Django expects to find models in application's <tt class="docutils literal">models.py</tt> file.
+Since we declared the entities deep down in SPI adapters, they have to be
+imported manually here
+<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog3/src/myapp/models.py">[source]</a>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/models.py</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">myapp.application.adapter.spi.persistence.entity.article_vote_entity</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ArticleVoteEntity</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">myapp.application.adapter.spi.persistence.entity.voting_user_entity</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">VotingUserEntity</span>
+<span class="p">)</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="testing">
+<h3>Testing</h3>
+<p><strong>The Final Assembly</strong> is a slightly misleading term. There is no need to wait
+for all the components to be available to assemble a production-level
+application container.
+On the surface, a container exposes an API entry point,
+backed either by a production-grade component or a dummy.</p>
+<p>So, the dependencies container should not be the last but one of the
+first items on the list when building an application following
+Hexagonal architecture principles.
+You can add the components to the container as they get ready and test every time
+how they fit together
+<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog3/tests/test_myapp/test_dependencies_container.py">[source]</a>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># tests/test_myapp/test_dependencies_container.py</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_build_production_ioc_container</span><span class="p">():</span>
+    <span class="n">build_production_dependencies_container</span><span class="p">()</span>
+</pre></div></td></tr></table></div>
+<p>At the same time, a simple <strong>smoke test</strong> can make a vote by a non-existing
+user and expect a response with HTTP 404 - Not Found status back:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span>curl<span class="w"> </span>http://localhost:8000/api/article_vote<span class="w"> </span><span class="se">\</span>
+--header<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+--request<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+--data<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">   &quot;user_id&quot;: &quot;efed6f83-49ee-4cbc-bdbd-2b92bf428f2b&quot;,</span>
+<span class="s1">   &quot;article_id&quot;: &quot;60ccea0c-0bf2-4726-8ac7-324fa03a74cd&quot;,</span>
+<span class="s1">   &quot;vote&quot;: &quot;UP&quot;</span>
+<span class="s1"> }&#39;</span>
+
+&gt;
+<span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;title&quot;</span>:<span class="s2">&quot;Error&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;detail&quot;</span>:<span class="s2">&quot;User &#39;efed6f83-49ee-4cbc-bdbd-2b92bf428f2b&#39; not found&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;status&quot;</span>:404
+<span class="o">}</span>
+</pre></div></td></tr></table></div>
+<p>Bear in mind that the job of a smoke test is to verify whether the application
+works. An ideal smoke test touches all the application layers
+without affecting its state. Voting by a non-existing user cuts through all the
+application layers, down to the database and returns the expected error result.</p>
+<p>This test can also run against an application-in-development with
+a dummy HTTP or SPI (database) adapters.
+Replacing a dummy adapter with a real one should not require any
+modifications to the test.</p>
+</div>
+</div>
+<div class="section" id="final-thoughts">
+<h2>Final thoughts</h2>
+<p>It took me almost two years to complete this article series. The example code
+lived through two major rewrites and has been continuously evolving.
+I am satisfied with the output and the outcome of this work.
+It helped me to understand Hexagonal Architecture and dive deeper into DDD.
+I hope it makes an inspiring impact on fellow Pythonistas!</p>
+</div>
+<div class="section" id="acknowledgments">
+<h2>Acknowledgments</h2>
+<p>Traditionally, <a class="reference external" href="https://jereteittinen.info">Jere &quot;Urokhtor&quot; Teittinen</a>
+gave priceless feedback on the draft, for which I am very grateful!</p>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://zaurnasibov.com/tag/architecture.html">architecture</a>
+      <a href="https://zaurnasibov.com/tag/ddd.html">DDD</a>
+      <a href="https://zaurnasibov.com/tag/dependency-injection.html">dependency injection</a>
+      <a href="https://zaurnasibov.com/tag/django.html">Django</a>
+      <a href="https://zaurnasibov.com/tag/hexagonal-architecture.html">hexagonal architecture</a>
+      <a href="https://zaurnasibov.com/tag/programming.html">programming</a>
+      <a href="https://zaurnasibov.com/tag/python.html">python</a>
+    </p>
+  </div>
+
+
+
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://zaurnasibov.com/posts/2022/10/15/refactoring_book_review.html" title="Refactoring - book review">
+      <i class="fa fa-angle-left"></i> Previous Post
+    </a>
+    <a class="btn float-right" href="https://zaurnasibov.com/posts/2023/02/21/specification_by_example_book_review.html" title="Specification by example - book review">
+      Next Post <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2025 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zaur's Thoughts ",
+  "url" : "https://zaurnasibov.com",
+  "image": "/static/images/logo.png",
+  "description": ""
+}
+</script><script defer
+  src='https://static.cloudflareinsights.com/beacon.min.js'
+  data-cf-beacon='{"token": "1147ebca9f9247a38190f2958de429a8"}'>
+</script>
+
+</body>
+</html>

@@ -1,0 +1,411 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Lexend+Deca:wght@100..900&display=swap&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://zaurnasibov.com/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/fontawesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/brands.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/solid.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com//static/css/extra.css">
+
+  <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="/static/images/favicon.png" type="image/x-icon">
+
+
+  <link href="https://zaurnasibov.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zaur's Thoughts Atom">
+
+
+
+
+
+
+
+
+
+<meta name="author" content="Zaur Nasibov" />
+<meta name="description" content="While reading the Binary trees chapter from Programming Interviews Exposed by John Mongan et al. I started thinking of alternative recursion examples which do not involve sorting, generating Fibonacci sequence, binary tree traversal and similar tasks. Lisp! Lisp is inseparable from recursion and Lisp interpreter would be a good case to demonstrate what recursion is and how it can be used efficiently. What would be a minimal simplified Lisp interpreter written in Python? Surprisingly, I managed to do it just in 6 lines of Python code! And this is not just because of Python being a wonderful language, but because of Lisp being such a beautiful and simple concept." />
+<meta name="keywords" content="Python, Lisp, programming">
+
+
+  <meta property="og:site_name" content="Zaur's Thoughts"/>
+  <meta property="og:title" content="A micro Lisp interpreter experiment"/>
+  <meta property="og:description" content="While reading the Binary trees chapter from Programming Interviews Exposed by John Mongan et al. I started thinking of alternative recursion examples which do not involve sorting, generating Fibonacci sequence, binary tree traversal and similar tasks. Lisp! Lisp is inseparable from recursion and Lisp interpreter would be a good case to demonstrate what recursion is and how it can be used efficiently. What would be a minimal simplified Lisp interpreter written in Python? Surprisingly, I managed to do it just in 6 lines of Python code! And this is not just because of Python being a wonderful language, but because of Lisp being such a beautiful and simple concept."/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://zaurnasibov.com/posts/2014/06/21/a_micro_lisp_interpreter_experiment.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2014-06-21 12:00:00+03:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://zaurnasibov.com/author/zaur-nasibov.html">
+  <meta property="article:section" content="Articles"/>
+  <meta property="article:tag" content="Python"/>
+  <meta property="article:tag" content="Lisp"/>
+  <meta property="article:tag" content="programming"/>
+  <meta property="og:image" content="/static/images/logo.png">
+
+  <title>Zaur's Thoughts &ndash; A micro Lisp interpreter experiment</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://zaurnasibov.com/">
+      <img src="/static/images/logo.png" alt="Zaur's Thoughts" title="Zaur's Thoughts">
+    </a>
+
+    <h1>
+      <a href="https://zaurnasibov.com/">Zaur's Thoughts</a>
+    </h1>
+
+    <p>Zaurun Fikirləri</p>
+
+
+    <nav>
+      <ul class="list">
+
+          <li>
+            <a target="_self" href="/posts.html" ><strong>Articles</strong></a>
+          </li>
+          <li>
+            <a target="_self" href="/pages/shorts.html" >Shorts</a>
+          </li>
+          <li>
+            <a target="_self" href="/category/books.html" >Books</a>
+          </li>
+
+
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/bookmarks.html#bookmarks">
+                Bookmarks
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/memes.html#memes">
+                Memes
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/projects.html#projects">
+                Projects
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/about.html#about">
+                About
+              </a>
+            </li>
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/zaur-nasibov-44610853/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/basicwolf"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-rss"
+           href="/feeds/all.atom.xml"
+           target="_blank">
+          <i class="fa-solid fa-rss"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://zaurnasibov.com/">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/tags.html">Tags</a>
+  <a href="/pages/privacy-policy.html">Privacy Policy</a>
+</nav>
+
+<article>
+  <header>
+      
+    <h1 id="a_micro_lisp_interpreter_experiment">A micro Lisp interpreter experiment</h1>
+    <p>
+      Posted on 21 June 2014 in <a href="https://zaurnasibov.com/category/articles.html">Articles</a>
+
+        &#8226; 4 min read
+    </p>
+  </header>
+
+
+  <div>
+    <p>Let's define the language grammar and evaluation forms:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span>list := (item0, item1, ...)
+item := list | atom
+atom := stringliteral|numliteral
+</pre></div></td></tr></table></div>
+<p>The evaluation rules are similar to any Lisp: the first atom is a function,
+the rest - are the arguments:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span>fn = list[0]
+args = list[1:]
+</pre></div></td></tr></table></div>
+<p>Notice that a list is written in a form of Python tuple. This is in a way
+a cheat which allows decreasing the interpreter's code dramatically (i.e.
+Python does the lexical and syntax analysis).
+Also note that the interpreter does not include any built-in operators,
+functions or special forms. They can all be created to extend the language
+separately.</p>
+<p>Let's write some examples before jumping to the code of the interpreter and
+its extension functions:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">(</span><span class="nv">quote,</span><span class="w"> </span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="c1">; &gt;&gt;&gt; (1, 2, 3)</span>
+<span class="p">(</span><span class="nv">plus,</span><span class="w"> </span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w">  </span><span class="c1">; &gt;&gt;&gt; 6</span>
+<span class="p">(</span><span class="nv">inc,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w">        </span><span class="c1">; &gt;&gt;&gt; 11</span>
+</pre></div></td></tr></table></div>
+<p>Allright, enough sentimental talk, let's get to the interpreter!</p>
+<div class="section" id="the-micro-lisp-interpreter">
+<h2>The micro Lisp interpreter</h2>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="n">list_or_atom</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_or_atom</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+        <span class="n">fn</span><span class="p">,</span> <span class="o">*</span><span class="n">fn_args</span> <span class="o">=</span> <span class="p">[</span><span class="nb">eval</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list_or_atom</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">fn_args</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">list_or_atom</span>
+</pre></div></td></tr></table></div>
+<p>That is it! Here is how it works:
+First, we check whether the input is a list (Python tuple) or an atom.
+In case if it is an atom we return it immediately. Thus, <tt class="docutils literal">eval(1)</tt>
+returns <tt class="docutils literal">1</tt>. If the argument is a tuple, we extract a function
+as its first element, and supply the rest elements as function arguments,
+recursively evaluating them in-place.
+Let's write various functions to extend this basic interpreter.</p>
+<div class="section" id="quote">
+<h3>quote</h3>
+<p>Quoting is used to separate expressions from data in Lisp.
+For example, in Emacs-Lisp it is <tt class="docutils literal">(quote 1 2 3)</tt>, which is usually
+written via quotation prefix as <tt class="docutils literal">'(1 2 3)</tt>. Without quotation,
+Lisp will interprete this as a function call, where the first symbol
+(<tt class="docutils literal">1</tt>) is a function name and <tt class="docutils literal">2 3</tt> - are function arguments.
+Because we are limited by Python syntax, it is impossible to introduce
+Lisp-alike special quote forms, i.e. <tt class="docutils literal">'(1 2 3)</tt>. Thus, <tt class="docutils literal">quote</tt>
+should be written as a function:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">quote</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a list without evaluating it.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+
+<span class="nb">eval</span><span class="p">((</span><span class="n">quote</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p><strong>Please be aware</strong>, that this is still a rudimentary quotation, which
+does not work correctly for quoted sub-lists. For example, in any
+Lisp the following evaluation takes places:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">&#39;</span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="p">))</span>
+<span class="nv">&gt;&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">(</span><span class="k">quote</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="p">))</span>
+</pre></div></td></tr></table></div>
+<p>However it evaluates to the following code in this mini-interpreter:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="plus">
+<h3>plus</h3>
+<p>Let's write a mathematical function. Usually the <tt class="docutils literal">+</tt> operator is used
+in various Lisp dialects for summing, but we are still limited with
+Python's syntax, which would not allow writing <tt class="docutils literal">(+, 2, 3)</tt>.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plus</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sums up the input arguments.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+
+<span class="nb">eval</span><span class="p">((</span><span class="n">plus</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">12</span>
+</pre></div></td></tr></table></div>
+<p>And here come two nice examples with recursion:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><span class="nb">eval</span><span class="p">((</span><span class="n">plus</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="p">(</span><span class="n">plus</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">18</span>
+
+<span class="nb">eval</span><span class="p">((</span><span class="n">plus</span><span class="p">,</span> <span class="p">(</span><span class="n">plus</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="n">plus</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">18</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="apply">
+<h3>apply</h3>
+<p>What happens if you try to plus a list, like <tt class="docutils literal">(plus, (quote, 1, 2, 3))</tt>?
+The interpreter will crash because it will end up calling Python's
+<tt class="docutils literal">sum</tt> as <tt class="docutils literal"><span class="pre">sum([(1,</span> 2, 3), ])</tt>. A typical Lisp dialect deals with this
+problem via <tt class="docutils literal">apply</tt> function:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Applies a function to a list of arguments.&quot;&quot;&quot;</span>
+    <span class="n">fn</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">fn_args</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">fn_args</span><span class="p">)</span>
+
+<span class="nb">eval</span><span class="p">((</span><span class="n">apply</span><span class="p">,</span> <span class="n">plus</span><span class="p">,</span> <span class="p">(</span><span class="n">quote</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">6</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="map-and-inc">
+<h3>map and inc</h3>
+<p>The <tt class="docutils literal">map</tt> function takes another function and a list as input, applies
+the function to each element of this list and returns the results in a new
+list. For example: <tt class="docutils literal">(map, inc, (quote, 1, 2, 3))</tt> returns <tt class="docutils literal">(2, 3, 4)</tt>.</p>
+<p>Here, <tt class="docutils literal">inc</tt> - is a simple function which returns the value of it's
+argument + 1. For example, <tt class="docutils literal">(inc, 10)</tt> returns <tt class="docutils literal">11</tt>.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">map</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply the function to each element of the list and return</span>
+<span class="sd">       the results in a new list.&quot;&quot;&quot;</span>
+    <span class="n">fn</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">fn_args</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">fn</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">fn_args</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">inc</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Increases the argument by 1.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">arg</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="nb">eval</span><span class="p">((</span><span class="nb">map</span><span class="p">,</span> <span class="n">inc</span><span class="p">,</span> <span class="p">(</span><span class="n">quote</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<span class="o">&gt;&gt;</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="lambdas">
+<h3>lambdas</h3>
+<p>I was looking for a nice way of writing lambdas without modifying
+the base interpreter. Unfortunately using the Python lambdas directly
+would require putting an explicit <tt class="docutils literal">eval()</tt> in the lambda body, e.g.:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="nb">eval</span><span class="p">((</span><span class="nb">map</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">plus</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">quote</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+</pre></div></td></tr></table></div>
+<p>Would not work because <tt class="docutils literal">(plus, x, 1)</tt> is never evaluated. To make
+this work we have to write it as:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="nb">eval</span><span class="p">((</span><span class="nb">map</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">eval</span><span class="p">(</span><span class="n">plus</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">quote</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+</pre></div></td></tr></table></div>
+<p>which destroys the consistency of the syntax. Ruby code blocks would
+be indeed helpful here :)</p>
+<p>I will stop extending the interpreter now. As you see the interpreter
+is not complete and it is quite primitive. But the aim of this article
+is to show another way of demonstrating and teaching recursion in Python
+through the beauty of Lisp :) I hope you enjoyed it!
+Looking forward for your comments and solutions!</p>
+</div>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://zaurnasibov.com/tag/python.html">Python</a>
+      <a href="https://zaurnasibov.com/tag/lisp.html">Lisp</a>
+      <a href="https://zaurnasibov.com/tag/programming.html">programming</a>
+    </p>
+  </div>
+
+
+
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://zaurnasibov.com/posts/2014/02/01/ecco_online.html" title="ECCO online">
+      <i class="fa fa-angle-left"></i> Previous Post
+    </a>
+    <a class="btn float-right" href="https://zaurnasibov.com/posts/2015/05/11/python_nightmares_implicit_this.html" title="Python nightmares: Implicit this">
+      Next Post <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2025 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zaur's Thoughts ",
+  "url" : "https://zaurnasibov.com",
+  "image": "/static/images/logo.png",
+  "description": ""
+}
+</script><script defer
+  src='https://static.cloudflareinsights.com/beacon.min.js'
+  data-cf-beacon='{"token": "1147ebca9f9247a38190f2958de429a8"}'>
+</script>
+
+</body>
+</html>

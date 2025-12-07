@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Lexend+Deca:wght@100..900&display=swap&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://zaurnasibov.com/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/fontawesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/brands.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/solid.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com//static/css/extra.css">
+
+  <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="/static/images/favicon.png" type="image/x-icon">
+
+
+  <link href="https://zaurnasibov.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zaur's Thoughts Atom">
+
+
+
+
+
+
+
+
+
+<meta name="author" content="Zaur Nasibov" />
+<meta name="description" content="It might be very convenient to use the same fixtures in test setup and assertions. This practice though is not as good as it looks like at first glance." />
+<meta name="keywords" content="good practices, programming, python, testing, unit tests">
+
+
+  <meta property="og:site_name" content="Zaur's Thoughts"/>
+  <meta property="og:title" content="Good practices: Avoiding the use of test inputs in assertions"/>
+  <meta property="og:description" content="It might be very convenient to use the same fixtures in test setup and assertions. This practice though is not as good as it looks like at first glance."/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://zaurnasibov.com/posts/2021/11/10/good-practices-avoiding-the-use-of-test-inputs-in-assertions.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2021-11-10 12:00:00+02:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://zaurnasibov.com/author/zaur-nasibov.html">
+  <meta property="article:section" content="Articles"/>
+  <meta property="article:tag" content="good practices"/>
+  <meta property="article:tag" content="programming"/>
+  <meta property="article:tag" content="python"/>
+  <meta property="article:tag" content="testing"/>
+  <meta property="article:tag" content="unit tests"/>
+  <meta property="og:image" content="/static/images/logo.png">
+
+  <title>Zaur's Thoughts &ndash; Good practices: Avoiding the use of test inputs in assertions</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://zaurnasibov.com/">
+      <img src="/static/images/logo.png" alt="Zaur's Thoughts" title="Zaur's Thoughts">
+    </a>
+
+    <h1>
+      <a href="https://zaurnasibov.com/">Zaur's Thoughts</a>
+    </h1>
+
+    <p>Zaurun Fikirləri</p>
+
+
+    <nav>
+      <ul class="list">
+
+          <li>
+            <a target="_self" href="/posts.html" ><strong>Articles</strong></a>
+          </li>
+          <li>
+            <a target="_self" href="/pages/shorts.html" >Shorts</a>
+          </li>
+          <li>
+            <a target="_self" href="/category/books.html" >Books</a>
+          </li>
+
+
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/bookmarks.html#bookmarks">
+                Bookmarks
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/memes.html#memes">
+                Memes
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/projects.html#projects">
+                Projects
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/about.html#about">
+                About
+              </a>
+            </li>
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/zaur-nasibov-44610853/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/basicwolf"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-rss"
+           href="/feeds/all.atom.xml"
+           target="_blank">
+          <i class="fa-solid fa-rss"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://zaurnasibov.com/">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/tags.html">Tags</a>
+  <a href="/pages/privacy-policy.html">Privacy Policy</a>
+</nav>
+
+<article>
+  <header>
+      
+    <h1 id="good-practices-avoiding-the-use-of-test-inputs-in-assertions">Good practices: Avoiding the use of test inputs in assertions</h1>
+    <p>
+      Posted on 10 November 2021 in <a href="https://zaurnasibov.com/category/articles.html">Articles</a>
+
+        &#8226; 2 min read
+    </p>
+  </header>
+
+
+  <div>
+    <img alt="Figure of eight know / https://freesvg.org/figure-of-eight-knot-vector-illustration / License: Public Domain" class="align-center" src="https://zaurnasibov.com/articles/2021-11-10-good-practices-avoiding-the-use-of-test-inputs-in-assertions/knot.png" style="width: 70%;" />
+<p>Imagine that we have to implement a <em>adding a title to a document</em>.
+The relationship between <tt class="docutils literal">Title</tt> and <tt class="docutils literal">Document</tt> is straightforward
+and we begin by writing a test:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_add_title_to_document</span><span class="p">():</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">Document</span><span class="p">()</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">Title</span><span class="p">(</span><span class="s2">&quot;Lorem Ipsum&quot;</span><span class="p">)</span>
+
+    <span class="n">document</span><span class="o">.</span><span class="n">add_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">document</span><span class="o">.</span><span class="n">title</span> <span class="o">==</span> <span class="n">title</span>
+</pre></div></td></tr></table></div>
+<p>Take a minute to spot the weak points of the code above and let's discuss them.</p>
+<div class="section" id="test-first-loop">
+<h2>Test-First Loop</h2>
+<p>People who practice test-driven development sometimes focus on the details of
+the process too much.
+We start by writing a test. Sometimes we write it to the end, sometimes we
+add small portions. The test fails and we write implementation to fix the failing
+part.
+The cycles repeats until the test is fully written and the implementation
+fulfills the test. The satisfied developer moves to the next task, everyone
+is happy.
+Is there something missing though?</p>
+</div>
+<div class="section" id="the-ultimate-test">
+<h2>The Ultimate Test</h2>
+<p>If someone asks you, what was the ultimate purpose of any test
+(we're speaking of software development of course) what would you answer?</p>
+<p>I think that the goal of any test is to <strong>confirm the relationship
+between certain inputs and outputs of a routine</strong>. The routine size doesn't matter
+- it could be as small as a function in a unit test or as big as a complex behavior
+of multiple services in an end-to-end test.</p>
+<p>This brings us back to the code above. The input is <tt class="docutils literal"><span class="pre">Title(&quot;lorem</span> ipsum&quot;)</tt>.
+What about the output?</p>
+</div>
+<div class="section" id="outputs-inputs">
+<h2>Outputs ≠ Inputs</h2>
+<p>The output of the test above is also the input. That is the biggest evil
+here. There is absolutely no way to fail this test by modifying the input:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_add_title_to_document</span><span class="p">():</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">Document</span><span class="p">()</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">Title</span><span class="p">(</span><span class="s2">&quot;dolor sit amet&quot;</span><span class="p">)</span>  <span class="c1"># changes don&#39;t affect test behaviour</span>
+
+    <span class="n">document</span><span class="o">.</span><span class="n">add_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">document</span><span class="o">.</span><span class="n">title</span> <span class="o">==</span> <span class="n">title</span>
+</pre></div></td></tr></table></div>
+<p>However, the test fails if input and output are separated:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_add_title_to_document</span><span class="p">():</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">Document</span><span class="p">()</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">Title</span><span class="p">(</span><span class="s2">&quot;dolor sit amet&quot;</span><span class="p">)</span>
+    <span class="n">document</span><span class="o">.</span><span class="n">add_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">document</span><span class="o">.</span><span class="n">title</span> <span class="o">==</span> <span class="n">Title</span><span class="p">(</span><span class="s2">&quot;Lorem Ipsum&quot;</span><span class="p">)</span>  <span class="c1"># hooray, this fails!</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="test-first-loop-extended-edition">
+<h2>Test-First Loop: Extended edition</h2>
+<p>My colleague <a class="reference external" href="https://jereteittinen.info">Jere Teittinen</a>
+taught me an amazingly simple and useful trick about writing tests.
+When you have completed writing a test assertion and the routine behind it,
+<strong>change the inputs or outputs to verify that the assertion fails</strong>.
+This is an important step which <strong>protects the test from tailored routine
+implementation</strong>.
+Such routine is able to fulfill the test only with the original inputs
+and outputs. You shake them a bit and everything falls apart like
+a house of cards.</p>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://zaurnasibov.com/tag/good-practices.html">good practices</a>
+      <a href="https://zaurnasibov.com/tag/programming.html">programming</a>
+      <a href="https://zaurnasibov.com/tag/python.html">python</a>
+      <a href="https://zaurnasibov.com/tag/testing.html">testing</a>
+      <a href="https://zaurnasibov.com/tag/unit-tests.html">unit tests</a>
+    </p>
+  </div>
+
+
+
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://zaurnasibov.com/posts/2021/10/30/hexarch_di_python_part_1.html" title="Hexagonal architecture and Python - Part I: Dependency Injection and componential architecture">
+      <i class="fa fa-angle-left"></i> Previous Post
+    </a>
+    <a class="btn float-right" href="https://zaurnasibov.com/posts/2022/09/18/hexarch_di_python_part_2.html" title="Hexagonal architecture and Python - Part II: Domain, Application Services, Ports and Adapters">
+      Next Post <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2025 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zaur's Thoughts ",
+  "url" : "https://zaurnasibov.com",
+  "image": "/static/images/logo.png",
+  "description": ""
+}
+</script><script defer
+  src='https://static.cloudflareinsights.com/beacon.min.js'
+  data-cf-beacon='{"token": "1147ebca9f9247a38190f2958de429a8"}'>
+</script>
+
+</body>
+</html>

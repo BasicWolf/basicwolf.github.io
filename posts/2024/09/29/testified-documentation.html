@@ -1,0 +1,431 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Lexend+Deca:wght@100..900&display=swap&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://zaurnasibov.com/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/fontawesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/brands.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/solid.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com//static/css/extra.css">
+
+  <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="/static/images/favicon.png" type="image/x-icon">
+
+
+  <link href="https://zaurnasibov.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zaur's Thoughts Atom">
+
+
+
+
+
+
+
+
+
+<meta name="author" content="Zaur Nasibov" />
+<meta name="description" content="It&#39;s hard to sell a software product - whether it&#39;s a library, a program, or generally speaking, a system - if it doesn&#39;t come with a top-notch manual. And keeping such manual up-to-date is not easy too. Gojko Adzic&#39;s ideas of Living Documentation to the rescue, but unfortunately they are still far from being widely adopted. In this post I propose a different way of making Living Documentation - by testifying its contents. Dive in to find out how!" />
+<meta name="keywords" content="programming, python, documentation, tests, specification, BDD, collaboration, cucumber">
+
+
+  <meta property="og:site_name" content="Zaur's Thoughts"/>
+  <meta property="og:title" content="Testified Documentation"/>
+  <meta property="og:description" content="It&#39;s hard to sell a software product - whether it&#39;s a library, a program, or generally speaking, a system - if it doesn&#39;t come with a top-notch manual. And keeping such manual up-to-date is not easy too. Gojko Adzic&#39;s ideas of Living Documentation to the rescue, but unfortunately they are still far from being widely adopted. In this post I propose a different way of making Living Documentation - by testifying its contents. Dive in to find out how!"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://zaurnasibov.com/posts/2024/09/29/testified-documentation.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2024-09-29 14:47:00+03:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://zaurnasibov.com/author/zaur-nasibov.html">
+  <meta property="article:section" content="Articles"/>
+  <meta property="article:tag" content="programming"/>
+  <meta property="article:tag" content="python"/>
+  <meta property="article:tag" content="documentation"/>
+  <meta property="article:tag" content="tests"/>
+  <meta property="article:tag" content="specification"/>
+  <meta property="article:tag" content="BDD"/>
+  <meta property="article:tag" content="collaboration"/>
+  <meta property="article:tag" content="cucumber"/>
+  <meta property="og:image" content="/static/images/logo.png">
+
+  <title>Zaur's Thoughts &ndash; Testified Documentation</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://zaurnasibov.com/">
+      <img src="/static/images/logo.png" alt="Zaur's Thoughts" title="Zaur's Thoughts">
+    </a>
+
+    <h1>
+      <a href="https://zaurnasibov.com/">Zaur's Thoughts</a>
+    </h1>
+
+    <p>Zaurun Fikirləri</p>
+
+
+    <nav>
+      <ul class="list">
+
+          <li>
+            <a target="_self" href="/posts.html" ><strong>Articles</strong></a>
+          </li>
+          <li>
+            <a target="_self" href="/pages/shorts.html" >Shorts</a>
+          </li>
+          <li>
+            <a target="_self" href="/category/books.html" >Books</a>
+          </li>
+
+
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/bookmarks.html#bookmarks">
+                Bookmarks
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/memes.html#memes">
+                Memes
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/projects.html#projects">
+                Projects
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/about.html#about">
+                About
+              </a>
+            </li>
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/zaur-nasibov-44610853/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/basicwolf"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-rss"
+           href="/feeds/all.atom.xml"
+           target="_blank">
+          <i class="fa-solid fa-rss"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://zaurnasibov.com/">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/tags.html">Tags</a>
+  <a href="/pages/privacy-policy.html">Privacy Policy</a>
+</nav>
+
+<article>
+  <header>
+      
+    <h1 id="testified-documentation">Testified Documentation</h1>
+    <p>
+      Posted on 29 September 2024 in <a href="https://zaurnasibov.com/category/articles.html">Articles</a>
+
+        &#8226; 5 min read
+    </p>
+  </header>
+
+
+  <div>
+    <!--  -->
+<blockquote>
+<p>The manual is outdated unless you are continuously
+building it alongside the application.</p>
+<p class="attribution">&mdash;<a class="reference external" href="https://www.arhohuttunen.com">Arho Huttunen</a></p>
+</blockquote>
+<p>It's hard to sell a software product - whether it's a library, a program,
+or generally speaking, a system - if it doesn't come with a top-notch manual.
+In my opinion, a good manual should describe
+every aspect of the system, provide plenty of different high-level examples
+and lower-level API specifications. It includes a changelog with
+emphasised important and breaking changes, explains how to install, upgrades
+and maintain the system.</p>
+<p>Keeping such documentation up-to-date is hard. Even when engineers who
+work on the system take care of the manual, they easily miss some tricky aspects
+or don't bother to document certain &quot;obvious&quot; behaviour.
+It's even harder for technical writers who work in silos and don't know much
+about the internals of the system, or don't fully understand the business case
+covered by the product feature they are documenting.</p>
+<div class="section" id="specification-by-example-and-cucumber">
+<h2>Specification by Example and Cucumber</h2>
+<p>Gojko Adzic proposed the concept of Living Documentation in his renowned book
+<a class="reference external" href="https://zaurnasibov.com/posts/2023/02/21/specification_by_example_book_review.html">&quot;Specification by Example&quot;</a>.
+But Living Documentation doesn't come for free.
+For a <span class="strike">JIRA ticket</span> a new feature description to become
+an executable specification, one must first lay down a bridge between the human-friendly
+narrative and the machine.</p>
+<p>For example: A fictional Flixnet movie streaming platform wants to notify the
+customers that their subscriptions are about to expire.
+After user mapping sessions, the stakeholders wrote down the following
+specification expressed in Gherkin/Cucumber syntax:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">Feature:</span><span class="nf"> Remind a customer about an expiring subscription</span>
+
+<span class="nf">  The customer might forget that their Flixnet subscription is expiring.</span>
+<span class="nf">  We want to retain the customer by reminding them about the expiring subscription</span>
+<span class="nf">  and providing an easy way to remain subscribed.</span>
+<span class="nf">  We will notify the customer only once, 3 days before the subscription expires,</span>
+<span class="nf">  so that the customer is not annoyed.</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> An active customer whose subscription expires in 3 days gets a notification</span>
+<span class="k">    Given </span><span class="nf">an active customer</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">their subscription expires in </span><span class="s">3</span><span class="nf"> days</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">we have not sent them a reminder yet</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">send the customer a reminder</span>
+</pre></div></td></tr></table></div>
+<p>How do we organise the document that incorporates
+this specification? Should it have a link to the specification? Or take
+some of its parts, like the feature name and description? Remember that Gherkin
+pays no attention to those, they are for the reader's convenience only.
+With some effort, it is possible to program <a class="reference external" href="https://docutils.sourceforge.io">docutils</a>
+or <a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/">MyST</a>
+directive to include the specification into a Markdown file:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><span class="gu">### User notifications and reminders</span>
+
+We send our users notifications on certain occasions. They are listed below:
+
+```{specification}
+:feature: Remind a customer about expiring subscription
+:include-description:
+```
+
+...
+</pre></div></td></tr></table></div>
+<p><em>Coupled with the ability to check specification execution (aka tests) results</em>,
+this could provide a living documentation!
+It's quite close, to what Gojko Adzic described
+in his 10-years-later aftermath <a class="reference external" href="https://gojko.net/2020/03/17/sbe-10-years.html">article</a>
+written in 2020. He noticed, that with then-available breed of
+Given-When-Then tools, the most effective solution was converting
+the specification files into something nicer and easier to read
+and then publishing a read-only version somewhere outside the version
+control system.</p>
+<p>The sad part is that specifications written in Gherkin and executed via Cucumber
+are largely abused. Aslak Hellesøy wrote in 2014 that Cucumber was
+<a class="reference external" href="https://cucumber.io/blog/collaboration/the-worlds-most-misunderstood-collaboration-tool/">largely misunderstood</a>.
+Cucumber is first a formost a <em>collaboration tool</em> that aims to bring a
+common understanding to software teams - across roles. It is not a testing tool
+for QA to write end-to-end tests on an existing implementation.
+I witnessed horrible Cucumber misuse: specifications written weeks after
+implementation got integrated; Specifications which have only technical terms
+and describe implementation details instead of business rules;
+Specifications meaningless and repetitive, such as:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">Given </span><span class="nf">a user</span>
+<span class="k">When </span><span class="nf">user logs in</span>
+<span class="k">Then </span><span class="nf">user is logged in</span>
+</pre></div></td></tr></table></div>
+<p>In other words, no one benefits from including <em>bad</em> Gherkin specification
+details into a manual. And the tooling does not exist yet, anyway.</p>
+</div>
+<div class="section" id="testified-documentation-1">
+<h2>Testified Documentation</h2>
+<p>Back to square one - how else to ensure that the behaviour described in the
+release manual aligns with the released program behaviour?</p>
+<p>A simple idea struck me in September 2024.
+What if we use something that is widely adopted by software engineers?
+That is - the output of automated tests: unit, behaviour,
+end-to-end - all of them that run on every build of the system.</p>
+<a class="reference external image-reference" href="https://zaurnasibov.com/articles/2024-09-29-testified-documentation/img/testified-documentation.svg">
+<img alt="Testified documentation diagram" class="align-center" src="https://zaurnasibov.com/articles/2024-09-29-testified-documentation/img/testified-documentation.webp" style="width: 80%;" />
+</a>
+<p>Test automation tooling is widely available and is quite stable for popular
+programming platforms.
+Moreover, test runners usually support a common
+<a class="reference external" href="https://github.com/testmoapp/junitxml">JUnit XML</a> output format.
+For example, here is the formatted report of two executed smoke tests:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;testsuites&gt;</span>
+<span class="w">  </span><span class="nt">&lt;testsuite</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;pytest&quot;</span><span class="w"> </span><span class="na">errors=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">failures=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">skipped=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">tests=</span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="na">time=</span><span class="s">&quot;0.041&quot;</span><span class="w"> </span><span class="na">timestamp=</span><span class="s">&quot;2024-09-29T14:19:49.292476+03:00&quot;</span><span class="w"> </span><span class="na">hostname=</span><span class="s">&quot;z&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;testcase</span><span class="w"> </span><span class="na">classname=</span><span class="s">&quot;test.test_smoke&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;test_smoke&quot;</span><span class="w"> </span><span class="na">time=</span><span class="s">&quot;0.001&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;testcase</span><span class="w"> </span><span class="na">classname=</span><span class="s">&quot;test.test_smoke.TestBigSmoke&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;test_big_smoke&quot;</span><span class="w"> </span><span class="na">time=</span><span class="s">&quot;0.000&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/testsuite&gt;</span>
+<span class="nt">&lt;/testsuites&gt;</span>
+</pre></div></td></tr></table></div>
+<p>Now imagine that for every paragraph in documentation file, we include a
+directive that checks whether certain test cases passed successfully.
+The results are invisible for the end user,
+it's intended for developers and copywriters:
+if any of the required tests fails, documentation won't build.</p>
+<p>It's nothing new though:
+some products already utilize testifying artifacts produced by test automation
+in documentation.
+For example, visual tests make screenshots, and the documentation embeds them
+as example images.</p>
+<p>I quickly assembled a small PoC for <a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a>
+- a tool widely used to write manuals for Python libraries and programs.
+Here, I included a test name as a role
+(yes, it should have been a directive ;-):</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span>This is a documentation for the &quot;Spectest&quot; library.
+
+Spectest starts with a simple smoke test. <span class="na">:spectest:</span><span class="nv">`test.test_smoke.test_smoke`</span>.
+</pre></div></td></tr></table></div>
+<p>The build reads test results from the XML above, passes successfully and
+outputs a Sphinx-based HTML manual.
+However, if we simulate a test failure by changing the verified name to
+<tt class="docutils literal"><span class="pre">:spectest:`test_ABCD`</span></tt>, the build breaks along:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span>/home/zaur/.../index.rst:13: ERROR: TEST test_ABCD not found [docutils]
+</pre></div></td></tr></table></div>
+<p>That's the idea in a nutshell. To me it sounds <em>technically</em> simple enough to get
+implemented for any extensible documentation generator.</p>
+<p>The devil is however, in the details.
+Testified documentation won't work well unless you have thorough behavior tests.
+That doesn't imply E2E tests at all! (I profess keeping those to a bare minimum.)
+Rather, have a suite of fast <a class="reference external" href="https://martinfowler.com/bliki/UnitTest.html">sociable tests</a>
+that verify system behaviour and utilize stubs and mocks for external dependencies.</p>
+</div>
+<div class="section" id="feedback">
+<h2>Feedback</h2>
+<p>Rainbows and unicorns :) I would love to hear your thoughts on this topic
+and include them here. I am a lucky guy who can share the
+wildest ideas with my colleagues and friends and get honest feedback.</p>
+<p><a class="reference external" href="https://github.com/jmp">Jarkko 'jmp' Piiroinen</a> had a very
+valid and cool-minded point: there is zero incentive to make this kind of
+documentation-to-test-results bindings if the target audience doesn't care
+about full-fledged product documentation in the first place.</p>
+<p>Seems to be the case, when a system is small enough to fit into
+product team members heads,
+and especially when the external interfaces are already documented
+in a form of specification, like OpenAPI spec.</p>
+<p><a class="reference external" href="https://www.arhohuttunen.com">Arho Huttunen</a> reminded that
+Cucumber is not the only tool for Specification by Example and Living Documentation.
+Uncle Bob's <a class="reference external" href="https://fitnesse.org">FitNesse</a> was there already in 2002!
+There are also <a class="reference external" href="https://concordion.org">Concordion</a>, <a class="reference external" href="https://serenity-bdd.github.io">Serentiy</a>, and most likely, others.
+We also discussed that for code examples in documentation, tools like
+<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/doctest.html">Doctest</a>
+which allow executing and testing their output during manual generation phase
+are even more useful.</p>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://zaurnasibov.com/tag/programming.html">programming</a>
+      <a href="https://zaurnasibov.com/tag/python.html">python</a>
+      <a href="https://zaurnasibov.com/tag/documentation.html">documentation</a>
+      <a href="https://zaurnasibov.com/tag/tests.html">tests</a>
+      <a href="https://zaurnasibov.com/tag/specification.html">specification</a>
+      <a href="https://zaurnasibov.com/tag/bdd.html">BDD</a>
+      <a href="https://zaurnasibov.com/tag/collaboration.html">collaboration</a>
+      <a href="https://zaurnasibov.com/tag/cucumber.html">cucumber</a>
+    </p>
+  </div>
+
+
+
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://zaurnasibov.com/posts/2024/08/17/dark-patterns-of-seat-selection-in-turkish-airlines.html" title="The dark patterns of seat selection in Turkish Airlines">
+      <i class="fa fa-angle-left"></i> Previous Post
+    </a>
+    <a class="btn float-right" href="https://zaurnasibov.com/posts/2024/12/29/peopleware.html" title="Peopleware">
+      Next Post <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2025 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zaur's Thoughts ",
+  "url" : "https://zaurnasibov.com",
+  "image": "/static/images/logo.png",
+  "description": ""
+}
+</script><script defer
+  src='https://static.cloudflareinsights.com/beacon.min.js'
+  data-cf-beacon='{"token": "1147ebca9f9247a38190f2958de429a8"}'>
+</script>
+
+</body>
+</html>

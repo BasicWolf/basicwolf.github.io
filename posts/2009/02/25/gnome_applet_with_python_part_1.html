@@ -1,0 +1,523 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Lexend+Deca:wght@100..900&display=swap&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://zaurnasibov.com/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/fontawesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/brands.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/solid.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com//static/css/extra.css">
+
+  <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="/static/images/favicon.png" type="image/x-icon">
+
+
+  <link href="https://zaurnasibov.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zaur's Thoughts Atom">
+
+
+
+
+
+
+
+
+
+<meta name="author" content="Zaur Nasibov" />
+<meta name="description" content="A bootstrap guide on creating Gnome2 panel applets with Python." />
+<meta name="keywords" content="Gnome, programming, Python">
+
+
+  <meta property="og:site_name" content="Zaur's Thoughts"/>
+  <meta property="og:title" content="Beginner&#39;s guide to creating a GNOME 2 applet with Python (Part I)"/>
+  <meta property="og:description" content="A bootstrap guide on creating Gnome2 panel applets with Python."/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://zaurnasibov.com/posts/2009/02/25/gnome_applet_with_python_part_1.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2009-02-25 12:00:00+02:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://zaurnasibov.com/author/zaur-nasibov.html">
+  <meta property="article:section" content="Articles"/>
+  <meta property="article:tag" content="Gnome"/>
+  <meta property="article:tag" content="programming"/>
+  <meta property="article:tag" content="Python"/>
+  <meta property="og:image" content="/static/images/logo.png">
+
+  <title>Zaur's Thoughts &ndash; Beginner&#39;s guide to creating a GNOME 2 applet with Python (Part I)</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://zaurnasibov.com/">
+      <img src="/static/images/logo.png" alt="Zaur's Thoughts" title="Zaur's Thoughts">
+    </a>
+
+    <h1>
+      <a href="https://zaurnasibov.com/">Zaur's Thoughts</a>
+    </h1>
+
+    <p>Zaurun Fikirləri</p>
+
+
+    <nav>
+      <ul class="list">
+
+          <li>
+            <a target="_self" href="/posts.html" ><strong>Articles</strong></a>
+          </li>
+          <li>
+            <a target="_self" href="/pages/shorts.html" >Shorts</a>
+          </li>
+          <li>
+            <a target="_self" href="/category/books.html" >Books</a>
+          </li>
+
+
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/bookmarks.html#bookmarks">
+                Bookmarks
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/memes.html#memes">
+                Memes
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/projects.html#projects">
+                Projects
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/about.html#about">
+                About
+              </a>
+            </li>
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/zaur-nasibov-44610853/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/basicwolf"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-rss"
+           href="/feeds/all.atom.xml"
+           target="_blank">
+          <i class="fa-solid fa-rss"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://zaurnasibov.com/">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/tags.html">Tags</a>
+  <a href="/pages/privacy-policy.html">Privacy Policy</a>
+</nav>
+
+<article>
+  <header>
+      
+    <h1 id="gnome_applet_with_python_part_1">Beginner's guide to creating a GNOME 2 applet with Python (Part I)</h1>
+    <p>
+      Posted on 25 February 2009 in <a href="https://zaurnasibov.com/category/articles.html">Articles</a>
+
+        &#8226; 5 min read
+    </p>
+  </header>
+
+
+  <div>
+    <p>Programming is an art.
+To be more specific, it's an everlasting art. There is no program that
+could completely satisfy a user. And I doubt that there is a program
+that could completely satisfy a programmer.</p>
+<p>I spend hours in front of my computer. Of course that is very unhealthy
+for the eyes. I wanted to create a simple reminder applet - an eyes icon
+that changes to &quot;bloody&quot; eyes - indicating that it's time to relax.</p>
+<p>This was my first GNOME applet, my first GTK and more or less serious
+Python experience and I'd like too share it with everyone, who deals with
+his or her first GNOME applet.</p>
+<p>I hope, this tutorial will help you.</p>
+<div class="section" id="part-i-gnome-applet-basics">
+<h2>Part I: GNOME applet basics</h2>
+<p>Before we begin...
+Some technical information about my working environment. I used Ubuntu 9.04
+and Python 2.6. So, when I'm saying that &quot;this library loads files from
+here&quot;, I'm speaking of what I've found in my working environment. It could
+be different in yours.</p>
+<div class="section" id="project-s-directory">
+<h3>1. Project's directory</h3>
+<p>First, lets create a directory for the applet.
+<tt class="docutils literal">/home/user/applet/ <span class="pre">(~/applet/)</span></tt> will do, of course you can create it as
+a symbolic link to your designated path. Here, <tt class="docutils literal">/home/user/</tt> is a path
+to your home directory. The source code of the applet will be located in
+<tt class="docutils literal">/home/user/applet/src/ <span class="pre">(~/applet/src/)</span></tt> directory.</p>
+</div>
+<div class="section" id="how-gnome-interacts-with-applets">
+<h3>2. How GNOME interacts with applets</h3>
+<p>In GNOME, an applet is a small application, designed to sit in the GNOME
+panel, providing quick and easy access to a control, such as a volume
+control, a clock, a network status display, or even a weather gauge <a class="footnote-reference" href="#footnote-1" id="footnote-reference-1">[1]</a>.</p>
+<p>Technically, applets are Bonobo controls <a class="footnote-reference" href="#footnote-2" id="footnote-reference-2">[2]</a> embedded in the Gnome panel.
+This means that there are few slight differences from stand-alone GNOME
+programs. The first difference is that each applet requires a 'server'
+file, which contains a description of the Bonobo capabilities <a class="footnote-reference" href="#footnote-1" id="footnote-reference-3">[1]</a>.</p>
+<p>GNOME searches for applet server files in <tt class="docutils literal">/usr/lib/bonobo/servers</tt>
+directory.</p>
+<p>The basic part of a simple server file contains server's id and location
+of an executable file (our file is a python script):</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><span class="nt">&lt;oaf_info&gt;</span>
+<span class="w">  </span><span class="nt">&lt;oaf_server</span><span class="w"> </span><span class="na">iid=</span><span class="s">&quot;OAFIID:SampleApplet_Factory&quot;</span>
+<span class="w">              </span><span class="na">type=</span><span class="s">&quot;exe&quot;</span>
+<span class="w">              </span><span class="na">location=</span><span class="s">&quot;/home/user/applet/src/applet.py&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;oaf_attribute</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;repo_ids&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;stringv&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;item</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;IDL:Bonobo/GenericFactory:1.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;item</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;IDL:Bonobo/Unknown:1.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/oaf_attribute&gt;</span>
+<span class="w">    </span><span class="nt">&lt;oaf_attribute</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;name&quot;</span>
+<span class="w">                   </span><span class="na">type=</span><span class="s">&quot;string&quot;</span>
+<span class="w">                   </span><span class="na">value=</span><span class="s">&quot;Sample Applet Factory&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;oaf_attribute</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;description&quot;</span>
+<span class="w">                   </span><span class="na">type=</span><span class="s">&quot;string&quot;</span>
+<span class="w">                   </span><span class="na">value=</span><span class="s">&quot;Sample Applet&#39;s factory that launches the applet&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/oaf_server&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;oaf_server</span><span class="w"> </span><span class="na">iid=</span><span class="s">&quot;OAFIID:SampleApplet&quot;</span>
+<span class="w">              </span><span class="na">type=</span><span class="s">&quot;factory&quot;</span>
+<span class="w">              </span><span class="na">location=</span><span class="s">&quot;OAFIID:SampleApplet_Factory&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;oaf_attribute</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;repo_ids&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;stringv&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;item</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;IDL:GNOME/Vertigo/PanelAppletShell:1.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;item</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;IDL:Bonobo/Control:1.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;item</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;IDL:Bonobo/Unknown:1.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/oaf_attribute&gt;</span>
+<span class="w">    </span><span class="nt">&lt;oaf_attribute</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;string&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;Sample Applet&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;oaf_attribute</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;description&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;string&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;description&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;oaf_attribute</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;panel:category:&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;string&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;Utility&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;oaf_attribute</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;panel:icon&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;string&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;no-picture-yet.png&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/oaf_server&gt;</span>
+<span class="nt">&lt;/oaf_info&gt;</span>
+</pre></div></td></tr></table></div>
+<p>For simplicity, the 'factory' is called <strong>SampleApplet_Factory</strong> and
+<tt class="docutils literal">home/user/applet/src/applet.py</tt> is the absolute path to the executable
+Python script.</p>
+<p>So, the fist step is to create a server file in <tt class="docutils literal">/usr/lib/bonobo/servers</tt>.
+Let's name it SampleApplet.server.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The root privileges are required to work with the SampleApplet.server
+file. Remember to correct the /home/user/ path</p>
+</div>
+<p>After that, the GNOME session could be restarted (restarting X-server via
+Ctrl+Alt+Backspace will do). Try adding the new applet to a panel. The dialog
+should look like this:</p>
+<img alt="Add to Panel dialog" class="align-center" src="https://zaurnasibov.com/articles/2009_02_25_gnome_applet_with_python_part_1/gnomeapplet_1_select_applet_1.png" />
+<p>The applet's image is absent, because it doesn't exist in
+<strong>/usr/share/pixmaps</strong>. The applet engine searches for an image according to
+our .server file:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="nt">&lt;oaf_attribute</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;panel:icon&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;string&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;no-picture-yet.png&quot;</span><span class="nt">/&gt;</span>
+</pre></div></td></tr></table></div>
+<p>The <strong>value=&quot;no-picture-yet.png&quot;</strong> string should be changed to
+<strong>value=&quot;gnome-laptop.png&quot;</strong>. After restarting GNOME session the
+&quot;Add to panel&quot; dialog should look like this:</p>
+<img alt="Add to Panel dialog" class="align-center" src="https://zaurnasibov.com/articles/2009_02_25_gnome_applet_with_python_part_1/gnomeapplet_1_select_applet_2.png" />
+<p>If by accident the gnome-laptop.png is absent, it could be saved to
+<strong>/usr/share/pixmaps</strong> from here:</p>
+<img alt="laptop" class="align-center" src="https://zaurnasibov.com/articles/2009_02_25_gnome_applet_with_python_part_1/gnomeapplet_1_gnome-laptop.png" />
+<p>It's time to write a few lines of code.</p>
+</div>
+<div class="section" id="launching-the-applet">
+<h3>3.1 Launching the applet</h3>
+<p>Let's start with creating an <strong>applet.py</strong> script file in <strong>~/applet/src</strong>.</p>
+<p>The next step, is to define the interpreter that'll handle the script
+(this is where programming starts):</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+</pre></div></td></tr></table></div>
+<p>The <strong>/usr/bin</strong> is a standard directory on Unix-like operating systems
+that contains most of the executable files (i.e., ready-to-run programs)
+that are not needed for booting (i.e., starting) or repairing the system <a class="footnote-reference" href="#footnote-3" id="footnote-reference-4">[3]</a></p>
+<p>Some modules should be imported: The pyGTK module is needed to specify the
+GTK version used (2.x in this article), the gnome module, that contains all
+the useful classes and methods about the GNOME desktop environment, i.e. the
+applet class, and the gtk module, Python bindings for the GTK toolkit <a class="footnote-reference" href="#footnote-4" id="footnote-reference-5">[4]</a>.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">gtk</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pygtk</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gnomeapplet</span>
+
+<span class="n">pygtk</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;2.0&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">applet_factory</span><span class="p">(</span><span class="n">applet</span><span class="p">,</span> <span class="n">iid</span><span class="p">):</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="s2">&quot;It works!&quot;</span><span class="p">)</span>
+    <span class="n">applet</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">applet</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Factory started&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>   <span class="c1"># testing for execution</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Starting factory&#39;</span><span class="p">)</span>
+    <span class="n">gnomeapplet</span><span class="o">.</span><span class="n">bonobo_factory</span><span class="p">(</span><span class="s1">&#39;OAFIID:SampleApplet_Factory&#39;</span><span class="p">,</span>
+                               <span class="n">gnomeapplet</span><span class="o">.</span><span class="n">Applet</span><span class="o">.</span><span class="n">__gtype__</span><span class="p">,</span>
+                               <span class="s1">&#39;Sample Applet&#39;</span><span class="p">,</span> <span class="s1">&#39;0.1&#39;</span><span class="p">,</span>
+                               <span class="n">applet_factory</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>The applet_factory function receives the object to be initialized (the
+applet) and the bonobo activation ID that the new factory will implement.
+It returns True if no errors were reported. Then the bonobo_factory
+function is called <a class="footnote-reference" href="#footnote-4" id="footnote-reference-6">[4]</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Remember to change the mode of the applet.py file to +x (execute/search),
+e.g. by running <strong>chmod 755 ~/applet/src/applet.py</strong></p>
+</div>
+<p>The bonobo_factory(IID,Type,Description,Version,Callback) arguments are:
+* <em>IID</em>: The bonobo-activation id of the factory.
+* <em>Type</em>: the type of the created object.
+* <em>Description</em>
+* <em>Version</em>
+* <em>Factory callback</em>: the name of the factory function</p>
+<p>&quot;It works!&quot; label should appear on a panel:</p>
+<img alt="Applet window" class="align-center" src="https://zaurnasibov.com/articles/2009_02_25_gnome_applet_with_python_part_1/gnomeapplet_1_applet_sample.png" />
+</div>
+<div class="section" id="debugging-routine">
+<h3>3.2 Debugging routine</h3>
+<p>The <tt class="docutils literal">print()</tt> function calls should print the text to the output stream.
+But where is the output? A common issue when developing an applet is the
+debug process which means, knowing what it's failing and why. As an applet
+is nothing but a GTK+ application we can use an additional command line
+argument like &quot;run-in-window&quot; to put it in window-mode by creating a GTK+
+window and inserting the applet in it <a class="footnote-reference" href="#footnote-4" id="footnote-reference-7">[4]</a>.</p>
+<p>It could be done making some changes in the code:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>   <span class="c1"># testing for execution</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Starting factory&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-d&#39;</span><span class="p">:</span> <span class="c1"># debugging</span>
+        <span class="n">mainWindow</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">Window</span><span class="p">()</span>
+        <span class="n">mainWindow</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Applet window&#39;</span><span class="p">)</span>
+        <span class="n">mainWindow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="n">gtk</span><span class="o">.</span><span class="n">main_quit</span><span class="p">)</span>
+        <span class="n">applet</span> <span class="o">=</span> <span class="n">gnomeapplet</span><span class="o">.</span><span class="n">Applet</span><span class="p">()</span>
+        <span class="n">applet_factory</span><span class="p">(</span><span class="n">applet</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">applet</span><span class="o">.</span><span class="n">reparent</span><span class="p">(</span><span class="n">mainWindow</span><span class="p">)</span>
+        <span class="n">mainWindow</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
+        <span class="n">gtk</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">gnomeapplet</span><span class="o">.</span><span class="n">bonobo_factory</span><span class="p">(</span><span class="s1">&#39;OAFIID:SampleApplet_Factory&#39;</span><span class="p">,</span>
+                                   <span class="n">gnomeapplet</span><span class="o">.</span><span class="n">Applet</span><span class="o">.</span><span class="n">__gtype__</span><span class="p">,</span>
+                                   <span class="s1">&#39;Sample applet&#39;</span><span class="p">,</span> <span class="s1">&#39;0.1&#39;</span><span class="p">,</span>
+                                   <span class="n">applet_factory</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>A GTK window is created, its title is set and the <tt class="docutils literal">'destroy'</tt> signal is
+connected to the <tt class="docutils literal">gkt.main_quit</tt> callback. It means that
+<tt class="docutils literal">gtk.main_quit()</tt> will be automatically called, when the window is
+destroyed (closed). We create GNOME applet's instance and make it a child
+control (widget) of the window we've just created.
+The <tt class="docutils literal">gtk.main()</tt> function runs the main loop until the <tt class="docutils literal">gtk.main_quit()</tt>
+function is called <a class="footnote-reference" href="#footnote-5" id="footnote-reference-8">[5]</a>. The GTK+ main loop's primary role is to listen
+for events on a file descriptor connected to the X server, and forward
+them to widgets <a class="footnote-reference" href="#footnote-6" id="footnote-reference-9">[6]</a>.</p>
+<p>Now the applet can be launched from a console with the <tt class="docutils literal"><span class="pre">-d</span></tt> key, e.g.
+<tt class="docutils literal">./applet.py <span class="pre">-d</span></tt>. The applet should appear in a window. It's a common
+GNOME window:</p>
+<img alt="Applet window" class="align-center" src="https://zaurnasibov.com/articles/2009_02_25_gnome_applet_with_python_part_1/gnomeapplet_1_applet_debug.png" />
+</div>
+<div class="section" id="references">
+<h3>References</h3>
+<table class="docutils footnote" frame="void" id="footnote-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#footnote-reference-1">1</a>, <a class="fn-backref" href="#footnote-reference-3">2</a>)</em> <a class="reference external" href="http://projects.gnome.org/ORBit2/appletstutorial.html">http://projects.gnome.org/ORBit2/appletstutorial.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-2">[2]</a></td><td><a class="reference external" href="http://en.wikipedia.org/wiki/Bonobo_(component_model">http://en.wikipedia.org/wiki/Bonobo_(component_model</a>)</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-4">[3]</a></td><td><a class="reference external" href="http://www.linfo.org/usr_bin.html">http://www.linfo.org/usr_bin.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[4]</td><td><em>(<a class="fn-backref" href="#footnote-reference-5">1</a>, <a class="fn-backref" href="#footnote-reference-6">2</a>, <a class="fn-backref" href="#footnote-reference-7">3</a>)</em> <a class="reference external" href="http://www.pygtk.org/articles/applets_arturogf">http://www.pygtk.org/articles/applets_arturogf</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-8">[5]</a></td><td><a class="reference external" href="http://www.pygtk.org/docs/pygtk/gtk-functions.html">http://www.pygtk.org/docs/pygtk/gtk-functions.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-9">[6]</a></td><td><a class="reference external" href="http://developer.gnome.org/doc/GGAD/sec-mainloop.html">http://developer.gnome.org/doc/GGAD/sec-mainloop.html</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://zaurnasibov.com/tag/gnome.html">Gnome</a>
+      <a href="https://zaurnasibov.com/tag/programming.html">programming</a>
+      <a href="https://zaurnasibov.com/tag/python.html">Python</a>
+    </p>
+  </div>
+
+
+
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://zaurnasibov.com/posts/2009/01/11/the_legacy_of_the_initramfs_optimization.html" title="The legacy of the initramfs optimization">
+      <i class="fa fa-angle-left"></i> Previous Post
+    </a>
+    <a class="btn float-right" href="https://zaurnasibov.com/posts/2009/04/03/byte_compiled_changelog.html" title="Byte-compiled ChangeLog">
+      Next Post <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2025 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zaur's Thoughts ",
+  "url" : "https://zaurnasibov.com",
+  "image": "/static/images/logo.png",
+  "description": ""
+}
+</script><script defer
+  src='https://static.cloudflareinsights.com/beacon.min.js'
+  data-cf-beacon='{"token": "1147ebca9f9247a38190f2958de429a8"}'>
+</script>
+
+</body>
+</html>

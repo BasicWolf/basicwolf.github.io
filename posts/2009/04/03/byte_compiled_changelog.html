@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Lexend+Deca:wght@100..900&display=swap&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://zaurnasibov.com/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/fontawesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/brands.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/solid.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com//static/css/extra.css">
+
+  <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="/static/images/favicon.png" type="image/x-icon">
+
+
+  <link href="https://zaurnasibov.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zaur's Thoughts Atom">
+
+
+
+
+
+
+
+
+
+<meta name="author" content="Zaur Nasibov" />
+<meta name="description" content="My favourite all-purpose, extensible and customizable editor is Emacs. Mastering Emacs takes months, even years, and there is always a lot to discover. For example, I&#39;ve just seen how Emacs tried to byte-compile a simple ChangeLog text document. How could that happen?" />
+<meta name="keywords" content="programming, Emacs, Elisp, regex">
+
+
+  <meta property="og:site_name" content="Zaur's Thoughts"/>
+  <meta property="og:title" content="Byte-compiled ChangeLog"/>
+  <meta property="og:description" content="My favourite all-purpose, extensible and customizable editor is Emacs. Mastering Emacs takes months, even years, and there is always a lot to discover. For example, I&#39;ve just seen how Emacs tried to byte-compile a simple ChangeLog text document. How could that happen?"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://zaurnasibov.com/posts/2009/04/03/byte_compiled_changelog.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2009-04-03 12:00:00+03:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://zaurnasibov.com/author/zaur-nasibov.html">
+  <meta property="article:section" content="Articles"/>
+  <meta property="article:tag" content="programming"/>
+  <meta property="article:tag" content="Emacs"/>
+  <meta property="article:tag" content="Elisp"/>
+  <meta property="article:tag" content="regex"/>
+  <meta property="og:image" content="/static/images/logo.png">
+
+  <title>Zaur's Thoughts &ndash; Byte-compiled ChangeLog</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://zaurnasibov.com/">
+      <img src="/static/images/logo.png" alt="Zaur's Thoughts" title="Zaur's Thoughts">
+    </a>
+
+    <h1>
+      <a href="https://zaurnasibov.com/">Zaur's Thoughts</a>
+    </h1>
+
+    <p>Zaurun Fikirləri</p>
+
+
+    <nav>
+      <ul class="list">
+
+          <li>
+            <a target="_self" href="/posts.html" ><strong>Articles</strong></a>
+          </li>
+          <li>
+            <a target="_self" href="/pages/shorts.html" >Shorts</a>
+          </li>
+          <li>
+            <a target="_self" href="/category/books.html" >Books</a>
+          </li>
+
+
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/bookmarks.html#bookmarks">
+                Bookmarks
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/memes.html#memes">
+                Memes
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/projects.html#projects">
+                Projects
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/about.html#about">
+                About
+              </a>
+            </li>
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/zaur-nasibov-44610853/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/basicwolf"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-rss"
+           href="/feeds/all.atom.xml"
+           target="_blank">
+          <i class="fa-solid fa-rss"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://zaurnasibov.com/">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/tags.html">Tags</a>
+  <a href="/pages/privacy-policy.html">Privacy Policy</a>
+</nav>
+
+<article>
+  <header>
+      
+    <h1 id="byte_compiled_changelog">Byte-compiled ChangeLog</h1>
+    <p>
+      Posted on 03 April 2009 in <a href="https://zaurnasibov.com/category/articles.html">Articles</a>
+
+        &#8226; 2 min read
+    </p>
+  </header>
+
+
+  <div>
+    <p>My dot emacs file is divided into .el pieces like this:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">(</span><span class="nf">load</span><span class="w"> </span><span class="s">&quot;~/.emacs/conf/env_internal.el&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">load</span><span class="w"> </span><span class="s">&quot;~/.emacs/conf/env_external.el&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">load</span><span class="w"> </span><span class="s">&quot;~/.emacs/conf/ui.el&quot;</span><span class="p">)</span>
+<span class="c1">; ...</span>
+</pre></div></td></tr></table></div>
+<p>It's much easier to deal with functions grouped in different files rather
+than functions in one big <tt class="docutils literal">.emacs.el</tt>.</p>
+<p>The following &quot;trick&quot; automatically byte-compiles .el files as they're
+being saved in Emacs:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">(</span><span class="nb">defun</span><span class="w"> </span><span class="nv">autocompile</span><span class="w"> </span><span class="no">nil</span>
+<span class="w">  </span><span class="p">(</span><span class="k">interactive</span><span class="p">)</span>
+<span class="w">  </span><span class="p">(</span><span class="nb">require</span><span class="w"> </span><span class="ss">&#39;bytecomp</span><span class="p">)</span>
+<span class="w">  </span><span class="p">(</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nf">numberp</span><span class="w"> </span><span class="p">(</span><span class="nf">string-match</span><span class="w"> </span><span class="s">&quot;.el&quot;</span><span class="w"> </span><span class="nf">buffer-file-name</span><span class="p">))</span>
+<span class="w">        </span><span class="p">(</span><span class="nv">byte-compile-file</span><span class="w"> </span><span class="p">(</span><span class="nf">buffer-file-name</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="nv">add-hook</span><span class="w"> </span><span class="ss">&#39;after-save-hook</span><span class="w"> </span><span class="ss">&#39;autocompile</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>It worked perfect for me, until once I was updating a single ChangeLog file
+via Emacs. When I saved it, Emacs tried to byte-compile the file! That was
+weird.</p>
+<p>The error should have not been in Emacs (that's true for 99.9%
+Emacs-related &quot;bugs&quot;), but somewhere in one of my configuration .el files.
+And probably there was something wrong with the byte-compile-on-save hook.
+The only function that could cause it was:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">(</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nf">numberp</span><span class="w"> </span><span class="p">(</span><span class="nf">string-match</span><span class="w"> </span><span class="s">&quot;.el&quot;</span><span class="w"> </span><span class="nf">buffer-file-name</span><span class="p">))</span>
+</pre></div></td></tr></table></div>
+<p>Let's see what Emacs says about the <tt class="docutils literal"><span class="pre">string-match()</span></tt> function:</p>
+<blockquote class="epigraph">
+<p><tt class="docutils literal"><span class="pre">(string-match</span> regexp string &amp; optional start)</tt></p>
+<p>Returns the index of start of the first match for regexp in string,
+or <tt class="docutils literal">nil</tt>.</p>
+</blockquote>
+<p>So, <tt class="docutils literal"><span class="pre">string-match()</span></tt> works with regexps! And I have the &quot;.&quot; symbol in
+the pattern. But period stands for a special character in regexps:</p>
+<blockquote class="epigraph">
+<p><tt class="docutils literal">'.' (Period)</tt>
+is a special character that matches any single character except a
+newline. Using concatenation, we can make regular expressions
+like <tt class="docutils literal">'a.b'</tt>, which matches any three-character string that begins
+with <tt class="docutils literal">'a'</tt> and ends with <tt class="docutils literal">'b'</tt>.</p>
+<p class="attribution">&mdash;Emacs help</p>
+</blockquote>
+<p>So, <tt class="docutils literal"><span class="pre">(string-match</span> &quot;.el&quot; <span class="pre">buffer-file-name)</span></tt> function call is wrong! For
+example:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">(</span><span class="nf">string-match</span><span class="w"> </span><span class="s">&quot;.el&quot;</span><span class="w"> </span><span class="s">&quot;ChangeLog&quot;</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>returns 4.</p>
+<p>I had to use a backslash to quote that period, like this:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">(</span><span class="nf">string-match</span><span class="w"> </span><span class="s">&quot;\.el&quot;</span><span class="w"> </span><span class="s">&quot;ChangeLog&quot;</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>But somehow, that didn't work either. An additional documentation exploration
+had shown that</p>
+<blockquote class="epigraph">
+<p>When you use regular expressions in a Lisp program, each <tt class="docutils literal">'\'</tt> must be
+doubled.</p>
+<p class="attribution">&mdash;Emacs help</p>
+</blockquote>
+<p>Finally, I tried:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">(</span><span class="nf">string-match</span><span class="w"> </span><span class="s">&quot;\\.el&quot;</span><span class="w"> </span><span class="s">&quot;ChangeLog&quot;</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>And it worked! The result was <cite>nil</cite>. And the result for any file with .el
+extension was the start position of the &quot;.el&quot; string in file's name.</p>
+<p>Here is the final version for automatic byte-compile when saving a file with
+.el extension:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">(</span><span class="nb">defun</span><span class="w"> </span><span class="nv">autocompile</span><span class="w"> </span><span class="no">nil</span>
+<span class="w">  </span><span class="s">&quot;compile itself if contains .el&quot;</span>
+<span class="w">  </span><span class="p">(</span><span class="k">interactive</span><span class="p">)</span>
+<span class="w">  </span><span class="p">(</span><span class="nb">require</span><span class="w"> </span><span class="ss">&#39;bytecomp</span><span class="p">)</span>
+<span class="w">  </span><span class="p">(</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nf">numberp</span><span class="w"> </span><span class="p">(</span><span class="nf">string-match</span><span class="w"> </span><span class="s">&quot;\\.el&quot;</span><span class="w"> </span><span class="nf">buffer-file-name</span><span class="p">))</span>
+<span class="w">      </span><span class="p">(</span><span class="nv">byte-compile-file</span><span class="w"> </span><span class="p">(</span><span class="nf">buffer-file-name</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="nv">add-hook</span><span class="w"> </span><span class="ss">&#39;after-save-hook</span><span class="w"> </span><span class="ss">&#39;autocompile</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>That was a funny problem and it took me about half an hour to deal with.
+Emacs help helps :)</p>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://zaurnasibov.com/tag/programming.html">programming</a>
+      <a href="https://zaurnasibov.com/tag/emacs.html">Emacs</a>
+      <a href="https://zaurnasibov.com/tag/elisp.html">Elisp</a>
+      <a href="https://zaurnasibov.com/tag/regex.html">regex</a>
+    </p>
+  </div>
+
+
+
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://zaurnasibov.com/posts/2009/02/25/gnome_applet_with_python_part_1.html" title="Beginner's guide to creating a GNOME 2 applet with Python (Part I)">
+      <i class="fa fa-angle-left"></i> Previous Post
+    </a>
+    <a class="btn float-right" href="https://zaurnasibov.com/posts/2009/04/14/emacs_latex_and_pdf_viewer.html" title="Emacs, LaTeX and pdf viewer">
+      Next Post <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2025 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zaur's Thoughts ",
+  "url" : "https://zaurnasibov.com",
+  "image": "/static/images/logo.png",
+  "description": ""
+}
+</script><script defer
+  src='https://static.cloudflareinsights.com/beacon.min.js'
+  data-cf-beacon='{"token": "1147ebca9f9247a38190f2958de429a8"}'>
+</script>
+
+</body>
+</html>
