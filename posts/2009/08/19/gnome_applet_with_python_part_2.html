@@ -1,0 +1,542 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Lexend+Deca:wght@100..900&display=swap&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://zaurnasibov.com/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/fontawesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/brands.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/solid.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com//static/css/extra.css">
+
+  <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="/static/images/favicon.png" type="image/x-icon">
+
+
+  <link href="https://zaurnasibov.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zaur's Thoughts Atom">
+
+
+
+
+
+
+
+
+
+<meta name="author" content="Zaur Nasibov" />
+<meta name="description" content="It&#39;s been a while since I wrote the first part of this guide. I&#39;m happy to introduce you the second part of the tutorial. This part continues the story about applet-only techniques. Even if you&#39;re skilled in PyGTK, you are adviced to read this part." />
+<meta name="keywords" content="programming, Python, Gnome">
+
+
+  <meta property="og:site_name" content="Zaur's Thoughts"/>
+  <meta property="og:title" content="Beginner&#39;s guide to creating a GNOME 2 applet with Python (Part II)"/>
+  <meta property="og:description" content="It&#39;s been a while since I wrote the first part of this guide. I&#39;m happy to introduce you the second part of the tutorial. This part continues the story about applet-only techniques. Even if you&#39;re skilled in PyGTK, you are adviced to read this part."/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://zaurnasibov.com/posts/2009/08/19/gnome_applet_with_python_part_2.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2009-08-19 12:00:00+03:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://zaurnasibov.com/author/zaur-nasibov.html">
+  <meta property="article:section" content="Articles"/>
+  <meta property="article:tag" content="programming"/>
+  <meta property="article:tag" content="Python"/>
+  <meta property="article:tag" content="Gnome"/>
+  <meta property="og:image" content="/static/images/logo.png">
+
+  <title>Zaur's Thoughts &ndash; Beginner&#39;s guide to creating a GNOME 2 applet with Python (Part II)</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://zaurnasibov.com/">
+      <img src="/static/images/logo.png" alt="Zaur's Thoughts" title="Zaur's Thoughts">
+    </a>
+
+    <h1>
+      <a href="https://zaurnasibov.com/">Zaur's Thoughts</a>
+    </h1>
+
+    <p>Zaurun Fikirləri</p>
+
+
+    <nav>
+      <ul class="list">
+
+          <li>
+            <a target="_self" href="/posts.html" ><strong>Articles</strong></a>
+          </li>
+          <li>
+            <a target="_self" href="/pages/shorts.html" >Shorts</a>
+          </li>
+          <li>
+            <a target="_self" href="/category/books.html" >Books</a>
+          </li>
+
+
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/bookmarks.html#bookmarks">
+                Bookmarks
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/memes.html#memes">
+                Memes
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/projects.html#projects">
+                Projects
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/about.html#about">
+                About
+              </a>
+            </li>
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/zaur-nasibov-44610853/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/basicwolf"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-rss"
+           href="/feeds/all.atom.xml"
+           target="_blank">
+          <i class="fa-solid fa-rss"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://zaurnasibov.com/">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/tags.html">Tags</a>
+  <a href="/pages/privacy-policy.html">Privacy Policy</a>
+</nav>
+
+<article>
+  <header>
+      
+    <h1 id="gnome_applet_with_python_part_2">Beginner's guide to creating a GNOME 2 applet with Python (Part II)</h1>
+    <p>
+      Posted on 19 August 2009 in <a href="https://zaurnasibov.com/category/articles.html">Articles</a>
+
+        &#8226; 4 min read
+    </p>
+  </header>
+
+
+  <div>
+    <div class="section" id="part-ii-gnome-applets-and-pygtk">
+<h2>Part II: GNOME applets and PyGTK</h2>
+<div class="section" id="before-we-begin">
+<h3>Before we begin...</h3>
+<p>If you have read part I of the tutorial, and have a test applet running
+in both &quot;panel&quot; and &quot;debug&quot; mode, you would have no problems running all
+the code described below. All terms described in part I, keep their meanings
+here so, if you have not read the article, you can do it now.</p>
+</div>
+<div class="section" id="launching-an-applet">
+<h3>1. Launching an applet</h3>
+<p>Generally, a GNOME applet could be treated as an application &quot;attached&quot; to
+the panel through Bonobo component model system <a class="footnote-reference" href="#footnote-2" id="footnote-reference-1">[2]</a>. We can launch the
+sample applet in a standard GNOME window with the <tt class="docutils literal"><span class="pre">-d</span></tt> key <a class="footnote-reference" href="#footnote-1" id="footnote-reference-2">[1]</a>. Yet,
+for example creating and attaching a menu to an applet is not the same
+task of creating a menu for a windowed application. Or, an applet will
+always be vertically-oriented&quot; in debug-mode. So, this time the applet
+will be added to a panel during all test-runs.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the sample applet doesn't appear on a panel, it means, that
+something went wrong (a possible bug in a script). Try launching the
+applet in debug mode to see the output and catch possible bugs.</p>
+</div>
+</div>
+<div class="section" id="popup-context-menu">
+<h3>2. Popup Context Menu</h3>
+<p>Every applet has a basic context popup-menu with three (at least in GNOME
+v2.26) items:</p>
+<img alt="applet sample" class="align-center" src="https://zaurnasibov.com/articles/2009_08_19_gnome_applet_with_python_part_2/gnomeapplet_2_applet_sample.png" />
+<p>According to the GNOME documentation library <a class="footnote-reference" href="#footnote-3" id="footnote-reference-3">[3]</a>, the only way to extend
+this menu is to call the following function:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">panel_applet_setup_menu</span><span class="w"> </span><span class="p">(</span><span class="n">PanelApplet</span><span class="w"> </span><span class="o">*</span><span class="n">applet</span><span class="p">,</span>
+<span class="w">                              </span><span class="k">const</span><span class="w"> </span><span class="n">gchar</span><span class="w"> </span><span class="o">*</span><span class="n">xml</span><span class="p">,</span>
+<span class="w">                              </span><span class="k">const</span><span class="w"> </span><span class="n">BonoboUIVerb</span><span class="w"> </span><span class="o">*</span><span class="n">verb_list</span><span class="p">,</span>
+<span class="w">                              </span><span class="n">gpointer</span><span class="w"> </span><span class="n">user_data</span><span class="p">);</span>
+</pre></div></td></tr></table></div>
+<p>The corresponding method in Python is Applet object's
+<tt class="docutils literal">setup_menu(xml, verbs, user_data)</tt> method.</p>
+<p>The required xml string is in a very easy-to-understand XML format:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><span class="nt">&lt;popup</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;button3&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;menuitem</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ItemPreferences&quot;</span>
+<span class="w">          </span><span class="na">verb=</span><span class="s">&quot;Preferences&quot;</span>
+<span class="w">          </span><span class="na">label=</span><span class="s">&quot;_Preferences&quot;</span>
+<span class="w">          </span><span class="na">pixtype=</span><span class="s">&quot;stock&quot;</span>
+<span class="w">          </span><span class="na">pixname=</span><span class="s">&quot;gtk-preferences&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;separator/&gt;</span>
+<span class="nt">&lt;submenu</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;Submenu&quot;</span><span class="w"> </span><span class="na">_label=</span><span class="s">&quot;Su_bmenu&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;menuitem</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ItemAbout&quot;</span>
+<span class="w">          </span><span class="na">verb=</span><span class="s">&quot;About&quot;</span>
+<span class="w">          </span><span class="na">label=</span><span class="s">&quot;_About&quot;</span>
+<span class="w">          </span><span class="na">pixtype=</span><span class="s">&quot;stock&quot;</span>
+<span class="w">          </span><span class="na">pixname=</span><span class="s">&quot;gtk-about&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/submenu&gt;</span>
+<span class="nt">&lt;/popup&gt;</span>
+</pre></div></td></tr></table></div>
+<p>The example above creates a menu of two items, a separator between them
+and a single sub-item:</p>
+<img alt="applet menu" class="align-center" src="https://zaurnasibov.com/articles/2009_08_19_gnome_applet_with_python_part_2/gnomeapplet_2_menu.png" />
+<p>As you can see, the Preferences and About icons are set from the current
+environment's theme.
+So, <tt class="docutils literal"><span class="pre">pixtype=&quot;stock&quot;</span></tt> and <tt class="docutils literal"><span class="pre">pixname=&quot;gtk-about&quot;</span></tt> attributes mean that
+an icon from GTK stock collection named &quot;gtk-about&quot; <a class="footnote-reference" href="#footnote-4" id="footnote-reference-4">[4]</a> will appear in
+a menu item.
+The name and label attributes define menuitem object's name and label
+properties. The underscore (<tt class="docutils literal">_</tt>) character defines a shortcut to a menu.</p>
+<p>The <strong>verb</strong> attribute is crucial for each <strong>menuitem</strong> node. The name of
+each verb links a menuitem and a callback function.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="n">verbs</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;About&#39;</span><span class="p">,</span> <span class="n">show_about</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Preferences&#39;</span><span class="p">,</span> <span class="n">show_preferences</span><span class="p">)]</span>
+</pre></div></td></tr></table></div>
+<p>To link the menus and the verbs list to an applet, the <tt class="docutils literal">setup_menu()</tt>
+method is called:1</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="n">applet</span><span class="o">.</span><span class="n">setup_menu</span><span class="p">(</span><span class="n">xml</span><span class="p">,</span> <span class="n">verbs</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>Where <strong>None</strong> is a &quot;user data&quot; (could be any python data object or None).</p>
+<p>Finally, all snippets described above, plus callback functions will look
+as follows:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_menu</span><span class="p">(</span><span class="n">applet</span><span class="p">):</span>
+   <span class="n">xml</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;&lt;popup name=&quot;button3&quot;&gt;</span>
+<span class="s2">          &lt;menuitem name=&quot;ItemPreferences&quot;</span>
+<span class="s2">              verb=&quot;Preferences&quot;</span>
+<span class="s2">              label=&quot;_Preferences&quot;</span>
+<span class="s2">              pixtype=&quot;stock&quot;</span>
+<span class="s2">              pixname=&quot;gtk-preferences&quot;/&gt;</span>
+<span class="s2">          &lt;separator/&gt;</span>
+<span class="s2">          &lt;submenu name=&quot;Submenu&quot; _label=&quot;Su_bmenu&quot;&gt;</span>
+<span class="s2">          &lt;menuitem name=&quot;ItemAbout&quot;</span>
+<span class="s2">              verb=&quot;About&quot;</span>
+<span class="s2">              label=&quot;_About&quot;</span>
+<span class="s2">              pixtype=&quot;stock&quot;</span>
+<span class="s2">              pixname=&quot;gtk-about&quot;/&gt;</span>
+<span class="s2">          &lt;/submenu&gt;</span>
+<span class="s2">          &lt;/popup&gt;&quot;&quot;&quot;</span>
+
+   <span class="n">verbs</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;About&#39;</span><span class="p">,</span> <span class="n">show_about</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Preferences&#39;</span><span class="p">,</span> <span class="n">show_preferences</span><span class="p">)]</span>
+   <span class="n">applet</span><span class="o">.</span><span class="n">setup_menu</span><span class="p">(</span><span class="n">xml</span><span class="p">,</span> <span class="n">verbs</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">show_about</span><span class="p">(</span><span class="o">*</span><span class="n">arguments</span><span class="p">):</span>
+   <span class="nb">print</span><span class="p">(</span><span class="n">arguments</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">show_preferences</span><span class="p">(</span><span class="o">*</span><span class="n">arguments</span><span class="p">):</span>
+   <span class="nb">print</span><span class="p">(</span><span class="n">arguments</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">applet_factory</span><span class="p">(</span><span class="n">gnome_applet</span><span class="p">,</span> <span class="n">iid</span><span class="p">):</span>
+   <span class="n">create_menu</span><span class="p">(</span><span class="n">gnome_applet</span><span class="p">)</span>
+   <span class="o">...</span>
+   <span class="o">...</span>
+</pre></div></td></tr></table></div>
+<p>Try launching the applet in <strong>debug</strong> mode, and printing out the
+<tt class="docutils literal">*arguments</tt> list in <tt class="docutils literal">show_about()</tt> and <tt class="docutils literal">show_preferences()</tt> functions.</p>
+<p>The result should be similar to:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span>(&lt;bonobo.ui.Component object at 0x963f5cc (BonoboUIComponent at 0x969dac0)&gt;, &#39;About&#39;
+</pre></div></td></tr></table></div>
+<p>Also try changing the None argument in <tt class="docutils literal">setup_menu()</tt> method to e.g.
+<tt class="docutils literal">'Hello!'</tt> string and then printing out the <tt class="docutils literal">*arguments</tt> list one more
+time. This time, the result should look like:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span>(&lt;bonobo.ui.Component object at 0x963f5cc (BonoboUIComponent at 0x969dac0)&gt;, &#39;About&#39;, &#39;Hello!&#39;)
+</pre></div></td></tr></table></div>
+<p>Now, you can change the callbacks' definitions</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">show_about</span><span class="p">(</span><span class="o">*</span><span class="n">arguments</span><span class="p">):</span>
+</pre></div></td></tr></table></div>
+<p>to</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">show_about</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+</pre></div></td></tr></table></div>
+<p>which slightly clarifies the code.</p>
+</div>
+<div class="section" id="applet-s-orientation">
+<h3>3.1 Applet's orientation</h3>
+<p>An applet could be set up both on a horizontal or vertical panel. This
+should be taken into account before creating the visual elements of an
+applet. Also an applet's orientation could be changed by user (dragging
+an applet from a horizontal panel to vertical panel), in this case a
+callback for the change-orient signal should be created <a class="footnote-reference" href="#footnote-5" id="footnote-reference-5">[5]</a>.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">change_orientation</span><span class="p">(</span><span class="n">applet</span><span class="p">,</span> <span class="n">orient</span><span class="p">,</span> <span class="n">user_data</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">applet_factory</span><span class="p">(</span><span class="n">applet</span><span class="p">,</span> <span class="n">iid</span><span class="p">):</span>
+    <span class="n">applet</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;change-orient&#39;</span><span class="p">,</span> <span class="n">change_orientation</span><span class="p">)</span>
+    <span class="o">...</span>
+    <span class="o">...</span>
+</pre></div></td></tr></table></div>
+<p>The code below demonstrates how change-orient signal could be used:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">applet_factory</span><span class="p">(</span><span class="n">applet</span><span class="p">,</span> <span class="n">iid</span><span class="p">):</span>
+    <span class="c1"># initialize an orientation-dependent label</span>
+    <span class="n">orientation</span> <span class="o">=</span> <span class="n">applet</span><span class="o">.</span><span class="n">get_orient</span><span class="p">()</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">orientation</span> <span class="o">==</span> <span class="n">gnomeapplet</span><span class="o">.</span><span class="n">ORIENT_UP</span> <span class="ow">or</span>
+        <span class="n">orientation</span> <span class="o">==</span> <span class="n">gnomeapplet</span><span class="o">.</span><span class="n">ORIENT_DOWN</span><span class="p">):</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="s2">&quot;Vertical&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="s2">&quot;Horizontal&quot;</span><span class="p">)</span>
+
+    <span class="c1"># label is the user data</span>
+    <span class="n">applet</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;change-orient&#39;</span><span class="p">,</span> <span class="n">change_orientation</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+    <span class="o">...</span>
+    <span class="o">...</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">change_orientation</span><span class="p">(</span><span class="n">applet</span><span class="p">,</span> <span class="n">orient</span><span class="p">,</span> <span class="n">user_data</span><span class="p">):</span>
+    <span class="n">orientation</span> <span class="o">=</span> <span class="n">applet</span><span class="o">.</span><span class="n">get_orient</span><span class="p">()</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">user_data</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">orientation</span> <span class="o">==</span> <span class="n">gnomeapplet</span><span class="o">.</span><span class="n">ORIENT_UP</span> <span class="ow">or</span>
+        <span class="n">orientation</span> <span class="o">==</span> <span class="n">gnomeapplet</span><span class="o">.</span><span class="n">ORIENT_DOWN</span><span class="p">):</span>
+        <span class="n">label</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;Vertical&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">label</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;Horizontal&quot;</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>The applet was added to a vertical panel:</p>
+<img alt="vertical applet" class="align-center" src="https://zaurnasibov.com/articles/2009_08_19_gnome_applet_with_python_part_2/gnomeapplet_2_vertical.png" />
+<p>Then, dragged to a auto-hidden horizontal one:</p>
+<img alt="horizontal applet" class="align-center" src="https://zaurnasibov.com/articles/2009_08_19_gnome_applet_with_python_part_2/gnomeapplet_2_horizontal.png" />
+</div>
+<div class="section" id="applet-s-background">
+<h3>3.2 Applet's background</h3>
+<p>The GNOME panel has three background options:</p>
+<img alt="applet on a panel" class="align-center" src="https://zaurnasibov.com/articles/2009_08_19_gnome_applet_with_python_part_2/gnomeapplet_2_panel.png" />
+<p>And an applet can detect these options' changes via the <tt class="docutils literal"><span class="pre">change-background</span></tt>
+signal <a class="footnote-reference" href="#footnote-6" id="footnote-reference-6">[6]</a>.</p>
+<p>But in practical situations, an applet doesn't respond to the panel's
+background changes. What really matters is an applet's background
+transparency. This is where the power of GNU helps: the sources of GNOME
+trash applet contain a &quot;hack&quot; line of code that makes an applet transparent.
+In Python it is:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">applet_factory</span><span class="p">(</span><span class="n">applet</span><span class="p">,</span> <span class="n">iid</span><span class="p">):</span>
+    <span class="n">applet</span><span class="o">.</span><span class="n">set_background_widget</span><span class="p">(</span><span class="n">applet</span><span class="p">)</span> <span class="c1"># /* enable transparency hack */</span>
+    <span class="o">...</span>
+    <span class="o">...</span>
+</pre></div></td></tr></table></div>
+<p>Now, the applet should look like this:</p>
+<img alt="transparent applet" class="align-center" src="https://zaurnasibov.com/articles/2009_08_19_gnome_applet_with_python_part_2/gnomeapplet_2_transparency.png" />
+<p>That's it! This is the end of the second part of the tutorial. There is
+not much left to say about the applet techniques. But there is much to
+learn about PyGTK (creating dialogs, different widgets, signals, etc.).
+A great tutorial is available at the official site <a class="reference external" href="http://www.pygtk.org">http://www.pygtk.org</a>.</p>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References</h2>
+<table class="docutils footnote" frame="void" id="footnote-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-2">[1]</a></td><td>Beginner's guide to creating a GNOME applet with Python (Part I)</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-1">[2]</a></td><td><a class="reference external" href="http://en.wikipedia.org/wiki/Bonobo_(component_model)">Bonobo component model</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-3">[3]</a></td><td><a class="reference external" href="https://developer.gnome.org/panel-applet/">The PanelApplet object</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-4">[4]</a></td><td><a class="reference external" href="https://developer.gnome.org/gtk3/stable/gtk3-Stock-Items.html">GTK stock items</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-5">[5]</a></td><td><a class="reference external" href="http://www.pygtk.org/articles/applets_arturogf/x186.html">www.pygtk.org - GNOME applet with python</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-6">[6]</a></td><td><a class="reference external" href="https://developer.gnome.org/panel-applet/2.32/panel-applet-panel-applet.html#PanelApplet-change-background">The &quot;change-background&quot; signal</a></td></tr>
+</tbody>
+</table>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://zaurnasibov.com/tag/programming.html">programming</a>
+      <a href="https://zaurnasibov.com/tag/python.html">Python</a>
+      <a href="https://zaurnasibov.com/tag/gnome.html">Gnome</a>
+    </p>
+  </div>
+
+
+
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://zaurnasibov.com/posts/2009/08/01/big_little_endian_quest.html" title="Big and Little endianness quest">
+      <i class="fa fa-angle-left"></i> Previous Post
+    </a>
+    <a class="btn float-right" href="https://zaurnasibov.com/posts/2009/08/19/back-to-life.html" title="Back to life">
+      Next Post <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2025 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zaur's Thoughts ",
+  "url" : "https://zaurnasibov.com",
+  "image": "/static/images/logo.png",
+  "description": ""
+}
+</script><script defer
+  src='https://static.cloudflareinsights.com/beacon.min.js'
+  data-cf-beacon='{"token": "1147ebca9f9247a38190f2958de429a8"}'>
+</script>
+
+</body>
+</html>

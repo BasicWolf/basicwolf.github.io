@@ -1,0 +1,466 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Lexend+Deca:wght@100..900&display=swap&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://zaurnasibov.com/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/fontawesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/brands.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/solid.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com//static/css/extra.css">
+
+  <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="/static/images/favicon.png" type="image/x-icon">
+
+
+  <link href="https://zaurnasibov.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zaur's Thoughts Atom">
+
+
+
+
+
+
+
+
+
+<meta name="author" content="Zaur Nasibov" />
+<meta name="description" content="kidomi - is a simple yet powerful javascript templating library which converts JSON input into a certain DOMNode output. Kidomi was written after I have had a chance to try the dommy ClojureScript library in production." />
+<meta name="keywords" content="CoffeeScript, JavaScript, programming">
+
+
+  <meta property="og:site_name" content="Zaur's Thoughts"/>
+  <meta property="og:title" content="Kidomi - a JSON-based templating library"/>
+  <meta property="og:description" content="kidomi - is a simple yet powerful javascript templating library which converts JSON input into a certain DOMNode output. Kidomi was written after I have had a chance to try the dommy ClojureScript library in production."/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://zaurnasibov.com/posts/2014/01/05/kidomi.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2014-01-05 12:00:00+02:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://zaurnasibov.com/author/zaur-nasibov.html">
+  <meta property="article:section" content="Articles"/>
+  <meta property="article:tag" content="CoffeeScript"/>
+  <meta property="article:tag" content="JavaScript"/>
+  <meta property="article:tag" content="programming"/>
+  <meta property="og:image" content="/static/images/logo.png">
+
+  <title>Zaur's Thoughts &ndash; Kidomi - a JSON-based templating library</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://zaurnasibov.com/">
+      <img src="/static/images/logo.png" alt="Zaur's Thoughts" title="Zaur's Thoughts">
+    </a>
+
+    <h1>
+      <a href="https://zaurnasibov.com/">Zaur's Thoughts</a>
+    </h1>
+
+    <p>Zaurun Fikirləri</p>
+
+
+    <nav>
+      <ul class="list">
+
+          <li>
+            <a target="_self" href="/posts.html" ><strong>Articles</strong></a>
+          </li>
+          <li>
+            <a target="_self" href="/pages/shorts.html" >Shorts</a>
+          </li>
+          <li>
+            <a target="_self" href="/category/books.html" >Books</a>
+          </li>
+
+
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/bookmarks.html#bookmarks">
+                Bookmarks
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/memes.html#memes">
+                Memes
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/projects.html#projects">
+                Projects
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/about.html#about">
+                About
+              </a>
+            </li>
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/zaur-nasibov-44610853/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/basicwolf"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-rss"
+           href="/feeds/all.atom.xml"
+           target="_blank">
+          <i class="fa-solid fa-rss"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://zaurnasibov.com/">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/tags.html">Tags</a>
+  <a href="/pages/privacy-policy.html">Privacy Policy</a>
+</nav>
+
+<article>
+  <header>
+      
+    <h1 id="kidomi">Kidomi - a JSON-based templating library</h1>
+    <p>
+      Posted on 05 January 2014 in <a href="https://zaurnasibov.com/category/articles.html">Articles</a>
+
+        &#8226; 3 min read
+    </p>
+  </header>
+
+
+  <div>
+    <p>Certainly, ClojureScript plays a major role in why the templating syntax seems so natural and pleasant, e.g.:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">(</span><span class="nf">node</span>
+<span class="p">[</span><span class="ss">:span</span>
+<span class="w">  </span><span class="p">{</span><span class="ss">:style</span>
+<span class="w">    </span><span class="p">{</span><span class="ss">:color</span><span class="w"> </span><span class="s">&quot;#aaa&quot;</span>
+<span class="w">     </span><span class="ss">:text-decoration</span><span class="w"> </span><span class="s">&quot;line-through&quot;</span><span class="p">}}</span>
+<span class="w">  </span><span class="s">&quot;hello world!&quot;</span><span class="p">])</span>
+</pre></div></td></tr></table></div>
+<p>But with JavaScript arrays and objects, there is a way to create something similar</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><span class="nv">kidomi</span><span class="p">([</span><span class="ss">&#39;span</span><span class="o">&#39;</span>,
+<span class="w">       </span><span class="p">{</span><span class="ss">&#39;style</span><span class="o">&#39;</span><span class="err">:</span>
+<span class="w">         </span><span class="p">{</span><span class="ss">&#39;color</span><span class="o">&#39;</span><span class="err">:</span><span class="w"> </span><span class="o">&#39;#</span><span class="nv">aaa</span><span class="o">&#39;</span>,
+<span class="w">          </span><span class="ss">&#39;text-decoration</span><span class="o">&#39;</span><span class="err">:</span><span class="w"> </span><span class="ss">&#39;line-through</span><span class="o">&#39;</span><span class="p">}}</span>,
+<span class="w">       </span><span class="s">&quot;hello world!&quot;</span><span class="p">])</span>
+</pre></div></td></tr></table></div>
+<p>Which outputs a HTMLElement with the following nested structure:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;color:#aaa; text-decoration:line-through&quot;</span><span class="p">&gt;</span>
+  hello world!
+<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</pre></div></td></tr></table></div>
+<p>Kidomi is written in CoffeeScript. It is covered by unit tests via
+<a class="reference external" href="http://qunitjs.com/">QUnit</a> and can be used by a <a class="reference external" href="https://developers.google.com/closure/compiler">Google Closure compiler</a>
+in an <em>ADVANCED_MODE</em> compilation or separately (e.g. to produce a minified output).</p>
+<div class="section" id="usage">
+<h2>Usage</h2>
+<p>The <tt class="docutils literal">kidomi(data)</tt> function returns a HTMLNode constructed from a data,
+for example:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><span class="nx">elem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">kidomi</span><span class="p">(</span>
+<span class="w">     </span><span class="p">[</span><span class="s1">&#39;div#main.content&#39;</span><span class="p">,</span>
+<span class="w">         </span><span class="p">[</span><span class="s1">&#39;span&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s1">&#39;style&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;blue&#39;</span><span class="p">}},</span><span class="w"> </span><span class="s1">&#39;Select file&#39;</span><span class="p">],</span>
+<span class="w">         </span><span class="p">[</span><span class="s1">&#39;form&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;inputName&#39;</span><span class="p">,</span>
+<span class="w">             </span><span class="s1">&#39;action&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;getform.php&#39;</span><span class="p">,</span>
+<span class="w">             </span><span class="s1">&#39;method&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;get&#39;</span><span class="p">},</span>
+<span class="w">         </span><span class="s1">&#39;Username: &#39;</span><span class="p">,</span>
+<span class="w">         </span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;text&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="p">}],</span>
+<span class="w">         </span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;submit&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;value&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Submit&#39;</span><span class="p">}]]])</span>
+</pre></div></td></tr></table></div>
+<p>The generated HTML element is:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;main&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;color: blue;&quot;</span><span class="p">&gt;</span>Select file<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">form</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;inputName&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;getform.php&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;get&quot;</span><span class="p">&gt;</span>
+    Username:
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;user&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">input</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Submit&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">input</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="syntax">
+<h2>Syntax</h2>
+<p>The general syntax of kidomi is: <tt class="docutils literal">node = kidomi(parsableObject)</tt>.
+Here, node is a HTMLElement or in a more generic case a DOM node.</p>
+<p>The <tt class="docutils literal">parsableObject</tt> is:</p>
+<ul class="simple">
+<li>A string. The returned object is a Text node.</li>
+<li>A number. It is automatically converted to string and the returned object is a Text node.</li>
+<li>A node. The returned object is the same node.</li>
+<li>An array. This should be discussed a bit thoroughly:</li>
+</ul>
+<p>The syntax of the parsableObject array is simple and very flexible.
+It consists of at least one item, which is:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">[</span><span class="s1">&#39;element#id.class1.class2.classN&#39;</span><span class="p">]</span>
+</pre></div></td></tr></table></div>
+<p>Here, <tt class="docutils literal">id</tt> - is the id attribute of the node, <tt class="docutils literal">class1.class2.classN</tt>
+- CSS classes of the node, i.e. <tt class="docutils literal"><span class="pre">class=&quot;class1</span> class2 classN&quot;</tt>.</p>
+<p>For example:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">[</span><span class="s1">&#39;div&#39;</span><span class="p">]</span><span class="w">                 </span><span class="c1">// &lt;div&gt;&lt;/div&gt;</span>
+<span class="p">[</span><span class="s1">&#39;div#content&#39;</span><span class="p">]</span><span class="w">         </span><span class="c1">// &lt;div id=&quot;content&quot;&gt;&lt;/div&gt;</span>
+<span class="p">[</span><span class="s1">&#39;span#user.username&#39;</span><span class="p">]</span><span class="w">  </span><span class="c1">// &lt;span id=&quot;user&quot; class=&quot;username&quot;&gt;&lt;/span&gt;</span>
+<span class="p">[</span><span class="s1">&#39;span.password&#39;</span><span class="p">]</span><span class="w">       </span><span class="c1">// &lt;span class=&quot;passwordd&quot;&gt;&lt;/span&gt;</span>
+<span class="p">[</span><span class="s1">&#39;div.main.dialog&#39;</span><span class="p">]</span><span class="w">     </span><span class="c1">// &lt;div class=&quot;main dialog&quot;&gt;&lt;/div&gt;</span>
+<span class="c1">// etc.</span>
+</pre></div></td></tr></table></div>
+<p>The second item is either an attributes object, or a sub-<tt class="docutils literal">parsableObject</tt>.
+The attributes object has the following syntax:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;class1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;classN&#39;</span><span class="p">],</span>
+<span class="w"> </span><span class="s1">&#39;style&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s1">&#39;prop1&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;val1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;propN&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;valN&#39;</span><span class="p">},</span>
+<span class="w"> </span><span class="s1">&#39;attribute1&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;value1&#39;</span><span class="p">,</span>
+<span class="w"> </span><span class="s1">&#39;attributeN&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;valueN&#39;</span><span class="p">}</span>
+</pre></div></td></tr></table></div>
+<p>or</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;class1 classN&#39;</span><span class="p">,</span>
+<span class="w"> </span><span class="s1">&#39;style&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;prop1:val1; propN:valN;&#39;</span><span class="p">,</span>
+<span class="w"> </span><span class="s1">&#39;attribute1&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;value1&#39;</span><span class="p">,</span>
+<span class="w"> </span><span class="s1">&#39;attributeN&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;valueN&#39;</span><span class="p">}</span>
+</pre></div></td></tr></table></div>
+<p>The <tt class="docutils literal">class</tt> and <tt class="docutils literal">style</tt> key-value pairs or strings are optional.</p>
+<ul class="simple">
+<li>The <tt class="docutils literal">class</tt> key-value pair is an array or a string with CSS classes'
+names applied to the node. It is appended to the classes found in the
+first item of the <tt class="docutils literal">parsableObject</tt> array.</li>
+<li>The <tt class="docutils literal">style</tt> key-value pair is an object or a string of CSS style
+properties of the node.</li>
+</ul>
+<p>The <tt class="docutils literal">attributeX</tt> key-value pairs are the attributes of the node.</p>
+<p>For example:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;biglink&#39;</span><span class="p">],</span>
+<span class="w">       </span><span class="s1">&#39;style&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;red&#39;</span><span class="p">},</span>
+<span class="w">       </span><span class="s1">&#39;href&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;http://github.com&#39;</span><span class="p">}]</span>
+
+<span class="c1">// &lt;a href=&quot;http://github.com&quot; class=&quot;biglink&quot; style=&quot;color:red;&quot;&gt;&lt;/a&gt;</span>
+</pre></div></td></tr></table></div>
+<p>The rest of the array items are nested <tt class="docutils literal">parsableObjects</tt> or in a special
+case - an array of arrays with <tt class="docutils literal">parsableObjects</tt>. For example:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1">// Nested elements</span>
+<span class="p">[</span><span class="s1">&#39;div&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;div&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;span.name&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Name: &#39;</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;span.lastname&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Last name: &#39;</span><span class="p">]]]</span>
+<span class="cm">/*</span>
+<span class="cm">   &lt;div&gt;</span>
+<span class="cm">     &lt;div&gt;</span>
+<span class="cm">       &lt;span class=&quot;name&quot;&gt;Name: &lt;/span&gt;</span>
+<span class="cm">       &lt;span class=&quot;lastname&quot;&gt;Last name: &lt;/span&gt;</span>
+<span class="cm">     &lt;/div&gt;</span>
+<span class="cm">   &lt;/div&gt;</span>
+<span class="cm">*/</span>
+
+<span class="c1">// Expandable nested array</span>
+<span class="p">[</span><span class="s1">&#39;tr&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[[</span><span class="s1">&#39;td&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;First&#39;</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;td&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Second&#39;</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;td&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Third&#39;</span><span class="p">]]]</span>
+<span class="cm">/*</span>
+<span class="cm"> &lt;tr&gt;</span>
+<span class="cm">   &lt;td&gt;First&lt;/td&gt;</span>
+<span class="cm">   &lt;td&gt;Second&lt;/td&gt;</span>
+<span class="cm">   &lt;td&gt;Third&lt;/td&gt;</span>
+<span class="cm"> &lt;/tr&gt;</span>
+<span class="cm">*/</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="building-and-testing">
+<h2>Building and testing</h2>
+<p>You will need the following tools to build and test <strong>kidomi</strong>:</p>
+<ol class="arabic simple" start="0">
+<li>GNU Make. This is used to run the <tt class="docutils literal">Makefile</tt> script.</li>
+<li><a class="reference external" href="http://coffeescript.org">CoffeeScript</a> compiler. This is enough to build the library.</li>
+<li><a class="reference external" href="https://developers.google.com/closure/compiler/">Google Closure</a> compiler. This is used to build the optimized
+version of the library. The CoffeeScript code is written with the
+Closure restrictions in mind.</li>
+<li><a class="reference external" href="http://phantomjs.org/">PhantomJS</a> is used to run the unit tests from a shell. You can as
+well run them in a normal browser.</li>
+</ol>
+</div>
+<div class="section" id="advanced-usage">
+<h2>Advanced usage</h2>
+<div class="section" id="referencing-elements">
+<h3>Referencing elements</h3>
+<p>One of the patterns where <strong>kidomi</strong> might be especially handy is
+when you have to create certain HTML elements before adding them in
+a DOM structure. For example:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><span class="nx">button</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">kidomi</span><span class="p">([</span><span class="s1">&#39;button&#39;</span><span class="p">]);</span>
+<span class="nx">button</span><span class="p">.</span><span class="nx">onclick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(){</span><span class="w"> </span><span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Hello world&#39;</span><span class="p">);</span><span class="w"> </span><span class="p">};</span>
+
+<span class="nx">myDiv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">kidomi</span><span class="p">(</span>
+<span class="w">            </span><span class="p">[</span><span class="s1">&#39;div&#39;</span><span class="p">,</span>
+<span class="w">              </span><span class="p">[</span><span class="s1">&#39;span&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Click me:&#39;</span><span class="p">],</span>
+<span class="w">                </span><span class="nx">button</span><span class="p">]);</span>
+
+<span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">myDiv</span><span class="p">);</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="list-comprehensions-in-coffeescript">
+<h3>List comprehensions in CoffeeScript</h3>
+<p>List (array) comprehensions are very handy to use as the expandable
+array elements, for example:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">[</span><span class="s">&#39;tr&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[[</span><span class="s">&#39;td&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;1&#39;</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s">&#39;td&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;2&#39;</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s">&#39;td&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;3&#39;</span><span class="p">]]]</span>
+
+<span class="c1"># can be written as:</span>
+
+<span class="p">[</span><span class="s">&#39;tr&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">([</span><span class="s">&#39;td&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;</span><span class="si">#{</span><span class="nx">i</span><span class="si">}</span><span class="s">&quot;</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">..</span><span class="mi">3</span><span class="p">])]</span>
+</pre></div></td></tr></table></div>
+</div>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://zaurnasibov.com/tag/coffeescript.html">CoffeeScript</a>
+      <a href="https://zaurnasibov.com/tag/javascript.html">JavaScript</a>
+      <a href="https://zaurnasibov.com/tag/programming.html">programming</a>
+    </p>
+  </div>
+
+
+
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://zaurnasibov.com/posts/2013/09/23/is_it_a_js_string.html" title="Is it a string?">
+      <i class="fa fa-angle-left"></i> Previous Post
+    </a>
+    <a class="btn float-right" href="https://zaurnasibov.com/posts/2014/02/01/ecco_online.html" title="ECCO online">
+      Next Post <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2025 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zaur's Thoughts ",
+  "url" : "https://zaurnasibov.com",
+  "image": "/static/images/logo.png",
+  "description": ""
+}
+</script><script defer
+  src='https://static.cloudflareinsights.com/beacon.min.js'
+  data-cf-beacon='{"token": "1147ebca9f9247a38190f2958de429a8"}'>
+</script>
+
+</body>
+</html>

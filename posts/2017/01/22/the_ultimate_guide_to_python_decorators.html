@@ -1,0 +1,1182 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Lexend+Deca:wght@100..900&display=swap&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://zaurnasibov.com/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/fontawesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/brands.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/solid.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com//static/css/extra.css">
+
+  <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="/static/images/favicon.png" type="image/x-icon">
+
+
+  <link href="https://zaurnasibov.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zaur's Thoughts Atom">
+
+
+
+
+
+
+
+
+
+<meta name="author" content="Zaur Nasibov" />
+<meta name="description" content="Decorators are one of the most beautiful feature of Python programming language. They can make code easy-readable and maintainable. Nevertheless, their usage may seem tricky and mysterious in the beginning. This is a guide to the world of decorators. I hope that you will feel like a pro and have no questions left about them after exploring this article." />
+<meta name="keywords" content="Python, programming">
+
+
+  <meta property="og:site_name" content="Zaur's Thoughts"/>
+  <meta property="og:title" content="The ultimate guide to Python decorators"/>
+  <meta property="og:description" content="Decorators are one of the most beautiful feature of Python programming language. They can make code easy-readable and maintainable. Nevertheless, their usage may seem tricky and mysterious in the beginning. This is a guide to the world of decorators. I hope that you will feel like a pro and have no questions left about them after exploring this article."/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://zaurnasibov.com/posts/2017/01/22/the_ultimate_guide_to_python_decorators.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2017-01-22 23:00:00+02:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://zaurnasibov.com/author/zaur-nasibov.html">
+  <meta property="article:section" content="Articles"/>
+  <meta property="article:tag" content="Python"/>
+  <meta property="article:tag" content="programming"/>
+  <meta property="og:image" content="/static/images/logo.png">
+
+  <title>Zaur's Thoughts &ndash; The ultimate guide to Python decorators</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://zaurnasibov.com/">
+      <img src="/static/images/logo.png" alt="Zaur's Thoughts" title="Zaur's Thoughts">
+    </a>
+
+    <h1>
+      <a href="https://zaurnasibov.com/">Zaur's Thoughts</a>
+    </h1>
+
+    <p>Zaurun Fikirləri</p>
+
+
+    <nav>
+      <ul class="list">
+
+          <li>
+            <a target="_self" href="/posts.html" ><strong>Articles</strong></a>
+          </li>
+          <li>
+            <a target="_self" href="/pages/shorts.html" >Shorts</a>
+          </li>
+          <li>
+            <a target="_self" href="/category/books.html" >Books</a>
+          </li>
+
+
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/bookmarks.html#bookmarks">
+                Bookmarks
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/memes.html#memes">
+                Memes
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/projects.html#projects">
+                Projects
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/about.html#about">
+                About
+              </a>
+            </li>
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/zaur-nasibov-44610853/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/basicwolf"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-rss"
+           href="/feeds/all.atom.xml"
+           target="_blank">
+          <i class="fa-solid fa-rss"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://zaurnasibov.com/">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/tags.html">Tags</a>
+  <a href="/pages/privacy-policy.html">Privacy Policy</a>
+</nav>
+
+<article>
+  <header>
+      
+    <h1 id="the_ultimate_guide_to_python_decorators">The ultimate guide to Python decorators</h1>
+    <p>
+      Posted on 22 January 2017 in <a href="https://zaurnasibov.com/category/articles.html">Articles</a>
+
+        &#8226; 12 min read
+    </p>
+  </header>
+
+
+  <div>
+    <div class="contents topic" id="contents">
+<p class="topic-title"><a class="reference internal" href="#top">Contents</a></p>
+<ul class="simple">
+<li><a class="reference internal" href="#introduction-to-decorators" id="toc-entry-1">Introduction to decorators</a><ul>
+<li><a class="reference internal" href="#historical-background" id="toc-entry-2">Historical background</a></li>
+<li><a class="reference internal" href="#geting-to-know-decorators" id="toc-entry-3">Geting to know decorators</a></li>
+<li><a class="reference internal" href="#closures-1" id="toc-entry-4">Closures</a></li>
+<li><a class="reference internal" href="#your-first-decorator-1" id="toc-entry-5">Your first decorator</a></li>
+<li><a class="reference internal" href="#examples" id="toc-entry-6">Examples</a></li>
+<li><a class="reference internal" href="#chaining-decorators-1" id="toc-entry-7">Chaining decorators</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#decorators-with-arguments-1" id="toc-entry-8">Decorators with arguments</a><ul>
+<li><a class="reference internal" href="#wrapping-functions-properly-1" id="toc-entry-9">Wrapping functions properly</a></li>
+<li><a class="reference internal" href="#decorators-and-arguments-1" id="toc-entry-10">Decorators and arguments</a></li>
+<li><a class="reference internal" href="#class-as-a-decorator" id="toc-entry-11">Class as a decorator</a></li>
+<li><a class="reference internal" href="#function-decorators-vs-class-decorators" id="toc-entry-12">Function-decorators vs. class-decorators</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#decorating-methods-1" id="toc-entry-13">Decorating methods</a><ul>
+<li><a class="reference internal" href="#self-and-method-decorators" id="toc-entry-14">Self and method decorators</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#decorating-classes-1" id="toc-entry-15">Decorating classes</a><ul>
+<li><a class="reference internal" href="#example-registering-a-plugin" id="toc-entry-16">Example: Registering a plugin</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#finale" id="toc-entry-17">Finale</a></li>
+<li><a class="reference internal" href="#references" id="toc-entry-18">References</a></li>
+</ul>
+</div>
+<div class="section" id="introduction-to-decorators">
+<h2>Introduction to decorators</h2>
+<div class="section" id="historical-background">
+<h3>Historical background</h3>
+<p>It all started with discussion on how-to turn the following syntax
+into something nice:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">C</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">info</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s1">&#39;This is class C&#39;</span>
+
+    <span class="n">info</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>This is an absolutely valid code, however declaring <tt class="docutils literal">info</tt> as a
+static method requires wrapping it as <tt class="docutils literal">info = staticmethod(info)</tt>.
+Inconvenient, isn't it?</p>
+<p>In case you are not familiar with <tt class="docutils literal">staticmethod()</tt> <a class="footnote-reference" href="#footnote-1" id="footnote-reference-1">[1]</a>: it is a builtin
+function which accepts a function as an argument and creates a static method for the class.
+This is all done via <a class="reference external" href="https://docs.python.org/3/howto/descriptor.html">descriptors protocol</a>,
+but no need to go that deep today. At this point, <tt class="docutils literal">info()</tt> can be called as</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">C</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="go">This is class C</span>
+</pre></div></td></tr></table></div>
+<p>After months of discussion, analysis and research
+<a class="reference external" href="https://www.python.org/dev/peps/pep-0318/">PEP 318 -- Decorators for Functions and Methods</a>
+was finally accepted. Since Python 2.4 decorators turned the code above into</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">C</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+   <span class="nd">@staticmethod</span>  <span class="c1"># this is a decorator</span>
+   <span class="k">def</span><span class="w"> </span><span class="nf">info</span><span class="p">():</span>
+       <span class="k">return</span> <span class="s1">&#39;This is class C&#39;</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="geting-to-know-decorators">
+<span id="what-decorators-are"></span><h3>Geting to know decorators</h3>
+<p>A decorator is a syntactic sugar of calling a function which
+accepts another function as an argument and returns either the
+same function or another callable. <em>Note: this
+definition is not complete and will be expanded further in the
+article</em>.</p>
+<p>Take a look at these nice decorators examples:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># Django web framework view decorators</span>
+<span class="nd">@login_required</span>
+<span class="nd">@require_GET</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_view</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="c1"># I can assume now that only GET requests</span>
+    <span class="c1"># from a logged in user make it this far.</span>
+    <span class="c1"># ...</span>
+
+
+<span class="c1"># Flask web microframework routing</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hello</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s2">&quot;Hello World!&quot;</span>
+
+
+<span class="c1"># Standard library unit tests</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MyTestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="nd">@skipUnless</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;win&quot;</span><span class="p">),</span> <span class="s2">&quot;requires Windows&quot;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_windows_support</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># windows specific testing code</span>
+        <span class="c1"># ...</span>
+</pre></div></td></tr></table></div>
+<p>No doubt, decorators improve the readability of code dramatically.</p>
+</div>
+<div class="section" id="closures-1">
+<span id="closures"></span><h3>Closures</h3>
+<p>Let's take a look at a practical example to see how decorators work from
+the inside. Imagine that you want to log all the
+arguments' values and the return value of a
+<tt class="docutils literal">send_message(sender, receiver, <span class="pre">text='')</span></tt> function calls to <tt class="docutils literal">stdout</tt>.
+This can be simply done via <tt class="docutils literal">print()</tt> as follows:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">send_message</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;send_message was called&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The arguments are sender=</span><span class="si">{}</span><span class="s1">, receiver=</span><span class="si">{}</span><span class="s1">, text=</span><span class="si">{}</span><span class="s1">&#39;</span>
+          <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">text</span><span class="p">))</span>
+    <span class="o">...</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The return value is &quot;SENT&quot;&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;SENT&#39;</span>
+</pre></div></td></tr></table></div>
+<p>However, consider that you now have to do the same for dozen other
+functions, all with different arguments and return values.
+First, let's do this without decorators:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">send_message</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">send_message_with_log</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">send_message</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;send_message was called&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ret</span>
+
+<span class="c1"># Important substitution</span>
+<span class="n">send_message</span> <span class="o">=</span> <span class="n">send_message_with_log</span>
+</pre></div></td></tr></table></div>
+<p>To make <tt class="docutils literal">send_message_with_log</tt> more generic, a technique called
+<a class="reference external" href="https://en.wikipedia.org/wiki/Closure_(computer_programming)">closure</a>
+is used as follows:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">send_message</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">log_fn</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> was called&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">ret</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="n">send_message_with_log</span> <span class="o">=</span> <span class="n">log_fn</span><span class="p">(</span><span class="n">send_message</span><span class="p">)</span>
+<span class="n">send_message</span> <span class="o">=</span> <span class="n">send_message_with_log</span>
+</pre></div></td></tr></table></div>
+<p>Here, value of <tt class="docutils literal">f</tt> is stored in lexical scope of <tt class="docutils literal">wrapper</tt>, which means
+that after <tt class="docutils literal">send_message_with_log = log_fn(send_message)</tt>, <tt class="docutils literal">send_message_with_log</tt> variable
+has a value of the <tt class="docutils literal">wrapper</tt> function with <tt class="docutils literal">send_message</tt> stored in
+<tt class="docutils literal">f</tt> variable. Finally, the <em>original</em> <tt class="docutils literal">send_message</tt> is substituted.
+In a single line:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="n">send_message</span> <span class="o">=</span> <span class="n">log_fn</span><span class="p">(</span><span class="n">send_message</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>Calling <tt class="docutils literal">send_message</tt> will produce the following output:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">send_message</span><span class="p">()</span>
+<span class="go">send_message was called</span>
+</pre></div></td></tr></table></div>
+<p>Note, that <tt class="docutils literal">log_fn</tt> is now generic and can be used to log any functions' calls.</p>
+</div>
+<div class="section" id="your-first-decorator-1">
+<span id="your-first-decorator"></span><h3>Your first decorator</h3>
+<p>Now we are ready to turn <tt class="docutils literal">log_fn</tt> into a decorator.
+Let's write it down and analyze its code line-by-line:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">log_fn</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> was called&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+        <span class="o">...</span>
+        <span class="k">return</span> <span class="n">ret</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@log_fn</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">send_message</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="k">return</span> <span class="s1">&#39;SENT&#39;</span>
+</pre></div></td></tr></table></div>
+<p><tt class="docutils literal">1. def log_fn(f):</tt> - a decorator is defined. It is a function
+which accepts a single argument - another function.</p>
+<p><tt class="docutils literal">2. def <span class="pre">wrapper(*args,</span> **kwargs):</tt> - an internal function (a closure technique)
+which wraps calls to function <tt class="docutils literal">f</tt> with custom logic. For a moment let's
+skip the body of <tt class="docutils literal">wrapper()</tt> and proceed to the end of <tt class="docutils literal">log_fn()</tt>.</p>
+<p><tt class="docutils literal">7. return wrapper</tt> - the return value of the decorator. It returns
+a callable, which is usually an internal wrapper function.</p>
+<p><tt class="docutils literal">9. &#64;log_fn</tt> - at this point decorator is called with
+<tt class="docutils literal">send_message</tt> as an argument. This is equivalent to:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">send_message</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="c1"># send_message is substituted</span>
+<span class="n">send_message</span> <span class="o">=</span> <span class="n">log_fn</span><span class="p">(</span><span class="n">send_message</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>Pay attention to the <tt class="docutils literal">wrapper</tt> function, which is returned
+by <tt class="docutils literal">log_fn()</tt> and assigned to <tt class="docutils literal">send_message</tt>. What happens
+to the original <tt class="docutils literal">send_message</tt>? Let's get back to the body of
+<tt class="docutils literal">wrapper</tt>.</p>
+<p><tt class="docutils literal">3. ret = <span class="pre">f(*args,</span> **kwargs)</tt> - here the original <tt class="docutils literal">f</tt> function
+is called. At this point, <tt class="docutils literal">f == send_message</tt>.</p>
+<p><tt class="docutils literal">4. <span class="pre">print('{}</span> was <span class="pre">called'.format(f.__name__))</span></tt> - a simple logging
+to stdout, which prints <tt class="docutils literal">&quot;send_message was called&quot;</tt> each time the
+function is called</p>
+<p><tt class="docutils literal">5. return ret</tt> - the return value of the original function
+call is returned</p>
+<p>Finally, let's update the decorator to make it more useful and fulfill
+the original requirements of logging the function call with the
+arguments and the return value:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">log_fn</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">sargs</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">)</span>
+        <span class="n">skwargs</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+                            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{name}</span><span class="s1">( </span><span class="si">{sargs}</span><span class="s1">, </span><span class="si">{skwargs}</span><span class="s1"> ) =&gt; </span><span class="si">{ret}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+              <span class="n">name</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+              <span class="n">sargs</span><span class="o">=</span><span class="n">sargs</span><span class="p">,</span>
+              <span class="n">skwargs</span><span class="o">=</span><span class="n">skwargs</span><span class="p">,</span>
+              <span class="n">ret</span><span class="o">=</span><span class="nb">repr</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+        <span class="p">))</span>
+        <span class="k">return</span> <span class="n">ret</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+</pre></div></td></tr></table></div>
+<p>So, the output of calling the decorated <tt class="docutils literal">send_message</tt> is:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">send_message</span><span class="p">(</span><span class="s1">&#39;alice&#39;</span><span class="p">,</span> <span class="s1">&#39;bob&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Hello!&#39;</span><span class="p">)</span>
+<span class="go">send_message( &#39;alice&#39;, &#39;bob&#39;, text=&#39;Hello!&#39; ) =&gt; SENT</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="examples">
+<h3>Examples</h3>
+<p>Decorator syntax allows quick and clear extension of the wrapped
+functions. Its beauty is in simplicity: by writing a single line declaration
+one can embed powerful functionality while keeping the code clean and neat.</p>
+<p>Let's explore decorators possibilities by writing a couple of
+decorators which might be handy in development.</p>
+<div class="section" id="debug-on-error">
+<h4>debug_on_error</h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pdb</span><span class="p">;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">debug_on_error</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Drop to pdb debugger on exception&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">pdb</span><span class="o">.</span><span class="n">post_mortem</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="c1"># usage</span>
+<span class="nd">@debug_on_error</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">div</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span>
+</pre></div></td></tr></table></div>
+<p>This decorator allows dropping into debugger the moment an error
+occurs in a function call. For example running the following code
+in ipython3:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">div</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">&lt;ipython-input-2-cd786e30d343&gt;(3)div()</span>
+<span class="go">-&gt; return x / y</span>
+<span class="go">(Pdb) ?</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="timeit">
+<h4>timeit</h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">timeit</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Measure an execution time of the wrapped function&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="n">tick</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+        <span class="n">tock</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">() execution time: </span><span class="si">{}</span><span class="s1"> s.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">tock</span> <span class="o">-</span> <span class="n">tick</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">ret</span>
+
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="c1"># example</span>
+<span class="nd">@timeit</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sum_up_to</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">res</span>
+</pre></div></td></tr></table></div>
+<p>This decorator prints the amount of seconds passed between function
+call and return events. It is helpful to measure a function's execution
+time and find performance bottlenecks. Let's run an example:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sum_up_to</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">10e6</span><span class="p">))</span>
+<span class="go">sum_up_to() execution time: 0.0465855598449707 s.</span>
+</pre></div></td></tr></table></div>
+</div>
+</div>
+<div class="section" id="chaining-decorators-1">
+<span id="chaining-decorators"></span><h3>Chaining decorators</h3>
+<p>Imagine that you want to log the function call with <tt class="docutils literal">log_fn</tt> and
+at the same time profile it with <tt class="docutils literal">timeit</tt> decorators.
+Just chain the decorators! For example:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><span class="nd">@timeit</span>
+<span class="nd">@log_fn</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sum_up_to</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div></td></tr></table></div>
+<p>This is the same as:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sum_up_to</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="n">sum_up_to</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">log_fn</span><span class="p">(</span><span class="n">sum_up_to</span><span class="p">))</span>
+</pre></div></td></tr></table></div>
+<p>There are virtually no limits on the amount of decorators decorating
+a function (beside the stack limit) however you may want to keep that
+number low for code readability.</p>
+</div>
+</div>
+<div class="section" id="decorators-with-arguments-1">
+<span id="decorators-with-arguments"></span><h2>Decorators with arguments</h2>
+<p>So far we've been exploring simple decorators and their usage,
+which is just the tip of the iceberg. For example, decorators
+accept arguments the same way as any ordinary function does.
+This makes them even more powerful and versatile.
+But before jumping there, let's take a look at an important
+technique which always follows decorators source.</p>
+<div class="section" id="wrapping-functions-properly-1">
+<span id="wrapping-functions-properly"></span><h3>Wrapping functions properly</h3>
+<p>Let's call <tt class="docutils literal">sum_up_to()</tt> from the last example, where it
+has been decorated with both <tt class="docutils literal">timeit</tt> and <tt class="docutils literal">log_fn</tt>.
+The printed result may look a little bit unexpected:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sum_up_to</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">10e6</span><span class="p">))</span>
+<span class="go">sum_up_to( 10000000,  ) =&gt; 49999995000000</span>
+<span class="go">wrapper() execution time: 0.4475877285003662 s.</span>
+</pre></div></td></tr></table></div>
+<p>Did you notice that the name of the function in the output
+is not <tt class="docutils literal">sum_up_to</tt> but <tt class="docutils literal">wrapper</tt>? This behaviour is not a bug.
+Take a minute to find out why this happens.</p>
+<p>Let's unwrap the decorator call:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># Python unwraps the decorator call into this:</span>
+<span class="n">sum_up_to</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">log_fn</span><span class="p">(</span><span class="n">sum_up_to</span><span class="p">))</span>
+
+<span class="c1"># First, log_fn(sum_up_to) is executed, which returns</span>
+<span class="c1"># log_fn&#39;s internal `wrapper` function:</span>
+<span class="n">log_fn_wrapper</span> <span class="o">=</span> <span class="n">log_fn</span><span class="p">(</span><span class="n">sum_up_to</span><span class="p">)</span>
+
+<span class="c1"># Hence, `timeit` is called with `log_argument_wrapper`</span>
+<span class="c1"># as an argument:</span>
+<span class="n">sum_up_to</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">log_fn_wrapper</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>The problem is that <tt class="docutils literal">wrapper</tt> does not mimic the original function. To overcome this, attributes like <tt class="docutils literal">__name__</tt>, <tt class="docutils literal">__doc__</tt>, <tt class="docutils literal">__module__</tt> etc. from the original function should be copied to <tt class="docutils literal">wrapper</tt>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">timeit</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="o">...</span>
+
+    <span class="n">wrapper</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="vm">__name__</span>
+    <span class="n">wrapper</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="vm">__doc__</span>
+    <span class="n">wrapper</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="vm">__module__</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+</pre></div></td></tr></table></div>
+<p>Though this code works fine, it means that one would have to write the same attributes copying routine in every decorator. Sounds familiar? Indeed, why not write yet another decorator, which does the attributes copying? Guess what, the standard library already contains a function <tt class="docutils literal">wraps()</tt> <a class="footnote-reference" href="#footnote-2" id="footnote-reference-2">[2]</a> which gracefully handles this issue:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">timeit</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+       <span class="o">...</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">log_fn</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="o">...</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@timeit</span>
+<span class="nd">@log_fn</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sum_up_to</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">sum_up_to</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">10e6</span><span class="p">))</span>
+<span class="n">sum_up_to</span><span class="p">(</span> <span class="mi">10000000</span><span class="p">,</span>  <span class="p">)</span> <span class="o">=&gt;</span> <span class="mi">49999995000000</span>
+<span class="n">sum_up_to</span><span class="p">()</span> <span class="n">execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">0.9093782901763916</span> <span class="n">s</span><span class="o">.</span>
+</pre></div></td></tr></table></div>
+<p>Wonderful! Now <tt class="docutils literal">timeit()</tt> prints the name of the decorated function.
+One thing you have probably noticed about <tt class="docutils literal">wraps</tt> is that it actually accepts an argument! Now that you know how-to wrap a decorator properly, let's find out how to pass arguments to decorators.</p>
+</div>
+<div class="section" id="decorators-and-arguments-1">
+<span id="decorators-and-arguments"></span><h3>Decorators and arguments</h3>
+<p>Decorators are functions, so they accept arguments the same way as any other function does.
+For example, let's update the <tt class="docutils literal">timeit</tt> decorator to log the function calls
+which take more than N seconds to complete:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><span class="nd">@timeit</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span> <span class="c1"># 100 milliseconds</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sum_up_to</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div></td></tr></table></div>
+<p>How to implement such a decorator? Remember that by definition,
+a decorator accepts a single argument only (i.e. the decorated function),
+thus accepting an integer in the example above breaks the rules.
+The trick is that it is not <tt class="docutils literal">timeit</tt> which decorates <tt class="docutils literal">sum_up_to</tt>,
+but rather the result of <tt class="docutils literal">timeit(0.1)</tt> call:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">timeit</span><span class="p">(</span><span class="n">limit</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="c1"># wrap properly</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+            <span class="o">...</span>
+        <span class="k">return</span> <span class="n">wrapper</span>
+    <span class="k">return</span> <span class="n">decorator</span>
+</pre></div></td></tr></table></div>
+<p>What happens when a function e.g. <tt class="docutils literal">sum_up_to</tt> is decorated as <tt class="docutils literal">&#64;timeit(0.1)</tt>?
+First, Python calls <tt class="docutils literal">timeit(0.1)</tt> which <strong>builds</strong> a decorator and returns it.
+Then, Python decorates <tt class="docutils literal">sum_up_to</tt> with the obtained decorator. It all can be
+decomposed as follows:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">timeit</span><span class="p">(</span><span class="n">limit</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="k">return</span> <span class="n">decorator</span>
+
+<span class="n">timeit_decorator_100ms</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="nd">@timeit_decorator_100ms</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sum_up_to</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div></td></tr></table></div>
+<p>There are no limits on decorators' arguments design. For example, a
+version of <tt class="docutils literal">timeit</tt> which accepts two arguments: a limit and a printer
+function:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">timeit</span><span class="p">(</span><span class="n">limit</span><span class="p">,</span> <span class="n">printer_fn</span><span class="o">=</span><span class="nb">print</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+            <span class="o">...</span>
+            <span class="k">if</span> <span class="n">diff</span> <span class="o">&gt;</span> <span class="n">limit</span><span class="p">:</span>
+                <span class="n">printer_fn</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">() execution time: </span><span class="si">{:.2}</span><span class="s1"> s.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">diff</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">ret</span>
+        <span class="k">return</span> <span class="n">wrapper</span>
+    <span class="k">return</span> <span class="n">decorator</span>
+
+<span class="nd">@timeit</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">printer_fn</span><span class="o">=</span><span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sum_up_to</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="class-as-a-decorator">
+<h3>Class as a decorator</h3>
+<p>Python allows taking the idea of decorators with arguments even further.
+Classes can be effectively used to reduce the amount of nested functions
+and to improve the code of  complex decorators.</p>
+<p>There is no magic in using classes: first, Python creates an object
+from a class and then calls it (i.e. invokes object's <tt class="docutils literal">__call__()</tt> method)
+to decorate a function.</p>
+<p>Let's rewrite <tt class="docutils literal">timeit(limit, printer_fn)</tt> as a class. The arguments are
+passed through <tt class="docutils literal">__init__()</tt> method and are stored as class attributes.
+The <tt class="docutils literal">__call__()</tt> method returns a wrapped function:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">timeit</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">printer_fn</span><span class="o">=</span><span class="nb">print</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">limit</span> <span class="o">=</span> <span class="n">limit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printer_fn</span> <span class="o">=</span> <span class="n">printer_fn</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+            <span class="n">tick</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+            <span class="n">tock</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">tock</span> <span class="o">-</span> <span class="n">tick</span>
+            <span class="k">if</span> <span class="n">diff</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">limit</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">printer_fn</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">() execution time: </span><span class="si">{:.2}</span><span class="s1"> s.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">diff</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">ret</span>
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@timeit</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sum_up_to</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+
+  <span class="n">sum_up_to</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">10e6</span><span class="p">))</span>
+  <span class="o">&gt;&gt;&gt;</span> <span class="n">sum_up_to</span><span class="p">()</span> <span class="n">execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">1.0</span> <span class="n">s</span><span class="o">.</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="function-decorators-vs-class-decorators">
+<span id="function-vs-class"></span><h3>Function-decorators vs. class-decorators</h3>
+<p><a class="reference external" href="http://python.org/dev/peps/pep-0020/">PEP-20</a> states that</p>
+<!--  -->
+<blockquote>
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.</blockquote>
+<p>Unless writing decorators on a regular basis, one would wonder, what
+are the benefits of using function-decorators vs. class-decorators and vice-verse?
+Function-decorators are</p>
+<ul class="simple">
+<li>Simple and clear when no decorator arguments are required.</li>
+<li>Even simpler when a decorator returns the original function, not a wrapper.</li>
+</ul>
+<p>However class decorators</p>
+<ul class="simple">
+<li>Allow better decomposition of complex decorators.</li>
+<li>Provide clearer syntax to store <strong>state</strong> of a decorator both local and global.</li>
+</ul>
+<p>The choice whether to write a decorator as a function or a class always depends
+on the case or personal preferences. As a rule of thumb -
+if the logic behind the decorator is complex, then go on with a class.
+Otherwise, pick a function approach.</p>
+</div>
+</div>
+<div class="section" id="decorating-methods-1">
+<span id="decorating-methods"></span><h2>Decorating methods</h2>
+<p>The syntax of decorating class methods is similar to decorating functions:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Calculator</span><span class="p">:</span>
+
+    <span class="nd">@log_fn</span>
+    <span class="nd">@timeit</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div></td></tr></table></div>
+<p>You are most probably familiar with the built-in <tt class="docutils literal">property</tt> <a class="footnote-reference" href="#footnote-6" id="footnote-reference-3">[6]</a>, <tt class="docutils literal">classmethod</tt> <a class="footnote-reference" href="#footnote-7" id="footnote-reference-4">[7]</a> and <tt class="docutils literal">staticmethod</tt> <a class="footnote-reference" href="#footnote-1" id="footnote-reference-5">[1]</a>
+decorators. For example here a calculator's epsilon is a read-only property:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Calculator</span><span class="p">:</span>
+    <span class="n">_eps</span> <span class="o">=</span> <span class="mf">0.00001</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">eps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eps</span>
+
+<span class="n">calc</span> <span class="o">=</span> <span class="n">Calculator</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">calc</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mf">0.00001</span>
+
+<span class="n">calc</span><span class="o">.</span><span class="n">eps</span> <span class="o">=</span> <span class="mf">0.0001</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="ne">AttributeError</span><span class="p">:</span> <span class="n">can</span><span class="s1">&#39;t set attribute</span>
+</pre></div></td></tr></table></div>
+<div class="section" id="self-and-method-decorators">
+<h3>Self and method decorators</h3>
+<p>Method decorators may have an explicit access to self. Consider this:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="c1"># WARNING, do not do this!</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">m</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+</pre></div></td></tr></table></div>
+<p>However this is a dangerous construction. A generic decorator <strong>should not</strong> access <tt class="docutils literal">self</tt>
+argument of the decorator method. As a matter of fact, a generic decorator <strong>should not</strong> know
+anything about the decorated callable, whether it is a function, a method, or a
+wrapper returned by another decorator. Otherwise it breaks the universal protocol
+and for example makes impossible chaining the decorators in an arbitrary order.</p>
+</div>
+</div>
+<div class="section" id="decorating-classes-1">
+<span id="decorating-classes"></span><h2>Decorating classes</h2>
+<p>When function decorators were originally debated for inclusion in Python 2.4, class decorators were seen as obscure and unnecessary thanks to metaclasses. After several years' experience with the Python 2.4.x series of releases and an increasing familiarity with function decorators and their uses, Guido van Rossum aka BDFL and the community re-evaluated class decorators and recommended their inclusion in Python 3.0 <a class="footnote-reference" href="#footnote-3" id="footnote-reference-6">[3]</a>.</p>
+<p>The use cases however are not that obvious <a class="footnote-reference" href="#footnote-4" id="footnote-reference-7">[4]</a>. That is because
+which could be done via class decorators, could be as well done
+via good old metaclasses. It seems that <em>the</em> usage case is
+registering a class in any kind of chain like a plugins
+system.</p>
+<p>A hint of such usage, is the standard library's <tt class="docutils literal">unittest.skip*</tt> <a class="footnote-reference" href="#footnote-5" id="footnote-reference-8">[5]</a> functions,
+for example:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><span class="nd">@unittest</span><span class="o">.</span><span class="n">skipUnless</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">LOGGING_ENABLED</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">LoggingTest</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_smoke</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div></td></tr></table></div>
+<p>This test will be executed, only if a <cite>Logging</cite> feature is enabled
+in application's settings.</p>
+<p>Consider another example: a media player application which supports plugins:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">player.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">Plugin</span><span class="p">,</span> <span class="n">register</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AACPlugin</span><span class="p">(</span><span class="n">Plugin</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="n">register</span><span class="p">(</span><span class="n">AACPlugin</span><span class="p">)</span>
+
+<span class="c1"># This plugin is still experimental and is not</span>
+<span class="c1"># registered in Player&#39;s plugins system</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AACExperimentalPlugin</span><span class="p">(</span><span class="n">Plugin</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div></td></tr></table></div>
+<p>Wouldn't it be easier to write</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><span class="nd">@register</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AACPlugin</span><span class="p">(</span><span class="n">Plugin</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div></td></tr></table></div>
+<p>?</p>
+<p>Also, why not automatically register the plugins which inherit from <tt class="docutils literal">Plugin</tt>
+class? Gotcha! What if you <strong>do not</strong> want to register the plugin yet, whether
+it is experimental, or incomplete, or for any other reason? That's where
+decorators allow expressing developer's intention in a clear and non-ambiguous
+manner.</p>
+<div class="section" id="example-registering-a-plugin">
+<h3>Example: Registering a plugin</h3>
+<p>Let's consider the case described above : A media player application has a plugins system
+which extend its basic capabilities. A <tt class="docutils literal">player.plugins.register()</tt> call is used
+to register an arbitrary class as a plugin. An API user should not care, about
+<tt class="docutils literal">register()</tt> 's internals, however in this case, <tt class="docutils literal">register()</tt> simply validates
+the classes and stores them in a global <tt class="docutils literal">_plugins</tt> list:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span> <span class="c1"># --- in player/plugins.py --- #</span>
+
+ <span class="n">_plugins</span> <span class="o">=</span> <span class="p">[]</span>
+
+ <span class="k">class</span><span class="w"> </span><span class="nc">Plugin</span><span class="p">:</span>
+<span class="w">     </span><span class="sd">&#39;&#39;&#39;Plugin base class&#39;&#39;&#39;</span>
+
+
+ <span class="k">def</span><span class="w"> </span><span class="nf">register</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">Plugin</span><span class="p">):</span>
+         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Cannot register a class as a Plugin: wrong type </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">cls</span><span class="p">)))</span>
+
+     <span class="n">_plugins</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+
+     <span class="k">return</span> <span class="bp">cls</span>
+
+
+<span class="c1"># --- usage in 3d-party module --- #</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">player.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">Plugin</span><span class="p">,</span> <span class="n">register</span>
+
+<span class="nd">@register</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AACPlugin</span><span class="p">(</span><span class="n">Plugin</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div></td></tr></table></div>
+</div>
+</div>
+<div class="section" id="finale">
+<h2>Finale</h2>
+<p>This is it! Thank you for reading, I hope you enjoyed!
+Please leave a comment, ask a question, or just share this article with
+anyone who is still lost in the world of Python decorators :)</p>
+</div>
+<div class="section" id="references">
+<h2>References</h2>
+<table class="docutils footnote" frame="void" id="footnote-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#footnote-reference-1">1</a>, <a class="fn-backref" href="#footnote-reference-5">2</a>)</em> <a class="reference external" href="https://docs.python.org/3/library/functions.html?highlight=staticmethod#staticmethod">staticmethod</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-2">[2]</a></td><td><a class="reference external" href="https://docs.python.org/3/library/functools.html?highlight=wraps#functools.wraps">&#64;functools.wraps</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-6">[3]</a></td><td><a class="reference external" href="https://www.python.org/dev/peps/pep-3129/">PEP 3129</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-7">[4]</a></td><td><a class="reference external" href="http://softwareengineering.stackexchange.com/questions/334195/class-decorators-in-python-practical-use-cases">Class decorators in Python: practical use cases</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-8">[5]</a></td><td><a class="reference external" href="https://docs.python.org/2/library/unittest.html#unittest.skip">unittest.skip</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-3">[6]</a></td><td><a class="reference external" href="https://docs.python.org/3/library/functions.html?#property">property</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-4">[7]</a></td><td><a class="reference external" href="https://docs.python.org/3/library/functions.html?#classmethod">classmethod</a></td></tr>
+</tbody>
+</table>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://zaurnasibov.com/tag/python.html">Python</a>
+      <a href="https://zaurnasibov.com/tag/programming.html">programming</a>
+    </p>
+  </div>
+
+
+
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://zaurnasibov.com/posts/2015/05/31/caffeine_withdrawal.html" title="My story of caffeine withdrawal">
+      <i class="fa fa-angle-left"></i> Previous Post
+    </a>
+    <a class="btn float-right" href="https://zaurnasibov.com/posts/2017/04/25/blogging-with-pelican.html" title="Blogging with Pelican">
+      Next Post <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2025 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zaur's Thoughts ",
+  "url" : "https://zaurnasibov.com",
+  "image": "/static/images/logo.png",
+  "description": ""
+}
+</script><script defer
+  src='https://static.cloudflareinsights.com/beacon.min.js'
+  data-cf-beacon='{"token": "1147ebca9f9247a38190f2958de429a8"}'>
+</script>
+
+</body>
+</html>

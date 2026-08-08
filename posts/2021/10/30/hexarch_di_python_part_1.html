@@ -1,0 +1,625 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Lexend+Deca:wght@100..900&display=swap&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://zaurnasibov.com/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/fontawesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/brands.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/solid.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com//static/css/extra.css">
+
+  <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="/static/images/favicon.png" type="image/x-icon">
+
+
+  <link href="https://zaurnasibov.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zaur's Thoughts Atom">
+
+
+
+
+
+
+
+
+
+<meta name="author" content="Zaur Nasibov" />
+<meta name="description" content="Welcome to articles series which cover the principles of Hexagonal architecture, talks of Dependency Injection, and its usage in these to Python and Django application design." />
+<meta name="keywords" content="architecture, DDD, dependency injection, hexagonal architecture, programming, python">
+
+
+  <meta property="og:site_name" content="Zaur's Thoughts"/>
+  <meta property="og:title" content="Hexagonal architecture and Python - Part I: Dependency Injection and componential architecture"/>
+  <meta property="og:description" content="Welcome to articles series which cover the principles of Hexagonal architecture, talks of Dependency Injection, and its usage in these to Python and Django application design."/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://zaurnasibov.com/posts/2021/10/30/hexarch_di_python_part_1.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2021-10-30 22:30:00+03:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://zaurnasibov.com/author/zaur-nasibov.html">
+  <meta property="article:section" content="Articles"/>
+  <meta property="article:tag" content="architecture"/>
+  <meta property="article:tag" content="DDD"/>
+  <meta property="article:tag" content="dependency injection"/>
+  <meta property="article:tag" content="hexagonal architecture"/>
+  <meta property="article:tag" content="programming"/>
+  <meta property="article:tag" content="python"/>
+  <meta property="og:image" content="/static/images/logo.png">
+
+  <title>Zaur's Thoughts &ndash; Hexagonal architecture and Python - Part I: Dependency Injection and componential architecture</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://zaurnasibov.com/">
+      <img src="/static/images/logo.png" alt="Zaur's Thoughts" title="Zaur's Thoughts">
+    </a>
+
+    <h1>
+      <a href="https://zaurnasibov.com/">Zaur's Thoughts</a>
+    </h1>
+
+    <p>Zaurun Fikirləri</p>
+
+
+    <nav>
+      <ul class="list">
+
+          <li>
+            <a target="_self" href="/posts.html" ><strong>Articles</strong></a>
+          </li>
+          <li>
+            <a target="_self" href="/pages/shorts.html" >Shorts</a>
+          </li>
+          <li>
+            <a target="_self" href="/category/books.html" >Books</a>
+          </li>
+
+
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/bookmarks.html#bookmarks">
+                Bookmarks
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/memes.html#memes">
+                Memes
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/projects.html#projects">
+                Projects
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/about.html#about">
+                About
+              </a>
+            </li>
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/zaur-nasibov-44610853/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/basicwolf"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-rss"
+           href="/feeds/all.atom.xml"
+           target="_blank">
+          <i class="fa-solid fa-rss"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://zaurnasibov.com/">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/tags.html">Tags</a>
+  <a href="/pages/privacy-policy.html">Privacy Policy</a>
+</nav>
+
+<article>
+  <header>
+      
+    <h1 id="hexarch_di_python_part_1">Hexagonal architecture and Python - Part I: Dependency Injection and componential architecture</h1>
+    <p>
+      Posted on 30 October 2021 in <a href="https://zaurnasibov.com/category/articles.html">Articles</a>
+
+        &#8226; 8 min read
+    </p>
+  </header>
+
+
+  <div>
+    <img alt="Python logo in a hexagon" class="align-center" src="https://zaurnasibov.com/articles/2021_10_30_hexarch_di_python_part_1/hexagonal-python.png" />
+<ul class="simple">
+<li><a class="reference external" href="https://zaurnasibov.com/posts/2021/10/30/hexarch_di_python_part_1.html">Part I: Dependency Injection and componential architecture</a></li>
+<li><a class="reference external" href="https://zaurnasibov.com/posts/2022/09/18/hexarch_di_python_part_2.html">Part II: Domain,  Application Services, Ports and Adapters</a></li>
+<li><a class="reference external" href="https://zaurnasibov.com/posts/2022/12/31/hexarch_di_python_part_3.html">Part III: Persistence, Transactions, Exceptions and The Final Assembly</a></li>
+<li><a class="reference external" href="https://zaurnasibov.com/posts/2025/05/10/hexarch-python-part-4-lightweight-integration-tests.html">Part IV: Lightweight integration tests</a></li>
+</ul>
+<p>Time flies awfully fast!
+Two and a half years ago I left the world of Django and found myself in the
+world of Spring Boot, Kotlin and Java.
+It was a genuine cultural shock.
+An extensive amount of new knowledge bombarded my brains.
+Sometimes it was so furious, that I wanted to run back to
+the beloved and bytewise familiar Python ecosystem.
+Inversion of Control (IoC) was the hardest topic to digest.
+Automated Dependency Injection (DI) felt like black magic,
+compared to Django's direct approach. Spring Boot behemoth framework consumed me in nightmares. But all the effort was worth it.</p>
+<p>We designed and implemented the application following Hexagonal architecture rules. And the final challenge was getting rid of the old &quot;implement
+a backlog of features&quot; habit in place of Domain-Driven Design (DDD).</p>
+<p>Our product is rapidly growing in size and complexity.
+Still, it is easy to maintain, support and develop
+- thanks to the solid foundation.
+The code is expressive and comprehensible.
+The components are easily interchangeable.
+By all means this product is better than anything
+previosly written by the team members.</p>
+<p>I look behind and see all the gaps in my experience
+which did not allow solving business problem as elegantly.
+Dear fellow Pythonista, I hope
+this short articles series about Hexagonal architecture
+would help you to achieve the same without going through my struggle.</p>
+<div class="section" id="dependency-injection">
+<h2>Dependency Injection</h2>
+<p>You know what Dependency Injection (DI) is, don't you?
+Sure you do, even if you can't recall the explicit definition.
+Let's see what are the pros and cons of this approach (a pattern, if you prefer).</p>
+<p>Imagine that we need a function which sends ALARM messages to a message bus.
+The first iteration is:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">my_cool_messaging_library</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_message_bus</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">send_alert</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">message_bus</span> <span class="o">=</span> <span class="n">get_message_bus</span><span class="p">()</span>
+    <span class="n">message_bus</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s1">&#39;alert&#39;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>Is there anything wrong with <tt class="docutils literal">send_alert()</tt> function?
+It depends upon <tt class="docutils literal">message_bus</tt> object, but this dependency
+is hidden from the caller.
+What if you'd like to use another message bus?
+How about the level of magic required to test this function?
+Did I just hear <tt class="docutils literal"><span class="pre">mock.patch(...)</span></tt>?
+Ladies and gentlemen, this is going south, let's try a different way:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">my_cool_messaging_library</span><span class="w"> </span><span class="kn">import</span> <span class="n">MessageBus</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">send_alert</span><span class="p">(</span><span class="n">message_bus</span><span class="p">:</span> <span class="n">MessageBus</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">message_bus</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s1">&#39;alert&#39;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>This small change in function signature is a big change of paradigm.
+The caller sees that <tt class="docutils literal">send_alert()</tt> function <strong>depends</strong> upon
+<tt class="docutils literal">MessageBus</tt> object (viva type annotations!).
+All implicit mocking bells and whistles are gone in favour of
+explicit and clean code.
+Sounds too good to be true?
+Have a look:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_send_alert_sends_message_to_alert_topic</span><span class="p">()</span>
+    <span class="n">message_bus_mock</span> <span class="o">=</span> <span class="n">MessageBusMock</span><span class="p">()</span>
+    <span class="n">send_alert</span><span class="p">(</span><span class="n">message_bus_mock</span><span class="p">,</span> <span class="s2">&quot;Hacking attempt detected!&quot;</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">message_bus_mock</span><span class="o">.</span><span class="n">sent_to_topic</span> <span class="o">==</span> <span class="s1">&#39;alert&#39;</span>
+    <span class="k">assert</span> <span class="n">message_bus_mock</span><span class="o">.</span><span class="n">sent_message</span> <span class="o">==</span> <span class="s2">&quot;Hacking attempt detected!&quot;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MessageBusMock</span><span class="p">(</span><span class="n">MessageBus</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sent_to_topic</span> <span class="o">=</span> <span class="n">topic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sent_message</span> <span class="o">=</span> <span class="n">message</span>
+</pre></div></td></tr></table></div>
+<p>But doesn't this mean that we have to pass an instance of <tt class="docutils literal">MessageBus</tt> to
+<tt class="docutils literal">send_alert()</tt> function on each call? Isn't that cumbersome?</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="n">send_alert</span><span class="p">(</span><span class="n">get_message_bus</span><span class="p">(),</span> <span class="s2">&quot;Stackoverflow is down&quot;</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>Let's try solving this problem by means of OOP:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AlertDispatcher</span><span class="p">:</span>
+    <span class="n">_message_bus</span><span class="p">:</span> <span class="n">MessageBus</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message_bus</span><span class="p">:</span> <span class="n">MessageBus</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_message_bus</span> <span class="o">=</span> <span class="n">message_bus</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_message_bus</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s1">&#39;alert&#39;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
+
+<span class="n">alert_dispatcher</span> <span class="o">=</span> <span class="n">AlertDispatcher</span><span class="p">(</span><span class="n">get_message_bus</span><span class="p">())</span>
+<span class="n">alert_dispatcher</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;Oh no, yet another dependency!&quot;</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>Now <tt class="docutils literal">AlertDispatcher</tt> class <strong>depends</strong> on an object of type <tt class="docutils literal">MessageBus</tt>.
+We <strong>inject</strong> this dependency when creating an <tt class="docutils literal">AlertDispatcher</tt> object
+by passing the dependency into constructor.
+We have <strong>wired</strong> (not coupled!) the object and its dependency.</p>
+<p>At this point the focus switches from <tt class="docutils literal">message_bus</tt> to <tt class="docutils literal">alert_dispatcher</tt>.
+This <strong>component</strong> may be required in different parts of the application.
+Which means that there should be a global context which holds and provides
+the object.
+Let's first discuss the nature of components and components wiring.</p>
+</div>
+<div class="section" id="componential-architecture">
+<h2>Componential Architecture</h2>
+<p id="messagebus">We didn't emphasize dependencies types while speaking of dependency injection.
+But you might have guessed that <tt class="docutils literal">MessageBus</tt> is just an abstraction,
+an interface or a protocol <a class="footnote-reference" href="#footnote-1" id="footnote-reference-1">[1]</a>.
+Somewhere the application defines:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MessageBus</span><span class="p">(</span><span class="n">typing</span><span class="o">.</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="n">topic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">pass</span>
+</pre></div></td></tr></table></div>
+<p id="memorymessagebus">There is also a simple implementation of <tt class="docutils literal">MessageBus</tt> in the project.
+It stores the incoming messages in a <tt class="docutils literal">list</tt>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MemoryMessageBus</span><span class="p">(</span><span class="n">MessageBus</span><span class="p">):</span>
+    <span class="n">sent_messages</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="n">topic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">messagge</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sent_messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p id="dispatchalertusecase">In the same manner, an abstract use case scenario is decoupled from a
+business-driven implementation:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># An abstract use case</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DispatchAlertUseCase</span><span class="p">(</span><span class="n">typing</span><span class="o">.</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dispatch_alert</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">pass</span>
+</pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># A concrete implementation in a service.</span>
+<span class="c1"># Note that a service may implement multiple related use cases at a time.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AlertDispatcherService</span><span class="p">(</span><span class="n">DispatchAlertUseCase</span><span class="p">):</span>
+    <span class="n">_message_bus</span><span class="p">:</span> <span class="n">MessageBus</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message_bus</span><span class="p">:</span> <span class="n">MessageBus</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_message_bus</span> <span class="o">=</span> <span class="n">message_bus</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">dispatch_alert</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_message_bus</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s1">&#39;alert&#39;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p id="chatopscontroller">Next, let's add a controller which accepts HTTP requests and invokes
+<tt class="docutils literal">DispatchAlertUseCase</tt>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ChatOpsController</span><span class="p">:</span>
+    <span class="o">...</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dispatch_alert_use_case</span><span class="p">:</span> <span class="n">DispatchAlertUseCase</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dispatch_alert_use_case</span> <span class="o">=</span> <span class="n">dispatch_alert_use_case</span>
+
+    <span class="nd">@post</span><span class="p">(</span><span class="s1">&#39;/alert)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">alert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dispatch_alert_use_case</span><span class="o">.</span><span class="n">dispatch_alert</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">HTTP_ACCEPTED</span>
+</pre></div></td></tr></table></div>
+<p>Finally, let's connect all the pieces together:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">my_favourite_http_framework</span><span class="w"> </span><span class="kn">import</span> <span class="n">http_server</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">message_bus</span> <span class="o">=</span> <span class="n">MemoryMessageBus</span><span class="p">()</span>
+    <span class="n">alert_dispatcher_service</span> <span class="o">=</span> <span class="n">AlertDispatcherService</span><span class="p">(</span><span class="n">message_bus</span><span class="p">)</span>
+    <span class="n">chat_opts_controller</span> <span class="o">=</span> <span class="n">ChatOpsController</span><span class="p">(</span><span class="n">alert_dispatcher_service</span><span class="p">)</span>
+
+    <span class="n">http_server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div></td></tr></table></div>
+<p>How would a rational and clear-minded developer react to this?
+She would call it overengineered and overcomplicated, no less!
+Which is indeed true. On the first glance, everything above fits into a short
+HTTP handler:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><span class="nd">@post</span><span class="p">(</span><span class="s1">&#39;/alert)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">alert</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+    <span class="n">bus</span> <span class="o">=</span> <span class="n">MemoryMessageBus</span><span class="p">()</span>
+    <span class="n">bus</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s1">&#39;alert&#39;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">HTTP_ACCEPTED</span>
+</pre></div></td></tr></table></div>
+<p>Is it short and simple? Absolutely!
+Is it maintainable? Hardly.
+But why?
+Because the components are strongly coupled in the code.
+By blending everything in a single function we tightly couple
+domain workflow and message bus implementation.
+And that's half the trouble.
+The worst part is that we
+<em>melted and buried business logic in technical details</em>.
+Don't get me wrong, such code has the right to exist.
+Yet its existence in a rapidly growing application will
+soon end up in a maintenance hell.</p>
+<p>Back to the componential architecture.
+What are the advantages?</p>
+<ul class="simple">
+<li>Components are <strong>isolated</strong> and are not directly dependent.
+Instead they are <strong>wired via abstractions</strong>.</li>
+<li>Every component works in certain boundaries and <strong>has a single responsibility</strong>.</li>
+<li>This means that components are immensely testable:
+either in full isolation or in a combination using test doubles.
+There is no need to explain that testing  isolated parts of a program
+is easier compared to testing it as a whole.
+Your TDD approach improves from inaudible &quot;well, we do tests...&quot;
+to sonorous &quot;tests-driven and test-first development&quot;.</li>
+<li>It is easy to substitute components, thanks to abstract dependencies.
+In the example above <tt class="docutils literal">MemoryMessageBus</tt> could be replaced with
+<tt class="docutils literal">DbMessageBus</tt>, <tt class="docutils literal">FileMessageBus</tt> or anything else.
+The caller of <tt class="docutils literal"><span class="pre">message_bus.send(...)</span></tt> should not care.</li>
+</ul>
+<p>Suddenly it dawns upon you:
+&quot;That sounds like... SOLID?&quot;
+Hell yeah!
+It is almost what Uncle Bob would call a
+<a class="reference external" href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecture</a>.
+I encourage you to read his article, before moving towards our end goal -
+Hexagonal architecture.</p>
+</div>
+<div class="section" id="architecture-is-about-intent">
+<h2>Architecture is about intent</h2>
+<p>One of my favourite Uncle Bob quotes on software architecture is
+&quot;Architecture is about intent&quot;.</p>
+<p>What do you see on this screenshot?</p>
+<img alt="Typical Django project" class="align-center" src="https://zaurnasibov.com/articles/2021_10_30_hexarch_di_python_part_1/django_project.png" />
+<p>No wonder if you recognized a &quot;typical Django application&quot;.
+Brilliant!
+Can you also tell what does this application do?
+If you can, my sincere congratulations - you are level 80 telepathist.
+Personally I have no clue whatsoever - that is a screenshot
+of a random Django application from Github.</p>
+<p>Robert Martin develops the idea
+<a class="reference external" href="https://www.youtube.com/watch?v=WpkDN78P884">further</a>.
+Take a look at a floor architecture plan and guess what the building is intended for:</p>
+<img alt="Typical Django project" class="align-center" src="https://zaurnasibov.com/articles/2021_10_30_hexarch_di_python_part_1/library_floor_paln.jpg" />
+<details>
+<summary><a>Answer</a></summary><p>That is a floor plan of <a class="reference external" href="https://en.wikipedia.org/wiki/Helsinki_Central_Library_Oodi">Oodi Library</a> in Helsinki.</p>
+</details><p>I hope this tiny puzzle was easy to solve and you got the main idea:
+architecture should meet us at the gate, literally after <tt class="docutils literal">git clone</tt>.
+Isn't it great when the source code is organized in such way
+that the purpose and the meaning of each file, class, function and
+any other object lies on the surface?</p>
+</div>
+<div class="section" id="hexagonal-architecture-of-ports-and-adapters">
+<h2>Hexagonal architecture of Ports and Adapters</h2>
+<p>&quot;We use the Hexagonal architecture of ports and adapters&quot; - how we start
+describing the architecture application to the new team members.
+It follows by showing a weird Cthulhu-like picture:</p>
+<img alt="Hexagonal architecture" class="align-center" src="https://zaurnasibov.com/articles/2021_10_30_hexarch_di_python_part_1/hexagon.png" />
+<p>Alistair Cockurn, the inventor of &quot;Hexagonal architecture&quot; term explains
+that &quot;hexagon&quot; is not strictly necessary:</p>
+<blockquote>
+<p>The hexagon is not a hexagon because the number six is important,
+but  rather to allow the people doing the drawing to have room
+to insert  ports and adapters as they need,
+not being constrained by a  one-dimensional layered drawing.</p>
+<p>The term ‘’hexagonal architecture’’  comes from this visual effect.</p>
+<p class="attribution">&mdash;<a class="reference external" href="https://alistair.cockburn.us/hexagonal-architecture/">Alistair Cockburn</a></p>
+</blockquote>
+<p>You may also recall the terms like
+&quot;Onion architecture&quot; or &quot;Ports and Adapters&quot; mentioned in Uncle Bob's
+<a class="reference external" href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">&quot;Clean archcitecture&quot;</a>
+article.
+All these terms describe a way to organize application architectecture in
+layers, with dependecies directed to the center.
+(We noticed though, that <em>hexagon</em> and <em>ports and adapters</em> are much simpler to
+imagine and explain compared to more abstract terms like &quot;clean&quot; or &quot;onion&quot;).</p>
+<p>The outer layer of the application - <em>adapters</em> - interacts with the outer world.
+The inner layer - <em>domain</em> and <em>domain services</em> - contains the business logic.
+The connecting layer in between is <em>application services</em>.
+The components in each layer are designed to have low coupling and high cohesion <a class="footnote-reference" href="#footnote-2" id="footnote-reference-2">[2]</a>.</p>
+<p><strong>Domain</strong> layer - is the heart of the application.
+The business rules are defined here.
+The names of classes, methods, functions, constants and other objects resemble
+those of the problem domain.</p>
+<p><strong>Application Programming Iterface (API) adapters</strong>
+are the components which convey commands and queries from the
+outer world to the application through <em>API ports</em>.
+Hence, <strong>API ports</strong> are interfaces through which the application is controlled
+and queried.
+In the <em>Componential architecture</em> described above, the <a class="reference internal" href="#dispatchalertusecase">DispatchAlertUseCase</a> is
+an <em>API port</em> and <a class="reference internal" href="#chatopscontroller">ChatOpsController</a> is an <em>API adapter</em>.</p>
+<p><strong>Service Provider Interface (SPI) adapters</strong> are the components which convey
+the application commands and queries to the outer world.
+Hence, <strong>SPI ports</strong> are interfaces through which commands and queries are
+passed to <em>SPI adapters</em>.
+In the <em>Componential architecture</em>, the <a class="reference internal" href="#messagebus">MessageBus</a> is an <em>SPI port</em> and
+its implementation <a class="reference internal" href="#memorymessagebus">MemoryMessageBus</a> is an <em>SPI adapter</em>.</p>
+<p><strong>Application services</strong> are the conductors which glue domain and ports
+performing use case scenarios. They are supposed to orchestrate the whole
+transaction, e.g. load data for the domain to use, call functions
+which perform domain logic, persist the results and publish events.</p>
+<p>There is one important rule to remember about hexagonal architecture:
+&quot;<em>Dependencies are directed from the outer layers to the inner center.</em>&quot;
+In practice this means that <em>adapters are aware of domain objects,
+but domain should not know of adapters or ports</em>.
+It's also important to clarify that since adapters belong to the <em>Adapters
+layer</em>, they may call each-other directly.
+The cases for this are:</p>
+<ul class="simple">
+<li><em>API adapter calls SPI adapter</em>.
+- Think of HTTP GET requests which end up querying a database:
+It doesn't make sense to reach database through the domain layer making tons
+of objects mappings on the way. It's much more efficient for a controller
+to call the specific <em>SPI port</em> directly.</li>
+<li><em>SPI adapter calls SPI adapter.</em> - Think of an database adapter which
+calls other adapters and aggregates all the results before returning it.</li>
+<li><em>API adapter calls API adapter.</em> - Probably the least useful. Handy,
+if you need to redirect calls from one API adapter to the other.</li>
+<li><em>SPI adapter calls API adapter</em> - AVOID. Such calls is unnecessary
+and creates call loops in the application.</li>
+</ul>
+<p>And... THAT IS IT!
+The basic principles of Hexagonal architecture of ports and adapters
+are surprisingly simple.
+This kind of architecture works well in application with complex problem domain.
+But it is an overkill, if everything you need is an
+&quot;HTTP interface for a database&quot;.</p>
+<p>We are now ready to dive into building a Hexagonal architecture -based
+Django applications.
+Stay tuned for part II.</p>
+</div>
+<div class="section" id="references">
+<h2>References</h2>
+<table class="docutils footnote" frame="void" id="footnote-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-1">[1]</a></td><td>Though <a class="reference external" href="https://www.python.org/dev/peps/pep-0544/">PEP-544</a> Protocols
+are about structural subtying. Another option to mimic interfaces is
+to either use abstract classes with abstract methods.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="footnote-2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-2">[2]</a></td><td><p class="first">Cohesion and coupling:</p>
+<ul class="last simple">
+<li><a class="reference external" href="https://devopedia.org/cohesion-vs-coupling">Devopedia: Cohesion vs. Coupling</a></li>
+<li><a class="reference external" href="https://enterprisecraftsmanship.com/posts/cohesion-coupling-difference/">Cohesion and Coupling: the difference</a></li>
+</ul>
+</td></tr>
+</tbody>
+</table>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://zaurnasibov.com/tag/architecture.html">architecture</a>
+      <a href="https://zaurnasibov.com/tag/ddd.html">DDD</a>
+      <a href="https://zaurnasibov.com/tag/dependency-injection.html">dependency injection</a>
+      <a href="https://zaurnasibov.com/tag/hexagonal-architecture.html">hexagonal architecture</a>
+      <a href="https://zaurnasibov.com/tag/programming.html">programming</a>
+      <a href="https://zaurnasibov.com/tag/python.html">python</a>
+    </p>
+  </div>
+
+
+
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://zaurnasibov.com/posts/2021/10/22/turn_the_ship_around_short_review.html" title="Turn the Ship Around!: A True Story of Turning Followers into Leaders - book review">
+      <i class="fa fa-angle-left"></i> Previous Post
+    </a>
+    <a class="btn float-right" href="https://zaurnasibov.com/posts/2021/11/10/good-practices-avoiding-the-use-of-test-inputs-in-assertions.html" title="Good practices: Avoiding the use of test inputs in assertions">
+      Next Post <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2025 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zaur's Thoughts ",
+  "url" : "https://zaurnasibov.com",
+  "image": "/static/images/logo.png",
+  "description": ""
+}
+</script><script defer
+  src='https://static.cloudflareinsights.com/beacon.min.js'
+  data-cf-beacon='{"token": "1147ebca9f9247a38190f2958de429a8"}'>
+</script>
+
+</body>
+</html>

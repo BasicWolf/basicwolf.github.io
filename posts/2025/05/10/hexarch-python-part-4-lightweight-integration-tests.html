@@ -1,0 +1,1029 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Lexend+Deca:wght@100..900&display=swap&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://zaurnasibov.com/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/fontawesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/brands.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/solid.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com//static/css/extra.css">
+
+  <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="/static/images/favicon.png" type="image/x-icon">
+
+
+  <link href="https://zaurnasibov.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zaur's Thoughts Atom">
+
+
+
+
+
+
+
+
+
+<meta name="author" content="Zaur Nasibov" />
+<meta name="description" content="It&#39;s pretty straightforward to unit test the components of an application that follows Hexagonal Architecture. The components are part of specific layers, and mocking the next dependency layer is usually simple. However, this approach means we never test the application as a whole and have to rely on expensive integration or end-to-end tests to do so. We can test the application components in sociable manner, leaving our components&#39; direct dependencies as-is, and pushing the mocks further to the application edges. If we push the mocks too far, we end up with lightweight integration tests. Let&#39;s explore how we can utilise such tests in a context of Django application and what benefits we can reap." />
+<meta name="keywords" content="architecture, django, hexagonal architecture, lightweight integration tests, programming, python, testing">
+
+
+  <meta property="og:site_name" content="Zaur's Thoughts"/>
+  <meta property="og:title" content="Hexagonal architecture and Python - Part IV: Lightweight integration tests"/>
+  <meta property="og:description" content="It&#39;s pretty straightforward to unit test the components of an application that follows Hexagonal Architecture. The components are part of specific layers, and mocking the next dependency layer is usually simple. However, this approach means we never test the application as a whole and have to rely on expensive integration or end-to-end tests to do so. We can test the application components in sociable manner, leaving our components&#39; direct dependencies as-is, and pushing the mocks further to the application edges. If we push the mocks too far, we end up with lightweight integration tests. Let&#39;s explore how we can utilise such tests in a context of Django application and what benefits we can reap."/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://zaurnasibov.com/posts/2025/05/10/hexarch-python-part-4-lightweight-integration-tests.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2025-05-10 18:00:00+03:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://zaurnasibov.com/author/zaur-nasibov.html">
+  <meta property="article:section" content="Articles"/>
+  <meta property="article:tag" content="architecture"/>
+  <meta property="article:tag" content="django"/>
+  <meta property="article:tag" content="hexagonal architecture"/>
+  <meta property="article:tag" content="lightweight integration tests"/>
+  <meta property="article:tag" content="programming"/>
+  <meta property="article:tag" content="python"/>
+  <meta property="article:tag" content="testing"/>
+  <meta property="og:image" content="/static/images/logo.png">
+
+  <title>Zaur's Thoughts &ndash; Hexagonal architecture and Python - Part IV: Lightweight integration tests</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://zaurnasibov.com/">
+      <img src="/static/images/logo.png" alt="Zaur's Thoughts" title="Zaur's Thoughts">
+    </a>
+
+    <h1>
+      <a href="https://zaurnasibov.com/">Zaur's Thoughts</a>
+    </h1>
+
+    <p>Zaurun Fikirləri</p>
+
+
+    <nav>
+      <ul class="list">
+
+          <li>
+            <a target="_self" href="/posts.html" ><strong>Articles</strong></a>
+          </li>
+          <li>
+            <a target="_self" href="/pages/shorts.html" >Shorts</a>
+          </li>
+          <li>
+            <a target="_self" href="/category/books.html" >Books</a>
+          </li>
+
+
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/bookmarks.html#bookmarks">
+                Bookmarks
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/memes.html#memes">
+                Memes
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/projects.html#projects">
+                Projects
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/about.html#about">
+                About
+              </a>
+            </li>
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/zaur-nasibov-44610853/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/basicwolf"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-rss"
+           href="/feeds/all.atom.xml"
+           target="_blank">
+          <i class="fa-solid fa-rss"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://zaurnasibov.com/">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/tags.html">Tags</a>
+  <a href="/pages/privacy-policy.html">Privacy Policy</a>
+</nav>
+
+<article>
+  <header>
+      
+    <h1 id="hexarch-python-part-4-lightweight-integration-tests">Hexagonal architecture and Python - Part IV: Lightweight integration tests</h1>
+    <p>
+      Posted on 10 May 2025 in <a href="https://zaurnasibov.com/category/articles.html">Articles</a>
+
+        &#8226; 14 min read
+    </p>
+  </header>
+
+
+  <div>
+    <!-- started writing on 2025-02-08 -->
+<img alt="Pythons and hexagons with Part IV" class="align-center" src="https://zaurnasibov.com/articles/2025-02-08-hexarch-lightweight-integration-tests/hexarch-lightweight-integration-tests.webp" />
+<ul class="simple">
+<li><a class="reference external" href="https://zaurnasibov.com/posts/2021/10/30/hexarch_di_python_part_1.html">Part I: Dependency Injection and componential architecture</a></li>
+<li><a class="reference external" href="https://zaurnasibov.com/posts/2022/09/18/hexarch_di_python_part_2.html">Part II: Domain,  Application Services, Ports and Adapters</a></li>
+<li><a class="reference external" href="https://zaurnasibov.com/posts/2022/12/31/hexarch_di_python_part_3.html">Part III: Persistence, Transactions, Exceptions and The Final Assembly</a></li>
+<li><a class="reference external" href="https://zaurnasibov.com/posts/2025/05/10/hexarch-python-part-4-lightweight-integration-tests.html">Part IV: Lightweight integration tests</a></li>
+<li><a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/tree/blog4">The code</a></li>
+</ul>
+<div class="section" id="intro">
+<h2><a class="toc-backref" href="#toc-entry-1">Intro</a></h2>
+<p>It is very easy to unit test the components of an application
+that follows Hexagonal architecture principles. The components
+belong to certain layers, and it's quite straightforward to
+mock the following dependency layer.
+However, the problem with such an approach is that we never
+test the application as a whole, and have to rely on expensive
+integration or end-to-end tests to do so.</p>
+<p>We can test the application components in <em>sociable</em> manner,
+leaving our components' direct dependencies as-is,
+and pushing the mocks further to the application edges.</p>
+<p>If we push the mocks too far, we end up with
+<em>lightweight integration tests</em>.
+Let's explore how we can utilise such tests in a context
+of Django application and what benefits we can reap.</p>
+<!--  -->
+<blockquote>
+<p>The original article focused on such &quot;lightweight integration&quot; tests.
+I even dared to call them &quot;sociable&quot;!
+<a class="reference external" href="https://github.com/jmp">Jarkko &quot;jmp&quot; Piiroinen</a> was very generous to
+thoroughly review the article. He pointed that <em>sociable tests</em>,
+rather implies testing a thing within the application core (or &quot;Application&quot; in
+<a class="reference external" href="https://alistair.cockburn.us/hexagonal-architecture">Alistair Cockburn's definition</a>)
+with its neighbours/collaborators. Testing the whole flow by mocking the
+rightmost calls is &quot;sociable tests pushed too far&quot;, or as Jarkko put it
+&quot;rather lightweight end-to-end tests&quot;.</p>
+<p>The updated article is about exploring the ways to conduct such tests
+in a Django application setup, focusing on the benefits and caveats.</p>
+</blockquote>
+<hr class="docutils" />
+<div class="contents topic" id="table-of-contents">
+<span id="hexarch-sociable-tests-part-4"></span><p class="topic-title"><a class="reference internal" href="#top">Table of Contents</a></p>
+<ul class="simple">
+<li><a class="reference internal" href="#intro" id="toc-entry-1">Intro</a></li>
+<li><a class="reference internal" href="#hexagonal-architecture-as-described-in-the-articles-series" id="toc-entry-2">Hexagonal architecture - as described in the articles series</a></li>
+<li><a class="reference internal" href="#testing-the-application" id="toc-entry-3">Testing the application</a></li>
+<li><a class="reference internal" href="#architecture-revised" id="toc-entry-4">Architecture revised</a></li>
+<li><a class="reference internal" href="#lightweight-integration-tests-driven-development" id="toc-entry-5">Lightweight integration tests -driven development</a></li>
+<li><a class="reference internal" href="#use-case-vote-for-an-article" id="toc-entry-6">Use case: Vote for an article</a></li>
+<li><a class="reference internal" href="#use-case-only-existing-user-can-vote-for-an-article" id="toc-entry-7">Use case: Only existing user can vote for an article</a></li>
+<li><a class="reference internal" href="#the-price-to-pay" id="toc-entry-8">The price to pay</a></li>
+<li><a class="reference internal" href="#conclusion" id="toc-entry-9">Conclusion</a></li>
+<li><a class="reference internal" href="#acknowledgements" id="toc-entry-10">Acknowledgements</a></li>
+</ul>
+</div>
+<p>Time flies (darn, I say that again)!
+I wrote the original &quot;Hexagonal Architecture and Python&quot; series
+back in 2022, which was only three years ago
+(<em>honestly, it feels like yesterday!</em>)
+Since then my understanding of RESTful API design and Domain-Driven Design
+has deepened. But the biggest shift, however, has occurred in where I start
+and how I test.</p>
+<p>I used to believed that the <em>implementation</em> of the domain model should precede
+exposing any API. I still <em>design</em> the domain model first before deriving API structure
+from if. However, I <em>implement</em> barebones API first, initially hard-coding and
+short-circuiting domain logic, to enable early integrations and
+feedback.
+This approach helps steer the development in the right direction,
+keeps API consumers happy and avoids &quot;big bang&quot; release surprises.</p>
+<p>This led to the second change. I used to TDD every layer and every component
+of the application <em>independently</em>. Today, I aim at unit testing the
+interconnected parts of the system.</p>
+<p>Bear in mind, that the system users often don't care about what's happening
+under its hood.
+They are more concerned with the system's public contract - its behaviour
+when queried and commanded through the public interfaces.
+System developers, on the other hand, also need assurance that the system
+interacts with its downstream dependencies as expected.
+We can apply behavior testing similarly: by testing
+the system via its public interfaces and downstream interactions,
+we reduce the need to test the application layers in isolation.</p>
+<p>Just so we're clear, I'm not calling anyone to put the whole thing together
+and test it on the launch pad. That's a recipe for disaster - remember what
+happened to the
+<a class="reference external" href="https://en.wikipedia.org/wiki/N1_(rocket)">Soviet N1 Moon rocket</a>?</p>
+<!--  -->
+<blockquote>
+Adverse characteristics of the large cluster of thirty engines and its complex
+fuel and oxidizer feeder systems were not revealed earlier in development
+because static test firings had not been conducted.
+(<a class="reference external" href="https://en.wikipedia.org/wiki/N1_(rocket)">Wikipedia</a>)</blockquote>
+<p>Instead, I'm looking for relatively lightweight ways to test the entire
+system, without going for a full end-to-end setup.</p>
+</div>
+<div class="section" id="hexagonal-architecture-as-described-in-the-articles-series">
+<h2><a class="toc-backref" href="#toc-entry-2">Hexagonal architecture - as described in the articles series</a></h2>
+<p>Let's recall the application and its architecture as described
+in the articles series:</p>
+<div class="figure align-center">
+<object data="https://zaurnasibov.com/articles/2025-02-08-hexarch-lightweight-integration-tests/full-app.svg" style="width: 100%;" type="image/svg+xml">A hexagonal architecture application diagram</object>
+<p class="caption">The example application is built using hexagonal architecture principles.
+This is beyond what Alistair Cockburn describes in the original
+<a class="reference external" href="https://alistair.cockburn.us/hexagonal-architecture">&quot;Hexagonal Architecture&quot; article</a>.
+Cockburn only defines <strong>Ports</strong>, <strong>Adapters</strong>, <strong>Application</strong> and their
+interactions.</p>
+</div>
+<p>The <strong>Application</strong> has a layered structure: the Core, which includes Domain
+models and services; The driving/in/API (application programming interface)
+and driven/out/SPI (service provider interface) ports for incoming and outgoing interactions;
+and API and SPI adapters.</p>
+<p>Python wise:</p>
+<ul class="simple">
+<li>The <strong>Domain model</strong> consists of classes and methods which reflect
+the real world domain rules. They are &quot;pure&quot; in nature, because
+they don't have any outer world dependencies.</li>
+<li>We can think of <strong>API</strong> and <strong>SPI ports</strong> as delegates - basically, function signatures.
+We can use Python Protocols or Abstract Base Classes to define them in
+OOP-compatible way.</li>
+<li>The <strong>Application Services</strong> implement API ports and orchestrate the flow
+between domain models and SPI ports. They invoke SPI ports and can also
+invoke other API ports when necessary.</li>
+<li>The <strong>SPI adapters</strong> implement SPI ports. SPI adapters are the bridges between
+the application and downstream dependencies (databases, cashes, message queues,
+file systems, other services etc.)</li>
+<li>The <strong>API adapters</strong> connect the outer world to the application.
+They receive commands and queries through different channels
+(command line, http, RPC, message queue etc.) and invoke API ports.
+The same API port can be invoked by many adapters - think of making the same
+query via a command line, or via a RESTful HTTP interface.</li>
+</ul>
+</div>
+<div class="section" id="testing-the-application">
+<h2><a class="toc-backref" href="#toc-entry-3">Testing the application</a></h2>
+<p>Martin Fowler speaks of <strong>&quot;Solitary&quot;</strong> and <strong>&quot;Sociable&quot;</strong> tests in the renowned
+<a class="reference external" href="https://martinfowler.com/bliki/UnitTest.html">article &quot;Unit Test&quot;</a>.
+Solitary tests mock the <em>direct dependencies</em> of the component under test.
+This is how I originally implemented tests in the
+&quot;Hexagonal Architecture with Django&quot; project.
+Tests like these run blazingly fast, but they only test the isolated behaviour
+of a given component (like an HTTP controller, an application service,
+or a database entities mapper) with fake downstream layer interactions.</p>
+<div class="figure align-center">
+<object data="https://zaurnasibov.com/articles/2025-02-08-hexarch-lightweight-integration-tests/api-solitary-test.svg" style="width: 100%;" type="image/svg+xml">A diagram of solitary API test</object>
+<p class="caption">A mockist-style HTTP adapter test.</p>
+</div>
+<p>Defining sociable tests is trickier:</p>
+<!--  -->
+<blockquote>
+<p>When xunit testing began in the 90's we made no attempt to go solitary unless
+communicating with the collaborators was awkward
+(such as a remote credit card verification system).</p>
+<p>I think that the term “unit testing” is appropriate because these tests
+are tests of the behavior of a single unit.
+We write the tests assuming everything other than that unit is working correctly.</p>
+<p class="attribution">&mdash;Martin Fowler, <a class="reference external" href="https://martinfowler.com/bliki/UnitTest.html">&quot;Unit Test&quot;</a>.</p>
+</blockquote>
+<p>So, in my perspective <em>a unit test is sociable when it verifies a unit of behaviour
+across multiple components boundaries. In the verified interaction, at least
+one direct dependency is not mocked, however the further dependencies can be mocked.</em></p>
+<div class="figure align-center">
+<object data="https://zaurnasibov.com/articles/2025-02-08-hexarch-lightweight-integration-tests/api-sociable-test.svg" style="width: 100%;" type="image/svg+xml">A diagram of sociable API test</object>
+<p class="caption">A classical-style HTTP adapter test.</p>
+</div>
+<p>Finally, we utilise higher-level integration or end-to-end tests to verify the behaviour flow throughout the application and its dependencies.
+Nowadays, tools such as <a class="reference external" href="https://testcontainers.com/?language=python">Testcontainers</a>
+allow the isolation of these tests by spinning up the real databases, caches
+and other dependencies for a short test lifetime.
+However, this setup might be too resource-intensive, or other downstream dependencies,
+that cannot be dockerised may need to come into play.
+This leaves us with slow and fragile classical e2e tests in an
+integration environment.</p>
+<p>What if we push sociable tests a bit further?
+We can mock the layer which stands between our adapters and external dependencies.
+This ensures that an API test flow passes forward
+and back through the whole application
+in a deterministic and isolated environment:</p>
+<div class="figure align-center">
+<object data="https://zaurnasibov.com/articles/2025-02-08-hexarch-lightweight-integration-tests/api-lightweight-integration-test.svg" style="width: 100%;" type="image/svg+xml">A diagram of a lightweight integration API test.</object>
+<p class="caption">A lightweight integration test.</p>
+</div>
+</div>
+<div class="section" id="architecture-revised">
+<h2><a class="toc-backref" href="#toc-entry-4">Architecture revised</a></h2>
+<p>Software architecture is important because it allows us to independently evolve
+different parts of the application and delay decisions.
+In a way, architecture constrains us, but helps keep the system organised.</p>
+<p>My presentation of Hexagonal Architecture in this series of articles,
+especially the testing part, was a bit bloated.
+Alistair Cockburn
+<a class="reference external" href="https://alistair.cockburn.us/hexagonal-architecture">said nothing</a>
+about the application's (core) internals.
+It's up to us whether we introduce &quot;Service&quot;, &quot;Domain&quot; or any other layer
+or concept.
+Just think: if an HTTP adapter handles a GET request to return
+raw data from a single table in the database,
+why even bother with &quot;Service&quot; and &quot;Domain&quot; layers
+which would only perform data transformations?</p>
+<p>So, when it comes to lightweight integration testing,
+we leave the application core as a black box,
+and interact with adapters only.</p>
+<div class="figure align-center">
+<object data="https://zaurnasibov.com/articles/2025-02-08-hexarch-lightweight-integration-tests/hexagonal-core.svg" style="width: 100%;" type="image/svg+xml">A hexagonal architecture application diagram</object>
+<p class="caption">We are free to implement the application core in any way
+when applying Hexagonal Architecture principles.</p>
+</div>
+</div>
+<div class="section" id="lightweight-integration-tests-driven-development">
+<h2><a class="toc-backref" href="#toc-entry-5">Lightweight integration tests -driven development</a></h2>
+<p>A classical end-to-end test is a poor development driver.
+It takes minutes, sometimes tens of minutes to run, often breaks,
+has a complicated setup, and ... (your favourite fallacies here).
+A lightweight integration test is somewhat better: it's fast
+and fully under our control.
+However, it rather drives adapters development,
+<strong>NOT</strong> the application core development.
+It also requires a complicates setup, especially when it comes
+to test doubles.</p>
+<p>Nevertheless, let's explore how such a test drives implementation.
+What steps would we take?</p>
+<ol class="arabic simple">
+<li>Pick a behaviour unit.</li>
+<li>Write a test for its API, asserting only the response.</li>
+<li>Write a minimal implementation to pass the test.</li>
+<li>If the behaviour is not pure and hits downstream dependencies,
+write a test similar to (2), but <strong>this time verify the dependency interaction.</strong>
+Mock the dependencies and verify interactions via these mocks.</li>
+<li>Write a minimal implementation to pass the test.</li>
+<li>If any other tests break, fix them. <strong>Here, you enter
+a recursion, starting at step 1 with a broken behaviour unit</strong>.</li>
+<li>Refactor. Remove duplication in application and tests code.
+Apply Clean/Hexagonal architecture principles when necessary.</li>
+</ol>
+<p>Let's walk through these steps by implementing the original
+&quot;Vote for an article&quot; use case from scratch.
+I <strong>will not</strong> include implementation code here, just the tests code.
+That's because the implementation stays the same, but the tests
+are quite different.</p>
+</div>
+<div class="section" id="use-case-vote-for-an-article">
+<h2><a class="toc-backref" href="#toc-entry-6">Use case: Vote for an article</a></h2>
+<p>Let's recap the requirements for this use case:</p>
+<ol class="arabic simple">
+<li>Every article has a rating.</li>
+<li>Users can change an article's rating by either
+&quot;upvoting&quot; or &quot;downvoting&quot; it.</li>
+<li>To vote on an article, a user's karma (their user rating)
+needs to be higher than 5</li>
+<li>A user can only vote on each article once.</li>
+</ol>
+<p>This translates into the following user story:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">Given </span><span class="nf">A registered user</span>
+<span class="nf">      who can vote on articles.</span>
+<span class="k">When </span><span class="nf">they vote on an article.</span>
+<span class="k">Then </span><span class="nf">the article&#39;s rating changes to reflect their vote.</span>
+</pre></div></td></tr></table></div>
+<div class="section" id="pick-a-behaviour-unit">
+<h3>1. Pick a behaviour unit</h3>
+<p>We start with a happy case scenario.
+Our TODO list looks like the following:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><span class="gu">### TODO</span>
+
+<span class="k">* [ ]</span> Test that &quot;When user successfully votes for an article,
+      the system responds with HTTP CREATED status and the vote details&quot;.
+<span class="k">* [ ]</span> Implement the view which handles voting for articles.
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="write-a-test-for-its-api">
+<h3>2. Write a test for its API</h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_when_user__successfully_votes_for_existing_article__system_returns_http_created_with_vote_details</span><span class="p">():</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">post_article_vote</span><span class="p">(</span>
+        <span class="n">article_id</span><span class="o">=</span><span class="s1">&#39;3f577757-0000-0000-0000-000000000000&#39;</span><span class="p">,</span>
+        <span class="n">user_id</span><span class="o">=</span><span class="s1">&#39;9af8961e-0000-0000-0000-000000000000&#39;</span><span class="p">,</span>
+        <span class="n">vote</span><span class="o">=</span><span class="s1">&#39;DOWN&#39;</span>
+    <span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">CREATED</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="p">{</span>
+        <span class="s1">&#39;article_id&#39;</span><span class="p">:</span> <span class="s1">&#39;3f577757-0000-0000-0000-000000000000&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="s1">&#39;9af8961e-0000-0000-0000-000000000000&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;vote&#39;</span><span class="p">:</span> <span class="s1">&#39;DOWN&#39;</span>
+    <span class="p">}</span>
+</pre></div></td></tr></table></div>
+<p>Here <tt class="docutils literal">post_article_vote()</tt> is a helper function which invokes the view via
+<tt class="docutils literal">APIRequestFactory</tt>. This keeps the tests fast and limits the context to
+the strictly necessary pieces.</p>
+<p>We run the test and it predictably fails.</p>
+</div>
+<div class="section" id="write-a-minimal-implementation-to-pass-the-test">
+<h3>3. Write a minimal implementation to pass the test</h3>
+<p>The first round implementation which passes this test is amazingly simple:
+the view just echoes the posted data.</p>
+<div class="figure align-center">
+<object data="https://zaurnasibov.com/articles/2025-02-08-hexarch-lightweight-integration-tests/api-sociable-test-echo.svg" style="width: 100%;" type="image/svg+xml">Echo HTTP request payload in response.</object>
+<p class="caption">The minimal implementation which passes the test - echoing
+POST payload back.</p>
+</div>
+<p>Is that it?
+Does the API interaction fully describes the system behaviour?
+Not really, because this behaviour is not pure, i.e. it has side effects,
+and we need to store the vote somewhere.</p>
+</div>
+<div class="section" id="write-a-test-to-verify-downstream-interaction">
+<h3>4. Write a test to verify downstream interaction</h3>
+<div class="section" id="mocking-django-model-persistence">
+<h4>Mocking Django model persistence</h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><span class="gu">### TODO</span>
+
+<span class="k">* [ ]</span> Test that &quot;When user successfully votes for an article,
+      the system persists the vote&quot;
+<span class="k">* [ ]</span> Implement persisting the vote.
+<span class="k">* [X]</span> Test that &quot;When user successfully votes for an article,
+      the system responds with HTTP CREATED status and the vote details&quot;.
+<span class="k">* [X]</span> Implement the view which handles voting for articles
+</pre></div></td></tr></table></div>
+<p>We're using a database for storage, and Django provides out-of-the box tools
+to run tests with a database backend.
+You could use an in-memory SQLite, spin up a heavier DB in a Docker container,
+or even use a shared database (oh the horror!).
+But in my book, all these methods are rather integration tests, than unit tests,
+because you are not really testing the application in isolation anymore.
+The same applies to other integrations like message queues, event busses,
+downstream services, file operations etc.</p>
+<p>What we can do though, is mock and spy on the persistence mechanisms that
+are furthest to the right (from the application perspective) or at the very top
+(from Django's perspective).
+For instance, we can mock a model's <tt class="docutils literal">save()</tt> method and spy on it.
+We can even create a pytest fixture like this:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mock_persisting_article_vote</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">ArticleVoteEntity</span><span class="p">,</span> <span class="s1">&#39;save&#39;</span><span class="p">,</span> <span class="n">autospec</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">mock</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_mock_persisting_article_vote</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">mock</span>
+    <span class="k">yield</span> <span class="n">_mock_persisting_article_vote</span>
+</pre></div></td></tr></table></div>
+<p>Now we can spy on the <tt class="docutils literal">save()</tt> method calls and verify the instance details
+passed as <tt class="docutils literal">self</tt> argument.
+But let's write a test first!</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_when_user__successfully_votes_for_existing_article__system_persists_the_vote_in_the_database</span><span class="p">(</span>
+    <span class="n">mock_persisting_article_vote</span><span class="p">,</span>
+    <span class="n">post_article_vote</span>
+<span class="p">):</span>
+    <span class="n">spy</span> <span class="o">=</span> <span class="n">mock_persisting_article_vote</span><span class="p">()</span>
+
+    <span class="n">post_article_vote</span><span class="p">(</span>
+        <span class="n">article_id</span><span class="o">=</span><span class="s1">&#39;3f577757-0000-0000-0000-000000000000&#39;</span><span class="p">,</span>
+        <span class="n">user_id</span><span class="o">=</span><span class="s1">&#39;9af8961e-0000-0000-0000-000000000000&#39;</span><span class="p">,</span>
+        <span class="n">vote</span><span class="o">=</span><span class="s1">&#39;down&#39;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># use the captured ``self`` value from ArticleVoteEntity().save()</span>
+    <span class="n">entity</span> <span class="o">=</span> <span class="n">spy</span><span class="o">.</span><span class="n">call_args</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="n">entity</span><span class="o">.</span><span class="n">article_id</span> <span class="o">==</span> <span class="n">UUID</span><span class="p">(</span><span class="s1">&#39;3f577757-0000-0000-0000-000000000000&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">entity</span><span class="o">.</span><span class="n">user_id</span> <span class="o">==</span> <span class="n">UUID</span><span class="p">(</span><span class="s1">&#39;9af8961e-0000-0000-0000-000000000000&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">entity</span><span class="o">.</span><span class="n">vote</span> <span class="o">==</span> <span class="s1">&#39;down&#39;</span>
+</pre></div></td></tr></table></div>
+<div class="figure align-center">
+<object data="https://zaurnasibov.com/articles/2025-02-08-hexarch-lightweight-integration-tests/mock-assert.svg" style="width: 100%;" type="image/svg+xml">Substitute Django database persistence mechanism with a mock.</object>
+<p class="caption">Substituting Django database persistence mechanism with a mock in a unit test.</p>
+</div>
+</div>
+</div>
+<div class="section" id="write-a-minimal-implementation-to-pass-the-test-1">
+<h3>5. Write a minimal implementation to pass the test</h3>
+<p>The implementation for this can be also naive - we can create and save
+an <tt class="docutils literal">ArticleVoteEntity</tt> from the HTTP POST data.
+A simple and well-known Django Rest Framework flow.</p>
+</div>
+<div class="section" id="refactor">
+<h3>7. Refactor</h3>
+<div class="section" id="mocks-are-for-humans-not-machines">
+<h4>Mocks are for humans, not machines!</h4>
+<p>I personally find <tt class="docutils literal"><span class="pre">spy.call_args[0][0]</span></tt> very ugly and non-intuitive.
+The fact that there is a comment explaining <em>what the line does</em> is already
+a code smell. How about writing a custom spy object which stores the saved
+entity, so that we can get the captured entity via self-explanatory</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_when_user__successfully_votes_for_existing_article__system_persists_the_vote_in_the_database</span><span class="p">(</span><span class="o">...</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="n">entity</span> <span class="o">=</span> <span class="n">spy</span><span class="o">.</span><span class="n">saved_article_voted_entity</span>
+    <span class="k">assert</span> <span class="n">entity</span><span class="o">.</span><span class="n">vote</span> <span class="o">==</span> <span class="s1">&#39;down&#39;</span>
+    <span class="o">...</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SaveArticleVoteEntitySpy</span><span class="p">:</span>
+    <span class="n">saved_article_voted_entity</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ArticleVoteEntity</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_article_vote_entity_mock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="o">*</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="n">_kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saved_article_voted_entity</span> <span class="o">=</span> <span class="n">entity</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mock_persisting_article_vote</span><span class="p">():</span>
+    <span class="n">spy</span> <span class="o">=</span> <span class="n">SaveArticleVoteEntitySpy</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">ArticleVoteEntity</span><span class="p">,</span> <span class="s1">&#39;save&#39;</span><span class="p">,</span> <span class="n">autospec</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">save_mock</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_mock_persisting_article_vote</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">SaveArticleVoteEntitySpy</span><span class="p">:</span>
+            <span class="n">save_mock</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="n">spy</span><span class="o">.</span><span class="n">save_article_vote_entity_mock</span>
+            <span class="k">return</span> <span class="n">spy</span>
+        <span class="k">yield</span> <span class="n">_mock_persisting_article_vote</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="remove-duplication-in-tests">
+<h4>Remove duplication in tests</h4>
+<p>You have probably noticed that the API response and Dependencies interaction
+tests have the similar <em>Given</em> and <em>When</em> or <em>Arrange</em> and <em>Act</em> parts.
+As a matter of fact, they <strong>should</strong> have identical parts because
+we're testing the same behaviour, just from different ends!</p>
+<p>Let's not repeat ourselves.
+One way is to group the behaviour tests in a single class and
+extract the <em>Arrange</em> and <em>Act</em> parts into their own fixtures
+and methods. Now, this might be an overkill for a small setup, but here
+is what I got in the end (<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog4/tests/test_myapp/application/test_api.py">spoiler alert!</a>):</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TestWhenUserSuccessfullyVotesForExistingArticle</span><span class="p">:</span>
+    <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">autouse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">arrange</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">given_a_user_who_can_vote</span><span class="p">,</span>
+        <span class="n">given_no_existing_article_votes</span><span class="p">,</span>
+        <span class="n">mock_persisting_article_vote</span><span class="p">,</span>
+        <span class="n">post_article_vote</span>
+    <span class="p">):</span>
+        <span class="n">given_a_user_who_can_vote</span><span class="p">(</span>
+            <span class="n">UUID</span><span class="p">(</span><span class="s1">&#39;9af8961e-0000-0000-0000-000000000000&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">given_no_existing_article_votes</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">persisting_article_vote_spy</span> <span class="o">=</span> <span class="n">mock_persisting_article_vote</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">post_article_vote</span> <span class="o">=</span> <span class="n">post_article_vote</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">post_article_vote</span><span class="p">(</span>
+            <span class="n">article_id</span><span class="o">=</span><span class="s1">&#39;3f577757-0000-0000-0000-000000000000&#39;</span><span class="p">,</span>
+            <span class="n">user_id</span><span class="o">=</span><span class="s1">&#39;9af8961e-0000-0000-0000-000000000000&#39;</span><span class="p">,</span>
+            <span class="n">vote</span><span class="o">=</span><span class="s1">&#39;down&#39;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_system_returns_http_created_with_vote_details</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">act</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">CREATED</span>
+        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="p">{</span>
+            <span class="s1">&#39;article_id&#39;</span><span class="p">:</span> <span class="s1">&#39;3f577757-0000-0000-0000-000000000000&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="s1">&#39;9af8961e-0000-0000-0000-000000000000&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;vote&#39;</span><span class="p">:</span> <span class="s1">&#39;DOWN&#39;</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_system_persists_the_vote_in_the_database</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">act</span><span class="p">()</span>
+        <span class="n">entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">persisting_article_vote_spy</span><span class="o">.</span><span class="n">saved_article_voted_entity</span>
+        <span class="k">assert</span> <span class="n">entity</span><span class="o">.</span><span class="n">article_id</span> <span class="o">==</span> <span class="n">UUID</span><span class="p">(</span><span class="s1">&#39;3f577757-0000-0000-0000-000000000000&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">entity</span><span class="o">.</span><span class="n">user_id</span> <span class="o">==</span> <span class="n">UUID</span><span class="p">(</span><span class="s1">&#39;9af8961e-0000-0000-0000-000000000000&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">entity</span><span class="o">.</span><span class="n">vote</span> <span class="o">==</span> <span class="s1">&#39;down&#39;</span>
+</pre></div></td></tr></table></div>
+<p>So far, so good, nothing is failing!
+Our next step, however, is going to shake things up a little bit.</p>
+</div>
+</div>
+</div>
+<div class="section" id="use-case-only-existing-user-can-vote-for-an-article">
+<h2><a class="toc-backref" href="#toc-entry-7">Use case: Only existing user can vote for an article</a></h2>
+<div class="section" id="pick-a-behaviour-unit-1">
+<h3>1. Pick a behaviour unit</h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><span class="gu">### TODO</span>
+
+<span class="k">* [ ]</span> Test that only existing user can vote for an article.
+</pre></div></td></tr></table></div>
+<p>First, let's define an existing user as a record in the database.
+Second, our current tests already cast a vote by the given <tt class="docutils literal">user_id</tt>.
+So, no matter how we tweak the &quot;Assert&quot; and &quot;Arrange&quot; (or
+&quot;Then&quot; and &quot;When&quot;) parts of the test, it will pass as long as we keep
+those parts aligned.  We need a new test that <em>will</em> break,
+and guide implementation further:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><span class="gu">### TODO</span>
+
+<span class="k">* [ ]</span> <span class="gs">**Test that a non-existing user can&#39;t vote for an article.**</span>
+<span class="k">* [ ]</span> Test that only an existing user can vote for an article.
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="write-a-test-for-its-api-1">
+<h3>2. Write a test for its API</h3>
+<p>Our system responds with <tt class="docutils literal">HTTP NOT FOUND</tt> in this case:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_when_voting__as_non_existing_user__system_returns_http_not_found_with_error_details</span><span class="p">(</span>
+    <span class="n">given_no_existing_users</span><span class="p">,</span>
+    <span class="n">post_article_vote</span>
+<span class="p">):</span>
+    <span class="n">given_no_existing_users</span><span class="p">()</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">post_article_vote</span><span class="p">(</span>
+        <span class="n">user_id</span><span class="o">=</span><span class="s1">&#39;a3853333-0000-0000-0000-000000000000&#39;</span>
+    <span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">NOT_FOUND</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="p">{</span>
+        <span class="s1">&#39;detail&#39;</span><span class="p">:</span> <span class="s2">&quot;User &#39;a3853333-0000-0000-0000-000000000000&#39; not found&quot;</span><span class="p">,</span>
+        <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="mi">404</span><span class="p">,</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Error&#39;</span>
+    <span class="p">}</span>
+</pre></div></td></tr></table></div>
+<p>This looks simple - we setup a system that doesn't have any users and then
+try to vote. The system should respond with an error.
+<tt class="docutils literal">given_no_existing_user()</tt> is a stub which returns no users when you try
+to search for them. In Django terms, that's a temporary <tt class="docutils literal">ObjectManager</tt>,
+with the necessary methods' stubs:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">VotingUserEntityEmptyObjectManagerMock</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="n">_kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VotingUserEntity</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">VotingUserEntity</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">()</span>
+</pre></div></td></tr></table></div>
+<p>The fixture substitutes the object manager for a single test run:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">given_no_existing_users</span><span class="p">():</span>
+    <span class="n">original_voting_user_entity_manager</span> <span class="o">=</span> <span class="n">VotingUserEntity</span><span class="o">.</span><span class="n">objects</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_given_no_existing_user</span><span class="p">():</span>
+        <span class="n">VotingUserEntity</span><span class="o">.</span><span class="n">objects</span> <span class="o">=</span> <span class="n">VotingUserEntityObjectManagerMock</span><span class="p">()</span>
+    <span class="k">yield</span> <span class="n">_given_no_existing_user</span>
+
+    <span class="n">VotingUserEntity</span><span class="o">.</span><span class="n">objects</span> <span class="o">=</span> <span class="n">original_voting_user_entity_manager</span>
+</pre></div></td></tr></table></div>
+<p>If we run the test, it fails because the logic implementation is missing.
+To turn the test green, we need to query the database, check whether
+a user exists, and return <tt class="docutils literal">HTTP 404</tt> otherwise.
+Once that is ready, the last test passes,
+however, <strong>the first two tests fail</strong> when trying to access the database
+since there is no way to set up existing users yet:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span>Unexpected error occurred: Database access not allowed,
+use the &quot;django_db&quot; mark, or the &quot;db&quot; or &quot;transactional_db&quot; fixtures
+to enable it.
+</pre></div></td></tr></table></div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Think about it for a sec! How would you mock an existing user?</p>
+</div>
+</div>
+<div class="section" id="fix-failing-tests">
+<h3>6. Fix failing tests</h3>
+<div class="section" id="mocking-existing-users">
+<h4>Mocking existing users</h4>
+<p>We can mock existing users the same way we mocked &quot;no existing users&quot; - by
+mocking the objects manager. First, we'll enable the manager to hold аnd return
+a <tt class="docutils literal">VotingUserEntity</tt> stub:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">VotingUserEntityObjectManagerMock</span><span class="p">:</span>
+    <span class="n">stub</span><span class="p">:</span> <span class="n">VotingUserEntity</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stub</span><span class="p">:</span> <span class="n">VotingUserEntity</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stub</span> <span class="o">=</span> <span class="n">stub</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="n">_kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VotingUserEntity</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">VotingUserEntity</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span>
+</pre></div></td></tr></table></div>
+<p>You can probably see where this is going, right?
+All we need to add is a fixture builder:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">given_voting_user</span><span class="p">():</span>
+    <span class="n">original_voting_user_entity_manager</span> <span class="o">=</span> <span class="n">VotingUserEntity</span><span class="o">.</span><span class="n">objects</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_given_voting_user</span><span class="p">(</span>
+        <span class="n">user_id</span><span class="p">:</span> <span class="n">UUID</span> <span class="o">=</span> <span class="n">uuid4</span><span class="p">(),</span>
+        <span class="n">karma</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="p">):</span>
+        <span class="n">VotingUserEntity</span><span class="o">.</span><span class="n">objects</span> <span class="o">=</span> <span class="n">VotingUserEntityObjectManagerMock</span><span class="p">(</span>
+            <span class="n">VotingUserEntity</span><span class="p">(</span>
+                <span class="n">user_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">,</span>
+                <span class="n">karma</span><span class="o">=</span><span class="n">karma</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">yield</span> <span class="n">_given_voting_user</span>
+
+    <span class="n">VotingUserEntity</span><span class="o">.</span><span class="n">objects</span> <span class="o">=</span> <span class="n">original_voting_user_entity_manager</span>
+</pre></div></td></tr></table></div>
+</div>
+</div>
+<div class="section" id="refactor-big">
+<h3>7. Refactor BIG</h3>
+<p>Did you notice that we have already implemented a couple of behaviour units
+inside a Django View, i.e. an API adapter? At this point we can start refactoring
+the code by adding the necessary abstractions, service, and domain layers,
+and moving Django model interaction code to SPI adapters.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is where things get a bit controversial.
+Remember that tests are meant to guide development.
+Hence, we must drive the development of the application core
+via proper solitary and sociable tests!</p>
+</div>
+<p>We are able do these refactorings because our tests cut through
+all the application layers and verify the behavior on its edges.</p>
+</div>
+</div>
+<div class="section" id="the-price-to-pay">
+<h2><a class="toc-backref" href="#toc-entry-8">The price to pay</a></h2>
+<p>The lightweight integration tests let us quickly test application as a whole,
+using mocks only at the system edges.
+However, these mocks can become quite sophisticated because a single
+use case triggered at the API often results in many downstream
+interactions.
+For example, imagine a scenario where the application returns
+HTTP 409 - Conflict, when someone votes for an article a second time.
+We'll need to mock <tt class="docutils literal">User.objects</tt> (a Django DB model ObjectManager)
+to provide an existing user, as well as provide an existing article
+via a mocked <tt class="docutils literal">Article.objects</tt> manager.</p>
+<p>At some point, the mocks can become <em>too</em> sophisticated and create a mess
+of their own.
+That's when <em>real</em> integration testing alternatives like in-memory SQLite,
+or even <a class="reference external" href="https://testcontainers.com/">Testcontainers</a> start making more sense.
+We may loose the rapid feedback of unit tests, but save ourselves a lot of
+time spent on maintenance of messy test doubles.</p>
+</div>
+<div class="section" id="conclusion">
+<h2><a class="toc-backref" href="#toc-entry-9">Conclusion</a></h2>
+<p>Solitary unit tests are excellent for developing individual components in isolation.
+Sociable unit tests are a classical approach to testing pieces together, mocking
+the complicated dependencies, for example, those which cross the I/O boundary.
+Both solitary and sociable unit tests are my tools of choice
+for test-driven development.</p>
+<p>Lightweight integration tests ensures that all components
+work together correctly as a complete application,
+while preserving the speed and flexibility of unit tests.
+However, we need to invest significantly in edge mocks to emulate rightmost
+interactions. Moreover, these tests primarily drive the implementation of
+application edges - the adapters.</p>
+<p>Lightweight integration tests are a good alternative
+to either missing integration tests or integration tests which require
+an equally complicated setup.
+They can be quite useful when refactoring a legacy system, that doesn't have
+any tests. We can capture the interaction on the edges and ensure that
+it doesn't change during development.</p>
+</div>
+<div class="section" id="acknowledgements">
+<h2><a class="toc-backref" href="#toc-entry-10">Acknowledgements</a></h2>
+<p>Once again, <a class="reference external" href="https://github.com/jmp">Jarkko &quot;jmp&quot; Piiroinen</a>
+nudged me to dive deeper and challenge
+my own understanding of the subject.
+I'm very grateful for your input, Jarkko!</p>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://zaurnasibov.com/tag/architecture.html">architecture</a>
+      <a href="https://zaurnasibov.com/tag/django.html">django</a>
+      <a href="https://zaurnasibov.com/tag/hexagonal-architecture.html">hexagonal architecture</a>
+      <a href="https://zaurnasibov.com/tag/lightweight-integration-tests.html">lightweight integration tests</a>
+      <a href="https://zaurnasibov.com/tag/programming.html">programming</a>
+      <a href="https://zaurnasibov.com/tag/python.html">python</a>
+      <a href="https://zaurnasibov.com/tag/testing.html">testing</a>
+    </p>
+  </div>
+
+
+
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://zaurnasibov.com/posts/2024/12/29/peopleware.html" title="Peopleware">
+      <i class="fa fa-angle-left"></i> Previous Post
+    </a>
+    <a class="btn float-right" href="https://zaurnasibov.com/posts/2025/07/20/framework-laptop-is-awesome.html" title="Framework Laptop is awesome!">
+      Next Post <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2025 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zaur's Thoughts ",
+  "url" : "https://zaurnasibov.com",
+  "image": "/static/images/logo.png",
+  "description": ""
+}
+</script><script defer
+  src='https://static.cloudflareinsights.com/beacon.min.js'
+  data-cf-beacon='{"token": "1147ebca9f9247a38190f2958de429a8"}'>
+</script>
+
+</body>
+</html>

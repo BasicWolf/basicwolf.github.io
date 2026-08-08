@@ -1,0 +1,987 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Lexend+Deca:wght@100..900&display=swap&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://zaurnasibov.com/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/fontawesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/brands.min.css">
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com/theme/font-awesome/css/solid.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://zaurnasibov.com//static/css/extra.css">
+
+  <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="/static/images/favicon.png" type="image/x-icon">
+
+
+  <link href="https://zaurnasibov.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zaur's Thoughts Atom">
+
+
+
+
+
+
+
+
+
+<meta name="author" content="Zaur Nasibov" />
+<meta name="description" content="Welcome to the second part of the article series, which cover principles of Hexagonal architecture, Dependency Injection, Domain-Driven Design and applies these all to Python and Django application design." />
+<meta name="keywords" content="architecture, DDD, dependency injection, hexagonal architecture, programming, python">
+
+
+  <meta property="og:site_name" content="Zaur's Thoughts"/>
+  <meta property="og:title" content="Hexagonal architecture and Python - Part II: Domain, Application Services, Ports and Adapters"/>
+  <meta property="og:description" content="Welcome to the second part of the article series, which cover principles of Hexagonal architecture, Dependency Injection, Domain-Driven Design and applies these all to Python and Django application design."/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://zaurnasibov.com/posts/2022/09/18/hexarch_di_python_part_2.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2022-09-18 12:00:00+03:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://zaurnasibov.com/author/zaur-nasibov.html">
+  <meta property="article:section" content="Articles"/>
+  <meta property="article:tag" content="architecture"/>
+  <meta property="article:tag" content="DDD"/>
+  <meta property="article:tag" content="dependency injection"/>
+  <meta property="article:tag" content="hexagonal architecture"/>
+  <meta property="article:tag" content="programming"/>
+  <meta property="article:tag" content="python"/>
+  <meta property="og:image" content="/static/images/logo.png">
+
+  <title>Zaur's Thoughts &ndash; Hexagonal architecture and Python - Part II: Domain, Application Services, Ports and Adapters</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://zaurnasibov.com/">
+      <img src="/static/images/logo.png" alt="Zaur's Thoughts" title="Zaur's Thoughts">
+    </a>
+
+    <h1>
+      <a href="https://zaurnasibov.com/">Zaur's Thoughts</a>
+    </h1>
+
+    <p>Zaurun Fikirləri</p>
+
+
+    <nav>
+      <ul class="list">
+
+          <li>
+            <a target="_self" href="/posts.html" ><strong>Articles</strong></a>
+          </li>
+          <li>
+            <a target="_self" href="/pages/shorts.html" >Shorts</a>
+          </li>
+          <li>
+            <a target="_self" href="/category/books.html" >Books</a>
+          </li>
+
+
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/bookmarks.html#bookmarks">
+                Bookmarks
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/memes.html#memes">
+                Memes
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/projects.html#projects">
+                Projects
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://zaurnasibov.com/pages/about.html#about">
+                About
+              </a>
+            </li>
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/zaur-nasibov-44610853/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/basicwolf"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-rss"
+           href="/feeds/all.atom.xml"
+           target="_blank">
+          <i class="fa-solid fa-rss"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://zaurnasibov.com/">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/tags.html">Tags</a>
+  <a href="/pages/privacy-policy.html">Privacy Policy</a>
+</nav>
+
+<article>
+  <header>
+      
+    <h1 id="hexarch_di_python_part_2">Hexagonal architecture and Python - Part II: Domain,  Application Services, Ports and Adapters</h1>
+    <p>
+      Posted on 18 September 2022 in <a href="https://zaurnasibov.com/category/articles.html">Articles</a>
+
+        &#8226; 11 min read
+    </p>
+  </header>
+
+
+  <div>
+    <img alt="Python logo in a hexagon with Roman II literal" class="align-center" id="hexarch-di-python-part-2" src="https://zaurnasibov.com/articles/2022_09_18_hexarch_di_python_part_2/hexagonal-python-2.png" />
+<ul class="simple">
+<li><a class="reference external" href="https://zaurnasibov.com/posts/2021/10/30/hexarch_di_python_part_1.html">Part I: Dependency Injection and componential architecture</a></li>
+<li><a class="reference external" href="https://zaurnasibov.com/posts/2022/09/18/hexarch_di_python_part_2.html">Part II: Domain,  Application Services, Ports and Adapters</a></li>
+<li><a class="reference external" href="https://zaurnasibov.com/posts/2022/12/31/hexarch_di_python_part_3.html">Part III: Persistence, Transactions, Exceptions and The Final Assembly</a></li>
+<li><a class="reference external" href="https://zaurnasibov.com/posts/2025/05/10/hexarch-python-part-4-lightweight-integration-tests.html">Part IV: Lightweight integration tests</a></li>
+<li><a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/tree/blog">The code</a></li>
+</ul>
+<div class="section" id="update">
+<h2>Update</h2>
+<p><strong>February 2025</strong></p>
+<p><em>Originally, I said that the domain model is the first thing to put in code.
+Today, I always start with public interfaces, and in the case of RESTful services,
+the API. Though what I consider &quot;the right way&quot; has changed, I left this article
+almost intact, only commenting in a few places why API should be **coded*</em> first.*</p>
+</div>
+<div class="section" id="intro">
+<h2>Intro</h2>
+<p>Now that you are familiar with the basic principles of Hexagonal architecture
+(<a class="reference external" href="https://zaurnasibov.com/posts/2021/10/30/hexarch_di_python_part_1.html">see part I</a>)
+let's try implementing a Django-based application following these principles.
+I've chosen Django for this exercise to demonstrate that even an opinionated framework is not an obstacle for Hexagonal architecture.
+What about the other web frameworks, like FastAPI, Flask, AIOHTTP with SQLAchemy or a NoSQL data store?</p>
+<p>Hexagonal architecture painlessly decouples the business logic from the technical details of
+HTTP communication, file system and database access, messaging and so on.
+You can swap Django with FastAPI,
+get rid of Django ORM and go with SQLAlchemy,
+and the business logic implementation remains the same!</p>
+<p>The source code of the example is available at
+<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/tree/blog">BasicWolf/hexagonal-architecture-django</a>
+Github repository.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Clone the repository before reading further. The layered hexagonal architecture
+means deeply nested python packages. It's much easier to follow the article when the example code is available locally.</p>
+</div>
+</div>
+<div class="section" id="project-structure">
+<h2>Project structure</h2>
+<p>A Django project is easily recognized by the top-level structure:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span>src/
+  hexarch_project/             # Django application essentials: wsgi.py, urls.py, settings.py
+  myapp/
+    migrations/                # Django migrations
+    apps.py                    # Django app configuration (creates dependencies container instance)
+    dependencies_container.py  # Dependencies container
+    models.py                  # Django DB models (imports models from SPI adapters)
+    urls.py                    # Django urls mappings
+    ⋮
+    application/               # application code; the structure follows the principles of hexagonal architecture
+</pre></div></td></tr></table></div>
+<p>Under the surface, the application <em>directory</em> structure is much deeper.
+From Python's perspective, all directories under <tt class="docutils literal">application/</tt> are <strong>namespace-packages</strong>
+i.e. there is no <tt class="docutils literal">__init__.py</tt> in them.
+The namespace packages allow <strong>the tests packages structure to reflect the application packages structure</strong>.</p>
+<p>The example application is structured as follows:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span>domain/            # Business domain models, services
+  model/
+  service/
+port/              # API and SPI ports (interfaces)
+  api/
+  spi/
+adapter/           # API and SPI ports implementation
+  api/
+    http/          # Django views and serializers
+    messaging/
+    ⋮
+  spi/
+    persistence/
+      entity/      # Django models
+      exceptions/  # Generic (django-independent) persistence exceptions
+      repository/  # High-level persistence abstraction
+    messaging/
+    ⋮
+service/           # Application services
+</pre></div></td></tr></table></div>
+<p>Notice that Django is used only in adapters.
+Django Views are <tt class="docutils literal">HTTP API</tt> adapters and Django Models are
+<tt class="docutils literal">Persistence SPI</tt> adapters.
+The rest of the project is independent from the framework.</p>
+</div>
+<div class="section" id="use-case-upvote-an-article">
+<h2>Use case: Upvote an Article</h2>
+<p>Now, let's take a look at an example use case.
+Imagine a web blogging platform in development.
+We want to add articles rating and let the users influence them.</p>
+<p>We gathered with the end-users, platform experts, QA, and other stakeholders
+and drew some ideas:</p>
+<ol class="arabic simple">
+<li>Every article has a rating.</li>
+<li>A user can change an article rating.</li>
+<li>To change the article rating, a user either &quot;upvotes&quot; or &quot;downvotes&quot;.</li>
+<li>Users can vote for the article only if their &quot;karma&quot; (i.e. user rating) value is high enough, greater than 5.</li>
+<li>A user can vote once per article.</li>
+</ol>
+<p>A user story is born:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><span class="nf">As a user of a blogging platform</span>
+<span class="k">I </span><span class="nf">want to give my vote,</span>
+<span class="nf">So that the article&#39;s rating changes.</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="where-do-we-start">
+<h2>Where do we start?</h2>
+<p>That's a simple question, isn't it?
+Let's consider the options:</p>
+<ol class="arabic">
+<li><p class="first"><strong>Database</strong>.
+It is important to integrate early with the downstream dependencies.
+The invisible bottlenecks could bring unpleasant surprises
+if integration is postponed till the last moment.
+Yet, a database is just storage and is usually located at
+the bottom layer of the application infrastructure.
+Do we really want to implement the database first and
+let it influence the application implementation?</p>
+</li>
+<li><p class="first"><strong>Public API</strong>. Public API is the contract with the outer world.
+Its best design emerges when API consumers and producers collaborate.
+After the API specification is ready, the consumers and the producer (our service) can
+implement their part of the contract independently, and
+start integration as early as possible, even when no domain/business logic
+code exists yet!</p>
+<p><em>We should always start by studying the domain, building shared understanding
+and deriving API from a detailed domain model. But when it comes to putting
+things in code, nowadays I tend to release API integration components
+as early as possible.
+In the early stages, I hard-code the returned values and focus on making sure
+that consumers can integrate. Only then do I start implementing the actual
+business logic.</em></p>
+</li>
+<li><p class="first"><strong>Domain</strong>. Starting with the domain model gives an advantage:
+we can test our <strong>understanding</strong> of the domain model, by expressing it
+in the code.
+Behaviour-driven development is essential at this stage.
+BDD brings techniques and tools to test the domain model code against
+the previously defined user stories.
+The problem is that we don't have the means to interact with the model yet.
+Which means that we have to go API first.</p>
+<p><em>However, the article continues as originally put - the Domain model
+is implemented before API View. The flow of implementing the API first
+is quite different from domain-first.</em></p>
+</li>
+</ol>
+</div>
+<div class="section" id="the-domain">
+<h2>The domain</h2>
+<p>A discussion between the developers, users and domain experts gives a birth to
+a domain-specific language, where each term has a particular meaning.
+We call this language - <a class="reference external" href="https://www.martinfowler.com/bliki/UbiquitousLanguage.html">Ubiquitous language</a> (UL).</p>
+<p>In Hexagonal architecture, the domain layer encapsulates the business logic and business processes.
+On the code side, the UL terms are used in the names of classes, methods, and other code units.
+Thus, by looking at the code, you can always tell how it is related to the problem domain.</p>
+<p>For example, a vote can be represented via the following enumeration
+[<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog/src/myapp/application/domain/model/vote.py#L4">source</a>]:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/application/domain/model/vote.py</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Vote</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">UP</span> <span class="o">=</span> <span class="s1">&#39;up&#39;</span>
+    <span class="n">DOWN</span> <span class="o">=</span> <span class="s1">&#39;down&#39;</span>
+</pre></div></td></tr></table></div>
+<p>Karma is an explicit type alias
+[<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog/src/myapp/application/domain/model/karma.py">source</a>]:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/application/domain/model/karma.py</span>
+
+<span class="n">Karma</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s1">&#39;Karma&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>The most complex class of the domain is <tt class="docutils literal">VotingUser</tt>,
+which represents a user that votes for an article.
+The <tt class="docutils literal">karma</tt> value determines whether the user can vote.
+We also need to know whether the user has already voted to prevent repeat voting.
+Voting for an article produces a result:</p>
+<img alt="uml diagram" class="align-center" src="https://zaurnasibov.com/images/4dee4275.png" />
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">VotingUser</span><span class="p">:</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">UserId</span>
+    <span class="n">karma</span><span class="p">:</span> <span class="n">Karma</span>
+    <span class="n">votes_for_articles</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ArticleVote</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">vote_for_article</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">article_id</span><span class="p">:</span> <span class="n">ArticleId</span><span class="p">,</span>
+        <span class="n">vote</span><span class="p">:</span> <span class="n">Vote</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VoteForArticleResult</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_user_voted_for_article</span><span class="p">(</span><span class="n">article_id</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">AlreadyVotedResult</span><span class="p">(</span><span class="n">article_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_karma_enough_for_voting</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">InsufficientKarmaResult</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+        <span class="c1">## IMPORTANT! The model state changes! ##</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">votes_for_articles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">ArticleVote</span><span class="p">(</span><span class="n">article_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">vote</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">SuccessfullyVotedResult</span><span class="p">(</span><span class="n">article_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">vote</span><span class="p">)</span>
+
+    <span class="o">...</span>
+</pre></div></td></tr></table></div>
+<p>Notice that even the private methods <tt class="docutils literal">_user_voted_for_article()</tt> and <tt class="docutils literal">_karma_enough_for_voting</tt>
+follow the domain language. A fellow developer can easily map the code
+to the domain model and business rules.</p>
+<p>You may wonder what <tt class="docutils literal">VoteForArticleResult</tt> and <tt class="docutils literal">SuccessfullyVotedResult</tt> are.
+Recall the basics of Hexagonal architecture from
+<a class="reference external" href="https://zaurnasibov.com/posts/2021/10/30/hexarch_di_python_part_1.html">Part I</a>:
+..</p>
+<blockquote>
+Dependencies are directed from the outer layers to the inner centre.</blockquote>
+<p><tt class="docutils literal">VoteForArticleResult</tt>
+[<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog/src/myapp/application/domain/model/vote_for_article_result.py#L10">source</a>]
+is a domain data transfer object model.
+It carries the voting result from the innermost application layer - the Domain
+- to the outermost API adapter layer.</p>
+<p>Writing tests for a domain model is straightforward since <tt class="docutils literal"><span class="pre">VotingUser.vote_for_article(...)</span></tt> return value
+is determined only by the <tt class="docutils literal">VotingUser</tt> instance state and the method input values.
+With meaningful fixtures names, tests turn into simple scenarios,
+for example
+[<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog/tests/test_myapp/application/domain/model/test_voting_user.py#L16">source</a>]:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># tests/test_myapp/application/domain/model/test_voting_user.py</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_vote_for_article_twice_returns_already_voted_result</span><span class="p">(</span>
+    <span class="n">voting_user_who_has_voted</span><span class="p">:</span> <span class="n">VotingUser</span><span class="p">,</span>
+    <span class="n">article_id_for_which_user_has_voted</span><span class="p">:</span> <span class="n">ArticleId</span><span class="p">,</span>
+    <span class="n">a_vote</span><span class="p">:</span> <span class="n">Vote</span><span class="p">,</span>
+    <span class="n">expected_already_voted_result</span><span class="p">:</span> <span class="n">AlreadyVotedResult</span>
+<span class="p">):</span>
+    <span class="n">voting_result</span> <span class="o">=</span> <span class="n">voting_user_who_has_voted</span><span class="o">.</span><span class="n">vote_for_article</span><span class="p">(</span>
+        <span class="n">article_id_for_which_user_has_voted</span><span class="p">,</span>
+        <span class="n">a_vote</span>
+    <span class="p">)</span>
+    <span class="k">assert</span> <span class="n">voting_result</span> <span class="o">==</span> <span class="n">expected_already_voted_result</span>
+</pre></div></td></tr></table></div>
+<p>Once the domain model is fully implemented, we switch our focus to its
+primary users - application services.</p>
+</div>
+<div class="section" id="application-service-a-skeleton">
+<h2>Application service: a skeleton</h2>
+<p>Application services are the conductors that orchestrate processes and data flow in the application.
+An application service implements one or more related use cases and invokes
+all the necessary dependencies required to perform these use cases.
+The service implementation can start with a single return statement only:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/application/service/article_rating_service.py</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ArticleRatingService</span><span class="p">(</span>
+    <span class="n">VoteForArticleUseCase</span>
+<span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vote_for_article</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="n">VoteForArticleCommand</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VoteForArticleResult</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">SuccessfullyVotedResult</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">.</span><span class="n">article_id</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">.</span><span class="n">user_id</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">.</span><span class="n">vote</span>
+        <span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>This dummy implementation is good enough to echo the commands back,
+but much more needed to execute the use case.
+For example, where does the application service get a <tt class="docutils literal">VotingUser</tt>?</p>
+</div>
+<div class="section" id="spi-ports">
+<h2>SPI Ports</h2>
+<p>In Hexagonal Architecture, an application service communicates with the outer world
+via Service Provider Interface (SPI) ports.
+The application service fetches the users by <tt class="docutils literal">user_id</tt> and <tt class="docutils literal">article_id</tt>.
+That can be expressed in a <tt class="docutils literal">FindVotingUserPort</tt> interface as follows
+[<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog/src/myapp/application/port/spi/find_voting_user_port.py#L8">source</a>]:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/application/port/spi/find_voting_user_port.py</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FindVotingUserPort</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_voting_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">article_id</span><span class="p">:</span> <span class="n">ArticleId</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="n">UserId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VotingUser</span><span class="p">:</span>
+        <span class="k">pass</span>
+</pre></div></td></tr></table></div>
+<p>We add <tt class="docutils literal">FindVotingUserPort</tt> as a dependency to the application service.
+In practice, we add a respective field and a way to initialize it via constructor:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/application/service/article_rating_service.py</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ArticleRatingService</span><span class="p">(</span>
+    <span class="n">VoteForArticleUseCase</span>
+<span class="p">):</span>
+    <span class="n">_find_voting_user_port</span><span class="p">:</span> <span class="n">FindVotingUserPort</span>
+    <span class="o">...</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">find_voting_user_port</span><span class="p">:</span> <span class="n">FindVotingUserPort</span><span class="p">,</span>
+        <span class="o">...</span>
+    <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_find_voting_user_port</span> <span class="o">=</span> <span class="n">find_voting_user_port</span>
+</pre></div></td></tr></table></div>
+<p>Can you tell, what actual implementation is behind that interface?
+Is <tt class="docutils literal">VotingUser</tt> found from a file? A database? Perhaps another HTTP endpoint?
+Or a hard-coded value?
+The application service does not care. It just makes a call:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/application/service/article_rating_service.py</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ArticleRatingService</span><span class="p">(</span><span class="o">...</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vote_for_article</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="n">VoteForArticleCommand</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VoteForArticleResult</span><span class="p">:</span>
+        <span class="n">voting_user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_voting_user_port</span><span class="o">.</span><span class="n">find_voting_user</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">.</span><span class="n">article_id</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">.</span><span class="n">user_id</span>
+        <span class="p">)</span>
+        <span class="o">...</span>
+</pre></div></td></tr></table></div>
+<p>Another responsibility of the service is to persist the voting results.</p>
+<p>It terms of <a class="reference external" href="https://en.wikipedia.org/wiki/Domain-driven_design">Domain-Driven Design</a>,
+<tt class="docutils literal">VotingUser</tt> is an <a class="reference external" href="https://martinfowler.com/bliki/DDD_Aggregate.html">Aggregate root</a>.
+To update an article rating we have to persist a <tt class="docutils literal">VotingUser</tt> as a whole.
+<tt class="docutils literal">SaveVotingUserPort</tt> takes care of that
+[<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog/src/myapp/application/port/spi/save_voting_user_port.py#L6">source</a>]:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/application/port/spi/save_voting_user_port.py</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SaveVotingUserPort</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_voting_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">voting_user</span><span class="p">:</span> <span class="n">VotingUser</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VotingUser</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="k">pass</span>
+</pre></div></td></tr></table></div>
+</div>
+<div class="section" id="putting-the-service-pieces-together">
+<h2>Putting the service pieces together</h2>
+<p>Finally, <tt class="docutils literal">ArticleRatingService</tt> has all the bits and pieces required to execute
+the use case
+[<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog/src/myapp/application/service/article_rating_service.py#L16">source</a>]:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/application/service/article_rating_service.py</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ArticleRatingService</span><span class="p">(</span>
+    <span class="n">VoteForArticleUseCase</span>
+<span class="p">):</span>
+    <span class="n">_find_voting_user_port</span><span class="p">:</span> <span class="n">FindVotingUserPort</span>
+    <span class="n">_save_voting_user_port</span><span class="p">:</span> <span class="n">SaveVotingUserPort</span>
+
+    <span class="o">...</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">vote_for_article</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="n">VoteForArticleCommand</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VoteForArticleResult</span><span class="p">:</span>
+        <span class="n">voting_user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_voting_user_port</span><span class="o">.</span><span class="n">find_voting_user</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">.</span><span class="n">article_id</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">.</span><span class="n">user_id</span>
+        <span class="p">)</span>
+
+        <span class="n">voting_result</span> <span class="o">=</span> <span class="n">voting_user</span><span class="o">.</span><span class="n">vote_for_article</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">.</span><span class="n">article_id</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">.</span><span class="n">vote</span>
+        <span class="p">)</span>
+
+        <span class="k">match</span> <span class="n">voting_result</span><span class="p">:</span>
+            <span class="k">case</span> <span class="n">SuccessfullyVotedResult</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_save_voting_user_port</span><span class="o">.</span><span class="n">save_voting_user</span><span class="p">(</span><span class="n">voting_user</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">voting_result</span>
+</pre></div></td></tr></table></div>
+<p>First, the service gets the required <tt class="docutils literal">VotingUser</tt>.
+Next, the user votes for the article.
+Last, the service checks whether the user has successfully voted and persists the user state.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Do you remember that an application service is supposed to orchestrate
+the flow without any knowledge of its content?
+You may have noticed, that our application service does not fulfil this
+promise. The service controls the flow in <tt class="docutils literal">match voting_result:</tt> block.
+I had to cheat here to make the code easier to follow and comprehend.
+One of the purer alternatives is the
+<a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/domain-events-design-implementation">Domain events</a>
+mechanism.
+It is a very interesting, but a huge topic, and unfortunately it falls out of the scope of this article.</p>
+</div>
+</div>
+<div class="section" id="test-driven-application-services-development">
+<h2>Test-driven application services development</h2>
+<p>Testing application service differs from testing a domain model.
+Unlike a domain model, an application service has SPI dependencies, which should
+be replaced with test doubles in each test.
+That fact should not complicate the tests, though.
+It is possible to construct and explicitly pass a dependency test double
+and rely on default values for the rest of them.</p>
+<p>For example, we test that the service persists the voting user
+[<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog/tests/test_myapp/application/service/test_article_rating_service.py#L42">source</a>].
+The only dependency explicitly declared and passed to the service builder
+is <tt class="docutils literal">SaveVotingUserPortMock</tt> test double.
+All other dependencies are provided by the <tt class="docutils literal">build_article_rating_service()</tt> builder function:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /tests/test_myapp/application/service/test_article_rating_service.py</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_voting_user_saved</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">vote_for_article_command</span><span class="p">:</span> <span class="n">VoteForArticleCommand</span><span class="p">,</span>
+    <span class="n">saved_voting_user</span><span class="p">:</span> <span class="n">VotingUser</span>
+<span class="p">):</span>
+    <span class="n">save_voting_user_port_mock</span> <span class="o">=</span> <span class="n">SaveVotingUserPortMock</span><span class="p">()</span>
+    <span class="n">article_rating_service</span> <span class="o">=</span> <span class="n">build_article_rating_service</span><span class="p">(</span>
+        <span class="n">save_voting_user_port</span><span class="o">=</span><span class="n">save_voting_user_port_mock</span>
+    <span class="p">)</span>
+
+    <span class="n">article_rating_service</span><span class="o">.</span><span class="n">vote_for_article</span><span class="p">(</span><span class="n">vote_for_article_command</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">save_voting_user_port_mock</span><span class="o">.</span><span class="n">saved_voting_user</span> <span class="o">==</span> <span class="n">saved_voting_user</span>
+</pre></div></td></tr></table></div>
+<p>The application service which implements <tt class="docutils literal">VoteForArticleUseCase</tt> is ready.
+Next, we implement the adapter that invokes the use case.</p>
+</div>
+<div class="section" id="http-api">
+<h2>HTTP API</h2>
+<p>Let's start with the specification skeleton.
+Notice how the request and responses are derived from the domain model:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><span class="nt">paths</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">/article_vote</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">post</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Vote for an article.</span>
+
+<span class="w">      </span><span class="nt">requestBody</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">content</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">application/json</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">schema</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">$ref</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;#/components/schemas/Vote&#39;</span>
+
+<span class="w">      </span><span class="nt">responses</span><span class="p">:</span>
+<span class="w">        </span><span class="s">&#39;201&#39;</span><span class="p p-Indicator">:</span>
+<span class="w">          </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Voted successfully.</span>
+<span class="w">        </span><span class="s">&#39;400&#39;</span><span class="p p-Indicator">:</span>
+<span class="w">          </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Bad request. There was a domain constraint violation.</span>
+<span class="w">        </span><span class="s">&#39;409&#39;</span><span class="p p-Indicator">:</span>
+<span class="w">          </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Conflict. User has already voted.</span>
+</pre></div></td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">I deliberately omit the complete specification since
+the topic is out of this article's scope.</p>
+</div>
+<p>Django Rest Framework is the obvious choice to facilitate a RESTful endpoint
+implementation with Django.
+Beside the request and response processing, the logic fits into few lines
+of code
+[<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog/src/myapp/application/adapter/api/http/article_vote_view.py#L29">source</a>]:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/application/adapter/api/http/article_vote_view.py</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ArticleVoteView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vote_for_article_use_case</span><span class="p">:</span> <span class="n">VoteForArticleUseCase</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vote_for_article_use_case</span> <span class="o">=</span> <span class="n">vote_for_article_use_case</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="n">vote_for_article_command</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_command</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vote_for_article_use_case</span><span class="o">.</span><span class="n">vote_for_article</span><span class="p">(</span>
+            <span class="n">vote_for_article_command</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_response</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="o">...</span>
+</pre></div></td></tr></table></div>
+<p>The intentions are:</p>
+<ol class="arabic simple">
+<li>Accept the HTTP request, deserialize and validate the request data.</li>
+<li><strong>Invoke the use case</strong>.</li>
+<li>Serialize the result and render the response.</li>
+</ol>
+<p>The view has one dependency: an object which implements <tt class="docutils literal">VoteForArticleUseCase</tt>
+protocol
+[<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog/src/myapp/application/port/api/vote_for_article_use_case.py#L9">source</a>]:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /src/myapp/application/port/api/vote_for_article_use_case.py</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">VoteForArticleUseCase</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+   <span class="k">def</span><span class="w"> </span><span class="nf">vote_for_article</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="n">VoteForArticleCommand</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VoteForArticleResult</span><span class="p">:</span>
+       <span class="k">pass</span>
+</pre></div></td></tr></table></div>
+<p>As we already know, the <tt class="docutils literal">ArticleRatingService</tt> has implemented this protocol
+as is ready to be wired with the controller.</p>
+<p>Testing a HTTP controller is no different from testing an application service.
+Every test injects a tuned double of the <tt class="docutils literal">VoteForArticleUseCase</tt> dependency
+and asserts the expected state or behavior.
+This makes the view testing times more lightweight compared to the traditional, spin-it-all-up Django app testing.</p>
+<p>For example, how to test a scenario, where a user tries to vote twice in a row?
+[<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog/tests/test_myapp/application/adapter/api/http/test_article_vote_view.py#L25">source</a>]</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /tests/test_myapp/application/adapter/api/http/test_article_vote_view.py</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_user_votes_for_the_same_article_returns_conflict</span><span class="p">(</span>
+    <span class="n">arf</span><span class="p">:</span> <span class="n">APIRequestFactory</span>
+<span class="p">):</span>
+    <span class="c1">## This is *the* view we are testing</span>
+    <span class="n">article_vote_view</span> <span class="o">=</span> <span class="n">ArticleVoteView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span>
+        <span class="c1">## we are injecting a stub which always</span>
+        <span class="c1">## returns AlreadyVotedResult (see below)</span>
+        <span class="n">vote_for_article_use_case</span><span class="o">=</span><span class="n">VoteForArticleUseCaseAlreadyVotedStub</span><span class="p">()</span>
+    <span class="p">)</span>
+
+    <span class="c1">## A valid article vote is POSTed</span>
+    <span class="n">response</span><span class="p">:</span> <span class="n">Response</span> <span class="o">=</span> <span class="n">article_vote_view</span><span class="p">(</span>
+        <span class="n">arf</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+            <span class="s1">&#39;/article_vote&#39;</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="n">UserId</span><span class="p">(</span><span class="n">UUID</span><span class="p">(</span><span class="s1">&#39;a3854820-0000-0000-0000-000000000000&#39;</span><span class="p">)),</span>
+                <span class="s1">&#39;article_id&#39;</span><span class="p">:</span> <span class="n">ArticleId</span><span class="p">(</span><span class="n">UUID</span><span class="p">(</span><span class="s1">&#39;dd494bd6-0000-0000-0000-000000000000&#39;</span><span class="p">)),</span>
+                <span class="s1">&#39;vote&#39;</span><span class="p">:</span> <span class="n">Vote</span><span class="o">.</span><span class="n">UP</span><span class="o">.</span><span class="n">value</span>
+            <span class="p">},</span>
+            <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;json&#39;</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1">## But the result is HTTP 409, as defined in the specification</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">CONFLICT</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="p">{</span>
+        <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="mi">409</span><span class="p">,</span>
+        <span class="s1">&#39;detail&#39;</span><span class="p">:</span> <span class="s2">&quot;User </span><span class="se">\&quot;</span><span class="s2">a3854820-0000-0000-0000-000000000000</span><span class="se">\&quot;</span><span class="s2"> has already voted&quot;</span>
+                  <span class="s2">&quot; for article </span><span class="se">\&quot;</span><span class="s2">dd494bd6-0000-0000-0000-000000000000</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s2">&quot;Cannot vote for an article&quot;</span>
+    <span class="p">}</span>
+</pre></div></td></tr></table></div>
+<p>And here is the <tt class="docutils literal">VoteForArticleUseCaseAlreadyVotedStub</tt>
+[<a class="reference external" href="https://github.com/BasicWolf/hexagonal-architecture-django/blob/blog/tests/test_myapp/application/adapter/api/http/test_article_vote_view.py#L148">source</a>]:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># /tests/test_myapp/application/adapter/api/http/test_article_vote_view.py</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">VoteForArticleUseCaseAlreadyVotedStub</span><span class="p">(</span><span class="n">VoteForArticleUseCase</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vote_for_article</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="n">VoteForArticleCommand</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VoteForArticleResult</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">AlreadyVotedResult</span><span class="p">(</span>
+            <span class="n">user_id</span><span class="o">=</span><span class="n">command</span><span class="o">.</span><span class="n">user_id</span><span class="p">,</span>
+            <span class="n">article_id</span><span class="o">=</span><span class="n">command</span><span class="o">.</span><span class="n">article_id</span>
+        <span class="p">)</span>
+</pre></div></td></tr></table></div>
+<p>Please pause for a moment.
+Does it take much effort to grok the test?
+Did you notice that the test does not interact with rest of the application?
+Did you also notice that it takes only five lines of code (three, if you put the
+<tt class="docutils literal">return</tt> on a single line!) to mock &quot;the rest of the application&quot;?
+The responsibilities are clearly decoupled, and
+there is no need to set up a database or <em>any</em> other service to test an HTTP endpoint.</p>
+</div>
+<div class="section" id="what-s-next">
+<h2>What's next</h2>
+<p>This concludes Part II of the article series about Hexagonal Architecture
+and Python and Django.
+Part III will discuss how to use Django Models in SPIs, manage database
+transactions and put all the application pieces together. Stay tuned!</p>
+</div>
+<div class="section" id="acknowledgments">
+<h2>Acknowledgments</h2>
+<p>I would like to express my very great appreciation to
+<a class="reference external" href="https://jereteittinen.info">Jere &quot;Urokhtor&quot; Teittinen</a>
+and <a class="reference external" href="https://jarkko.org">Jarkko &quot;jmp&quot; Piiroinen</a>
+for reviewing the article and helping to improve it!</p>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://zaurnasibov.com/tag/architecture.html">architecture</a>
+      <a href="https://zaurnasibov.com/tag/ddd.html">DDD</a>
+      <a href="https://zaurnasibov.com/tag/dependency-injection.html">dependency injection</a>
+      <a href="https://zaurnasibov.com/tag/hexagonal-architecture.html">hexagonal architecture</a>
+      <a href="https://zaurnasibov.com/tag/programming.html">programming</a>
+      <a href="https://zaurnasibov.com/tag/python.html">python</a>
+    </p>
+  </div>
+
+
+
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://zaurnasibov.com/posts/2021/11/10/good-practices-avoiding-the-use-of-test-inputs-in-assertions.html" title="Good practices: Avoiding the use of test inputs in assertions">
+      <i class="fa fa-angle-left"></i> Previous Post
+    </a>
+    <a class="btn float-right" href="https://zaurnasibov.com/posts/2022/10/15/refactoring_book_review.html" title="Refactoring - book review">
+      Next Post <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2025 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zaur's Thoughts ",
+  "url" : "https://zaurnasibov.com",
+  "image": "/static/images/logo.png",
+  "description": ""
+}
+</script><script defer
+  src='https://static.cloudflareinsights.com/beacon.min.js'
+  data-cf-beacon='{"token": "1147ebca9f9247a38190f2958de429a8"}'>
+</script>
+
+</body>
+</html>
